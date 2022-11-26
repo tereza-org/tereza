@@ -20,9 +20,11 @@ const postsDir = path.join(__dirname, 'posts');
 
 const zettelkasten = new Zettelkasten({ postsDir });
 
-console.log(zettelkasten.getPosts()); // Prints all posts.
+(async () => {
+  const posts = await zettelkasten.getPosts();
 
-console.log(zettelkasten.getPosts({ groups: ['blog'] })); // Prints all posts in the `blog` group.
+  const blogPost = await zettelkasten.getPosts({ groups: ['blog'] });
 
-console.log(zettelkasten.getTags()); // Prints all tags.
+  const tags = await zettelkasten.getTags();
+})();
 ```

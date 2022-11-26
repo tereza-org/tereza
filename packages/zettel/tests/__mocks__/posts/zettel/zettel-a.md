@@ -6,4 +6,4 @@ tags:
 
 ## Notes
 
-This is a text for Zettel 1.
+This is a text for Zettel A.

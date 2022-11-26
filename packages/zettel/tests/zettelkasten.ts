@@ -7,6 +7,7 @@ export const config: ZettelkastenConfig = {
   postsDir,
   ignoreGroups: ['ignored'],
   requiredMetadata: ['title', 'date', 'excerpt'],
+  normalizeOnInit: false,
 };
 
 export const zettelkasten = new Zettelkasten(config);

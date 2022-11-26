@@ -1,0 +1,37 @@
+{
+  "name": "@terezatech/zettel-cli",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "bin": {
+    "zettelkasten": "./bin/zettelkasten"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "jest"
+  },
+  "typings": "dist/index.d.ts",
+  "dependencies": {
+    "@terezatech/zettel-cli": "^0.3.0",
+    "@ttoss/config": "^1.18.3",
+    "yargs": "^17.6.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "jest": "^29.3.1",
+    "ts-node": "^10.9.1",
+    "tsup": "^6.5.0"
+  },
+  "keywords": [],
+  "publishConfig": {
+    "access": "public"
+  }
+}

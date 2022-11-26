@@ -8,6 +8,12 @@ export type ZettelkastenConfig = {
   postsDir: string;
   ignoreGroups?: string[];
   requiredMetadata?: string[];
+  normalizeOnInit?: boolean;
+};
+
+export const DEFAULT_CONFIG: Partial<ZettelkastenConfig> = {
+  requiredMetadata: ['title', 'date', 'excerpt'],
+  normalizeOnInit: true,
 };
 
 export type Book = {
@@ -21,7 +27,7 @@ export type Book = {
 type SimplePost = {
   group: string;
   slug: string;
-  id: string;
+  id?: string;
   title?: string;
   excerpt?: string;
   draft?: boolean;
@@ -112,6 +118,8 @@ const getSimplePostFromMarkdownFile = (
     id: `${data.group}/${data.slug}`,
     content,
   };
+
+  post.id = post.id || `${post.group}/${post.slug}`;
 
   post.title = post.title || titleCase(post.slug);
 
@@ -235,6 +243,19 @@ const getPost = async (
   return post;
 };
 
+/**
+ * Save post as markdown file.
+ */
+const savePost = async (
+  config: ZettelkastenConfig,
+  post: SimplePost
+): Promise<void> => {
+  const { content, ...metadata } = post;
+  const filePath = path.join(config.postsDir, post.group, `${post.slug}.md`);
+  const md = matter.stringify(content || '', metadata);
+  return await fs.promises.writeFile(filePath, md);
+};
+
 const getTags = async (config: ZettelkastenConfig) => {
   const posts = await getPosts(config);
 
@@ -250,11 +271,41 @@ const getTags = async (config: ZettelkastenConfig) => {
   return tags;
 };
 
+const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
+  const [allPosts, allTags] = await Promise.all([
+    getAllSimplePosts(config),
+    getTags(config),
+  ]);
+
+  /**
+   * Normalize the set of tags: if another post has a tag that is the same as
+   * current post slug, then add the tag to the current post.
+   */
+  allPosts.forEach((post) => {
+    const doAllTagsContainsPostSlug = allTags.includes(post.slug);
+
+    if (doAllTagsContainsPostSlug) {
+      post.tags = normalizeTags([...(post.tags || []), post.slug]);
+    }
+  });
+
+  const promises = allPosts.map((post) => savePost(config, post));
+
+  await Promise.all(promises);
+};
+
 export class Zettelkasten {
   private config: ZettelkastenConfig;
 
   constructor(config: ZettelkastenConfig) {
-    this.config = config;
+    this.config = { ...DEFAULT_CONFIG, ...config };
+    this.init();
+  }
+
+  private async init() {
+    if (this.config.normalizeOnInit) {
+      await this.normalizeAndSavePosts();
+    }
   }
 
   public getConfig() {
@@ -270,10 +321,18 @@ export class Zettelkasten {
   }
 
   public async getPost(params: GetPostParams) {
-    return await getPost(this.config, params);
+    return getPost(this.config, params);
   }
 
   public async getTags() {
-    return await getTags(this.config);
+    return getTags(this.config);
+  }
+
+  public async savePost(post: SimplePost) {
+    return savePost(this.config, post);
+  }
+
+  public async normalizeAndSavePosts() {
+    return normalizeAndSavePosts(this.config);
   }
 }

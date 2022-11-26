@@ -4,7 +4,7 @@ test('get all posts', async () => {
   const allPosts = await zettelkasten.getPosts();
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
-    expect.arrayContaining(['blog/post-a', 'books/book-a', 'zettel/zettel-1'])
+    expect.arrayContaining(['blog/post-a', 'books/book-a', 'zettel/zettel-a'])
   );
 });
 
