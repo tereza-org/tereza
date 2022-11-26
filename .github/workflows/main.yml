@@ -1,0 +1,60 @@
+name: main
+
+'on':
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: main
+  cancel-in-progress: false
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-region: us-east-1
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 20
+          ssh-key: ${{ secrets.SSH_DEPLOY_KEY }}
+
+      # https://github.com/actions/checkout/issues/13#issuecomment-724415212
+      - name: Setup git user
+        run: |
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # https://github.com/actions/setup-node/issues/488
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Yarn cache
+        timeout-minutes: 5
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install dependencies
+        timeout-minutes: 7
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: Run main command
+        timeout-minutes: 20
+        run: sh -e ./.cicd/commands/main.sh
