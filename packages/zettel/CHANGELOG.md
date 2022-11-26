@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.4.0...@terezatech/zettel@0.5.0) (2022-11-26)
+
+### Features
+
+- add references and backlinks to posts ([f808e90](https://github.com/arantespp/tereza-tech/commit/f808e90d83964392d8016264c0e5c4f494c8ee94))
+
 # [0.4.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.3.0...@terezatech/zettel@0.4.0) (2022-11-26)
 
 ### Features
