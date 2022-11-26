@@ -192,6 +192,10 @@ export class Zettelkasten {
     this.postsDir = config.postsDir;
   }
 
+  public getPostsDir() {
+    return this.postsDir;
+  }
+
   public getGroups() {
     return getGroups(this.postsDir);
   }
