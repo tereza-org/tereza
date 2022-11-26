@@ -36,3 +36,17 @@ test('post with all required metadata can be a draft if draft metadata is true',
   });
   expect(post?.draft).toEqual(true);
 });
+
+test('backlinks and references', async () => {
+  const referencedPost = await zettelkasten.getPost({
+    id: 'blog/post-not-a-draft',
+  });
+
+  const referencingPost = await zettelkasten.getPost({
+    id: 'blog/post-not-a-draft-and-reference-another',
+  });
+
+  expect(referencedPost?.backlinks).toContain(referencingPost?.id);
+
+  expect(referencingPost?.references).toContain(referencedPost?.id);
+});

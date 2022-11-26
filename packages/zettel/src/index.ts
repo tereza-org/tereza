@@ -24,7 +24,7 @@ export type Book = {
   ISBN?: string;
 };
 
-type SimplePost = {
+export type PostMetadata = {
   group: string;
   slug: string;
   id?: string;
@@ -35,6 +35,11 @@ type SimplePost = {
   tags?: string[];
   content?: string;
   book?: Book;
+  [key: string]: any;
+};
+
+type SimplePost = PostMetadata & {
+  content: string;
 };
 
 /**
@@ -173,14 +178,10 @@ const getPosts = async (
 ) => {
   const allSimplePosts = await getAllSimplePosts(config);
 
-  const allPosts = allSimplePosts
-    .map((post) => {
-      return {
-        ...post,
-        references: [],
-        backlinks: [],
-      };
-    })
+  const allPostsWithFullMetadata = allSimplePosts
+    /**
+     * All posts with drafts rules applied.
+     */
     .filter((post) => {
       if (!params) {
         return true;
@@ -201,9 +202,39 @@ const getPosts = async (
       }
 
       return true;
+    })
+    .map((post) => {
+      const href = `/${post.group}/${post.slug}`;
+      return { ...post, href };
+    })
+    .map((post, _, allPosts) => {
+      /**
+       * Array of all post ids that `post` use as references.
+       */
+      const references = allPosts.reduce((acc, { id, href }) => {
+        if (!id) {
+          return acc;
+        }
+
+        if (post.content.includes(`(${href})`)) {
+          return [id, ...acc];
+        }
+
+        return acc;
+      }, [] as string[]);
+
+      /**
+       * Add backlinks to post. Backlinks are all posts that
+       * reference current `post`.
+       */
+      const backlinks = allPosts
+        .filter(({ content }) => content.includes(`(${post.href})`))
+        .map(({ id }) => id);
+
+      return { ...post, references, backlinks };
     });
 
-  return allPosts;
+  return allPostsWithFullMetadata;
 };
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
@@ -293,6 +324,37 @@ const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
 
   await Promise.all(promises);
 };
+
+// const getRecommendations = async (
+//   config: ZettelkastenConfig,
+//   params: GetPostParams
+// ): Promise<PostMetadata> => {
+//   const [post, allPosts] = await Promise.all([
+//     getPost(config, params),
+//     getPosts(config),
+//   ]);
+
+//   const scoreMap = allPosts.reduce<{ [key: string]: number }>((acc, { id }) => {
+//     acc[id] = 0;
+//     return acc;
+//   }, {});
+
+//   post?.references.forEach((reference) => {
+//     scoreMap[reference] += 6;
+//   });
+
+//   post?.backlinks.forEach((backlink) => {
+//     scoreMap[backlink.id] += 3;
+//   });
+
+//   post?.tags.forEach((tag) => {
+//     allPosts.forEach(({ tags, href }) => {
+//       if (tags.includes(tag)) {
+//         scoreMap[href] += 1;
+//       }
+//     });
+//   });
+// };
 
 export class Zettelkasten {
   private config: ZettelkastenConfig;
