@@ -13,6 +13,9 @@
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^17.3.0",
+    "@lerna-lite/changed": "^1.13.0",
+    "@lerna-lite/cli": "^1.13.0",
+    "@lerna-lite/list": "^1.13.0",
     "@ttoss/config": "^1.18.3",
     "@ttoss/eslint-config": "^1.16.2",
     "eslint": "^8.28.0",

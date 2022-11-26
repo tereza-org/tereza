@@ -6,12 +6,19 @@
   "author": "Pedro Arantes",
   "main": "index.js",
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "test": "jest"
   },
   "dependencies": {
-    "@ttoss/config": "^1.18.3"
+    "@ttoss/config": "^1.18.3",
+    "change-case": "^4.1.2",
+    "gray-matter": "^4.0.3",
+    "title-case": "^3.0.3"
   },
   "devDependencies": {
+    "@types/jest": "^29.2.3",
+    "jest": "^29.3.1",
+    "ts-node": "^10.9.1",
     "tsup": "^6.5.0"
   },
   "keywords": []
