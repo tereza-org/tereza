@@ -1,25 +1,28 @@
 {
+  "private": true,
   "name": "tereza-tech",
   "version": "0.0.0",
-  "private": true,
+  "scripts": {
+    "build-graph": "turbo run build --graph=turbo-build-graph.png",
+    "prepare": "husky install"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint-config-custom": "*",
-    "prettier": "latest",
+    "@commitlint/cli": "^17.3.0",
+    "@ttoss/config": "^1.18.3",
+    "@ttoss/eslint-config": "^1.16.2",
+    "eslint": "^8.28.0",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.0.4",
+    "prettier": "^2.8.0",
     "turbo": "latest"
   },
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
   "packageManager": "yarn@1.22.0"
 }
