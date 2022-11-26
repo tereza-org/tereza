@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "jest"
+    "test": "echo jest"
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
