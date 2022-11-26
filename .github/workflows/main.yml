@@ -58,3 +58,5 @@ jobs:
       - name: Run main command
         timeout-minutes: 20
         run: sh -e ./.cicd/commands/main.sh
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

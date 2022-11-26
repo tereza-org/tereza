@@ -23,7 +23,7 @@ yarn lerna version --yes --no-push
 yarn turbo run build lint test deploy --filter=[$LATEST_TAG]
 
 # Publish packages
-yarn lerna publish from-git --yes --no-verify-access
+yarn lerna publish from-git --yes
 
 # Push only tags to check if there's no issues with the tags
 git push --tags
