@@ -19,3 +19,20 @@ test('getPost by group and slug', async () => {
   expect(post?.group).toEqual(group);
   expect(post?.slug).toEqual(slug);
 });
+
+test('post with not all required metadata should be draft', async () => {
+  const post = await zettelkasten.getPost({ id: 'blog/post-draft' });
+  expect(post?.draft).toEqual(true);
+});
+
+test('post with all required metadata cannot be draft', async () => {
+  const post = await zettelkasten.getPost({ id: 'blog/post-not-a-draft' });
+  expect(post?.draft).toEqual(false);
+});
+
+test('post with all required metadata can be a draft if draft metadata is true', async () => {
+  const post = await zettelkasten.getPost({
+    id: 'blog/post-has-all-required-metadata-but-is-draft',
+  });
+  expect(post?.draft).toEqual(true);
+});

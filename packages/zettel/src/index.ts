@@ -4,6 +4,12 @@ import { normalizeTags } from './normalizeTags';
 import { titleCase } from 'title-case';
 import matter from 'gray-matter';
 
+export type ZettelkastenConfig = {
+  postsDir: string;
+  ignoreGroups?: string[];
+  requiredMetadata?: string[];
+};
+
 export type Book = {
   authors: string[];
   link: string;
@@ -28,9 +34,16 @@ type SimplePost = {
 /**
  * Groups are all folders in the postsDir directory.
  */
-const getGroups = (postsDir: string) => {
-  const groups = fs.readdirSync(postsDir);
-  return groups;
+const getGroups = (config: ZettelkastenConfig) => {
+  const groups = fs.readdirSync(config.postsDir);
+
+  return groups.filter((group) => {
+    if (config.ignoreGroups) {
+      return !config.ignoreGroups.includes(group);
+    }
+
+    return true;
+  });
 };
 
 type MarkdownFile = {
@@ -74,10 +87,10 @@ const readAllMarkdownFilesFromDir = async (dir: string) => {
   );
 };
 
-const readAllMarkdownFiles = async (postsDir: string) => {
-  const groups = getGroups(postsDir);
+const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
+  const groups = getGroups(config);
   const promises = groups.map(async (group) => {
-    const groupDir = path.join(postsDir, group);
+    const groupDir = path.join(config.postsDir, group);
     const markdowns = await readAllMarkdownFilesFromDir(groupDir);
     markdowns.forEach((markdown) => (markdown.data.group = group));
     return markdowns;
@@ -87,6 +100,7 @@ const readAllMarkdownFiles = async (postsDir: string) => {
 };
 
 const getSimplePostFromMarkdownFile = (
+  config: ZettelkastenConfig,
   markdownFile: MarkdownFile
 ): SimplePost => {
   const { data, content } = markdownFile;
@@ -103,30 +117,85 @@ const getSimplePostFromMarkdownFile = (
 
   post.tags = normalizeTags(post.tags);
 
+  post.draft = (() => {
+    /**
+     * If draft is explicitly set to true, then return true.
+     */
+    if (typeof post.draft === 'boolean' && post.draft === true) {
+      return true;
+    }
+
+    const hasAllRequiredMetadata = config.requiredMetadata?.every(
+      (key) => key in post
+    );
+
+    /**
+     * If draft is explicitly set to false, but the post is missing required
+     * metadata, then return false.
+     */
+    if (!hasAllRequiredMetadata && post.draft === false) {
+      return false;
+    }
+
+    return !hasAllRequiredMetadata;
+  })();
+
   return post;
 };
 
-const getAllSimplePosts = async (postsDir: string) => {
-  const markdowns = await readAllMarkdownFiles(postsDir);
-  const posts = markdowns.map(getSimplePostFromMarkdownFile);
+const getAllSimplePosts = async (config: ZettelkastenConfig) => {
+  const markdowns = await readAllMarkdownFiles(config);
+  const posts = markdowns.map((markdown) =>
+    getSimplePostFromMarkdownFile(config, markdown)
+  );
   return posts;
+};
+
+type GetPostsParams = {
+  groups?: string | string[];
+  drafts?: boolean;
 };
 
 /**
  * Add new metadata to posts, like references and backlinks.
  */
-const getAllPosts = async (postsDir: string) => {
-  const allPosts = await getAllSimplePosts(postsDir);
+const getPosts = async (
+  config: ZettelkastenConfig,
+  params?: GetPostsParams
+) => {
+  const allSimplePosts = await getAllSimplePosts(config);
 
-  const posts = allPosts.map((post) => {
-    return {
-      ...post,
-      references: [],
-      backlinks: [],
-    };
-  });
+  const allPosts = allSimplePosts
+    .map((post) => {
+      return {
+        ...post,
+        references: [],
+        backlinks: [],
+      };
+    })
+    .filter((post) => {
+      if (!params) {
+        return true;
+      }
 
-  return posts;
+      if (params.groups) {
+        const groups = Array.isArray(params.groups)
+          ? params.groups
+          : [params.groups];
+
+        return groups.includes(post.group);
+      }
+
+      if (!params.drafts) {
+        if (post.draft) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+
+  return allPosts;
 };
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
@@ -135,7 +204,7 @@ type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
  * GroupPosts when read from markdown file. It doesn't have backlinks and
  * references, for example.
  */
-type Post = ThenArg<ReturnType<typeof getAllPosts>>[number];
+type Post = ThenArg<ReturnType<typeof getPosts>>[number];
 
 type GetPostParams =
   | {
@@ -146,10 +215,10 @@ type GetPostParams =
   | { title: string };
 
 const getPost = async (
-  params: GetPostParams,
-  postsDir: string
+  config: ZettelkastenConfig,
+  params: GetPostParams
 ): Promise<Post | undefined> => {
-  const allPosts = await getAllPosts(postsDir);
+  const allPosts = await getPosts(config);
 
   if ('id' in params) {
     return allPosts.find((post) => post.id === params.id);
@@ -166,8 +235,8 @@ const getPost = async (
   return post;
 };
 
-const getTags = async (postsDir: string) => {
-  const posts = await getAllPosts(postsDir);
+const getTags = async (config: ZettelkastenConfig) => {
+  const posts = await getPosts(config);
 
   const tags = posts
     .flatMap((post) => post.tags)
@@ -181,34 +250,30 @@ const getTags = async (postsDir: string) => {
   return tags;
 };
 
-export type ZettelkastenConfig = {
-  postsDir: string;
-};
-
 export class Zettelkasten {
-  private postsDir: string;
+  private config: ZettelkastenConfig;
 
   constructor(config: ZettelkastenConfig) {
-    this.postsDir = config.postsDir;
+    this.config = config;
   }
 
-  public getPostsDir() {
-    return this.postsDir;
+  public getConfig() {
+    return this.config;
   }
 
   public getGroups() {
-    return getGroups(this.postsDir);
+    return getGroups(this.config);
   }
 
-  public async getPosts() {
-    return getAllPosts(this.postsDir);
+  public async getPosts(params?: GetPostsParams) {
+    return getPosts(this.config, params);
   }
 
   public async getPost(params: GetPostParams) {
-    return await getPost(params, this.postsDir);
+    return await getPost(this.config, params);
   }
 
   public async getTags() {
-    return await getTags(this.postsDir);
+    return await getTags(this.config);
   }
 }

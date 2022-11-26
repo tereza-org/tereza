@@ -1,6 +1,12 @@
 import * as path from 'path';
-import { Zettelkasten } from '../src';
+import { Zettelkasten, ZettelkastenConfig } from '../src';
 
-export const postsDir = path.join(__dirname, '__mocks__', 'posts');
+const postsDir = path.join(__dirname, '__mocks__', 'posts');
 
-export const zettelkasten = new Zettelkasten({ postsDir });
+export const config: ZettelkastenConfig = {
+  postsDir,
+  ignoreGroups: ['ignored'],
+  requiredMetadata: ['title', 'date', 'excerpt'],
+};
+
+export const zettelkasten = new Zettelkasten(config);
