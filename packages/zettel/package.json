@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "description": "",
   "license": "MIT",
-  "author": "Pedro Arantes",
-  "main": "index.js",
+  "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "build": "tsup",
     "test": "jest"
   },
+  "typings": "dist/index.d.ts",
   "dependencies": {
     "@ttoss/config": "^1.18.3",
     "change-case": "^4.1.2",
@@ -21,5 +27,8 @@
     "ts-node": "^10.9.1",
     "tsup": "^6.5.0"
   },
-  "keywords": []
+  "keywords": [],
+  "publishConfig": {
+    "access": "public"
+  }
 }
