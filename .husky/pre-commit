@@ -3,3 +3,4 @@
 
 yarn lint-staged
 yarn run build-graph
+git add turbo-build-graph.png
