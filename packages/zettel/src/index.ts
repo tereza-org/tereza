@@ -1,9 +1,11 @@
+import * as dateFns from 'date-fns';
 import * as fs from 'fs';
 import * as path from 'path';
 import { normalizeTags } from './normalizeTags';
 import { sortObjectByKey } from './sortObjectByKey';
 import { titleCase } from 'title-case';
 import matter from 'gray-matter';
+import readingTime from 'reading-time';
 
 export type ZettelkastenConfig = {
   postsDir: string;
@@ -11,12 +13,17 @@ export type ZettelkastenConfig = {
   requiredMetadata?: string[];
   normalizeOnInit?: boolean;
   recommendationsLimit?: number;
+  /**
+   * https://date-fns.org/v2.29.3/docs/format
+   */
+  dateFormat?: string;
 };
 
-export const DEFAULT_CONFIG: Partial<ZettelkastenConfig> = {
+export const DEFAULT_CONFIG = {
   requiredMetadata: ['title', 'date', 'excerpt'],
-  normalizeOnInit: true,
+  normalizeOnInit: false,
   recommendationsLimit: 5,
+  dateFormat: 'PPP',
 };
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
@@ -155,9 +162,26 @@ const getSimplePostFromMarkdownFile = (
     content,
   } as SimplePost;
 
+  post.title = post.title || titleCase(post.slug);
+
   post.id = post.id || path.join(post.group, post.slug);
 
-  post.title = post.title || titleCase(post.slug);
+  const date = (() => {
+    if (post.date) {
+      const d = new Date(post.date);
+      return dateFns.addMinutes(d, d.getTimezoneOffset());
+    }
+
+    return undefined;
+  })();
+
+  if (date) {
+    post.date = dateFns.format(date, 'yyyy-MM-dd');
+    post.formattedDate = dateFns.format(
+      date,
+      config.dateFormat || DEFAULT_CONFIG.dateFormat
+    );
+  }
 
   post.tags = normalizeTags(post.tags);
 
@@ -237,8 +261,12 @@ const getPostsWithoutRecommendations = async (
       return true;
     })
     .map((post) => {
-      const href = post.id;
-      return { ...post, href };
+      return {
+        ...post,
+        href: post.id,
+        formattedDate: post.formattedDate as string | undefined,
+        readingTime: Math.round(readingTime(post.content).minutes) || 1,
+      };
     })
     .map((post, _, allPosts) => {
       /**
@@ -387,7 +415,7 @@ const getPosts = async (
   return postsWithRecommendations;
 };
 
-type Post = ThenArg<ReturnType<typeof getPosts>>[number];
+export type Post = ThenArg<ReturnType<typeof getPosts>>[number];
 
 const getPost = async (
   config: ZettelkastenConfig,
@@ -452,7 +480,7 @@ const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
   await Promise.all(promises);
 };
 
-type GetRecommendationsParams =
+export type GetRecommendationsParams =
   | {
       group?: string;
       tag?: string;

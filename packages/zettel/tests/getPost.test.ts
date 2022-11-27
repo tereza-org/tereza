@@ -1,9 +1,33 @@
+import { Zettelkasten } from '../src';
 import { zettelkasten } from './zettelkasten';
 
 test('getPost by id', async () => {
   const id = '/blog/post-a';
   const post = await zettelkasten.getPost({ id });
   expect(post?.id).toEqual(id);
+});
+
+test('parse date', async () => {
+  const id = '/blog/post-a';
+  const post = await zettelkasten.getPost({ id });
+  expect(post?.date).toEqual('2020-01-01');
+  expect(post?.formattedDate).toEqual('January 1st, 2020');
+});
+
+test('parse date with another format', async () => {
+  const z = new Zettelkasten({
+    ...zettelkasten.config,
+    dateFormat: 'PPPP',
+  });
+  const post = await z.getPost({ id: '/blog/post-a' });
+  expect(post?.date).toEqual('2020-01-01');
+  expect(post?.formattedDate).toEqual('Wednesday, January 1st, 2020');
+});
+
+test('reading time', async () => {
+  const id = '/blog/post-a';
+  const post = await zettelkasten.getPost({ id });
+  expect(post?.readingTime).toEqual(1);
 });
 
 test('getPost by title', async () => {
