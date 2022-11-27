@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "build-graph": "turbo run build --graph=turbo-build-graph.png",
+    "lint": "lint-staged --diff main --quiet",
+    "ls": "lerna ls",
     "prepare": "husky install"
   },
   "workspaces": [

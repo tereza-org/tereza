@@ -1,0 +1,68 @@
+name: pr
+
+'on':
+  pull_request:
+    branch:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+concurrency:
+  group: pr-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  pr:
+    runs-on: ubuntu-latest
+    steps:
+      # - name: Configure AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-region: us-east-1
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 50
+
+      - name: Fetch and merge most recent main
+        run: |
+          git fetch origin main:main
+          git merge main --ff-only --no-edit
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # https://github.com/actions/setup-node/issues/488
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: yarn-cache-folder-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            yarn-cache-folder-
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --prefer-offline
+
+      - name: Lint
+        run: |
+
+          yarn lint
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Need lint. Please run 'yarn lint' locally and commit the changes"
+            exit 1
+          fi
+
+      - name: Run pr command
+        run: sh -e ./.cicd/commands/pr.sh
+        env:
+          CARLIN_BRANCH: ${{ github.event.pull_request.head.ref }}
