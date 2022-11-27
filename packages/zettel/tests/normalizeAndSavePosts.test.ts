@@ -32,7 +32,7 @@ test('if a slug is tag in another post, add it as tag', async () => {
     .spyOn(fs.promises, 'writeFile')
     .mockImplementation((_, post: any) => {
       const { data } = matter(post);
-      if (data.id === 'zettel/zettel-a') {
+      if (data.id === '/zettel/zettel-a') {
         zettelATags = data.tags;
       }
 

@@ -46,11 +46,19 @@ type SimplePost = PostMetadata & {
   content: string;
 };
 
+const getDirectories = async (dir: string) =>
+  (await fs.promises.readdir(dir, { withFileTypes: true }))
+    .filter((dirent) => dirent.isDirectory())
+    .map((dirent) => dirent.name);
+
 /**
  * Groups are all folders in the postsDir directory.
  */
-const getGroups = (config: ZettelkastenConfig) => {
-  const groups = fs.readdirSync(config.postsDir);
+const getGroups = async (config: ZettelkastenConfig) => {
+  const groups = [
+    '/',
+    ...(await getDirectories(config.postsDir)).map((group) => `/${group}`),
+  ];
 
   return groups.filter((group) => {
     if (config.ignoreGroups) {
@@ -103,7 +111,7 @@ const readAllMarkdownFilesFromDir = async (dir: string) => {
 };
 
 const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
-  const groups = getGroups(config);
+  const groups = await getGroups(config);
 
   const promises = groups.map(async (group) => {
     const groupDir = path.join(config.postsDir, group);
@@ -130,11 +138,10 @@ const getSimplePostFromMarkdownFile = (
     ...data,
     group: data.group,
     slug: data.slug,
-    id: `${data.group}/${data.slug}`,
     content,
-  };
+  } as SimplePost;
 
-  post.id = post.id || `${post.group}/${post.slug}`;
+  post.id = post.id || path.join(post.group, post.slug);
 
   post.title = post.title || titleCase(post.slug);
 
@@ -216,7 +223,7 @@ const getPostsWithoutRecommendations = async (
       return true;
     })
     .map((post) => {
-      const href = `/${post.group}/${post.slug}`;
+      const href = post.id;
       return { ...post, href };
     })
     .map((post, _, allPosts) => {
@@ -430,11 +437,13 @@ const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
   await Promise.all(promises);
 };
 
-type GetRecommendationsParams = {
-  group?: string;
-  tag?: string;
-  limit?: boolean;
-};
+type GetRecommendationsParams =
+  | {
+      group?: string;
+      tag?: string;
+      limit?: boolean;
+    }
+  | undefined;
 
 /**
  * Group or tags recommendations.
@@ -443,7 +452,7 @@ const getRecommendations = async (
   config: ZettelkastenConfig,
   params: GetRecommendationsParams
 ) => {
-  const { tag, group } = params;
+  const { tag, group } = params || {};
 
   const allRecommendations = await (async () => {
     /**
@@ -464,7 +473,7 @@ const getRecommendations = async (
     return getPosts(config);
   })();
 
-  const limit = params.limit ? config.recommendationsLimit : undefined;
+  const limit = params?.limit ? config.recommendationsLimit : undefined;
 
   const recommendations = allRecommendations
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -502,7 +511,11 @@ export class Zettelkasten {
     return this._config;
   }
 
-  public getGroups() {
+  static readMarkdownFile = readMarkdownFile;
+
+  static readAllMarkdownFilesFromDir = readAllMarkdownFilesFromDir;
+
+  public async getGroups() {
     return getGroups(this.config);
   }
 
