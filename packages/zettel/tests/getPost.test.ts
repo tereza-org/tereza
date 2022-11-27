@@ -50,3 +50,11 @@ test('backlinks and references', async () => {
 
   expect(referencingPost?.references).toContain(referencedPost?.id);
 });
+
+test('recommendations', async () => {
+  const post = await zettelkasten.getPost({ id: 'zettel/related-zettel-1' });
+
+  expect(post?.recommendations.length).toEqual(
+    zettelkasten.config.recommendationsLimit
+  );
+});

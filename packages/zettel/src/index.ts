@@ -9,12 +9,16 @@ export type ZettelkastenConfig = {
   ignoreGroups?: string[];
   requiredMetadata?: string[];
   normalizeOnInit?: boolean;
+  recommendationsLimit?: number;
 };
 
 export const DEFAULT_CONFIG: Partial<ZettelkastenConfig> = {
   requiredMetadata: ['title', 'date', 'excerpt'],
   normalizeOnInit: true,
+  recommendationsLimit: 5,
 };
+
+type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
 
 export type Book = {
   authors: string[];
@@ -27,7 +31,7 @@ export type Book = {
 export type PostMetadata = {
   group: string;
   slug: string;
-  id?: string;
+  id: string;
   title?: string;
   excerpt?: string;
   draft?: boolean;
@@ -100,13 +104,19 @@ const readAllMarkdownFilesFromDir = async (dir: string) => {
 
 const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
   const groups = getGroups(config);
+
   const promises = groups.map(async (group) => {
     const groupDir = path.join(config.postsDir, group);
+
     const markdowns = await readAllMarkdownFilesFromDir(groupDir);
+
     markdowns.forEach((markdown) => (markdown.data.group = group));
+
     return markdowns;
   });
+
   const allMarkdowns = (await Promise.all(promises)).flat();
+
   return allMarkdowns;
 };
 
@@ -158,9 +168,11 @@ const getSimplePostFromMarkdownFile = (
 
 const getAllSimplePosts = async (config: ZettelkastenConfig) => {
   const markdowns = await readAllMarkdownFiles(config);
+
   const posts = markdowns.map((markdown) =>
     getSimplePostFromMarkdownFile(config, markdown)
   );
+
   return posts;
 };
 
@@ -172,7 +184,7 @@ type GetPostsParams = {
 /**
  * Add new metadata to posts, like references and backlinks.
  */
-const getPosts = async (
+const getPostsWithoutRecommendations = async (
   config: ZettelkastenConfig,
   params?: GetPostsParams
 ) => {
@@ -212,10 +224,6 @@ const getPosts = async (
        * Array of all post ids that `post` use as references.
        */
       const references = allPosts.reduce((acc, { id, href }) => {
-        if (!id) {
-          return acc;
-        }
-
         if (post.content.includes(`(${href})`)) {
           return [id, ...acc];
         }
@@ -229,7 +237,7 @@ const getPosts = async (
        */
       const backlinks = allPosts
         .filter(({ content }) => content.includes(`(${post.href})`))
-        .map(({ id }) => id);
+        .map(({ id }) => id as string);
 
       return { ...post, references, backlinks };
     });
@@ -237,13 +245,9 @@ const getPosts = async (
   return allPostsWithFullMetadata;
 };
 
-type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
-
-/**
- * GroupPosts when read from markdown file. It doesn't have backlinks and
- * references, for example.
- */
-type Post = ThenArg<ReturnType<typeof getPosts>>[number];
+type PostWithoutRecommendations = ThenArg<
+  ReturnType<typeof getPostsWithoutRecommendations>
+>[number];
 
 type GetPostParams =
   | {
@@ -253,12 +257,10 @@ type GetPostParams =
   | { id: string }
   | { title: string };
 
-const getPost = async (
-  config: ZettelkastenConfig,
+const filterPostFromPostsArray = <P extends SimplePost>(
+  allPosts: P[],
   params: GetPostParams
-): Promise<Post | undefined> => {
-  const allPosts = await getPosts(config);
-
+): P | undefined => {
   if ('id' in params) {
     return allPosts.find((post) => post.id === params.id);
   }
@@ -270,6 +272,109 @@ const getPost = async (
   const post = allPosts.find(
     (post) => post.group === params.group && post.slug === params.slug
   );
+
+  return post;
+};
+
+const getPostRecommendations = async (
+  config: ZettelkastenConfig,
+  params: GetPostParams
+): Promise<PostMetadata[]> => {
+  const allPosts = await getPostsWithoutRecommendations(config);
+
+  const post = filterPostFromPostsArray(allPosts, params);
+
+  const scoreMap = allPosts.reduce<{ [key: string]: number }>((acc, { id }) => {
+    acc[id] = 0;
+    return acc;
+  }, {});
+
+  /**
+   * All posts that the current post references scores.
+   */
+  post?.references.forEach((reference) => {
+    scoreMap[reference] += 6;
+  });
+
+  /**
+   * All posts that reference the current post scores.
+   */
+  post?.backlinks.forEach((backlink) => {
+    scoreMap[backlink] += 3;
+  });
+
+  /**
+   * All posts that have the same tags as the current post scores.
+   */
+  post?.tags?.forEach((tag) => {
+    allPosts.forEach(({ tags, id }) => {
+      if (tags?.includes(tag)) {
+        scoreMap[id] += 1;
+      }
+    });
+  });
+
+  const recommendations = Object.entries(scoreMap)
+    .map(([id, score]) => {
+      const post = allPosts.find((post) => post.id === id);
+      return { post, score };
+    })
+    .filter(({ score }) => score > 0)
+    .sort(({ score: scoreA }, { score: scoreB }) => {
+      return scoreB - scoreA;
+    })
+    .map(({ post }) => post)
+    .filter((post): post is PostWithoutRecommendations => !!post)
+    .map((post) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { content, ...metadata } = post;
+      return metadata as PostMetadata;
+    })
+    /**
+     * Remove itself from recommendations.
+     */
+    .filter(({ href }) => href !== post?.href)
+    .slice(0, config.recommendationsLimit)
+    .map((recommendation) => {
+      /**
+       * Check if the recommendation is referenced by the current post.
+       */
+      const isReference = post?.references.includes(recommendation.id);
+
+      return { ...recommendation, isReference };
+    });
+
+  return recommendations;
+};
+
+const getPosts = async (
+  config: ZettelkastenConfig,
+  params?: GetPostsParams
+) => {
+  const posts = await getPostsWithoutRecommendations(config, params);
+
+  const postsWithRecommendations = await Promise.all(
+    posts.map(async (post) => {
+      const recommendations = await getPostRecommendations(config, {
+        id: post.id,
+      });
+
+      return { ...post, recommendations };
+    })
+  );
+
+  return postsWithRecommendations;
+};
+
+type Post = ThenArg<ReturnType<typeof getPosts>>[number];
+
+const getPost = async (
+  config: ZettelkastenConfig,
+  params: GetPostParams
+): Promise<Post | undefined> => {
+  const allPosts = await getPosts(config);
+
+  const post = filterPostFromPostsArray(allPosts, params);
 
   return post;
 };
@@ -325,42 +430,65 @@ const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
   await Promise.all(promises);
 };
 
-// const getRecommendations = async (
-//   config: ZettelkastenConfig,
-//   params: GetPostParams
-// ): Promise<PostMetadata> => {
-//   const [post, allPosts] = await Promise.all([
-//     getPost(config, params),
-//     getPosts(config),
-//   ]);
+type GetRecommendationsParams = {
+  group?: string;
+  tag?: string;
+  limit?: boolean;
+};
 
-//   const scoreMap = allPosts.reduce<{ [key: string]: number }>((acc, { id }) => {
-//     acc[id] = 0;
-//     return acc;
-//   }, {});
+/**
+ * Group or tags recommendations.
+ */
+const getRecommendations = async (
+  config: ZettelkastenConfig,
+  params: GetRecommendationsParams
+) => {
+  const { tag, group } = params;
 
-//   post?.references.forEach((reference) => {
-//     scoreMap[reference] += 6;
-//   });
+  const allRecommendations = await (async () => {
+    /**
+     * Tag recommendations.
+     */
+    if (tag) {
+      const allPosts = await getPosts(config);
+      return allPosts.filter(({ tags }) => (tags || []).includes(tag));
+    }
 
-//   post?.backlinks.forEach((backlink) => {
-//     scoreMap[backlink.id] += 3;
-//   });
+    /**
+     * Group recommendations.
+     */
+    if (group) {
+      return getPosts(config, { groups: [group] });
+    }
 
-//   post?.tags.forEach((tag) => {
-//     allPosts.forEach(({ tags, href }) => {
-//       if (tags.includes(tag)) {
-//         scoreMap[href] += 1;
-//       }
-//     });
-//   });
-// };
+    return getPosts(config);
+  })();
+
+  const limit = params.limit ? config.recommendationsLimit : undefined;
+
+  const recommendations = allRecommendations
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    .map(({ content, ...metadata }) => metadata)
+    .slice(0, limit)
+    /**
+     * Sort by date.
+     */
+    .sort((postA, postB) => {
+      if (!postA.date || !postB.date) {
+        return 0;
+      }
+
+      return postA?.date > postB?.date ? -1 : 1;
+    });
+
+  return recommendations;
+};
 
 export class Zettelkasten {
-  private config: ZettelkastenConfig;
+  private _config: ZettelkastenConfig;
 
   constructor(config: ZettelkastenConfig) {
-    this.config = { ...DEFAULT_CONFIG, ...config };
+    this._config = { ...DEFAULT_CONFIG, ...config };
     this.init();
   }
 
@@ -370,8 +498,8 @@ export class Zettelkasten {
     }
   }
 
-  public getConfig() {
-    return this.config;
+  get config() {
+    return this._config;
   }
 
   public getGroups() {
@@ -396,5 +524,9 @@ export class Zettelkasten {
 
   public async normalizeAndSavePosts() {
     return normalizeAndSavePosts(this.config);
+  }
+
+  public async getRecommendations(params: GetRecommendationsParams) {
+    return getRecommendations(this.config, params);
   }
 }
