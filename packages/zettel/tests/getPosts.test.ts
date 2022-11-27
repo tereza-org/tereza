@@ -4,25 +4,29 @@ test('get all posts', async () => {
   const allPosts = await zettelkasten.getPosts();
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
-    expect.arrayContaining(['blog/post-a', 'books/book-a', 'zettel/zettel-a'])
+    expect.arrayContaining([
+      '/blog/post-a',
+      '/books/book-a',
+      '/zettel/zettel-a',
+    ])
   );
 });
 
 test('get only blog posts', async () => {
   const allPosts = await zettelkasten.getPosts({
-    groups: 'blog',
+    groups: '/blog',
   });
   const ids = allPosts.map((post) => post.id);
-  expect(ids).toMatchObject(expect.arrayContaining(['blog/post-a']));
+  expect(ids).toMatchObject(expect.arrayContaining(['/blog/post-a']));
 });
 
 test('get blog and book posts', async () => {
   const allPosts = await zettelkasten.getPosts({
-    groups: ['blog', 'books'],
+    groups: ['/blog', '/books'],
   });
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
-    expect.arrayContaining(['blog/post-a', 'books/book-a'])
+    expect.arrayContaining(['/blog/post-a', '/books/book-a'])
   );
 });
 
@@ -31,8 +35,8 @@ test('get posts not including drafts', async () => {
     drafts: false,
   });
   const ids = allPosts.map((post) => post.id);
-  expect(ids).toMatchObject(expect.arrayContaining(['blog/post-not-a-draft']));
-  expect(ids).not.toMatchObject(expect.arrayContaining(['blog/post-draft']));
+  expect(ids).toMatchObject(expect.arrayContaining(['/blog/post-not-a-draft']));
+  expect(ids).not.toMatchObject(expect.arrayContaining(['/blog/post-draft']));
 });
 
 test('get posts including drafts', async () => {
@@ -41,7 +45,7 @@ test('get posts including drafts', async () => {
   });
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
-    expect.arrayContaining(['blog/post-draft', 'blog/post-not-a-draft'])
+    expect.arrayContaining(['/blog/post-draft', '/blog/post-not-a-draft'])
   );
 });
 

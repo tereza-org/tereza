@@ -5,7 +5,7 @@ const postsDir = path.join(__dirname, '__mocks__', 'posts');
 
 export const config: ZettelkastenConfig = {
   postsDir,
-  ignoreGroups: ['ignored'],
+  ignoreGroups: ['/ignored'],
   requiredMetadata: ['title', 'date', 'excerpt'],
   normalizeOnInit: false,
 };

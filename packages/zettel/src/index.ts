@@ -50,7 +50,10 @@ type SimplePost = PostMetadata & {
  * Groups are all folders in the postsDir directory.
  */
 const getGroups = (config: ZettelkastenConfig) => {
-  const groups = fs.readdirSync(config.postsDir);
+  const groups = [
+    '/',
+    ...fs.readdirSync(config.postsDir).map((group) => `/${group}`),
+  ];
 
   return groups.filter((group) => {
     if (config.ignoreGroups) {
@@ -216,7 +219,7 @@ const getPostsWithoutRecommendations = async (
       return true;
     })
     .map((post) => {
-      const href = `/${post.group}/${post.slug}`;
+      const href = post.id;
       return { ...post, href };
     })
     .map((post, _, allPosts) => {
@@ -501,6 +504,10 @@ export class Zettelkasten {
   get config() {
     return this._config;
   }
+
+  static readMarkdownFile = readMarkdownFile;
+
+  static readAllMarkdownFilesFromDir = readAllMarkdownFilesFromDir;
 
   public getGroups() {
     return getGroups(this.config);
