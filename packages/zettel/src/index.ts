@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { normalizeTags } from './normalizeTags';
+import { sortObjectByKey } from './sortObjectByKey';
 import { titleCase } from 'title-case';
 import matter from 'gray-matter';
 
@@ -37,10 +38,21 @@ export type PostMetadata = {
   draft?: boolean;
   date?: string;
   tags?: string[];
-  content?: string;
   book?: Book;
   [key: string]: any;
 };
+
+const metadataSortOrder = [
+  'title',
+  'id',
+  'group',
+  'slug',
+  'draft',
+  'date',
+  'excerpt',
+  'tags',
+  'book',
+];
 
 type SimplePost = PostMetadata & {
   content: string;
@@ -395,7 +407,10 @@ const savePost = async (
 ): Promise<void> => {
   const { content, ...metadata } = post;
   const filePath = path.join(config.postsDir, post.group, `${post.slug}.md`);
-  const md = matter.stringify(content || '', metadata);
+  const md = matter.stringify(
+    content || '',
+    sortObjectByKey(metadata, metadataSortOrder)
+  );
   return await fs.promises.writeFile(filePath, md);
 };
 
