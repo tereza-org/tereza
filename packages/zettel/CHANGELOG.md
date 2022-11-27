@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.7.0...@terezatech/zettel@0.7.1) (2022-11-27)
+
+### Bug Fixes
+
+- tags and drafts rules ([#3](https://github.com/terezatech/tereza-apps/issues/3)) ([3ff3dee](https://github.com/terezatech/tereza-apps/commit/3ff3dee39270f53baa9778b8e76dddd58e94a58a))
+
 # [0.7.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.6.0...@terezatech/zettel@0.7.0) (2022-11-27)
 
 ### Features
