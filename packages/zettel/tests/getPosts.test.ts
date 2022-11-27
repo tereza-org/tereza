@@ -56,3 +56,9 @@ test('false and undefined should be the same', async () => {
   const allPosts2 = await zettelkasten.getPosts({});
   expect(allPosts).toEqual(allPosts2);
 });
+
+test('include root posts', async () => {
+  const allPosts = await zettelkasten.getPosts();
+  const groups = allPosts.map((post) => post.group);
+  expect(groups).toMatchObject(expect.arrayContaining(['/']));
+});

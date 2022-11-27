@@ -53,8 +53,23 @@ test('backlinks and references', async () => {
 
 test('recommendations', async () => {
   const post = await zettelkasten.getPost({ id: '/zettel/related-zettel-1' });
-
   expect(post?.recommendations.length).toEqual(
     zettelkasten.config.recommendationsLimit
   );
+});
+
+test('should get root post by group and slug', async () => {
+  const post = await zettelkasten.getPost({ group: '/', slug: 'post-on-root' });
+  expect(post).toBeTruthy();
+});
+
+test('should get root post by id', async () => {
+  const post = await zettelkasten.getPost({ id: '/post-on-root' });
+  expect(post).toBeTruthy();
+});
+
+test('should keep custom id', async () => {
+  const id = 'custom-id';
+  const post = await zettelkasten.getPost({ id });
+  expect(post?.id).toEqual(id);
 });
