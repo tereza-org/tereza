@@ -1,6 +1,6 @@
 {
   "name": "@terezatech/zettel-cli",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "",
   "license": "MIT",
   "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
@@ -20,7 +20,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@terezatech/zettel": "^0.6.0",
+    "@terezatech/zettel": "^0.7.0",
     "@ttoss/config": "^1.18.3",
     "yargs": "^17.6.2"
   },

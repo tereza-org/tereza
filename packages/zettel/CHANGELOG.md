@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.6.0...@terezatech/zettel@0.7.0) (2022-11-27)
+
+### Features
+
+- add root group ([#2](https://github.com/terezatech/tereza-apps/issues/2)) ([c8b94dd](https://github.com/terezatech/tereza-apps/commit/c8b94dd98cbe8f65be09fa8f6beec1dd295c4ff3))
+
 # [0.6.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.5.0...@terezatech/zettel@0.6.0) (2022-11-27)
 
 ### Bug Fixes
