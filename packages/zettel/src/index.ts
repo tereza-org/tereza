@@ -173,6 +173,9 @@ const getSimplePostFromMarkdownFile = (
   return post;
 };
 
+/**
+ * Get all posts including drafts.
+ */
 const getAllSimplePosts = async (config: ZettelkastenConfig) => {
   const markdowns = await readAllMarkdownFiles(config);
 
@@ -185,11 +188,12 @@ const getAllSimplePosts = async (config: ZettelkastenConfig) => {
 
 type GetPostsParams = {
   groups?: string | string[];
-  drafts?: boolean;
+  includeDrafts?: boolean;
 };
 
 /**
- * Add new metadata to posts, like references and backlinks.
+ * Add new metadata to posts, like references and backlinks
+ * and apply draft rules.
  */
 const getPostsWithoutRecommendations = async (
   config: ZettelkastenConfig,
@@ -202,22 +206,22 @@ const getPostsWithoutRecommendations = async (
      * All posts with drafts rules applied.
      */
     .filter((post) => {
-      if (!params) {
-        return true;
+      const { groups = [], includeDrafts = false } = params || {};
+
+      const finalGroups = Array.isArray(groups) ? groups : [groups];
+
+      /**
+       * Filter out posts that are not in the specified groups.
+       */
+      if (finalGroups.length > 0 && !finalGroups.includes(post.group)) {
+        return false;
       }
 
-      if (params.groups) {
-        const groups = Array.isArray(params.groups)
-          ? params.groups
-          : [params.groups];
-
-        return groups.includes(post.group);
-      }
-
-      if (!params.drafts) {
-        if (post.draft) {
-          return false;
-        }
+      /**
+       * Filter out drafts if includeDrafts is false.
+       */
+      if (!includeDrafts && post.draft) {
+        return false;
       }
 
       return true;
@@ -379,10 +383,8 @@ const getPost = async (
   config: ZettelkastenConfig,
   params: GetPostParams
 ): Promise<Post | undefined> => {
-  const allPosts = await getPosts(config);
-
+  const allPosts = await getPosts(config, { includeDrafts: true });
   const post = filterPostFromPostsArray(allPosts, params);
-
   return post;
 };
 
@@ -399,8 +401,8 @@ const savePost = async (
   return await fs.promises.writeFile(filePath, md);
 };
 
-const getTags = async (config: ZettelkastenConfig) => {
-  const posts = await getPosts(config);
+const getTags = async (config: ZettelkastenConfig, params?: GetPostsParams) => {
+  const posts = await getPosts(config, params);
 
   const tags = posts
     .flatMap((post) => post.tags)
@@ -417,7 +419,7 @@ const getTags = async (config: ZettelkastenConfig) => {
 const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
   const [allPosts, allTags] = await Promise.all([
     getAllSimplePosts(config),
-    getTags(config),
+    getTags(config, { includeDrafts: true }),
   ]);
 
   /**
@@ -527,8 +529,8 @@ export class Zettelkasten {
     return getPost(this.config, params);
   }
 
-  public async getTags() {
-    return getTags(this.config);
+  public async getTags(params?: GetPostsParams) {
+    return getTags(this.config, params);
   }
 
   public async savePost(post: SimplePost) {
