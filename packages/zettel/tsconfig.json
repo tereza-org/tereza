@@ -1,6 +1,3 @@
 {
-  "extends": "@ttoss/config/tsconfig.json",
-  "compilerOptions": {
-    "target": "es5"
-  }
+  "extends": "@ttoss/config/tsconfig.json"
 }
