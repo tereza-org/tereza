@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.5.0...@terezatech/zettel@0.6.0) (2022-11-27)
+
+### Bug Fixes
+
+- target module ([0a3372b](https://github.com/arantespp/tereza-tech/commit/0a3372b88d825e83677a6c5515a5a751ece8ab87))
+
+### Features
+
+- add recommendations ([27a9100](https://github.com/arantespp/tereza-tech/commit/27a91001b67023cd9212f549ab38b62c0330eeb0))
+
 # [0.5.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.4.0...@terezatech/zettel@0.5.0) (2022-11-26)
 
 ### Features
