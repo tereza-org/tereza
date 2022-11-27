@@ -57,3 +57,19 @@ test('include root posts', async () => {
   const groups = allPosts.map((post) => post.group);
   expect(groups).toMatchObject(expect.arrayContaining(['/']));
 });
+
+test('not include not markdown files', async () => {
+  const allPosts = await zettelkasten.getPosts({ includeDrafts: true });
+  const notMarkdown = allPosts.filter((post) =>
+    post.slug.includes('not-markdown')
+  );
+  expect(notMarkdown.length).toEqual(0);
+});
+
+test('should not return posts that is draft but with draft metadata equals false', async () => {
+  const allPosts = await zettelkasten.getPosts({ includeDrafts: false });
+  const notDraft = allPosts.filter((post) =>
+    post.id.includes('/blog/forced-not-draft-post')
+  );
+  expect(notDraft.length).toEqual(0);
+});

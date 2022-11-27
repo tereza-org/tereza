@@ -91,17 +91,19 @@ const readMarkdownFile = async (
 const readAllMarkdownFilesFromDir = async (dir: string) => {
   const files = await fs.promises.readdir(dir);
 
-  const promises = files.map(async (slug) => {
-    const filePath = path.join(dir, slug);
+  const promises = files
+    .filter((filename) => filename.endsWith('.md'))
+    .map(async (filename) => {
+      const filePath = path.join(dir, filename);
 
-    const markdown = await readMarkdownFile(filePath);
+      const markdown = await readMarkdownFile(filePath);
 
-    if (markdown?.data) {
-      markdown.data.slug = slug.replace('.md', '');
-    }
+      if (markdown?.data) {
+        markdown.data.slug = filename.replace('.md', '');
+      }
 
-    return markdown;
-  });
+      return markdown;
+    });
 
   const markdowns = await Promise.all(promises);
 
@@ -160,13 +162,9 @@ const getSimplePostFromMarkdownFile = (
     );
 
     /**
-     * If draft is explicitly set to false, but the post is missing required
-     * metadata, then return false.
+     * Even ff draft is explicitly set to false, but the post is missing
+     * required metadata, then return false.
      */
-    if (!hasAllRequiredMetadata && post.draft === false) {
-      return false;
-    }
-
     return !hasAllRequiredMetadata;
   })();
 
