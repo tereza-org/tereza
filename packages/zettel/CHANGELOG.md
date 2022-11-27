@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.8.0...@terezatech/zettel@0.9.0) (2022-11-27)
+
+### Features
+
+- add formatted date and reading time ([#6](https://github.com/terezatech/tereza-apps/issues/6)) ([969c26c](https://github.com/terezatech/tereza-apps/commit/969c26c46cb8e06e70a5836c2f790c7e24fb2c02))
+
 # [0.8.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.7.2...@terezatech/zettel@0.8.0) (2022-11-27)
 
 ### Features
