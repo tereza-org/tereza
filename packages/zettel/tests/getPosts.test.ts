@@ -1,7 +1,7 @@
 import { zettelkasten } from './zettelkasten';
 
-test('get all posts', async () => {
-  const allPosts = await zettelkasten.getPosts();
+test('get all posts including drafts', async () => {
+  const allPosts = await zettelkasten.getPosts({ includeDrafts: true });
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
     expect.arrayContaining([
@@ -23,6 +23,7 @@ test('get only blog posts', async () => {
 test('get blog and book posts', async () => {
   const allPosts = await zettelkasten.getPosts({
     groups: ['/blog', '/books'],
+    includeDrafts: true,
   });
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
@@ -31,18 +32,14 @@ test('get blog and book posts', async () => {
 });
 
 test('get posts not including drafts', async () => {
-  const allPosts = await zettelkasten.getPosts({
-    drafts: false,
-  });
+  const allPosts = await zettelkasten.getPosts({ includeDrafts: false });
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(expect.arrayContaining(['/blog/post-not-a-draft']));
   expect(ids).not.toMatchObject(expect.arrayContaining(['/blog/post-draft']));
 });
 
 test('get posts including drafts', async () => {
-  const allPosts = await zettelkasten.getPosts({
-    drafts: true,
-  });
+  const allPosts = await zettelkasten.getPosts({ includeDrafts: true });
   const ids = allPosts.map((post) => post.id);
   expect(ids).toMatchObject(
     expect.arrayContaining(['/blog/post-draft', '/blog/post-not-a-draft'])
@@ -50,9 +47,7 @@ test('get posts including drafts', async () => {
 });
 
 test('false and undefined should be the same', async () => {
-  const allPosts = await zettelkasten.getPosts({
-    drafts: false,
-  });
+  const allPosts = await zettelkasten.getPosts({ includeDrafts: false });
   const allPosts2 = await zettelkasten.getPosts({});
   expect(allPosts).toEqual(allPosts2);
 });
