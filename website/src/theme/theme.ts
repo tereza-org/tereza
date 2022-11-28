@@ -19,13 +19,25 @@ const darkPalette = {
   color5: '#2B8C7B',
 };
 
+const white = '#F2F2F2';
+
+const black = '#0D0D0D';
+
 export const theme: Theme = {
+  initialColorModeName: 'light',
   colors: {
-    black: '#160B26',
-    white: '#F2F2F2',
-    text: '#02000D',
+    black,
+    white,
+    text: black,
+    background: white,
     primary: lightPalette.color3,
     secondary: lightPalette.color1,
+    modes: {
+      dark: {
+        text: white,
+        background: black,
+      },
+    },
   },
   text: {
     h1: {
