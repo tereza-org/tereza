@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.9.0...@terezatech/zettel@0.10.0) (2022-11-28)
+
+### Features
+
+- metadata on backlinks and references ([#7](https://github.com/terezatech/tereza-apps/issues/7)) ([360c261](https://github.com/terezatech/tereza-apps/commit/360c261a28dfea2e2b9b012eeb10226fa0655ca6))
+
 # [0.9.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.8.0...@terezatech/zettel@0.9.0) (2022-11-27)
 
 ### Features
