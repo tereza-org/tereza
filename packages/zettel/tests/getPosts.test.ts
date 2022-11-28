@@ -73,3 +73,25 @@ test('should not return posts that is draft but with draft metadata equals false
   );
   expect(notDraft.length).toEqual(0);
 });
+
+test('post recommendations should not include the post itself', async () => {
+  const posts = await zettelkasten.getPosts();
+  posts.forEach((post) => {
+    expect(Array.isArray(post.recommendations)).toBeTruthy();
+    expect(post.recommendations.map((p) => p.id)).not.toContain(post.id);
+  });
+});
+
+test.each(['references', 'backlinks', 'recommendations'])(
+  'no %s should contain content',
+  async (param) => {
+    const posts = await zettelkasten.getPosts();
+    posts.forEach((post) => {
+      const value = (post as any)[param] as any[];
+      expect(Array.isArray(value)).toBeTruthy();
+      value.forEach((v) => {
+        expect(v.content).toBeUndefined();
+      });
+    });
+  }
+);

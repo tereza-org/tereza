@@ -70,9 +70,13 @@ test('backlinks and references', async () => {
     id: '/blog/post-not-a-draft-and-reference-another',
   });
 
-  expect(referencedPost?.backlinks).toContain(referencingPost?.id);
+  expect(
+    referencedPost?.backlinks.find((p) => p.id === referencingPost?.id)
+  ).toBeTruthy();
 
-  expect(referencingPost?.references).toContain(referencedPost?.id);
+  expect(
+    referencingPost?.references.find((p) => p.id === referencedPost?.id)
+  ).toBeTruthy();
 });
 
 test('recommendations', async () => {
@@ -96,4 +100,14 @@ test('should keep custom id', async () => {
   const id = 'custom-id';
   const post = await zettelkasten.getPost({ id });
   expect(post?.id).toEqual(id);
+});
+
+test('post without content should be draft', async () => {
+  const post = await zettelkasten.getPost({ id: '/blog/post-without-content' });
+  expect(post?.draft).toEqual(true);
+});
+
+test('return empty array if no tags', async () => {
+  const post = await zettelkasten.getPost({ id: '/blog/post-without-tags' });
+  expect(post?.tags).toEqual([]);
 });
