@@ -59,4 +59,5 @@ jobs:
         timeout-minutes: 20
         run: sh -e ./.cicd/commands/main.sh
         env:
+          ACM_ARN: ${{ secrets.ACM_ARN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
