@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "tereza-tech",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "build-graph": "turbo run build --graph=turbo-build-graph.png",
     "lint": "lint-staged --diff main --quiet",

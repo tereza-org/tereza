@@ -72,7 +72,7 @@ const config = {
           },
           // { to: '/blog', label: 'Blog', position: 'left' },
           {
-            href: 'https://github.com/terezatech/tereza-apps',
+            href: 'https://github.com/terezatech/tereza-tech',
             label: 'GitHub',
             position: 'right',
           },
@@ -108,7 +108,7 @@ const config = {
               // },
               {
                 label: 'GitHub',
-                href: 'https://github.com/terezatech/tereza-apps',
+                href: 'https://github.com/terezatech/tereza-tech',
               },
             ],
           },

@@ -3,41 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [0.10.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.9.0...@terezatech/zettel@0.10.0) (2022-11-28)
+# [0.10.0](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel@0.9.0...@terezatech/zettel@0.10.0) (2022-11-28)
 
 ### Features
 
-- metadata on backlinks and references ([#7](https://github.com/terezatech/tereza-apps/issues/7)) ([360c261](https://github.com/terezatech/tereza-apps/commit/360c261a28dfea2e2b9b012eeb10226fa0655ca6))
+- metadata on backlinks and references ([#7](https://github.com/terezatech/tereza-tech/issues/7)) ([360c261](https://github.com/terezatech/tereza-tech/commit/360c261a28dfea2e2b9b012eeb10226fa0655ca6))
 
-# [0.9.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.8.0...@terezatech/zettel@0.9.0) (2022-11-27)
-
-### Features
-
-- add formatted date and reading time ([#6](https://github.com/terezatech/tereza-apps/issues/6)) ([969c26c](https://github.com/terezatech/tereza-apps/commit/969c26c46cb8e06e70a5836c2f790c7e24fb2c02))
-
-# [0.8.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.7.2...@terezatech/zettel@0.8.0) (2022-11-27)
+# [0.9.0](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel@0.8.0...@terezatech/zettel@0.9.0) (2022-11-27)
 
 ### Features
 
-- sort metadata ([#5](https://github.com/terezatech/tereza-apps/issues/5)) ([c38c4f9](https://github.com/terezatech/tereza-apps/commit/c38c4f960bac0eca4b21f6cac7cbe4b9b3f687cb))
+- add formatted date and reading time ([#6](https://github.com/terezatech/tereza-tech/issues/6)) ([969c26c](https://github.com/terezatech/tereza-tech/commit/969c26c46cb8e06e70a5836c2f790c7e24fb2c02))
 
-## [0.7.2](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.7.1...@terezatech/zettel@0.7.2) (2022-11-27)
+# [0.8.0](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel@0.7.2...@terezatech/zettel@0.8.0) (2022-11-27)
+
+### Features
+
+- sort metadata ([#5](https://github.com/terezatech/tereza-tech/issues/5)) ([c38c4f9](https://github.com/terezatech/tereza-tech/commit/c38c4f960bac0eca4b21f6cac7cbe4b9b3f687cb))
+
+## [0.7.2](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel@0.7.1...@terezatech/zettel@0.7.2) (2022-11-27)
 
 ### Bug Fixes
 
-- ignore not markdown files ([#4](https://github.com/terezatech/tereza-apps/issues/4)) ([5d8f494](https://github.com/terezatech/tereza-apps/commit/5d8f494cbf49cd302e982ab7a2c18670d6bde21d))
+- ignore not markdown files ([#4](https://github.com/terezatech/tereza-tech/issues/4)) ([5d8f494](https://github.com/terezatech/tereza-tech/commit/5d8f494cbf49cd302e982ab7a2c18670d6bde21d))
 
-## [0.7.1](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.7.0...@terezatech/zettel@0.7.1) (2022-11-27)
+## [0.7.1](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel@0.7.0...@terezatech/zettel@0.7.1) (2022-11-27)
 
 ### Bug Fixes
 
-- tags and drafts rules ([#3](https://github.com/terezatech/tereza-apps/issues/3)) ([3ff3dee](https://github.com/terezatech/tereza-apps/commit/3ff3dee39270f53baa9778b8e76dddd58e94a58a))
+- tags and drafts rules ([#3](https://github.com/terezatech/tereza-tech/issues/3)) ([3ff3dee](https://github.com/terezatech/tereza-tech/commit/3ff3dee39270f53baa9778b8e76dddd58e94a58a))
 
-# [0.7.0](https://github.com/terezatech/tereza-apps/compare/@terezatech/zettel@0.6.0...@terezatech/zettel@0.7.0) (2022-11-27)
+# [0.7.0](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel@0.6.0...@terezatech/zettel@0.7.0) (2022-11-27)
 
 ### Features
 
-- add root group ([#2](https://github.com/terezatech/tereza-apps/issues/2)) ([c8b94dd](https://github.com/terezatech/tereza-apps/commit/c8b94dd98cbe8f65be09fa8f6beec1dd295c4ff3))
+- add root group ([#2](https://github.com/terezatech/tereza-tech/issues/2)) ([c8b94dd](https://github.com/terezatech/tereza-tech/commit/c8b94dd98cbe8f65be09fa8f6beec1dd295c4ff3))
 
 # [0.6.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.5.0...@terezatech/zettel@0.6.0) (2022-11-27)
 
