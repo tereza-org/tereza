@@ -8,21 +8,21 @@ afterEach(() => {
 });
 
 test('should not normalize on init', async () => {
-  const normalizeAndSavePostsMock = jest.spyOn(
+  const normalizePostsMock = jest.spyOn(
     Zettelkasten.prototype,
-    'normalizeAndSavePosts'
+    'normalizePosts'
   );
   new Zettelkasten({ ...config, normalizeOnInit: false });
-  expect(normalizeAndSavePostsMock).not.toHaveBeenCalled();
+  expect(normalizePostsMock).not.toHaveBeenCalled();
 });
 
 test('should normalize on init', async () => {
-  const normalizeAndSavePostsMock = jest.spyOn(
+  const normalizePostsMock = jest.spyOn(
     Zettelkasten.prototype,
-    'normalizeAndSavePosts'
+    'normalizePosts'
   );
   new Zettelkasten({ ...config, normalizeOnInit: true });
-  expect(normalizeAndSavePostsMock).toHaveBeenCalled();
+  expect(normalizePostsMock).toHaveBeenCalled();
 });
 
 test('if a slug is tag in another post, add it as tag', async () => {
@@ -39,7 +39,7 @@ test('if a slug is tag in another post, add it as tag', async () => {
       return Promise.resolve();
     });
 
-  await zettelkasten.normalizeAndSavePosts();
+  await zettelkasten.normalizePosts();
 
   expect(writeFileMock).toHaveBeenCalled();
 

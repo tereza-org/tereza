@@ -44,7 +44,7 @@ export type PostMetadata = {
   excerpt?: string;
   draft?: boolean;
   date?: string;
-  tags?: string[];
+  tags: string[];
   book?: Book;
   [key: string]: any;
 };
@@ -193,6 +193,10 @@ const getSimplePostFromMarkdownFile = (
       return true;
     }
 
+    if (!post.content) {
+      return true;
+    }
+
     const hasAllRequiredMetadata = config.requiredMetadata?.every(
       (key) => key in post
     );
@@ -223,6 +227,12 @@ const getAllSimplePosts = async (config: ZettelkastenConfig) => {
 type GetPostsParams = {
   groups?: string | string[];
   includeDrafts?: boolean;
+};
+
+const removeContent = (post: SimplePost): PostMetadata => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { content, ...rest } = post;
+  return rest;
 };
 
 /**
@@ -272,13 +282,13 @@ const getPostsWithoutRecommendations = async (
       /**
        * Array of all post ids that `post` use as references.
        */
-      const references = allPosts.reduce((acc, { id, href }) => {
-        if (post.content.includes(`(${href})`)) {
-          return [id, ...acc];
+      const references = allPosts.reduce((acc, recommendation) => {
+        if (post.content.includes(`(${recommendation.href})`)) {
+          return [removeContent(recommendation), ...acc];
         }
 
         return acc;
-      }, [] as string[]);
+      }, [] as PostMetadata[]);
 
       /**
        * Add backlinks to post. Backlinks are all posts that
@@ -286,7 +296,7 @@ const getPostsWithoutRecommendations = async (
        */
       const backlinks = allPosts
         .filter(({ content }) => content.includes(`(${post.href})`))
-        .map(({ id }) => id as string);
+        .map((post) => removeContent(post));
 
       return { ...post, references, backlinks };
     });
@@ -342,14 +352,14 @@ const getPostRecommendations = async (
    * All posts that the current post references scores.
    */
   post?.references.forEach((reference) => {
-    scoreMap[reference] += 6;
+    scoreMap[reference.id] += 6;
   });
 
   /**
    * All posts that reference the current post scores.
    */
   post?.backlinks.forEach((backlink) => {
-    scoreMap[backlink] += 3;
+    scoreMap[backlink.id] += 3;
   });
 
   /**
@@ -374,11 +384,7 @@ const getPostRecommendations = async (
     })
     .map(({ post }) => post)
     .filter((post): post is PostWithoutRecommendations => !!post)
-    .map((post) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { content, ...metadata } = post;
-      return metadata as PostMetadata;
-    })
+    .map((post) => removeContent(post))
     /**
      * Remove itself from recommendations.
      */
@@ -388,8 +394,9 @@ const getPostRecommendations = async (
       /**
        * Check if the recommendation is referenced by the current post.
        */
-      const isReference = post?.references.includes(recommendation.id);
-
+      const isReference = post?.references.find(
+        (reference) => reference.id === recommendation.id
+      );
       return { ...recommendation, isReference };
     });
 
@@ -457,7 +464,7 @@ const getTags = async (config: ZettelkastenConfig, params?: GetPostsParams) => {
   return tags;
 };
 
-const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
+const normalizePosts = async (config: ZettelkastenConfig) => {
   const [allPosts, allTags] = await Promise.all([
     getAllSimplePosts(config),
     getTags(config, { includeDrafts: true }),
@@ -480,20 +487,18 @@ const normalizeAndSavePosts = async (config: ZettelkastenConfig) => {
   await Promise.all(promises);
 };
 
-export type GetRecommendationsParams =
-  | {
-      group?: string;
-      tag?: string;
-      limit?: boolean;
-    }
-  | undefined;
+export type GetRecommendationsParams = {
+  group?: string;
+  tag?: string;
+  limit?: boolean;
+};
 
 /**
  * Group or tags recommendations.
  */
 const getRecommendations = async (
   config: ZettelkastenConfig,
-  params: GetRecommendationsParams
+  params?: GetRecommendationsParams
 ) => {
   const { tag, group } = params || {};
 
@@ -546,7 +551,7 @@ export class Zettelkasten {
 
   private async init() {
     if (this.config.normalizeOnInit) {
-      await this.normalizeAndSavePosts();
+      await this.normalizePosts();
     }
   }
 
@@ -578,11 +583,11 @@ export class Zettelkasten {
     return savePost(this.config, post);
   }
 
-  public async normalizeAndSavePosts() {
-    return normalizeAndSavePosts(this.config);
+  public async normalizePosts() {
+    return normalizePosts(this.config);
   }
 
-  public async getRecommendations(params: GetRecommendationsParams) {
+  public async getRecommendations(params?: GetRecommendationsParams) {
     return getRecommendations(this.config, params);
   }
 }

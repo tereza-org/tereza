@@ -17,3 +17,8 @@ test('getRecommendations by group', async () => {
   const posts = await zettelkasten.getRecommendations({ group: '/blog' });
   expect(posts.length > 1).toBeTruthy();
 });
+
+test('recommendations without params', async () => {
+  const recommendations = await zettelkasten.getRecommendations();
+  expect(Array.isArray(recommendations)).toBeTruthy();
+});
