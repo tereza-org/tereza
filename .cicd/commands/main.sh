@@ -1,3 +1,5 @@
+export CARLIN_ENVIRONMENT=Production
+
 # Fetch tags
 git fetch --tags
 

@@ -10,7 +10,8 @@
   },
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "website"
   ],
   "dependencies": {},
   "devDependencies": {
