@@ -3925,10 +3925,25 @@
     identity-obj-proxy "^3.0.0"
     prettier-package-json "^2.6.4"
 
-"@ttoss/eslint-config@^1.16.2":
-  version "1.16.2"
-  resolved "https://registry.yarnpkg.com/@ttoss/eslint-config/-/eslint-config-1.16.2.tgz#0a6e30f0170cfe44db0715e055aef19b6fe9477f"
-  integrity sha512-UZact7ZlT9aT0N1W1KyUYY10hJL1fsMgzkI9dNUx2r3CUZjQ5YZ7gnJfFbwicz9ERrR3qP4XJYdHqiuLijK0Kw==
+"@ttoss/config@^1.20.0":
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/@ttoss/config/-/config-1.20.0.tgz#0db5d305169f7a5968e509d24ad96d4adeca81f5"
+  integrity sha512-BmQ4la6OuuxUpME91jXvmsSPcqht78Yv/YLCQf3BKKLs89xiTUYElcLW+ZfN3Ccc9lxiiArixxGee6v1fl0KEw==
+  dependencies:
+    "@babel/preset-env" "^7.18.6"
+    "@babel/preset-react" "^7.18.6"
+    "@babel/preset-typescript" "^7.18.6"
+    "@commitlint/config-conventional" "^17.0.3"
+    "@formatjs/ts-transformer" "^3.9.8"
+    babel-plugin-formatjs "^10.3.24"
+    deepmerge "^4.2.2"
+    identity-obj-proxy "^3.0.0"
+    prettier-package-json "^2.6.4"
+
+"@ttoss/eslint-config@^1.18.0":
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/@ttoss/eslint-config/-/eslint-config-1.18.0.tgz#dad2375a798c273b3de1c4d7ea133b750b60c3bd"
+  integrity sha512-DupR0HtgHbVaAeL6/EZoGNY3i6MUbE2QqeyRBp1Z7Mk/Vle9MiHoYNyuK0019E0COX2eijzgL+tT+FSblhmyiw==
   dependencies:
     "@rushstack/eslint-patch" "^1.2.0"
     "@typescript-eslint/eslint-plugin" "^5.39.0"
@@ -3937,6 +3952,7 @@
     eslint-plugin-formatjs "^4.3.2"
     eslint-plugin-jest "^27.1.1"
     eslint-plugin-jsx-a11y "^6.6.1"
+    eslint-plugin-prefer-arrow-functions "^3.1.4"
     eslint-plugin-prettier "^4.2.1"
     eslint-plugin-react "^7.31.8"
     eslint-plugin-react-hooks "^4.6.0"
@@ -7157,6 +7173,11 @@ eslint-plugin-jsx-a11y@^6.6.1:
     language-tags "^1.0.5"
     minimatch "^3.1.2"
     semver "^6.3.0"
+
+eslint-plugin-prefer-arrow-functions@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prefer-arrow-functions/-/eslint-plugin-prefer-arrow-functions-3.1.4.tgz#a0761c7a0ba71461f6b2136fdf7f7cec1c82d778"
+  integrity sha512-LSO8VibqBKqzelr+L21mEIfachavCon+1SEumCJ6U8Ze2q0pntyojmomcVwd9RZBjrP+HV6k1Osz0B3Xwdq8WA==
 
 eslint-plugin-prettier@^4.2.1:
   version "4.2.1"
