@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.3.0 (2022-11-30)
+
+### Bug Fixes
+
+- lerna all flag ([2f8af39](https://github.com/terezatech/tereza-tech/commit/2f8af395b813adf7fa38d6a7d0c51ee8164feecc))
+
+### Features
+
+- add flashcard ([#9](https://github.com/terezatech/tereza-tech/issues/9)) ([3f44f64](https://github.com/terezatech/tereza-tech/commit/3f44f648b211a3de943d41992b95c2d664919fe1))
+
 ## [0.2.7](https://github.com/terezatech/tereza-tech/compare/@terezatech/zettel-cli@0.2.6...@terezatech/zettel-cli@0.2.7) (2022-11-28)
 
 **Note:** Version bump only for package @terezatech/zettel-cli
