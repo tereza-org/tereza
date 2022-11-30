@@ -426,9 +426,10 @@ const getPostRecommendations = async (
       /**
        * Check if the recommendation is referenced by the current post.
        */
-      const isReference = post?.references.find((reference) => {
+      const isReference = !!post?.references.find((reference) => {
         return reference.id === recommendation.id;
       });
+
       return { ...recommendation, isReference };
     });
 
