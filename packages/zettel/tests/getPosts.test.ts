@@ -98,6 +98,17 @@ test('post recommendations should not include the post itself', async () => {
   });
 });
 
+test('post recommendations should not return isReference equals undefined or null', async () => {
+  const posts = await zettelkasten.getPosts();
+  posts.forEach((post) => {
+    post.recommendations.forEach((p) => {
+      expect(p.isReference).not.toBeUndefined();
+      expect(p.isReference).not.toBeNull();
+      expect(typeof p.isReference).toEqual('boolean');
+    });
+  });
+});
+
 test.each(['references', 'backlinks', 'recommendations'])(
   'no %s should contain content',
   async (param) => {
