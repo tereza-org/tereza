@@ -71,11 +71,15 @@ test('backlinks and references', async () => {
   });
 
   expect(
-    referencedPost?.backlinks.find((p) => p.id === referencingPost?.id)
+    referencedPost?.backlinks.find((p) => {
+      return p.id === referencingPost?.id;
+    })
   ).toBeTruthy();
 
   expect(
-    referencingPost?.references.find((p) => p.id === referencedPost?.id)
+    referencingPost?.references.find((p) => {
+      return p.id === referencedPost?.id;
+    })
   ).toBeTruthy();
 });
 

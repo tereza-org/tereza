@@ -1,5 +1,5 @@
 {
-  "name": "@terezatech/zettel-cli",
+  "name": "@tereza-tech/zettel-cli",
   "version": "0.2.7",
   "description": "",
   "license": "MIT",
@@ -7,7 +7,7 @@
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "bin": {
-    "zettelkasten": "./bin/zettelkasten"
+    "zettel": "./bin/zettel"
   },
   "files": [
     "bin",
@@ -20,7 +20,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@terezatech/zettel": "^0.10.0",
+    "@tereza-tech/zettel": "^0.10.0",
     "@ttoss/config": "^1.18.3",
     "yargs": "^17.6.2"
   },

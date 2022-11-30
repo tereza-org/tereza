@@ -1,4 +1,5 @@
 import * as dateFns from 'date-fns';
+import * as flashcardModule from './flashcard';
 import * as fs from 'fs';
 import * as path from 'path';
 import { normalizeTags } from './normalizeTags';
@@ -65,10 +66,15 @@ type SimplePost = PostMetadata & {
   content: string;
 };
 
-const getDirectories = async (dir: string) =>
-  (await fs.promises.readdir(dir, { withFileTypes: true }))
-    .filter((dirent) => dirent.isDirectory())
-    .map((dirent) => dirent.name);
+const getDirectories = async (dir: string) => {
+  return (await fs.promises.readdir(dir, { withFileTypes: true }))
+    .filter((dirent) => {
+      return dirent.isDirectory();
+    })
+    .map((dirent) => {
+      return dirent.name;
+    });
+};
 
 /**
  * Groups are all folders in the postsDir directory.
@@ -76,7 +82,9 @@ const getDirectories = async (dir: string) =>
 const getGroups = async (config: ZettelkastenConfig) => {
   const groups = [
     '/',
-    ...(await getDirectories(config.postsDir)).map((group) => `/${group}`),
+    ...(await getDirectories(config.postsDir)).map((group) => {
+      return `/${group}`;
+    }),
   ];
 
   return groups.filter((group) => {
@@ -111,7 +119,9 @@ const readAllMarkdownFilesFromDir = async (dir: string) => {
   const files = await fs.promises.readdir(dir);
 
   const promises = files
-    .filter((filename) => filename.endsWith('.md'))
+    .filter((filename) => {
+      return filename.endsWith('.md');
+    })
     .map(async (filename) => {
       const filePath = path.join(dir, filename);
 
@@ -126,9 +136,9 @@ const readAllMarkdownFilesFromDir = async (dir: string) => {
 
   const markdowns = await Promise.all(promises);
 
-  return markdowns.filter(
-    (markdown): markdown is MarkdownFile => markdown !== undefined
-  );
+  return markdowns.filter((markdown): markdown is MarkdownFile => {
+    return markdown !== undefined;
+  });
 };
 
 const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
@@ -139,7 +149,9 @@ const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
 
     const markdowns = await readAllMarkdownFilesFromDir(groupDir);
 
-    markdowns.forEach((markdown) => (markdown.data.group = group));
+    markdowns.forEach((markdown) => {
+      return (markdown.data.group = group);
+    });
 
     return markdowns;
   });
@@ -197,9 +209,9 @@ const getSimplePostFromMarkdownFile = (
       return true;
     }
 
-    const hasAllRequiredMetadata = config.requiredMetadata?.every(
-      (key) => key in post
-    );
+    const hasAllRequiredMetadata = config.requiredMetadata?.every((key) => {
+      return key in post;
+    });
 
     /**
      * Even ff draft is explicitly set to false, but the post is missing
@@ -217,9 +229,9 @@ const getSimplePostFromMarkdownFile = (
 const getAllSimplePosts = async (config: ZettelkastenConfig) => {
   const markdowns = await readAllMarkdownFiles(config);
 
-  const posts = markdowns.map((markdown) =>
-    getSimplePostFromMarkdownFile(config, markdown)
-  );
+  const posts = markdowns.map((markdown) => {
+    return getSimplePostFromMarkdownFile(config, markdown);
+  });
 
   return posts;
 };
@@ -295,8 +307,12 @@ const getPostsWithoutRecommendations = async (
        * reference current `post`.
        */
       const backlinks = allPosts
-        .filter(({ content }) => content.includes(`(${post.href})`))
-        .map((post) => removeContent(post));
+        .filter(({ content }) => {
+          return content.includes(`(${post.href})`);
+        })
+        .map((post) => {
+          return removeContent(post);
+        });
 
       return { ...post, references, backlinks };
     });
@@ -321,16 +337,20 @@ const filterPostFromPostsArray = <P extends SimplePost>(
   params: GetPostParams
 ): P | undefined => {
   if ('id' in params) {
-    return allPosts.find((post) => post.id === params.id);
+    return allPosts.find((post) => {
+      return post.id === params.id;
+    });
   }
 
   if ('title' in params) {
-    return allPosts.find((post) => post.title === params.title);
+    return allPosts.find((post) => {
+      return post.title === params.title;
+    });
   }
 
-  const post = allPosts.find(
-    (post) => post.group === params.group && post.slug === params.slug
-  );
+  const post = allPosts.find((post) => {
+    return post.group === params.group && post.slug === params.slug;
+  });
 
   return post;
 };
@@ -375,28 +395,40 @@ const getPostRecommendations = async (
 
   const recommendations = Object.entries(scoreMap)
     .map(([id, score]) => {
-      const post = allPosts.find((post) => post.id === id);
+      const post = allPosts.find((post) => {
+        return post.id === id;
+      });
       return { post, score };
     })
-    .filter(({ score }) => score > 0)
+    .filter(({ score }) => {
+      return score > 0;
+    })
     .sort(({ score: scoreA }, { score: scoreB }) => {
       return scoreB - scoreA;
     })
-    .map(({ post }) => post)
-    .filter((post): post is PostWithoutRecommendations => !!post)
-    .map((post) => removeContent(post))
+    .map(({ post }) => {
+      return post;
+    })
+    .filter((post): post is PostWithoutRecommendations => {
+      return !!post;
+    })
+    .map((post) => {
+      return removeContent(post);
+    })
     /**
      * Remove itself from recommendations.
      */
-    .filter(({ href }) => href !== post?.href)
+    .filter(({ href }) => {
+      return href !== post?.href;
+    })
     .slice(0, config.recommendationsLimit)
     .map((recommendation) => {
       /**
        * Check if the recommendation is referenced by the current post.
        */
-      const isReference = post?.references.find(
-        (reference) => reference.id === recommendation.id
-      );
+      const isReference = post?.references.find((reference) => {
+        return reference.id === recommendation.id;
+      });
       return { ...recommendation, isReference };
     });
 
@@ -453,13 +485,21 @@ const getTags = async (config: ZettelkastenConfig, params?: GetPostsParams) => {
   const posts = await getPosts(config, params);
 
   const tags = posts
-    .flatMap((post) => post.tags)
+    .flatMap((post) => {
+      return post.tags;
+    })
     /**
      * Remove duplicates.
      */
-    .filter((tag, index, arr) => arr.indexOf(tag) === index)
-    .filter((tag): tag is string => tag !== undefined)
-    .sort((tagA, tagB) => tagA.localeCompare(tagB));
+    .filter((tag, index, arr) => {
+      return arr.indexOf(tag) === index;
+    })
+    .filter((tag): tag is string => {
+      return tag !== undefined;
+    })
+    .sort((tagA, tagB) => {
+      return tagA.localeCompare(tagB);
+    });
 
   return tags;
 };
@@ -482,7 +522,9 @@ const normalizePosts = async (config: ZettelkastenConfig) => {
     }
   });
 
-  const promises = allPosts.map((post) => savePost(config, post));
+  const promises = allPosts.map((post) => {
+    return savePost(config, post);
+  });
 
   await Promise.all(promises);
 };
@@ -508,7 +550,9 @@ const getRecommendations = async (
      */
     if (tag) {
       const allPosts = await getPosts(config);
-      return allPosts.filter(({ tags }) => (tags || []).includes(tag));
+      return allPosts.filter(({ tags }) => {
+        return (tags || []).includes(tag);
+      });
     }
 
     /**
@@ -525,7 +569,9 @@ const getRecommendations = async (
 
   const recommendations = allRecommendations
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    .map(({ content, ...metadata }) => metadata)
+    .map(({ content, ...metadata }) => {
+      return metadata;
+    })
     .slice(0, limit)
     /**
      * Sort by date.
@@ -539,6 +585,20 @@ const getRecommendations = async (
     });
 
   return recommendations;
+};
+
+interface PostWithDate extends Post {
+  date: string;
+}
+
+const getFlashcard = async (config: ZettelkastenConfig) => {
+  const posts = (await getPosts(config)).filter(
+    (post): post is PostWithDate => {
+      return !!post.date;
+    }
+  );
+
+  return flashcardModule.getFlashcard(posts);
 };
 
 export class Zettelkasten {
@@ -589,5 +649,9 @@ export class Zettelkasten {
 
   public async getRecommendations(params?: GetRecommendationsParams) {
     return getRecommendations(this.config, params);
+  }
+
+  public async getFlashcard() {
+    return getFlashcard(this.config);
   }
 }
