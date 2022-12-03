@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.4](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.11.3...@tereza-tech/zettel@0.11.4) (2022-12-03)
+
+### Bug Fixes
+
+- export flashcard type ([#15](https://github.com/terezatech/tereza-tech/issues/15)) ([f526410](https://github.com/terezatech/tereza-tech/commit/f526410fdd18b1f745771985e8e33e8ca9867865))
+
 ## [0.11.3](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.11.2...@tereza-tech/zettel@0.11.3) (2022-12-03)
 
 ### Bug Fixes
