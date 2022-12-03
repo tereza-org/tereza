@@ -34,27 +34,35 @@ test('tags should be in the graph', async () => {
   expect(ids).toMatchObject(expect.arrayContaining(tags));
 });
 
-test('backlinks and references should be connected with post', async () => {
-  const referencedPost = await zettelkasten.getPost({
-    id: '/blog/post-not-a-draft',
-  });
+test('references should be the post source', async () => {
+  const id = '/blog/post-not-a-draft-and-reference-post-not-a-draft';
 
-  const referencingPost = await zettelkasten.getPost({
-    id: '/blog/post-not-a-draft-and-reference-another',
+  const referencingPost = await zettelkasten.getPost(id);
+
+  expect(referencingPost).not.toBeUndefined();
+
+  const graph = await zettelkasten.getGraph();
+
+  referencingPost?.references.forEach((reference) => {
+    const referenceLink = graph.links.find((link) => {
+      return link.source === reference.id && link.target === id;
+    });
+    expect(referenceLink).toBeTruthy();
   });
+});
+
+test('backlinks should be the post target', async () => {
+  const id = '/blog/post-not-a-draft';
+
+  const referencedPost = await zettelkasten.getPost(id);
+
+  expect(referencedPost).not.toBeUndefined();
 
   const graph = await zettelkasten.getGraph();
 
   referencedPost?.backlinks.forEach((backlink) => {
-    const backlinkLink = graph.links.find((link) => {
-      return link.source === backlink.id && link.target === referencedPost.id;
-    });
-    expect(backlinkLink).toBeTruthy();
-  });
-
-  referencingPost?.references.forEach((reference) => {
     const referenceLink = graph.links.find((link) => {
-      return link.source === referencingPost.id && link.target === reference.id;
+      return link.source === id && link.target === backlink.id;
     });
     expect(referenceLink).toBeTruthy();
   });

@@ -1,25 +1,43 @@
 import { ZettelkastenConfig } from './config';
 import { getPosts, getTags } from './files';
 
-export const getGraph = async (config: ZettelkastenConfig) => {
+export type GraphGroup = 'posts' | 'tags';
+
+export type GraphNode = {
+  id: string;
+  group: GraphGroup;
+  label?: string;
+};
+
+export type GraphLink = {
+  source: string;
+  target: string;
+};
+
+export type Graph = {
+  nodes: GraphNode[];
+  links: GraphLink[];
+};
+
+export const getGraph = async (config: ZettelkastenConfig): Promise<Graph> => {
   const [allPosts, allTags] = await Promise.all([
     getPosts(config),
     getTags(config),
   ]);
 
-  const postsNodes = allPosts.map(({ id, title }) => {
+  const postsNodes = allPosts.map((post) => {
     return {
-      id,
-      group: 'post',
-      name: title,
+      id: post.id,
+      group: 'posts' as GraphGroup,
+      label: post.title,
     };
   });
 
   const tagsNodes = allTags.map((tag) => {
     return {
       id: tag,
-      group: 'tag',
-      name: `#${tag}`,
+      group: 'tags' as GraphGroup,
+      label: '#' + tag,
     };
   });
 
@@ -29,29 +47,11 @@ export const getGraph = async (config: ZettelkastenConfig) => {
     };
   });
 
-  const backlinksLinks = allPosts.flatMap(({ backlinks, id }) => {
-    return (backlinks || []).map((backlink) => {
-      return {
-        target: id,
-        source: backlink.id,
-      };
-    });
-  });
-
-  const backlinksLinks2 = allPosts.flatMap(({ backlinks, id }) => {
-    return (backlinks || []).map((backlink) => {
-      return {
-        target: backlink.id,
-        source: id,
-      };
-    });
-  });
-
   const referencesLinks = allPosts.flatMap(({ references, id }) => {
     return (references || []).map((reference) => {
       return {
-        target: reference.id,
-        source: id,
+        target: id,
+        source: reference.id,
       };
     });
   });
@@ -65,7 +65,7 @@ export const getGraph = async (config: ZettelkastenConfig) => {
     });
   });
 
-  const links = [...backlinksLinks, ...tagsLinks, ...referencesLinks]
+  const links = [...referencesLinks, ...tagsLinks]
     .map((link) => {
       return {
         ...link,
