@@ -1,4 +1,4 @@
 label: Zettel
 link:
-  type: doc
-  id: packages/zettel/getting-started
+  type: generated-index
+  slug: packages/zettel

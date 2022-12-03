@@ -1,5 +1,5 @@
 /**
- * Mock fs.promises.writeFile to avoid writing on __mocks__/posts.
+ * Mock fs.promises.writeFile to avoid writing on __mocks__/notes.
  */
 jest.mock('fs', () => {
   return {

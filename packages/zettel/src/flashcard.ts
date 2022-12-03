@@ -1,5 +1,5 @@
 import * as dateFns from 'date-fns';
-import { Post, getPosts } from './files';
+import { Note, getNotes } from './notes';
 import { ZettelkastenConfig } from './config';
 
 export const INTERVAL = 7;
@@ -64,24 +64,24 @@ export const getPNumber = (x: number) => {
   );
 };
 
-export interface PostWithDate extends Post {
+export interface NoteWithDate extends Note {
   date: string;
 }
 
-export type Flashcard = PostWithDate & {
+export type Flashcard = NoteWithDate & {
   date: string;
   diffDays: number;
   pNumber: number;
   diffWeeks: { weeks: number; days: number };
 };
 
-export const getFlashcards = (posts: PostWithDate[]): Flashcard[] => {
+export const getFlashcards = (notes: NoteWithDate[]): Flashcard[] => {
   const today = new Date();
 
   return (
-    posts
-      .map((post) => {
-        const diffDays = dateFns.differenceInDays(today, new Date(post.date));
+    notes
+      .map((note) => {
+        const diffDays = dateFns.differenceInDays(today, new Date(note.date));
 
         const diffWeeks = (() => {
           const weeks = Math.floor(diffDays / 7);
@@ -90,14 +90,14 @@ export const getFlashcards = (posts: PostWithDate[]): Flashcard[] => {
         })();
 
         return {
-          ...post,
+          ...note,
           diffDays,
           pNumber: getPNumber(diffDays),
           diffWeeks,
         };
       })
       /**
-       * Only include posts that are older than 0 days.
+       * Only include notes that are older than 0 days.
        */
       .filter(({ diffDays }) => {
         return diffDays > 0;
@@ -119,16 +119,16 @@ export const getFlashcardByProbability = (
   return sortedFlashcards[getWeightedRandomInt(weights)];
 };
 
-const getFlashcard = async (postsWithDate: PostWithDate[]) => {
-  const flashcards = await getFlashcards(postsWithDate);
+const getFlashcard = async (notesWithDate: NoteWithDate[]) => {
+  const flashcards = await getFlashcards(notesWithDate);
   return getFlashcardByProbability(flashcards);
 };
 
 export const getFlashcardFromConfig = async (config: ZettelkastenConfig) => {
-  const posts = await getPosts(config);
-  const postsWithDate = posts.filter((post): post is PostWithDate => {
-    return post.date !== undefined;
+  const notes = await getNotes(config);
+  const notesWithDate = notes.filter((note): note is NoteWithDate => {
+    return note.date !== undefined;
   });
-  const flashcard = await getFlashcard(postsWithDate);
+  const flashcard = await getFlashcard(notesWithDate);
   return flashcard;
 };

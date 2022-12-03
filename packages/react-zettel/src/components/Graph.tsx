@@ -15,7 +15,7 @@ export const Graph = ({
   const newGraphData = React.useMemo(() => {
     const nodes = (graphData?.nodes || []).map((node) => {
       return {
-        val: node.group === 'posts' ? 10 : 1,
+        val: node.group === 'notes' ? 10 : 1,
         ...node,
       };
     });

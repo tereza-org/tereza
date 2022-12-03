@@ -61,7 +61,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- add references and backlinks to posts ([f808e90](https://github.com/arantespp/tereza-tech/commit/f808e90d83964392d8016264c0e5c4f494c8ee94))
+- add references and backlinks to notes ([f808e90](https://github.com/arantespp/tereza-tech/commit/f808e90d83964392d8016264c0e5c4f494c8ee94))
 
 # 0.1.0 (2022-11-26)
 
@@ -72,4 +72,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- normalize post ([ac64f48](https://github.com/arantespp/tereza-tech/commit/ac64f48fbfa3f1b3281b9228e4dcfa3c8c86d034))
+- normalize note ([ac64f48](https://github.com/arantespp/tereza-tech/commit/ac64f48fbfa3f1b3281b9228e4dcfa3c8c86d034))

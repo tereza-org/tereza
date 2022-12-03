@@ -1,6 +1,6 @@
 # Zettel
 
-This package provides a engine to handle your Zettelkasten notes.
+Create your own digital garden with Zettel, an open source engine that implements the [Zettelkasten method](https://arantespp.com/zettel/zettelkasten).
 
 ## Installation
 
@@ -8,23 +8,27 @@ This package provides a engine to handle your Zettelkasten notes.
 yarn add @tereza-tech/zettel
 ```
 
-## Quick start
+## Quickstart
 
-Create your Zettelkasten notes in a folder, for example `posts`, then instantiate your Zettelkasen engine:
+Create your Zettelkasten notes in a folder, for example `notes`, then instantiate your Zettelkasen engine:
 
 ```ts
 import { Zettelkasten } from '@tereza-tech/zettel';
 import * as path from 'path';
 
-const postsDir = path.join(process.cwd(), 'posts');
+const notesDir = path.join(process.cwd(), 'notes');
 
-const zettelkasten = new Zettelkasten({ postsDir });
+const zettelkasten = new Zettelkasten({ notesDir });
 
 (async () => {
-  const posts = await zettelkasten.getPosts();
+  const notes = await zettelkasten.getNotes();
 
-  const blogPost = await zettelkasten.getPosts({ groups: ['blog'] });
+  const blogNote = await zettelkasten.getNotes({ groups: ['blog'] });
 
   const tags = await zettelkasten.getTags();
+
+  const flashcard = await zettelkasten.getFlashcard();
+
+  const graph = await zettelkasten.getGraph();
 })();
 ```

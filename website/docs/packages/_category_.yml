@@ -1,6 +1,6 @@
 label: Packages
 collapsible: true
-collapsed: true
+collapsed: false
 link:
   type: generated-index
   slug: packages

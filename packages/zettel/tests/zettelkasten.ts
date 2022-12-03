@@ -3,12 +3,12 @@ import { Zettelkasten, ZettelkastenConfig } from '../src';
 
 export { Zettelkasten };
 
-const postsDir = path.join(__dirname, '__mocks__', 'posts');
+const notesDir = path.join(__dirname, '__mocks__', 'notes');
 
 export const config: ZettelkastenConfig = {
-  postsDir,
+  notesDir,
   ignoreGroups: ['/ignored'],
-  requiredMetadata: ['title', 'date', 'excerpt'],
+  requiredMetadata: ['title', 'date', 'description'],
   normalizeOnInit: false,
 };
 

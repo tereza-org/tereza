@@ -19,7 +19,7 @@ const darkPalette = {
   color5: '#2B8C7B',
 };
 
-const white = '#F2F2F2';
+const white = '#FDFDFD';
 
 const black = '#0D0D0D';
 

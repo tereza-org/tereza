@@ -1,5 +1,4 @@
 import * as dateFns from 'date-fns';
-import * as flashcardModule from './flashcard';
 import * as fs from 'fs';
 import * as path from 'path';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
@@ -19,12 +18,12 @@ export type Book = {
   ISBN?: string;
 };
 
-export type PostMetadata = {
+export type NoteMetadata = {
   group: string;
   slug: string;
   id: string;
   title?: string;
-  excerpt?: string;
+  description?: string;
   draft?: boolean;
   date?: string;
   tags: string[];
@@ -39,12 +38,12 @@ const metadataSortOrder = [
   'slug',
   'draft',
   'date',
-  'excerpt',
+  'description',
   'tags',
   'book',
 ];
 
-export type SimplePost = PostMetadata & {
+export type SimpleNote = NoteMetadata & {
   content: string;
 };
 
@@ -59,12 +58,12 @@ const getDirectories = async (dir: string) => {
 };
 
 /**
- * Groups are all folders in the postsDir directory.
+ * Groups are all folders in the notesDir directory.
  */
 export const getGroups = async (config: ZettelkastenConfig) => {
   const groups = [
     '/',
-    ...(await getDirectories(config.postsDir)).map((group) => {
+    ...(await getDirectories(config.notesDir)).map((group) => {
       return `/${group}`;
     }),
   ];
@@ -127,7 +126,7 @@ const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
   const groups = await getGroups(config);
 
   const promises = groups.map(async (group) => {
-    const groupDir = path.join(config.postsDir, group);
+    const groupDir = path.join(config.notesDir, group);
 
     const markdowns = await readAllMarkdownFilesFromDir(groupDir);
 
@@ -143,26 +142,26 @@ const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
   return allMarkdowns;
 };
 
-const getSimplePostFromMarkdownFile = (
+const getSimpleNoteFromMarkdownFile = (
   config: ZettelkastenConfig,
   markdownFile: MarkdownFile
-): SimplePost => {
+): SimpleNote => {
   const { data, content } = markdownFile;
 
-  const post: SimplePost = {
+  const note: SimpleNote = {
     ...data,
     group: data.group,
     slug: data.slug,
     content,
-  } as SimplePost;
+  } as SimpleNote;
 
-  post.title = post.title || titleCase(post.slug);
+  note.title = note.title || titleCase(note.slug);
 
-  post.id = post.id || path.join(post.group, post.slug);
+  note.id = note.id || path.join(note.group, note.slug);
 
   const date = (() => {
-    if (post.date) {
-      const d = new Date(post.date);
+    if (note.date) {
+      const d = new Date(note.date);
       return dateFns.addMinutes(d, d.getTimezoneOffset());
     }
 
@@ -170,143 +169,143 @@ const getSimplePostFromMarkdownFile = (
   })();
 
   if (date) {
-    post.date = dateFns.format(date, 'yyyy-MM-dd');
-    post.formattedDate = dateFns.format(
+    note.date = dateFns.format(date, 'yyyy-MM-dd');
+    note.formattedDate = dateFns.format(
       date,
       config.dateFormat || DEFAULT_CONFIG.dateFormat
     );
   }
 
-  post.tags = normalizeTags(post.tags);
+  note.tags = normalizeTags(note.tags);
 
-  post.draft = (() => {
+  note.draft = (() => {
     /**
      * If draft is explicitly set to true, then return true.
      */
-    if (typeof post.draft === 'boolean' && post.draft === true) {
+    if (typeof note.draft === 'boolean' && note.draft === true) {
       return true;
     }
 
-    if (!post.content) {
+    if (!note.content) {
       return true;
     }
 
     const hasAllRequiredMetadata = config.requiredMetadata?.every((key) => {
-      return key in post;
+      return key in note;
     });
 
     /**
-     * Even ff draft is explicitly set to false, but the post is missing
+     * Even ff draft is explicitly set to false, but the note is missing
      * required metadata, then return false.
      */
     return !hasAllRequiredMetadata;
   })();
 
-  return post;
+  return note;
 };
 
 /**
- * Get all posts including drafts.
+ * Get all notes including drafts.
  */
-const getAllSimplePosts = async (config: ZettelkastenConfig) => {
+const getAllSimpleNotes = async (config: ZettelkastenConfig) => {
   const markdowns = await readAllMarkdownFiles(config);
 
-  const posts = markdowns.map((markdown) => {
-    return getSimplePostFromMarkdownFile(config, markdown);
+  const notes = markdowns.map((markdown) => {
+    return getSimpleNoteFromMarkdownFile(config, markdown);
   });
 
-  return posts;
+  return notes;
 };
 
-export type GetPostsParams = {
+export type GetNotesParams = {
   groups?: string | string[];
   includeDrafts?: boolean;
 };
 
-const removeContent = (post: SimplePost): PostMetadata => {
+const removeContent = (note: SimpleNote): NoteMetadata => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { content, ...rest } = post;
+  const { content, ...rest } = note;
   return rest;
 };
 
 /**
- * Add new metadata to posts, like references and backlinks
+ * Add new metadata to notes, like references and backlinks
  * and apply draft rules.
  */
-const getPostsWithoutRecommendations = async (
+const getNotesWithoutRecommendations = async (
   config: ZettelkastenConfig,
-  params?: GetPostsParams
+  params?: GetNotesParams
 ) => {
-  const allSimplePosts = await getAllSimplePosts(config);
+  const allSimpleNotes = await getAllSimpleNotes(config);
 
-  const allPostsWithFullMetadata = allSimplePosts
+  const allNotesWithFullMetadata = allSimpleNotes
     /**
-     * All posts with drafts rules applied.
+     * All notes with drafts rules applied.
      */
-    .filter((post) => {
+    .filter((note) => {
       const { groups = [], includeDrafts = false } = params || {};
 
       const finalGroups = Array.isArray(groups) ? groups : [groups];
 
       /**
-       * Filter out posts that are not in the specified groups.
+       * Filter out notes that are not in the specified groups.
        */
-      if (finalGroups.length > 0 && !finalGroups.includes(post.group)) {
+      if (finalGroups.length > 0 && !finalGroups.includes(note.group)) {
         return false;
       }
 
       /**
        * Filter out drafts if includeDrafts is false.
        */
-      if (!includeDrafts && post.draft) {
+      if (!includeDrafts && note.draft) {
         return false;
       }
 
       return true;
     })
-    .map((post) => {
+    .map((note) => {
       return {
-        ...post,
-        href: post.id,
-        formattedDate: post.formattedDate as string | undefined,
-        readingTime: Math.round(readingTime(post.content).minutes) || 1,
+        ...note,
+        href: note.id,
+        formattedDate: note.formattedDate as string | undefined,
+        readingTime: Math.round(readingTime(note.content).minutes) || 1,
       };
     })
-    .map((post, _, allPosts) => {
+    .map((note, _, allNotes) => {
       /**
-       * Array of all post ids that `post` use as references.
+       * Array of all note ids that `note` use as references.
        */
-      const references = allPosts.reduce((acc, recommendation) => {
-        if (post.content.includes(`(${recommendation.href})`)) {
+      const references = allNotes.reduce((acc, recommendation) => {
+        if (note.content.includes(`(${recommendation.href})`)) {
           return [removeContent(recommendation), ...acc];
         }
 
         return acc;
-      }, [] as PostMetadata[]);
+      }, [] as NoteMetadata[]);
 
       /**
-       * Add backlinks to post. Backlinks are all posts that
-       * reference current `post`.
+       * Add backlinks to note. Backlinks are all notes that
+       * reference current `note`.
        */
-      const backlinks = allPosts
+      const backlinks = allNotes
         .filter(({ content }) => {
-          return content.includes(`(${post.href})`);
+          return content.includes(`(${note.href})`);
         })
-        .map((post) => {
-          return removeContent(post);
+        .map((note) => {
+          return removeContent(note);
         });
 
-      return { ...post, references, backlinks };
+      return { ...note, references, backlinks };
     });
 
-  return allPostsWithFullMetadata;
+  return allNotesWithFullMetadata;
 };
 
-type PostWithoutRecommendations = ThenArg<
-  ReturnType<typeof getPostsWithoutRecommendations>
+type NoteWithoutRecommendations = ThenArg<
+  ReturnType<typeof getNotesWithoutRecommendations>
 >[number];
 
-export type GetPostParams =
+export type GetNoteParams =
   | {
       group: string;
       slug: string;
@@ -315,70 +314,70 @@ export type GetPostParams =
   | { title: string }
   | string;
 
-const filterPostFromPostsArray = <P extends SimplePost>(
-  allPosts: P[],
-  params: GetPostParams
+const filterNoteFromNotesArray = <P extends SimpleNote>(
+  allNotes: P[],
+  params: GetNoteParams
 ): P | undefined => {
   /**
-   * If params is a string, then it is post id.
+   * If params is a string, then it is note id.
    */
   if (typeof params === 'string') {
-    return allPosts.find((post) => {
-      return post.id === params;
+    return allNotes.find((note) => {
+      return note.id === params;
     });
   }
 
   if ('id' in params) {
-    return allPosts.find((post) => {
-      return post.id === params.id;
+    return allNotes.find((note) => {
+      return note.id === params.id;
     });
   }
 
   if ('title' in params) {
-    return allPosts.find((post) => {
-      return post.title === params.title;
+    return allNotes.find((note) => {
+      return note.title === params.title;
     });
   }
 
-  const post = allPosts.find((post) => {
-    return post.group === params.group && post.slug === params.slug;
+  const note = allNotes.find((note) => {
+    return note.group === params.group && note.slug === params.slug;
   });
 
-  return post;
+  return note;
 };
 
-const getPostRecommendations = async (
+const getNoteRecommendations = async (
   config: ZettelkastenConfig,
-  params: GetPostParams
-): Promise<PostMetadata[]> => {
-  const allPosts = await getPostsWithoutRecommendations(config);
+  params: GetNoteParams
+): Promise<NoteMetadata[]> => {
+  const allNotes = await getNotesWithoutRecommendations(config);
 
-  const post = filterPostFromPostsArray(allPosts, params);
+  const note = filterNoteFromNotesArray(allNotes, params);
 
-  const scoreMap = allPosts.reduce<{ [key: string]: number }>((acc, { id }) => {
+  const scoreMap = allNotes.reduce<{ [key: string]: number }>((acc, { id }) => {
     acc[id] = 0;
     return acc;
   }, {});
 
   /**
-   * All posts that the current post references scores.
+   * All notes that the current note references scores.
    */
-  post?.references.forEach((reference) => {
+  note?.references.forEach((reference) => {
     scoreMap[reference.id] += 6;
   });
 
   /**
-   * All posts that reference the current post scores.
+   * All notes that reference the current note scores.
    */
-  post?.backlinks.forEach((backlink) => {
+  note?.backlinks.forEach((backlink) => {
     scoreMap[backlink.id] += 3;
   });
 
   /**
-   * All posts that have the same tags as the current post scores.
+   * All notes that have the same tags as the current note scores.
    */
-  post?.tags?.forEach((tag) => {
-    allPosts.forEach(({ tags, id }) => {
+  note?.tags?.forEach((tag) => {
+    allNotes.forEach(({ tags, id }) => {
       if (tags?.includes(tag)) {
         scoreMap[id] += 1;
       }
@@ -387,10 +386,10 @@ const getPostRecommendations = async (
 
   const recommendations = Object.entries(scoreMap)
     .map(([id, score]) => {
-      const post = allPosts.find((post) => {
-        return post.id === id;
+      const note = allNotes.find((note) => {
+        return note.id === id;
       });
-      return { post, score };
+      return { note, score };
     })
     .filter(({ score }) => {
       return score > 0;
@@ -398,27 +397,27 @@ const getPostRecommendations = async (
     .sort(({ score: scoreA }, { score: scoreB }) => {
       return scoreB - scoreA;
     })
-    .map(({ post }) => {
-      return post;
+    .map(({ note }) => {
+      return note;
     })
-    .filter((post): post is PostWithoutRecommendations => {
-      return !!post;
+    .filter((note): note is NoteWithoutRecommendations => {
+      return !!note;
     })
-    .map((post) => {
-      return removeContent(post);
+    .map((note) => {
+      return removeContent(note);
     })
     /**
      * Remove itself from recommendations.
      */
     .filter(({ href }) => {
-      return href !== post?.href;
+      return href !== note?.href;
     })
     .slice(0, config.recommendationsLimit)
     .map((recommendation) => {
       /**
-       * Check if the recommendation is referenced by the current post.
+       * Check if the recommendation is referenced by the current note.
        */
-      const isReference = !!post?.references.find((reference) => {
+      const isReference = !!note?.references.find((reference) => {
         return reference.id === recommendation.id;
       });
 
@@ -428,45 +427,45 @@ const getPostRecommendations = async (
   return recommendations;
 };
 
-export const getPosts = async (
+export const getNotes = async (
   config: ZettelkastenConfig,
-  params?: GetPostsParams
+  params?: GetNotesParams
 ) => {
-  const posts = await getPostsWithoutRecommendations(config, params);
+  const notes = await getNotesWithoutRecommendations(config, params);
 
-  const postsWithRecommendations = await Promise.all(
-    posts.map(async (post) => {
-      const recommendations = await getPostRecommendations(config, {
-        id: post.id,
+  const notesWithRecommendations = await Promise.all(
+    notes.map(async (note) => {
+      const recommendations = await getNoteRecommendations(config, {
+        id: note.id,
       });
 
-      return { ...post, recommendations };
+      return { ...note, recommendations };
     })
   );
 
-  return postsWithRecommendations;
+  return notesWithRecommendations;
 };
 
-export type Post = ThenArg<ReturnType<typeof getPosts>>[number];
+export type Note = ThenArg<ReturnType<typeof getNotes>>[number];
 
-export const getPost = async (
+export const getNote = async (
   config: ZettelkastenConfig,
-  params: GetPostParams
-): Promise<Post | undefined> => {
-  const allPosts = await getPosts(config, { includeDrafts: true });
-  const post = filterPostFromPostsArray(allPosts, params);
-  return post;
+  params: GetNoteParams
+): Promise<Note | undefined> => {
+  const allNotes = await getNotes(config, { includeDrafts: true });
+  const note = filterNoteFromNotesArray(allNotes, params);
+  return note;
 };
 
 /**
- * Save post as markdown file.
+ * Save note as markdown file.
  */
-export const savePost = async (
+export const saveNote = async (
   config: ZettelkastenConfig,
-  post: SimplePost
+  note: SimpleNote
 ): Promise<void> => {
-  const { content, ...metadata } = post;
-  const filePath = path.join(config.postsDir, post.group, `${post.slug}.md`);
+  const { content, ...metadata } = note;
+  const filePath = path.join(config.notesDir, note.group, `${note.slug}.md`);
   const md = matter.stringify(
     content || '',
     sortObjectByKey(metadata, metadataSortOrder)
@@ -476,13 +475,13 @@ export const savePost = async (
 
 export const getTags = async (
   config: ZettelkastenConfig,
-  params?: GetPostsParams
+  params?: GetNotesParams
 ) => {
-  const posts = await getPosts(config, params);
+  const notes = await getNotes(config, params);
 
-  const tags = posts
-    .flatMap((post) => {
-      return post.tags;
+  const tags = notes
+    .flatMap((note) => {
+      return note.tags;
     })
     /**
      * Remove duplicates.
@@ -500,26 +499,26 @@ export const getTags = async (
   return tags;
 };
 
-export const normalizePosts = async (config: ZettelkastenConfig) => {
-  const [allPosts, allTags] = await Promise.all([
-    getAllSimplePosts(config),
+export const normalizeNotes = async (config: ZettelkastenConfig) => {
+  const [allNotes, allTags] = await Promise.all([
+    getAllSimpleNotes(config),
     getTags(config, { includeDrafts: true }),
   ]);
 
   /**
-   * Normalize the set of tags: if another post has a tag that is the same as
-   * current post slug, then add the tag to the current post.
+   * Normalize the set of tags: if another note has a tag that is the same as
+   * current note slug, then add the tag to the current note.
    */
-  allPosts.forEach((post) => {
-    const doAllTagsContainsPostSlug = allTags.includes(post.slug);
+  allNotes.forEach((note) => {
+    const doAllTagsContainsNoteSlug = allTags.includes(note.slug);
 
-    if (doAllTagsContainsPostSlug) {
-      post.tags = normalizeTags([...(post.tags || []), post.slug]);
+    if (doAllTagsContainsNoteSlug) {
+      note.tags = normalizeTags([...(note.tags || []), note.slug]);
     }
   });
 
-  const promises = allPosts.map((post) => {
-    return savePost(config, post);
+  const promises = allNotes.map((note) => {
+    return saveNote(config, note);
   });
 
   await Promise.all(promises);
@@ -545,8 +544,8 @@ export const getRecommendations = async (
      * Tag recommendations.
      */
     if (tag) {
-      const allPosts = await getPosts(config);
-      return allPosts.filter(({ tags }) => {
+      const allNotes = await getNotes(config);
+      return allNotes.filter(({ tags }) => {
         return (tags || []).includes(tag);
       });
     }
@@ -555,10 +554,10 @@ export const getRecommendations = async (
      * Group recommendations.
      */
     if (group) {
-      return getPosts(config, { groups: [group] });
+      return getNotes(config, { groups: [group] });
     }
 
-    return getPosts(config);
+    return getNotes(config);
   })();
 
   const limit = params?.limit ? config.recommendationsLimit : undefined;
@@ -572,12 +571,12 @@ export const getRecommendations = async (
     /**
      * Sort by date.
      */
-    .sort((postA, postB) => {
-      if (!postA.date || !postB.date) {
+    .sort((noteA, noteB) => {
+      if (!noteA.date || !noteB.date) {
         return 0;
       }
 
-      return postA?.date > postB?.date ? -1 : 1;
+      return noteA?.date > noteB?.date ? -1 : 1;
     });
 
   return recommendations;

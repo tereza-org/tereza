@@ -1,19 +1,19 @@
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import {
-  GetPostParams,
-  GetPostsParams,
+  GetNoteParams,
+  GetNotesParams,
   GetRecommendationsParams,
-  SimplePost,
+  SimpleNote,
   getGroups,
-  getPost,
-  getPosts,
+  getNote,
+  getNotes,
   getRecommendations,
   getTags,
-  normalizePosts,
+  normalizeNotes,
   readAllMarkdownFilesFromDir,
   readMarkdownFile,
-  savePost,
-} from './files';
+  saveNote,
+} from './notes';
 import { getFlashcardFromConfig } from './flashcard';
 import { getGraph } from './graph';
 
@@ -27,7 +27,7 @@ export class Zettelkasten {
 
   private async init() {
     if (this.config.normalizeOnInit) {
-      await this.normalizePosts();
+      await this.normalizeNotes();
     }
   }
 
@@ -43,24 +43,24 @@ export class Zettelkasten {
     return getGroups(this.config);
   }
 
-  public async getPosts(params?: GetPostsParams) {
-    return getPosts(this.config, params);
+  public async getNotes(params?: GetNotesParams) {
+    return getNotes(this.config, params);
   }
 
-  public async getPost(params: GetPostParams) {
-    return getPost(this.config, params);
+  public async getNote(params: GetNoteParams) {
+    return getNote(this.config, params);
   }
 
-  public async getTags(params?: GetPostsParams) {
+  public async getTags(params?: GetNotesParams) {
     return getTags(this.config, params);
   }
 
-  public async savePost(post: SimplePost) {
-    return savePost(this.config, post);
+  public async saveNote(note: SimpleNote) {
+    return saveNote(this.config, note);
   }
 
-  public async normalizePosts() {
-    return normalizePosts(this.config);
+  public async normalizeNotes() {
+    return normalizeNotes(this.config);
   }
 
   public async getRecommendations(params?: GetRecommendationsParams) {

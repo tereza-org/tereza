@@ -1,4 +1,4 @@
 export { Zettelkasten } from './Zettelkasten';
 export type { ZettelkastenConfig } from './config';
-export type { Post, PostMetadata } from './files';
+export type { Note, NoteMetadata } from './notes';
 export type { Flashcard } from './flashcard';

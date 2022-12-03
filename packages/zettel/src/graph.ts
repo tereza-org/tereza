@@ -1,7 +1,7 @@
 import { ZettelkastenConfig } from './config';
-import { getPosts, getTags } from './files';
+import { getNotes, getTags } from './notes';
 
-export type GraphGroup = 'posts' | 'tags';
+export type GraphGroup = 'notes' | 'tags';
 
 export type GraphNode = {
   id: string;
@@ -20,16 +20,16 @@ export type Graph = {
 };
 
 export const getGraph = async (config: ZettelkastenConfig): Promise<Graph> => {
-  const [allPosts, allTags] = await Promise.all([
-    getPosts(config),
+  const [allNotes, allTags] = await Promise.all([
+    getNotes(config),
     getTags(config),
   ]);
 
-  const postsNodes = allPosts.map((post) => {
+  const notesNodes = allNotes.map((note) => {
     return {
-      id: post.id,
-      group: 'posts' as GraphGroup,
-      label: post.title,
+      id: note.id,
+      group: 'notes' as GraphGroup,
+      label: note.title,
     };
   });
 
@@ -41,13 +41,13 @@ export const getGraph = async (config: ZettelkastenConfig): Promise<Graph> => {
     };
   });
 
-  const nodes = [...postsNodes, ...tagsNodes].map((node) => {
+  const nodes = [...notesNodes, ...tagsNodes].map((node) => {
     return {
       ...node,
     };
   });
 
-  const referencesLinks = allPosts.flatMap(({ references, id }) => {
+  const referencesLinks = allNotes.flatMap(({ references, id }) => {
     return (references || []).map((reference) => {
       return {
         target: id,
@@ -56,7 +56,7 @@ export const getGraph = async (config: ZettelkastenConfig): Promise<Graph> => {
     });
   });
 
-  const tagsLinks = allPosts.flatMap(({ id, tags }) => {
+  const tagsLinks = allNotes.flatMap(({ id, tags }) => {
     return tags.map((tag) => {
       return {
         target: id,

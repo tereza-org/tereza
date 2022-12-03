@@ -7,30 +7,30 @@ afterEach(() => {
 });
 
 test('should not normalize on init', async () => {
-  const normalizePostsMock = jest.spyOn(
+  const normalizeNotesMock = jest.spyOn(
     Zettelkasten.prototype,
-    'normalizePosts'
+    'normalizeNotes'
   );
   new Zettelkasten({ ...config, normalizeOnInit: false });
-  expect(normalizePostsMock).not.toHaveBeenCalled();
+  expect(normalizeNotesMock).not.toHaveBeenCalled();
 });
 
 test('should normalize on init', async () => {
-  const normalizePostsMock = jest.spyOn(
+  const normalizeNotesMock = jest.spyOn(
     Zettelkasten.prototype,
-    'normalizePosts'
+    'normalizeNotes'
   );
   new Zettelkasten({ ...config, normalizeOnInit: true });
-  expect(normalizePostsMock).toHaveBeenCalled();
+  expect(normalizeNotesMock).toHaveBeenCalled();
 });
 
-test('if a slug is tag in another post, add it as tag', async () => {
+test('if a slug is tag in another note, add it as tag', async () => {
   let zettelATags: string[] = [];
 
   const writeFileMock = jest
     .spyOn(fs.promises, 'writeFile')
-    .mockImplementation((_, post: any) => {
-      const { data } = matter(post);
+    .mockImplementation((_, note: any) => {
+      const { data } = matter(note);
       if (data.id === '/zettel/zettel-a') {
         zettelATags = data.tags;
       }
@@ -38,7 +38,7 @@ test('if a slug is tag in another post, add it as tag', async () => {
       return Promise.resolve();
     });
 
-  await zettelkasten.normalizePosts();
+  await zettelkasten.normalizeNotes();
 
   expect(writeFileMock).toHaveBeenCalled();
 

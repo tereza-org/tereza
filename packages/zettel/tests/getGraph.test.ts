@@ -6,44 +6,44 @@ test('getGraph should return links and nodes', async () => {
   expect(graph.nodes.length).toBeGreaterThan(0);
 });
 
-test('not draft posts should be in the graph', async () => {
+test('not draft notes should be in the graph', async () => {
   const graph = await zettelkasten.getGraph();
   const ids = graph.nodes.map((node) => {
     return node.id;
   });
   expect(ids).toMatchObject(
-    expect.arrayContaining(['/blog/post-not-a-draft', '/blog/post-a'])
+    expect.arrayContaining(['/blog/note-not-a-draft', '/blog/note-a'])
   );
 });
 
-test('draft posts should not be in the graph', async () => {
+test('draft notes should not be in the graph', async () => {
   const graph = await zettelkasten.getGraph();
   const ids = graph.nodes.map((node) => {
     return node.id;
   });
-  expect(ids).not.toMatchObject(expect.arrayContaining(['/blog/post-draft']));
+  expect(ids).not.toMatchObject(expect.arrayContaining(['/blog/note-draft']));
 });
 
 test('tags should be in the graph', async () => {
   const graph = await zettelkasten.getGraph();
   const tags =
-    (await zettelkasten.getPost('/blog/post-not-a-draft'))?.tags || [];
+    (await zettelkasten.getNote('/blog/note-not-a-draft'))?.tags || [];
   const ids = graph.nodes.map((node) => {
     return node.id;
   });
   expect(ids).toMatchObject(expect.arrayContaining(tags));
 });
 
-test('references should be the post source', async () => {
-  const id = '/blog/post-not-a-draft-and-reference-post-not-a-draft';
+test('references should be the note source', async () => {
+  const id = '/blog/note-not-a-draft-and-reference-note-not-a-draft';
 
-  const referencingPost = await zettelkasten.getPost(id);
+  const referencingNote = await zettelkasten.getNote(id);
 
-  expect(referencingPost).not.toBeUndefined();
+  expect(referencingNote).not.toBeUndefined();
 
   const graph = await zettelkasten.getGraph();
 
-  referencingPost?.references.forEach((reference) => {
+  referencingNote?.references.forEach((reference) => {
     const referenceLink = graph.links.find((link) => {
       return link.source === reference.id && link.target === id;
     });
@@ -51,16 +51,16 @@ test('references should be the post source', async () => {
   });
 });
 
-test('backlinks should be the post target', async () => {
-  const id = '/blog/post-not-a-draft';
+test('backlinks should be the note target', async () => {
+  const id = '/blog/note-not-a-draft';
 
-  const referencedPost = await zettelkasten.getPost(id);
+  const referencedNote = await zettelkasten.getNote(id);
 
-  expect(referencedPost).not.toBeUndefined();
+  expect(referencedNote).not.toBeUndefined();
 
   const graph = await zettelkasten.getGraph();
 
-  referencedPost?.backlinks.forEach((backlink) => {
+  referencedNote?.backlinks.forEach((backlink) => {
     const referenceLink = graph.links.find((link) => {
       return link.source === id && link.target === backlink.id;
     });
