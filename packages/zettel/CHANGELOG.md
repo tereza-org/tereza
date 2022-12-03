@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.3](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.11.2...@tereza-tech/zettel@0.11.3) (2022-12-03)
+
+### Bug Fixes
+
+- export types ([#14](https://github.com/terezatech/tereza-tech/issues/14)) ([5a6cd5c](https://github.com/terezatech/tereza-tech/commit/5a6cd5c0af8c7c54850d04314247236bad249b84))
+
 ## [0.11.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.11.1...@tereza-tech/zettel@0.11.2) (2022-12-03)
 
 **Note:** Version bump only for package @tereza-tech/zettel
