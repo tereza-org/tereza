@@ -1,6 +1,5 @@
 import * as fs from 'fs';
-import { Zettelkasten } from '../src';
-import { config, zettelkasten } from './zettelkasten';
+import { Zettelkasten, config, zettelkasten } from './zettelkasten';
 import matter from 'gray-matter';
 
 afterEach(() => {

@@ -1,9 +1,14 @@
-import { Zettelkasten } from '../src';
-import { zettelkasten } from './zettelkasten';
+import { Zettelkasten, zettelkasten } from './zettelkasten';
 
-test('getPost by id', async () => {
+test('getPost by id object', async () => {
   const id = '/blog/post-a';
   const post = await zettelkasten.getPost({ id });
+  expect(post?.id).toEqual(id);
+});
+
+test('getPost by id string', async () => {
+  const id = '/blog/post-a';
+  const post = await zettelkasten.getPost(id);
   expect(post?.id).toEqual(id);
 });
 
@@ -67,7 +72,7 @@ test('backlinks and references', async () => {
   });
 
   const referencingPost = await zettelkasten.getPost({
-    id: '/blog/post-not-a-draft-and-reference-another',
+    id: '/blog/post-not-a-draft-and-reference-post-not-a-draft',
   });
 
   expect(

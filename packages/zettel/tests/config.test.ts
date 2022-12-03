@@ -1,4 +1,4 @@
-import { DEFAULT_CONFIG } from '../src';
+import { DEFAULT_CONFIG } from '../src/config';
 import { config, zettelkasten } from './zettelkasten';
 
 test('getConfig', () => {
