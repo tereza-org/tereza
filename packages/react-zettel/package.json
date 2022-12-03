@@ -1,0 +1,33 @@
+{
+  "name": "@tereza-tech/react-zettel",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "echo jest"
+  },
+  "typings": "dist/index.d.ts",
+  "dependencies": {
+    "react-force-graph-3d": "^1.21.15",
+    "three-spritetext": "^1.6.5"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "react": "^18.2.0"
+  },
+  "keywords": [],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,5 +1,4 @@
-import { Zettelkasten } from '../src';
-import { config, zettelkasten } from './zettelkasten';
+import { Zettelkasten, config, zettelkasten } from './zettelkasten';
 
 const z = new Zettelkasten({ ...config, ignoreGroups: undefined });
 
