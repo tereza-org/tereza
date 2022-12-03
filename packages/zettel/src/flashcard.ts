@@ -64,14 +64,18 @@ export const getPNumber = (x: number) => {
   );
 };
 
-export type Flashcard = {
+export interface PostWithDate extends Post {
+  date: string;
+}
+
+export type Flashcard = PostWithDate & {
   date: string;
   diffDays: number;
   pNumber: number;
   diffWeeks: { weeks: number; days: number };
 };
 
-export const getFlashcards = async <P extends { date: string }>(posts: P[]) => {
+export const getFlashcards = (posts: PostWithDate[]): Flashcard[] => {
   const today = new Date();
 
   return posts
@@ -96,9 +100,9 @@ export const getFlashcards = async <P extends { date: string }>(posts: P[]) => {
     });
 };
 
-export const getFlashcardByProbability = <P>(
-  flashcards: (Flashcard & P)[]
-): Flashcard & P => {
+export const getFlashcardByProbability = (
+  flashcards: Flashcard[]
+): Flashcard => {
   const sortedFlashcards = flashcards.sort((fa, fb) => {
     return fa.diffDays - fb.diffDays;
   });
@@ -110,14 +114,10 @@ export const getFlashcardByProbability = <P>(
   return sortedFlashcards[getWeightedRandomInt(weights)];
 };
 
-const getFlashcard = async <P extends { date: string }>(posts: P[]) => {
-  const flashcards = await getFlashcards(posts);
-  return getFlashcardByProbability<P>(flashcards);
+const getFlashcard = async (postsWithDate: PostWithDate[]) => {
+  const flashcards = await getFlashcards(postsWithDate);
+  return getFlashcardByProbability(flashcards);
 };
-
-export interface PostWithDate extends Post {
-  date: string;
-}
 
 export const getFlashcardFromConfig = async (config: ZettelkastenConfig) => {
   const posts = await getPosts(config);
