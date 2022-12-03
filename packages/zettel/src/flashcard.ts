@@ -78,26 +78,31 @@ export type Flashcard = PostWithDate & {
 export const getFlashcards = (posts: PostWithDate[]): Flashcard[] => {
   const today = new Date();
 
-  return posts
-    .map((post) => {
-      const diffDays = dateFns.differenceInDays(today, new Date(post.date));
+  return (
+    posts
+      .map((post) => {
+        const diffDays = dateFns.differenceInDays(today, new Date(post.date));
 
-      const diffWeeks = (() => {
-        const weeks = Math.floor(diffDays / 7);
-        const days = diffDays % 7;
-        return { weeks, days };
-      })();
+        const diffWeeks = (() => {
+          const weeks = Math.floor(diffDays / 7);
+          const days = diffDays % 7;
+          return { weeks, days };
+        })();
 
-      return {
-        ...post,
-        diffDays,
-        pNumber: getPNumber(diffDays),
-        diffWeeks,
-      };
-    })
-    .filter(({ diffDays }) => {
-      return diffDays >= INTERVAL - 1;
-    });
+        return {
+          ...post,
+          diffDays,
+          pNumber: getPNumber(diffDays),
+          diffWeeks,
+        };
+      })
+      /**
+       * Only include posts that are older than 0 days.
+       */
+      .filter(({ diffDays }) => {
+        return diffDays > 0;
+      })
+  );
 };
 
 export const getFlashcardByProbability = (

@@ -61,6 +61,10 @@ test.each([
       { date: '2021-06-02' },
       { date: '2021-06-03' },
       { date: '2021-06-04' },
+      /**
+       * This post is the only one that should not be returned because it was
+       * created today.
+       */
       { date: '2021-06-05' },
     ],
     [
@@ -71,10 +75,15 @@ test.each([
       { date: '2021-05-28', diffDays: 8, pNumber: 137 },
       { date: '2021-05-29', diffDays: 7, pNumber: 969 },
       { date: '2021-05-30', diffDays: 6, pNumber: 67 },
+      { date: '2021-05-31', diffDays: 5, pNumber: 0 },
+      { date: '2021-06-01', diffDays: 4, pNumber: 139 },
+      { date: '2021-06-02', diffDays: 3, pNumber: 68 },
+      { date: '2021-06-03', diffDays: 2, pNumber: 140 },
+      { date: '2021-06-04', diffDays: 1, pNumber: 141 },
     ],
   ],
 ])('getFlashcards test: %#', async (_, allPosts, returnedPosts) => {
-  const flashcards = (await getFlashcards(allPosts)).map(
+  const flashcards = getFlashcards(allPosts as any).map(
     ({ date, diffDays, pNumber }) => {
       return { date, diffDays, pNumber };
     }
