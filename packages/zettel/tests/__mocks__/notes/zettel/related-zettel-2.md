@@ -1,7 +1,7 @@
 ---
-title: Related Zettel 3
+title: Related Zettel 2
 date: 2020-01-01
-excerpt: This is post not a draft.
+description: This is note not a draft.
 tags:
   - related-tag
 ---

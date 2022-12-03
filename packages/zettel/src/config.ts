@@ -1,5 +1,5 @@
 export type ZettelkastenConfig = {
-  postsDir: string;
+  notesDir: string;
   ignoreGroups?: string[];
   requiredMetadata?: string[];
   normalizeOnInit?: boolean;
@@ -11,7 +11,7 @@ export type ZettelkastenConfig = {
 };
 
 export const DEFAULT_CONFIG = {
-  requiredMetadata: ['title', 'date', 'excerpt'],
+  requiredMetadata: ['title', 'date', 'description'],
   normalizeOnInit: false,
   recommendationsLimit: 5,
   dateFormat: 'PPP',

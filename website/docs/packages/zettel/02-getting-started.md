@@ -1,8 +1,7 @@
 ---
 hide_title: true
-title: Zettel
-description: This package provides a engine to handle your Zettelkasten notes.
-slug: '.'
+title: Getting Started
+description: Create your own digital garden with Zettel, an open source engine that implements the Zettelkasten method.
 ---
 
 import Readme, {

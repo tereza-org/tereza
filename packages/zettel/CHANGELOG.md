@@ -29,7 +29,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Bug Fixes
 
-- is reference returning post instead boolean ([#11](https://github.com/terezatech/tereza-tech/issues/11)) ([2fcba9a](https://github.com/terezatech/tereza-tech/commit/2fcba9a3a1808a4478c64962aa2509df19151ccb))
+- is reference returning note instead boolean ([#11](https://github.com/terezatech/tereza-tech/issues/11)) ([2fcba9a](https://github.com/terezatech/tereza-tech/commit/2fcba9a3a1808a4478c64962aa2509df19151ccb))
 
 # 0.11.0 (2022-11-30)
 
@@ -97,13 +97,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- add references and backlinks to posts ([f808e90](https://github.com/arantespp/tereza-tech/commit/f808e90d83964392d8016264c0e5c4f494c8ee94))
+- add references and backlinks to notes ([f808e90](https://github.com/arantespp/tereza-tech/commit/f808e90d83964392d8016264c0e5c4f494c8ee94))
 
 # [0.4.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.3.0...@terezatech/zettel@0.4.0) (2022-11-26)
 
 ### Features
 
-- normalize post ([ac64f48](https://github.com/arantespp/tereza-tech/commit/ac64f48fbfa3f1b3281b9228e4dcfa3c8c86d034))
+- normalize note ([ac64f48](https://github.com/arantespp/tereza-tech/commit/ac64f48fbfa3f1b3281b9228e4dcfa3c8c86d034))
 
 # [0.3.0](https://github.com/arantespp/tereza-tech/compare/@terezatech/zettel@0.2.0...@terezatech/zettel@0.3.0) (2022-11-26)
 
@@ -119,7 +119,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Features
 
-- add getPostsDir method ([663fc59](https://github.com/arantespp/tereza-tech/commit/663fc59950cf1224c879dff254cf24c28ab9210c))
+- add getNotesDir method ([663fc59](https://github.com/arantespp/tereza-tech/commit/663fc59950cf1224c879dff254cf24c28ab9210c))
 
 # 0.1.0 (2022-11-26)
 

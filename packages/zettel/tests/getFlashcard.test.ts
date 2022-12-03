@@ -47,7 +47,7 @@ test.each([
 
 test.each([
   [
-    "don't return recent posts",
+    "don't return recent notes",
     [
       { date: '2020-02-02' },
       { date: '2020-07-28' },
@@ -62,7 +62,7 @@ test.each([
       { date: '2021-06-03' },
       { date: '2021-06-04' },
       /**
-       * This post is the only one that should not be returned because it was
+       * This note is the only one that should not be returned because it was
        * created today.
        */
       { date: '2021-06-05' },
@@ -82,13 +82,13 @@ test.each([
       { date: '2021-06-04', diffDays: 1, pNumber: 141 },
     ],
   ],
-])('getFlashcards test: %#', async (_, allPosts, returnedPosts) => {
-  const flashcards = getFlashcards(allPosts as any).map(
+])('getFlashcards test: %#', async (_, allNotes, returnedNotes) => {
+  const flashcards = getFlashcards(allNotes as any).map(
     ({ date, diffDays, pNumber }) => {
       return { date, diffDays, pNumber };
     }
   );
-  expect(flashcards).toEqual(returnedPosts);
+  expect(flashcards).toEqual(returnedNotes);
 });
 
 describe('testing getFlashcardByProbability', () => {
@@ -132,11 +132,11 @@ describe('testing getFlashcardByProbability', () => {
     [0.9],
     [1],
   ])(
-    'when all p-numbers is zero, must return the most recent post',
+    'when all p-numbers is zero, must return the most recent note',
     (random) => {
       const flashcards = [
         { diffDays: 100, pNumber: 0 },
-        { diffDays: 1, pNumber: 0 }, // Most recent post.
+        { diffDays: 1, pNumber: 0 }, // Most recent note.
         { diffDays: 200, pNumber: 0 },
       ] as any;
 
