@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { ThemeProvider } from 'theme-ui';
-import { theme } from './theme';
+import { ThemeProvider } from '@tereza-tech/theme';
 
 const Root = ({ children }: { children: React.ReactNode }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+  return <ThemeProvider>{children}</ThemeProvider>;
 };
 
 export default Root;

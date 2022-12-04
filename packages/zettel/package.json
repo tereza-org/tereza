@@ -3,7 +3,10 @@
   "version": "0.11.6",
   "description": "",
   "license": "MIT",
-  "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
+  "author": "Tereza Tech",
+  "contributors": [
+    "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)"
+  ],
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "files": [
