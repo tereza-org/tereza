@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ThemeProvider } from '@ttoss/ui';
+import { ThemeProvider } from 'theme-ui';
 import { theme } from './theme';
 
 const Root = ({ children }: { children: React.ReactNode }) => {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Flex, Heading, Text } from '@ttoss/ui';
+import { Flex, Heading, Text } from 'theme-ui';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
@@ -35,8 +35,9 @@ const Hero = () => {
             color: 'primary',
             padding: 0,
             margin: 0,
-            textShadow: ({ colors }) =>
-              `0 0 10px ${colors?.secondary}, 0 0 16px ${colors?.secondary}`,
+            textShadow: ({ colors }) => {
+              return `0 0 10px ${colors?.secondary}, 0 0 16px ${colors?.secondary}`;
+            },
           }}
         >
           {siteConfig.title}
@@ -45,8 +46,9 @@ const Hero = () => {
           sx={{
             fontSize: [4, 5, 6],
             color: 'secondary',
-            textShadow: ({ colors }) =>
-              `0 0 4px ${colors?.white}, 0 0 4px ${colors?.white}`,
+            textShadow: ({ colors }) => {
+              return `0 0 4px ${colors?.white}, 0 0 4px ${colors?.white}`;
+            },
             fontWeight: 'bold',
           }}
         >
