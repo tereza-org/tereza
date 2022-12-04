@@ -22,7 +22,7 @@ yarn turbo run build test lint --filter=[$LATEST_TAG]
 yarn lerna version --yes --no-push
 
 # Rebuild all packages that Lerna will publish
-yarn turbo run build lint test deploy --filter=[$LATEST_TAG]
+yarn turbo run build lint test --filter=[$LATEST_TAG]
 
 # Publish packages
 yarn lerna publish from-git --yes

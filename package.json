@@ -21,7 +21,6 @@
     "@lerna-lite/list": "^1.13.0",
     "@ttoss/config": "^1.20.0",
     "@ttoss/eslint-config": "^1.18.0",
-    "carlin": "^1.19.12",
     "eslint": "^8.28.0",
     "husky": "^8.0.2",
     "lint-staged": "^13.0.4",
