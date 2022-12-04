@@ -8,7 +8,6 @@
     "publish": {
       "allowBranch": "main",
       "conventionalCommits": true,
-      "ignoreChanges": ["**/*.md"],
       "message": "chore(release): publish packages",
       "noPrivate": true
     }
