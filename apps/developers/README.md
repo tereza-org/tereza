@@ -1,3 +1,3 @@
-# Tereza Tech Website
+# Tereza Tech Developers
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+Check out our [Developers Docs](https://developers.terezatech.com) for more information.
