@@ -6,7 +6,7 @@ description: Create your own digital garden with Zettel, an open source engine t
 
 import Readme, {
 toc as ReadmeTOC,
-} from "../../../../packages/zettel/README.md";
+} from "../../../../../packages/zettel/README.md";
 
 <Readme />
 
