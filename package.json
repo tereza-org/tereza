@@ -7,11 +7,10 @@
     "lint": "lint-staged --diff main --quiet",
     "ls": "lerna ls",
     "prepare": "husky install",
-    "playbook": "yarn workspace @tereza-tech-docs/developers run start"
+    "playbook": "yarn workspace @tereza-tech-apps/developers run start"
   },
   "workspaces": [
     "apps/*",
-    "docs/*",
     "packages/*"
   ],
   "dependencies": {},
