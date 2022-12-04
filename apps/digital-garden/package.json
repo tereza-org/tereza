@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@teteza-tech-apps/digital-garden",
+  "name": "@tereza-tech-apps/digital-garden",
   "version": "0.1.1",
   "scripts": {
     "build": "next build",
