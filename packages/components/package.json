@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "@tereza-tech/components",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
+  "main": "dist/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "echo jest"
+  },
+  "typings": "dist/index.d.ts",
+  "dependencies": {},
+  "peerDependencies": {
+    "@emotion/react": "^11.10.5",
+    "react": ">=16.8.0",
+    "theme-ui": "^0.15.4"
+  },
+  "devDependencies": {
+    "@emotion/react": "^11.10.5",
+    "@types/react": "^18.0.26",
+    "react": "^18.2.0",
+    "theme-ui": "^0.15.4",
+    "tsup": "^6.5.0"
+  },
+  "keywords": []
+}

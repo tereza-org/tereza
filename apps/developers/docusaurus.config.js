@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Tereza Tech',
-  tagline: 'We take you to the next level.',
+  tagline: "Tereza's tools documentation for developers.",
   url: 'https://tereza.tech',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -29,10 +29,8 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/terezatech/tereza-tech/tree/main/apps/developers/',
         },
         // blog: {
         //   showReadingTime: true,
@@ -66,7 +64,7 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'introduction',
             position: 'left',
             label: 'Docs',
           },
@@ -86,7 +84,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/docs/introduction',
               },
             ],
           },

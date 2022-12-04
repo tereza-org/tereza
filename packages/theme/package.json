@@ -1,6 +1,6 @@
 {
-  "name": "@tereza-tech/zettel-cli",
-  "version": "0.3.6",
+  "name": "@tereza-tech/theme",
+  "version": "1.0.0",
   "description": "",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -9,28 +9,25 @@
   ],
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
-  "bin": {
-    "zettel": "./bin/zettel"
-  },
   "files": [
-    "bin",
     "dist",
     "src"
   ],
   "scripts": {
-    "build": "tsup",
-    "test": "echo jest"
+    "build": "tsup"
   },
   "typings": "dist/index.d.ts",
-  "dependencies": {
-    "@tereza-tech/zettel": "^0.11.6",
-    "@ttoss/config": "^1.18.3",
-    "yargs": "^17.6.2"
+  "peerDependencies": {
+    "@emotion/react": "^11.10.5",
+    "react": "^18.2.0",
+    "theme-ui": "^0.15.4"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.3",
-    "jest": "^29.3.1",
-    "ts-node": "^10.9.1",
+    "@emotion/react": "^11.10.5",
+    "@ttoss/config": "^1.20.0",
+    "@types/react": "^18.0.26",
+    "react": "^18.2.0",
+    "theme-ui": "^0.15.4",
     "tsup": "^6.5.0"
   },
   "keywords": [],

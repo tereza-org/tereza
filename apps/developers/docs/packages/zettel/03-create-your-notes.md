@@ -72,7 +72,7 @@ This is the body of my draft note.
 
 The engine uses the `draft` metadata to ignore notes in some methods. For example, the `getNotes` method will ignore notes with the `draft` metadata set to `true`:
 
-includeDrafts
+But, if you want to include drafts in the results, you can pass the `includeDrafts` option:
 
 ```ts
 const notDraftNotes = await zettelkasten.getNotes();
