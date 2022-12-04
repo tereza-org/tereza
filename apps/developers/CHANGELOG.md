@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.0.6...@tereza-tech-apps/developers@0.1.0) (2022-12-04)
+
+### Features
+
+- add theme and tereza app ([#21](https://github.com/terezatech/tereza-tech/issues/21)) ([ef64e73](https://github.com/terezatech/tereza-tech/commit/ef64e73df3b47339d39ba0ff946afcfe655c6eaa))
+
 ## [0.0.6](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.0.5...@tereza-tech-apps/developers@0.0.6) (2022-12-04)
 
 **Note:** Version bump only for package @tereza-tech-apps/developers

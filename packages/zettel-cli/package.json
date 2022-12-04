@@ -1,6 +1,6 @@
 {
   "name": "@tereza-tech/zettel-cli",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -23,7 +23,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.11.6",
+    "@tereza-tech/zettel": "^0.12.0",
     "@ttoss/config": "^1.18.3",
     "yargs": "^17.6.2"
   },

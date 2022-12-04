@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech/components",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "",
   "license": "MIT",
   "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
@@ -16,7 +16,6 @@
     "test": "echo jest"
   },
   "typings": "dist/index.d.ts",
-  "dependencies": {},
   "peerDependencies": {
     "@emotion/react": "^11.10.5",
     "react": ">=16.8.0",
