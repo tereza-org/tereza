@@ -11,7 +11,7 @@ export type ZettelkastenConfig = {
 };
 
 export const DEFAULT_CONFIG = {
-  requiredMetadata: ['title', 'date', 'description'],
+  requiredMetadata: [],
   normalizeOnInit: false,
   recommendationsLimit: 5,
   dateFormat: 'PPP',

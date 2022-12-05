@@ -1,4 +1,4 @@
-import { zettelkasten } from './zettelkasten';
+import { Zettelkasten, zettelkasten } from './zettelkasten';
 
 test('get all notes including drafts', async () => {
   const allNotes = await zettelkasten.getNotes({ includeDrafts: true });
@@ -122,3 +122,15 @@ test.each(['references', 'backlinks', 'recommendations'])(
     });
   }
 );
+
+test.each([
+  './tests/__mocks__/notes',
+  'tests/__mocks__/notes',
+  '../zettel/tests/__mocks__/notes',
+  '../../packages/zettel/tests/__mocks__/notes',
+])('should return notes if notesDir is relative', async (relativeDir) => {
+  const notes0 = await zettelkasten.getNotes();
+  const z = new Zettelkasten({ notesDir: relativeDir });
+  const notes1 = await z.getNotes();
+  expect(notes0).toEqual(notes1);
+});

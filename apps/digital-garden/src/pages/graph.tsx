@@ -14,16 +14,16 @@ const Graph = dynamic(
 );
 
 export const getStaticProps = async () => {
-  const graphData = await zettel.getGraph();
+  const graph = await zettel.getGraph();
   return {
-    props: { graphData },
+    props: { graph },
   };
 };
 
 const GraphPage = ({
-  graphData,
+  graph,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <Graph graphData={graphData} width={1000} height={600} />;
+  return <Graph graph={graph} width={1000} height={600} />;
 };
 
 export default GraphPage;

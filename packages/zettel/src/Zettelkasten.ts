@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import {
   GetNoteParams,
@@ -22,6 +23,12 @@ export class Zettelkasten {
 
   constructor(config: ZettelkastenConfig) {
     this._config = { ...DEFAULT_CONFIG, ...config };
+
+    /**
+     * Resolve the notesDir to an absolute path.
+     */
+    this._config.notesDir = path.resolve(process.cwd(), this._config.notesDir);
+
     this.init();
   }
 

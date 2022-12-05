@@ -6,28 +6,28 @@ import SpriteText from 'three-spritetext';
 export const Graph = ({
   height,
   width,
-  graphData,
+  graph,
 }: {
   height: number;
   width: number;
-  graphData: GraphData;
+  graph: GraphData;
 }) => {
   const newGraphData = React.useMemo(() => {
-    const nodes = (graphData?.nodes || []).map((node) => {
+    const nodes = (graph?.nodes || []).map((node) => {
       return {
         val: node.group === 'notes' ? 10 : 1,
         ...node,
       };
     });
 
-    const links = (graphData?.links || []).map((link) => {
+    const links = (graph?.links || []).map((link) => {
       return {
         ...link,
       };
     });
 
     return { nodes, links };
-  }, [graphData?.links, graphData?.nodes]);
+  }, [graph?.links, graph?.nodes]);
 
   const graphCommonProps = {
     height,
@@ -55,3 +55,5 @@ export const Graph = ({
     />
   );
 };
+
+export default Graph;
