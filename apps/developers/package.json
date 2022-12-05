@@ -20,6 +20,7 @@
     "@emotion/react": "^11.10.5",
     "@mdx-js/react": "^1.6.22",
     "@tereza-tech/components": "^0.0.1",
+    "@tereza-tech/docusaurus-plugin-zettel": "^0.0.1",
     "@tereza-tech/theme": "^1.0.0",
     "@tereza-tech/zettel": "^0.11.6",
     "@theme-ui/mdx": "^0.15.4",
