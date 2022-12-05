@@ -1,35 +1,48 @@
-import { Graph, Zettelkasten, ZettelkastenConfig } from '@tereza-tech/zettel';
+import {
+  GraphData,
+  Zettelkasten,
+  ZettelkastenConfig,
+} from '@tereza-tech/zettel';
 import { LoadContext, Plugin } from '@docusaurus/types';
+
+type PluginOptions = ZettelkastenConfig & {
+  knowledgeGraph: {
+    path?: string;
+    component: string;
+  };
+};
+
+export type PluginContent = { graphData: GraphData };
 
 /**
  * https://docusaurus.io/docs/api/plugin-methods/lifecycle-apis
  */
 const docusaurusPluginZettel = (
   context: LoadContext,
-  options: ZettelkastenConfig
-): Plugin<{ graph: Graph }> => {
+  options: PluginOptions
+): Plugin<PluginContent> => {
   return {
     name: 'docusaurus-plugin-zettel',
     loadContent: async () => {
       const zettelkasten = new Zettelkasten(options);
-      const graph = await zettelkasten.getGraph();
+      const graphData = await zettelkasten.getGraphData();
       return {
-        graph,
+        graphData,
       };
     },
     contentLoaded: async ({ content, actions }) => {
       const { createData, addRoute } = actions;
 
-      const graphJsonPath = await createData(
-        'graph.json',
-        JSON.stringify(content.graph)
+      const graphDataJsonPath = await createData(
+        'graphData.json',
+        JSON.stringify(content.graphData)
       );
 
       addRoute({
-        path: '/graph',
-        component: '@tereza-tech/react-zettel/src/components/Graph',
+        path: options.knowledgeGraph.path || '/knowledge-graph',
+        component: options.knowledgeGraph.component,
         modules: {
-          graph: graphJsonPath,
+          graphData: graphDataJsonPath,
         },
         exact: true,
       });

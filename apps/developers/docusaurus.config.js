@@ -122,7 +122,12 @@ const config = {
   plugins: [
     [
       '@tereza-tech/docusaurus-plugin-zettel',
-      { notesDir: '../digital-garden/notes' },
+      {
+        notesDir: '../digital-garden/notes',
+        knowledgeGraph: {
+          component: '@site/src/components/KnowledgeGraph.tsx',
+        },
+      },
     ],
     //   [
     //     'docusaurus-plugin-typedoc',

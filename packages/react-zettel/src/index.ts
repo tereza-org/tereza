@@ -1,1 +1,5 @@
-export { Graph } from './components/Graph';
+export {
+  KnowledgeGraph,
+  KnowledgeGraphProps,
+  GraphData,
+} from './components/KnowledgeGraph';

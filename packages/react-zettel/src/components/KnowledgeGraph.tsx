@@ -1,33 +1,37 @@
 import * as React from 'react';
-import { Graph as GraphData } from '@tereza-tech/zettel/src/graph';
 import ForceGraph3D from 'react-force-graph-3d';
 import SpriteText from 'three-spritetext';
+import type { GraphData } from '@tereza-tech/zettel/src/graph';
 
-export const Graph = ({
-  height,
-  width,
-  graph,
-}: {
+export type { GraphData };
+
+export type KnowledgeGraphProps = {
   height: number;
   width: number;
-  graph: GraphData;
-}) => {
+  graphData: GraphData;
+};
+
+export const KnowledgeGraph = ({
+  height,
+  width,
+  graphData,
+}: KnowledgeGraphProps) => {
   const newGraphData = React.useMemo(() => {
-    const nodes = (graph?.nodes || []).map((node) => {
+    const nodes = (graphData?.nodes || []).map((node) => {
       return {
         val: node.group === 'notes' ? 10 : 1,
         ...node,
       };
     });
 
-    const links = (graph?.links || []).map((link) => {
+    const links = (graphData?.links || []).map((link) => {
       return {
         ...link,
       };
     });
 
     return { nodes, links };
-  }, [graph?.links, graph?.nodes]);
+  }, [graphData?.links, graphData?.nodes]);
 
   const graphCommonProps = {
     height,
@@ -55,5 +59,3 @@ export const Graph = ({
     />
   );
 };
-
-export default Graph;

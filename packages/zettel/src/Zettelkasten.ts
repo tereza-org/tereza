@@ -16,7 +16,7 @@ import {
   saveNote,
 } from './notes';
 import { getFlashcardFromConfig } from './flashcard';
-import { getGraph } from './graph';
+import { getGraphData } from './graph';
 
 export class Zettelkasten {
   private _config: ZettelkastenConfig;
@@ -78,7 +78,7 @@ export class Zettelkasten {
     return getFlashcardFromConfig(this.config);
   }
 
-  public async getGraph() {
-    return getGraph(this.config);
+  public async getGraphData() {
+    return getGraphData(this.config);
   }
 }
