@@ -16,7 +16,7 @@ import {
   saveNote,
 } from './notes';
 import { getFlashcardFromConfig } from './flashcard';
-import { getGraphData } from './graph';
+import { getGraphData } from './knowledgeGraph';
 
 export class Zettelkasten {
   private _config: ZettelkastenConfig;
