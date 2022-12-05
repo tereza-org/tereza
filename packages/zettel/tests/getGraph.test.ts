@@ -1,13 +1,13 @@
 import { zettelkasten } from './zettelkasten';
 
-test('getGraph should return links and nodes', async () => {
-  const graph = await zettelkasten.getGraph();
+test('getGraphData should return links and nodes', async () => {
+  const graph = await zettelkasten.getGraphData();
   expect(graph.links.length).toBeGreaterThan(0);
   expect(graph.nodes.length).toBeGreaterThan(0);
 });
 
 test('not draft notes should be in the graph', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   const ids = graph.nodes.map((node) => {
     return node.id;
   });
@@ -17,7 +17,7 @@ test('not draft notes should be in the graph', async () => {
 });
 
 test('draft notes should not be in the graph', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   const ids = graph.nodes.map((node) => {
     return node.id;
   });
@@ -25,7 +25,7 @@ test('draft notes should not be in the graph', async () => {
 });
 
 test('tags should be in the graph', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   const tags =
     (await zettelkasten.getNote('/blog/note-not-a-draft'))?.tags || [];
   const ids = graph.nodes.map((node) => {
@@ -41,7 +41,7 @@ test('references should be the note source', async () => {
 
   expect(referencingNote).not.toBeUndefined();
 
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
 
   referencingNote?.references.forEach((reference) => {
     const referenceLink = graph.links.find((link) => {
@@ -58,7 +58,7 @@ test('backlinks should be the note target', async () => {
 
   expect(referencedNote).not.toBeUndefined();
 
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
 
   referencedNote?.backlinks.forEach((backlink) => {
     const referenceLink = graph.links.find((link) => {
@@ -69,14 +69,14 @@ test('backlinks should be the note target', async () => {
 });
 
 test('should not have self references', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   graph.links.forEach((link) => {
     expect(link.source).not.toEqual(link.target);
   });
 });
 
 test('should not have duplicate links', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   const links = graph.links.map((link) => {
     return `${link.source}---${link.target}`;
   });
@@ -84,7 +84,7 @@ test('should not have duplicate links', async () => {
 });
 
 test('shoud not have duplicate nodes', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   const nodes = graph.nodes.map((node) => {
     return node.id;
   });
@@ -92,7 +92,7 @@ test('shoud not have duplicate nodes', async () => {
 });
 
 test('should not have inverse links', async () => {
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
   graph.links.forEach((link) => {
     const inverseLink = graph.links.find((l) => {
       return l.source === link.target && l.target === link.source;

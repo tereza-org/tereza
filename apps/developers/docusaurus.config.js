@@ -93,7 +93,7 @@ const config = {
             items: [
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/arantespp',
+                href: 'https://twitter.com/terezatech',
               },
             ],
           },
@@ -118,6 +118,34 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+
+  plugins: [
+    [
+      '@tereza-tech/docusaurus-plugin-zettel',
+      {
+        notesDir: '../digital-garden/notes',
+        knowledgeGraph: {
+          component: '@site/src/components/KnowledgeGraph.tsx',
+        },
+      },
+    ],
+    //   [
+    //     'docusaurus-plugin-typedoc',
+    //     {
+    //       id: 'api-1',
+    //       includeExtension: false,
+    //       entryPoints: ['../../packages/zettel/src/index.ts'],
+    //       tsconfig: '../../packages/zettel/tsconfig.json',
+    //       out: 'api-1',
+    //       sidebar: {
+    //         categoryLabel: 'API XYZ',
+    //         collapsed: false,
+    //         position: 0,
+    //         fullNames: true,
+    //       },
+    //     },
+    //   ],
+  ],
 };
 
 module.exports = config;

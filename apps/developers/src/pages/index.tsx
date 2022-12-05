@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Flex, Heading, Text } from 'theme-ui';
 import { Hero } from '@tereza-tech/components';
 import Layout from '@theme/Layout';
 import useBaseUrl from '@docusaurus/useBaseUrl';

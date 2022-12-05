@@ -14,12 +14,14 @@ export type GraphLink = {
   target: string;
 };
 
-export type Graph = {
+export type GraphData = {
   nodes: GraphNode[];
   links: GraphLink[];
 };
 
-export const getGraph = async (config: ZettelkastenConfig): Promise<Graph> => {
+export const getGraphData = async (
+  config: ZettelkastenConfig
+): Promise<GraphData> => {
   const [allNotes, allTags] = await Promise.all([
     getNotes(config),
     getTags(config),

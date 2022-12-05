@@ -2,10 +2,10 @@ import { InferGetStaticPropsType } from 'next';
 import { zettel } from '../lib/zettel';
 import dynamic from 'next/dynamic';
 
-const Graph = dynamic(
+const KnowledgeGraph = dynamic(
   () => {
     return import('@tereza-tech/react-zettel').then((mod) => {
-      return mod.Graph;
+      return mod.KnowledgeGraph;
     });
   },
   {
@@ -14,7 +14,7 @@ const Graph = dynamic(
 );
 
 export const getStaticProps = async () => {
-  const graphData = await zettel.getGraph();
+  const graphData = await zettel.getGraphData();
   return {
     props: { graphData },
   };
@@ -23,7 +23,7 @@ export const getStaticProps = async () => {
 const GraphPage = ({
   graphData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <Graph graphData={graphData} width={1000} height={600} />;
+  return <KnowledgeGraph graphData={graphData} width={1000} height={600} />;
 };
 
 export default GraphPage;

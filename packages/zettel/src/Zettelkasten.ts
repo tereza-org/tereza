@@ -1,3 +1,4 @@
+import * as path from 'path';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import {
   GetNoteParams,
@@ -15,13 +16,19 @@ import {
   saveNote,
 } from './notes';
 import { getFlashcardFromConfig } from './flashcard';
-import { getGraph } from './graph';
+import { getGraphData } from './graph';
 
 export class Zettelkasten {
   private _config: ZettelkastenConfig;
 
   constructor(config: ZettelkastenConfig) {
     this._config = { ...DEFAULT_CONFIG, ...config };
+
+    /**
+     * Resolve the notesDir to an absolute path.
+     */
+    this._config.notesDir = path.resolve(process.cwd(), this._config.notesDir);
+
     this.init();
   }
 
@@ -71,7 +78,7 @@ export class Zettelkasten {
     return getFlashcardFromConfig(this.config);
   }
 
-  public async getGraph() {
-    return getGraph(this.config);
+  public async getGraphData() {
+    return getGraphData(this.config);
   }
 }

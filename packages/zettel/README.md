@@ -29,6 +29,6 @@ const zettelkasten = new Zettelkasten({ notesDir });
 
   const flashcard = await zettelkasten.getFlashcard();
 
-  const graph = await zettelkasten.getGraph();
+  const graph = await zettelkasten.getGraphData();
 })();
 ```

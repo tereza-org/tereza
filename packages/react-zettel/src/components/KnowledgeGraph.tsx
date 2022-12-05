@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { Graph as GraphData } from '@tereza-tech/zettel/src/graph';
 import ForceGraph3D from 'react-force-graph-3d';
 import SpriteText from 'three-spritetext';
+import type { GraphData } from '@tereza-tech/zettel/src/graph';
 
-export const Graph = ({
-  height,
-  width,
-  graphData,
-}: {
+export type { GraphData };
+
+export type KnowledgeGraphProps = {
   height: number;
   width: number;
   graphData: GraphData;
-}) => {
+};
+
+export const KnowledgeGraph = ({
+  height,
+  width,
+  graphData,
+}: KnowledgeGraphProps) => {
   const newGraphData = React.useMemo(() => {
     const nodes = (graphData?.nodes || []).map((node) => {
       return {

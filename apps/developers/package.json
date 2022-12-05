@@ -20,6 +20,8 @@
     "@emotion/react": "^11.10.5",
     "@mdx-js/react": "^1.6.22",
     "@tereza-tech/components": "^0.1.0",
+    "@tereza-tech/docusaurus-plugin-zettel": "^0.0.1",
+    "@tereza-tech/react-zettel": "^0.1.0",
     "@tereza-tech/theme": "^1.1.0",
     "@tereza-tech/zettel": "^0.12.0",
     "@theme-ui/mdx": "^0.15.4",
@@ -30,6 +32,9 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "2.2.0",
+    "docusaurus-plugin-typedoc": "^0.18.0",
+    "typedoc": "^0.23.21",
+    "typedoc-plugin-markdown": "^3.14.0",
     "typescript": "^4.9.3"
   },
   "engines": {
