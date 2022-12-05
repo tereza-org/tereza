@@ -130,7 +130,7 @@ test.each([
   '../../packages/zettel/tests/__mocks__/notes',
 ])('should return notes if notesDir is relative', async (relativeDir) => {
   const notes0 = await zettelkasten.getNotes();
-  const z = new Zettelkasten({ notesDir: relativeDir });
+  const z = new Zettelkasten({ ...zettelkasten.config, notesDir: relativeDir });
   const notes1 = await z.getNotes();
   expect(notes0).toEqual(notes1);
 });
