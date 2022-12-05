@@ -43,6 +43,8 @@ export const KnowledgeGraph = ({
     linkWidth: 0.3,
     linkDirectionalParticles: 2,
     linkDirectionalParticleWidth: 3,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, @typescript-eslint/no-unused-vars
+    onDagError: (loopNodeIds) => {},
   };
 
   return (

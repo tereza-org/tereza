@@ -37,7 +37,7 @@ export const getGraphData = async (
 
   const tagsNodes = allTags.map((tag) => {
     return {
-      id: tag,
+      id: '#' + tag,
       group: 'tags' as GraphGroup,
       label: '#' + tag,
     };

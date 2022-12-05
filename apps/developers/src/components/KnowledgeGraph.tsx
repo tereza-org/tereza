@@ -3,7 +3,7 @@ import { GraphData } from '@tereza-tech/react-zettel';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import Layout from '@theme/Layout';
 
-const KnowledgeGraphComponent = ({ graphData }: { graphData: GraphData }) => {
+const KnowledgeGraph = ({ graphData }: { graphData: GraphData }) => {
   return (
     <Layout>
       <BrowserOnly>
@@ -19,4 +19,4 @@ const KnowledgeGraphComponent = ({ graphData }: { graphData: GraphData }) => {
   );
 };
 
-export default KnowledgeGraphComponent;
+export default KnowledgeGraph;
