@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ForceGraph3D from 'react-force-graph-3d';
 import SpriteText from 'three-spritetext';
-import type { GraphData } from '@tereza-tech/zettel/src/graph';
+import type { GraphData } from '@tereza-tech/zettel/src/knowledgeGraph';
 
 export type { GraphData };
 
