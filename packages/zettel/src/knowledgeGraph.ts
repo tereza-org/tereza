@@ -35,11 +35,15 @@ export const getGraphData = async (
     };
   });
 
+  const getTagId = (tag: string) => {
+    return '#' + tag;
+  };
+
   const tagsNodes = allTags.map((tag) => {
     return {
-      id: tag,
+      id: getTagId(tag),
       group: 'tags' as GraphGroup,
-      label: '#' + tag,
+      label: getTagId(tag),
     };
   });
 
@@ -62,7 +66,7 @@ export const getGraphData = async (
     return tags.map((tag) => {
       return {
         target: id,
-        source: tag,
+        source: getTagId(tag),
       };
     });
   });
