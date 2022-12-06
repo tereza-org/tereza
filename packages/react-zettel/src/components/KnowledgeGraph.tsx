@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ForceGraph3D from 'react-force-graph-3d';
+import ForceGraph3D, { ForceGraphProps } from 'react-force-graph-3d';
 import SpriteText from 'three-spritetext';
 import type { GraphData } from '@tereza-tech/zettel/src/knowledgeGraph';
 
@@ -33,7 +33,7 @@ export const KnowledgeGraph = ({
     return { nodes, links };
   }, [graphData?.links, graphData?.nodes]);
 
-  const graphCommonProps = {
+  const graphCommonProps: ForceGraphProps = {
     height,
     width,
     graphData: newGraphData,
