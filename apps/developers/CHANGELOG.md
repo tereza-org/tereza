@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.1.2...@tereza-tech-apps/developers@0.1.3) (2022-12-06)
+
+### Bug Fixes
+
+- trying to fix vercel deploy ([e93f31a](https://github.com/terezatech/tereza-tech/commit/e93f31a3c78e7a20323812b4902b559ad26579aa))
+
 ## [0.1.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.1.1...@tereza-tech-apps/developers@0.1.2) (2022-12-06)
 
 **Note:** Version bump only for package @tereza-tech-apps/developers
