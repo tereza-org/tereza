@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <nav>
           <Link href="/">Home</Link>
           {' | '}
-          <Link href="/graph">Graph</Link>
+          <Link href="/knowledge-graph">Knowledge Graph</Link>
           {' | '}
           <Link href="/flashcard">Flashcard</Link>
         </nav>
