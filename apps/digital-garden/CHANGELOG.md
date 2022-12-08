@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.1.6...@tereza-tech-apps/digital-garden@0.2.0) (2022-12-08)
+
+### Features
+
+- add 2d graph ([#26](https://github.com/terezatech/tereza-tech/issues/26)) ([2b8fd93](https://github.com/terezatech/tereza-tech/commit/2b8fd93399076ccb7d1c784ff0eea963268b293f))
+
 ## [0.1.6](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.1.5...@tereza-tech-apps/digital-garden@0.1.6) (2022-12-07)
 
 ### Bug Fixes
