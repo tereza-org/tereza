@@ -23,7 +23,16 @@ export const getStaticProps = async () => {
 const GraphPage = ({
   graphData,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  return <KnowledgeGraph graphData={graphData} width={1000} height={600} />;
+  return (
+    <div
+      style={{
+        width: '100%',
+        height: '70vh',
+      }}
+    >
+      <KnowledgeGraph graphData={graphData} />
+    </div>
+  );
 };
 
 export default GraphPage;
