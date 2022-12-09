@@ -3,21 +3,13 @@ import { Theme } from 'theme-ui';
 /**
  * Generated on https://color.adobe.com/create/image using the hero image.
  */
-const lightPalette = {
+const palette = {
   color1: '#011F26',
   color2: '#195959',
   color3: '#5ABFA3',
   color4: '#79F2D0',
   color5: '#BFA18F',
 };
-
-// const darkPalette = {
-//   color1: '#160B26',
-//   color2: '#02000D',
-//   color3: '#011F26',
-//   color4: '#195959',
-//   color5: '#2B8C7B',
-// };
 
 // text: {
 //   h1: {
@@ -56,8 +48,11 @@ export const theme: Theme = {
     white,
     text: black,
     background: white,
-    primary: lightPalette.color3,
-    secondary: lightPalette.color1,
+    primary: palette.color3,
+    secondary: palette.color1,
+    note: palette.color3,
+    tag: '#D35844',
+    draft: palette.color5,
     modes: {
       dark: {
         text: white,
@@ -67,7 +62,7 @@ export const theme: Theme = {
   },
   shadows: {
     none: 'none',
-    shadow: `0 0 10px ${lightPalette.color1}, 0 0 16px ${lightPalette.color1}`,
+    shadow: `0 0 10px ${palette.color1}, 0 0 16px ${palette.color1}`,
   },
   text: {
     heading: {
@@ -82,10 +77,10 @@ export const theme: Theme = {
       lineHeight: 'body',
       fontWeight: 'body',
       a: {
-        color: 'secondary',
+        color: 'primary',
         textDecoration: 'none',
         ':hover': {
-          color: 'primary',
+          color: palette.color4,
           textDecoration: 'underline',
         },
       },

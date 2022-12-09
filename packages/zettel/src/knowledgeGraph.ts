@@ -1,7 +1,7 @@
 import { ZettelkastenConfig } from './config';
 import { getNotes, getTags } from './notes';
 
-export type GraphGroup = 'notes' | 'tags';
+export type GraphGroup = 'note' | 'tag';
 
 export type GraphNode = {
   id: string;
@@ -30,7 +30,7 @@ export const getGraphData = async (
   const notesNodes = allNotes.map((note) => {
     return {
       id: note.id,
-      group: 'notes' as GraphGroup,
+      group: 'note' as GraphGroup,
       label: note.title,
     };
   });
@@ -42,7 +42,7 @@ export const getGraphData = async (
   const tagsNodes = allTags.map((tag) => {
     return {
       id: getTagId(tag),
-      group: 'tags' as GraphGroup,
+      group: 'tag' as GraphGroup,
       label: getTagId(tag),
     };
   });
