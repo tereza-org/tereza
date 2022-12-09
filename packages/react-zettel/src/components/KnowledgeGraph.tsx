@@ -1,8 +1,11 @@
 import * as React from 'react';
+import { Box, Button, useThemeUI } from 'theme-ui';
 import ForceGraph2D, {
+  ForceGraphMethods as ForceGraphMethods2D,
   ForceGraphProps as ForceGraphProps2D,
 } from 'react-force-graph-2d';
 import ForceGraph3D, {
+  ForceGraphMethods as ForceGraphMethods3D,
   ForceGraphProps as ForceGraphProps3D,
 } from 'react-force-graph-3d';
 import SpriteText from 'three-spritetext';
@@ -21,7 +24,16 @@ export const KnowledgeGraph = ({
   width,
   graphData,
 }: KnowledgeGraphProps) => {
+  const { theme } = useThemeUI();
+
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  /**
+   * Refs to the 2D and 3D graphs.
+   * NOTE: it always undefined on the first render.
+   */
+  const graph2DRef = React.useRef<ForceGraphMethods2D | undefined>(undefined);
+  const graph3DRef = React.useRef<ForceGraphMethods3D | undefined>(undefined);
 
   const [dimensions, setDimensions] = React.useState({
     height,
@@ -63,7 +75,9 @@ export const KnowledgeGraph = ({
   const newGraphData = React.useMemo(() => {
     const nodes = (graphData?.nodes || []).map((node) => {
       return {
-        val: node.group === 'notes' ? 7 : 1,
+        val: node.group === 'note' ? 10 : 1,
+        color:
+          node.group === 'note' ? theme.rawColors?.note : theme.rawColors?.tag,
         ...node,
       };
     });
@@ -75,17 +89,23 @@ export const KnowledgeGraph = ({
     });
 
     return { nodes, links };
-  }, [graphData?.links, graphData?.nodes]);
+  }, [graphData?.links, graphData?.nodes, theme.rawColors]);
 
   const [is3D, setIs3D] = React.useState(true);
 
   const [dagMode, setDagMode] =
     React.useState<ForceGraphProps2D['dagMode']>('radialin');
 
+  const dagLevelDistance = React.useMemo(() => {
+    const numberOfNodes = graphData.nodes.length;
+    const minDagLevelDistance = 25;
+    return minDagLevelDistance * (Math.log10(numberOfNodes + 1) + 1);
+  }, [graphData.nodes.length]);
+
   const graphCommonProps: ForceGraphProps3D & ForceGraphProps2D = {
     ...dimensions,
     dagMode,
-    dagLevelDistance: 50,
+    dagLevelDistance,
     graphData: newGraphData,
     nodeOpacity: 0.9,
     nodeResolution: 32,
@@ -99,9 +119,10 @@ export const KnowledgeGraph = ({
   };
 
   return (
-    <div ref={containerRef}>
+    <Box ref={containerRef}>
       {is3D ? (
         <ForceGraph3D
+          ref={graph3DRef}
           {...graphCommonProps}
           nodeThreeObjectExtend={true}
           nodeThreeObject={(node: any) => {
@@ -112,24 +133,24 @@ export const KnowledgeGraph = ({
           }}
         />
       ) : (
-        <ForceGraph2D {...graphCommonProps} />
+        <ForceGraph2D ref={graph2DRef} {...graphCommonProps} />
       )}
-      <div>
-        <button
+      <Box>
+        <Button
           onClick={() => {
             setIs3D(!is3D);
           }}
         >
           {is3D ? '2D' : '3D'}
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             setDagMode(dagMode === 'bu' ? 'radialin' : 'bu');
           }}
         >
           {dagMode === 'bu' ? 'Radial' : 'Bottom Up'}
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
 };

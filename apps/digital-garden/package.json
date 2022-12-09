@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
     "@tereza-tech/react-zettel": "^0.2.0",
     "@tereza-tech/zettel": "^0.12.2",
     "@types/node": "18.11.9",
@@ -18,6 +19,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-force-graph-3d": "^1.21.15",
+    "theme-ui": "^0.15.4",
     "typescript": "4.9.3"
   }
 }
