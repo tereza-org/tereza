@@ -9,7 +9,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "build-storybook": "build-storybook",
+    "build": "build-storybook",
     "dev": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006"
   },
