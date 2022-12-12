@@ -32,9 +32,14 @@ export class Zettelkasten {
     this.init();
   }
 
-  private async init() {
+  private init() {
+    /**
+     * Get all notes on init to populate the cache.
+     */
+    this.getNotes();
+
     if (this.config.normalizeOnInit) {
-      await this.normalizeNotes();
+      this.normalizeNotes();
     }
   }
 

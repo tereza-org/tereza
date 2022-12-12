@@ -5,8 +5,11 @@ import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import { normalizeTags } from './normalizeTags';
 import { sortObjectByKey } from './sortObjectByKey';
 import { titleCase } from 'title-case';
+import NodeCache from 'node-cache';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
+
+const cache = new NodeCache();
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
 
@@ -26,6 +29,7 @@ export type NoteMetadata = {
   description?: string;
   draft?: boolean;
   date?: string;
+  formattedDate?: string;
   tags: string[];
   book?: Book;
   [key: string]: any;
@@ -48,13 +52,23 @@ export type SimpleNote = NoteMetadata & {
 };
 
 const getDirectories = async (dir: string) => {
-  return (await fs.promises.readdir(dir, { withFileTypes: true }))
-    .filter((dirent) => {
-      return dirent.isDirectory();
-    })
-    .map((dirent) => {
-      return dirent.name;
-    });
+  const cacheKey = `getDirectories-${dir}`;
+
+  if (!cache.has(cacheKey)) {
+    const directories = (
+      await fs.promises.readdir(dir, { withFileTypes: true })
+    )
+      .filter((dirent) => {
+        return dirent.isDirectory();
+      })
+      .map((dirent) => {
+        return dirent.name;
+      });
+
+    cache.set(cacheKey, directories);
+  }
+
+  return cache.get<string[]>(cacheKey) || [];
 };
 
 /**
@@ -87,39 +101,53 @@ type MarkdownFile = {
 export const readMarkdownFile = async (
   filePath: string
 ): Promise<MarkdownFile | undefined> => {
-  try {
-    const fileContents = await fs.promises.readFile(filePath, 'utf8');
-    const { data, content } = matter(fileContents);
-    return { data, content };
-  } catch (err) {
-    return undefined;
+  const cacheKey = `readMarkdownFile-${filePath}`;
+
+  if (!cache.has(cacheKey)) {
+    try {
+      const fileContents = await fs.promises.readFile(filePath, 'utf8');
+      const { data, content } = matter(fileContents);
+      cache.set(cacheKey, { data, content });
+    } catch (err) {
+      cache.set(cacheKey, undefined);
+    }
   }
+
+  return cache.get<MarkdownFile>(cacheKey);
 };
 
 export const readAllMarkdownFilesFromDir = async (dir: string) => {
-  const files = await fs.promises.readdir(dir);
+  const cacheKey = `readAllMarkdownFilesFromDir-${dir}`;
 
-  const promises = files
-    .filter((filename) => {
-      return filename.endsWith('.md');
-    })
-    .map(async (filename) => {
-      const filePath = path.join(dir, filename);
+  if (!cache.has(cacheKey)) {
+    const files = await fs.promises.readdir(dir);
 
-      const markdown = await readMarkdownFile(filePath);
+    const promises = files
+      .filter((filename) => {
+        return filename.endsWith('.md');
+      })
+      .map(async (filename) => {
+        const filePath = path.join(dir, filename);
 
-      if (markdown?.data) {
-        markdown.data.slug = filename.replace('.md', '');
+        const markdown = await readMarkdownFile(filePath);
+
+        if (markdown?.data) {
+          markdown.data.slug = filename.replace('.md', '');
+        }
+
+        return markdown;
+      });
+
+    const markdowns = (await Promise.all(promises)).filter(
+      (markdown): markdown is MarkdownFile => {
+        return markdown !== undefined;
       }
+    );
 
-      return markdown;
-    });
+    cache.set(cacheKey, markdowns);
+  }
 
-  const markdowns = await Promise.all(promises);
-
-  return markdowns.filter((markdown): markdown is MarkdownFile => {
-    return markdown !== undefined;
-  });
+  return cache.get<MarkdownFile[]>(cacheKey) || [];
 };
 
 const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
@@ -204,17 +232,27 @@ const getSimpleNoteFromMarkdownFile = (
   return note;
 };
 
+const getAllSimpleNotesCacheKey = (config: ZettelkastenConfig) => {
+  return JSON.stringify(config);
+};
+
 /**
  * Get all notes including drafts.
  */
 const getAllSimpleNotes = async (config: ZettelkastenConfig) => {
-  const markdowns = await readAllMarkdownFiles(config);
+  const cacheKey = getAllSimpleNotesCacheKey(config);
 
-  const notes = markdowns.map((markdown) => {
-    return getSimpleNoteFromMarkdownFile(config, markdown);
-  });
+  if (!cache.has(cacheKey)) {
+    const markdowns = await readAllMarkdownFiles(config);
 
-  return notes;
+    const notes = markdowns.map((markdown) => {
+      return getSimpleNoteFromMarkdownFile(config, markdown);
+    });
+
+    cache.set(cacheKey, notes);
+  }
+
+  return cache.get<SimpleNote[]>(cacheKey) || [];
 };
 
 export type GetNotesParams = {
@@ -267,7 +305,6 @@ const getNotesWithoutRecommendations = async (
       return {
         ...note,
         href: note.id,
-        formattedDate: note.formattedDate as string | undefined,
         readingTime: Math.round(readingTime(note.content).minutes) || 1,
       };
     })
@@ -344,6 +381,132 @@ const filterNoteFromNotesArray = <P extends SimpleNote>(
   });
 
   return note;
+};
+
+export const getNotes = async (
+  config: ZettelkastenConfig,
+  params?: GetNotesParams
+) => {
+  const notes = await getNotesWithoutRecommendations(config, params);
+
+  return notes;
+};
+
+export type Note = ThenArg<ReturnType<typeof getNotes>>[number];
+
+export const getNote = async (
+  config: ZettelkastenConfig,
+  params: GetNoteParams
+): Promise<Note | undefined> => {
+  const allNotes = await getNotes(config, { includeDrafts: true });
+  const note = filterNoteFromNotesArray(allNotes, params);
+  return note;
+};
+
+/**
+ * Save note as markdown file.
+ */
+export const saveNote = async (
+  config: ZettelkastenConfig,
+  note: SimpleNote
+): Promise<void> => {
+  /**
+   * Save markdown file.
+   */
+  const { content, ...metadata } = note;
+
+  const filePath = path.join(config.notesDir, note.group, `${note.slug}.md`);
+
+  const sortedMetadata = sortObjectByKey(metadata, metadataSortOrder);
+
+  const md = matter.stringify(content || '', sortedMetadata);
+
+  await fs.promises.writeFile(filePath, md);
+
+  /**
+   * Cache has not been initialized.
+   */
+  if (!cache.has(getAllSimpleNotesCacheKey(config))) {
+    return;
+  }
+
+  /**
+   * Update cache.
+   */
+  const oldMarkdownFiles = await readAllMarkdownFiles(config);
+
+  const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
+    return (
+      markdownFile.data.group !== note.group ||
+      markdownFile.data.slug !== note.slug
+    );
+  });
+
+  const { content: newContent, ...newData } = getSimpleNoteFromMarkdownFile(
+    config,
+    {
+      content: note.content,
+      data: sortedMetadata,
+    }
+  );
+
+  newMarkdownFiles.push({
+    content: newContent,
+    data: newData,
+  });
+
+  cache.set(getAllSimpleNotesCacheKey(config), newMarkdownFiles);
+};
+
+export const getTags = async (
+  config: ZettelkastenConfig,
+  params?: GetNotesParams
+) => {
+  const notes = await getNotes(config, params);
+
+  const tags = notes
+    .flatMap((note) => {
+      return note.tags;
+    })
+    /**
+     * Remove duplicates.
+     */
+    .filter((tag, index, arr) => {
+      return arr.indexOf(tag) === index;
+    })
+    .filter((tag): tag is string => {
+      return tag !== undefined;
+    })
+    .sort((tagA, tagB) => {
+      return tagA.localeCompare(tagB);
+    });
+
+  return tags;
+};
+
+export const normalizeNotes = async (config: ZettelkastenConfig) => {
+  const [allNotes, allTags] = await Promise.all([
+    getAllSimpleNotes(config),
+    getTags(config, { includeDrafts: true }),
+  ]);
+
+  /**
+   * Normalize the set of tags: if another note has a tag that is the same as
+   * current note slug, then add the tag to the current note.
+   */
+  allNotes.forEach((note) => {
+    const doAllTagsContainsNoteSlug = allTags.includes(note.slug);
+
+    if (doAllTagsContainsNoteSlug) {
+      note.tags = normalizeTags([...(note.tags || []), note.slug]);
+    }
+  });
+
+  const promises = allNotes.map((note) => {
+    return saveNote(config, note);
+  });
+
+  await Promise.all(promises);
 };
 
 const getNoteRecommendations = async (
@@ -427,104 +590,8 @@ const getNoteRecommendations = async (
   return recommendations;
 };
 
-export const getNotes = async (
-  config: ZettelkastenConfig,
-  params?: GetNotesParams
-) => {
-  const notes = await getNotesWithoutRecommendations(config, params);
-
-  const notesWithRecommendations = await Promise.all(
-    notes.map(async (note) => {
-      const recommendations = await getNoteRecommendations(config, {
-        id: note.id,
-      });
-
-      return { ...note, recommendations };
-    })
-  );
-
-  return notesWithRecommendations;
-};
-
-export type Note = ThenArg<ReturnType<typeof getNotes>>[number];
-
-export const getNote = async (
-  config: ZettelkastenConfig,
-  params: GetNoteParams
-): Promise<Note | undefined> => {
-  const allNotes = await getNotes(config, { includeDrafts: true });
-  const note = filterNoteFromNotesArray(allNotes, params);
-  return note;
-};
-
-/**
- * Save note as markdown file.
- */
-export const saveNote = async (
-  config: ZettelkastenConfig,
-  note: SimpleNote
-): Promise<void> => {
-  const { content, ...metadata } = note;
-  const filePath = path.join(config.notesDir, note.group, `${note.slug}.md`);
-  const md = matter.stringify(
-    content || '',
-    sortObjectByKey(metadata, metadataSortOrder)
-  );
-  return await fs.promises.writeFile(filePath, md);
-};
-
-export const getTags = async (
-  config: ZettelkastenConfig,
-  params?: GetNotesParams
-) => {
-  const notes = await getNotes(config, params);
-
-  const tags = notes
-    .flatMap((note) => {
-      return note.tags;
-    })
-    /**
-     * Remove duplicates.
-     */
-    .filter((tag, index, arr) => {
-      return arr.indexOf(tag) === index;
-    })
-    .filter((tag): tag is string => {
-      return tag !== undefined;
-    })
-    .sort((tagA, tagB) => {
-      return tagA.localeCompare(tagB);
-    });
-
-  return tags;
-};
-
-export const normalizeNotes = async (config: ZettelkastenConfig) => {
-  const [allNotes, allTags] = await Promise.all([
-    getAllSimpleNotes(config),
-    getTags(config, { includeDrafts: true }),
-  ]);
-
-  /**
-   * Normalize the set of tags: if another note has a tag that is the same as
-   * current note slug, then add the tag to the current note.
-   */
-  allNotes.forEach((note) => {
-    const doAllTagsContainsNoteSlug = allTags.includes(note.slug);
-
-    if (doAllTagsContainsNoteSlug) {
-      note.tags = normalizeTags([...(note.tags || []), note.slug]);
-    }
-  });
-
-  const promises = allNotes.map((note) => {
-    return saveNote(config, note);
-  });
-
-  await Promise.all(promises);
-};
-
 export type GetRecommendationsParams = {
+  note?: GetNoteParams;
   group?: string;
   tag?: string;
   limit?: boolean;
@@ -537,9 +604,13 @@ export const getRecommendations = async (
   config: ZettelkastenConfig,
   params?: GetRecommendationsParams
 ) => {
-  const { tag, group } = params || {};
+  const { tag, group, note } = params || {};
 
   const allRecommendations = await (async () => {
+    if (note) {
+      return getNoteRecommendations(config, note);
+    }
+
     /**
      * Tag recommendations.
      */

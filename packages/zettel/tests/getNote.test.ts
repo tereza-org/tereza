@@ -89,8 +89,10 @@ test('backlinks and references', async () => {
 });
 
 test('recommendations', async () => {
-  const note = await zettelkasten.getNote({ id: '/zettel/related-zettel-1' });
-  expect(note?.recommendations.length).toEqual(
+  const recommendations = await zettelkasten.getRecommendations({
+    note: { id: '/zettel/related-zettel-1' },
+  });
+  expect(recommendations.length).toEqual(
     zettelkasten.config.recommendationsLimit
   );
 });
