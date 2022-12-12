@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.13.0...@tereza-tech/zettel@0.13.1) (2022-12-12)
+
+### Bug Fixes
+
+- remove notes recommendaations ([#28](https://github.com/terezatech/tereza-tech/issues/28)) ([3010c5f](https://github.com/terezatech/tereza-tech/commit/3010c5f7bd8ecd9da9e0e5cb79e16e5187771546))
+
 # [0.13.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.12.2...@tereza-tech/zettel@0.13.0) (2022-12-09)
 
 ### Features
