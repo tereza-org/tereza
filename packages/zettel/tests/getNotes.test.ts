@@ -88,28 +88,33 @@ test('should not return notes that is draft but with draft metadata equals false
 
 test('note recommendations should not include the note itself', async () => {
   const notes = await zettelkasten.getNotes();
-  notes.forEach((note) => {
-    expect(Array.isArray(note.recommendations)).toBeTruthy();
+
+  for (const note of notes) {
+    const recommendations = await zettelkasten.getRecommendations({ note });
+    expect(Array.isArray(recommendations)).toBeTruthy();
     expect(
-      note.recommendations.map((p) => {
+      recommendations.map((p) => {
         return p.id;
       })
     ).not.toContain(note.id);
-  });
+  }
 });
 
 test('note recommendations should not return isReference equals undefined or null', async () => {
   const notes = await zettelkasten.getNotes();
-  notes.forEach((note) => {
-    note.recommendations.forEach((p) => {
-      expect(p.isReference).not.toBeUndefined();
-      expect(p.isReference).not.toBeNull();
-      expect(typeof p.isReference).toEqual('boolean');
+
+  for (const note of notes) {
+    const recommendations = await zettelkasten.getRecommendations({ note });
+
+    recommendations.forEach((recommendation) => {
+      expect(recommendation.isReference).not.toBeUndefined();
+      expect(recommendation.isReference).not.toBeNull();
+      expect(typeof recommendation.isReference).toEqual('boolean');
     });
-  });
+  }
 });
 
-test.each(['references', 'backlinks', 'recommendations'])(
+test.each(['references', 'backlinks'])(
   'no %s should contain content',
   async (param) => {
     const notes = await zettelkasten.getNotes();

@@ -35,8 +35,12 @@ export const getStaticProps = async ({
 
   const note = await zettel.getNote(noteId);
 
+  const recommendations = await zettel.getRecommendations({
+    note: { id: noteId },
+  });
+
   return {
-    props: { note },
+    props: { note, recommendations },
   };
 };
 
