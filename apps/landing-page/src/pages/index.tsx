@@ -1,4 +1,4 @@
-import { Flex } from 'theme-ui';
+import { Flex } from '@ttoss/ui';
 import { Hero, Navbar } from '@tereza-tech/components';
 import Head from 'next/head';
 import Link from 'next/link';

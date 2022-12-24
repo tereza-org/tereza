@@ -1,7 +1,7 @@
 import { DecoratorFn } from '@storybook/react';
 import { ThemeProvider } from '@tereza-tech/theme';
 import * as React from 'react';
-import { Flex } from 'theme-ui';
+import { Flex } from '@ttoss/ui';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

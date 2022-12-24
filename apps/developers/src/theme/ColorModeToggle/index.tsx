@@ -1,11 +1,11 @@
-import { useThemeUI } from 'theme-ui';
+import * as React from 'react';
+import { useTheme } from '@ttoss/ui';
 import ColorModeToggle from '@theme-original/ColorModeToggle';
-import React from 'react';
 
 const ColorModeToggleWrapper = (props: any) => {
   const { value: colorMode } = props;
 
-  const { setColorMode } = useThemeUI();
+  const { setColorMode } = useTheme();
 
   React.useEffect(() => {
     setColorMode?.(colorMode);

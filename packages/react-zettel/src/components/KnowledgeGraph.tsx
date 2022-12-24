@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Button, useThemeUI } from 'theme-ui';
+import { Box, Button, useTheme } from '@ttoss/ui';
 import ForceGraph2D, {
   ForceGraphMethods as ForceGraphMethods2D,
   ForceGraphProps as ForceGraphProps2D,
@@ -24,7 +24,7 @@ export const KnowledgeGraph = ({
   width,
   graphData,
 }: KnowledgeGraphProps) => {
-  const { theme } = useThemeUI();
+  const { theme } = useTheme();
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
