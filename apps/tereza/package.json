@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tereza-tech/theme": "^1.2.1",
     "@ttoss/react-auth": "^1.2.3",
     "@ttoss/react-i18n": "^1.18.2",
     "@ttoss/react-notifications": "^1.19.3",
