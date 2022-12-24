@@ -1,6 +1,6 @@
 {
-  "name": "@tereza-tech/zettel-cli",
-  "version": "0.4.4",
+  "name": "tereza",
+  "version": "0.4.3",
   "description": "",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "module": "dist/esm/index.js",
   "bin": {
-    "zettel": "./bin/zettel"
+    "tereza": "./bin/tereza"
   },
   "files": [
     "bin",
@@ -24,7 +24,7 @@
   "typings": "dist/index.d.ts",
   "dependencies": {
     "@tereza-tech/zettel": "^0.13.1",
-    "@ttoss/config": "^1.18.3",
+    "@ttoss/config": "^1.25.0",
     "yargs": "^17.6.2"
   },
   "devDependencies": {

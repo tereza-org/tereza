@@ -3,9 +3,9 @@ import * as yargs from 'yargs';
 export const cli = () => {
   return yargs
     .strict()
-    .scriptName('zettel')
+    .scriptName('tereza')
     .command({
-      command: 'normalize',
+      command: 'zettel',
       describe: false,
       handler: (argv) => {
         // eslint-disable-next-line no-console

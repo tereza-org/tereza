@@ -2,5 +2,6 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 yarn lint-staged
+yarn cdvc
 yarn run build-graph
 git add turbo-build-graph.png
