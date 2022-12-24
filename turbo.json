@@ -1,12 +1,16 @@
 {
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
+    "//#cdvc": {
+      "outputs": []
+    },
     "//#lint": {},
     "build": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["//#cdvc", "^build"],
+      "outputs": ["build/**", "dist/**", ".next/**", "storybook-static/**"]
     },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": ["//#cdvc", "build"],
       "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
     },
     "deploy": {

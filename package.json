@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "build-graph": "turbo run build --graph=turbo-build-graph.png",
+    "cdvc": "check-dependency-version-consistency .",
     "lint": "lint-staged --diff main --quiet",
     "ls": "lerna ls",
     "prepare": "husky install",
@@ -19,12 +20,13 @@
     "@lerna-lite/changed": "^1.13.0",
     "@lerna-lite/cli": "^1.13.0",
     "@lerna-lite/list": "^1.13.0",
-    "@ttoss/config": "^1.20.0",
-    "@ttoss/eslint-config": "^1.18.0",
-    "eslint": "^8.28.0",
+    "@ttoss/config": "^1.25.0",
+    "@ttoss/eslint-config": "^1.19.2",
+    "check-dependency-version-consistency": "^3.0.3",
+    "eslint": "^8.30.0",
     "husky": "^8.0.2",
-    "lint-staged": "^13.0.4",
-    "prettier": "^2.8.0",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
     "turbo": "latest"
   },
   "engines": {

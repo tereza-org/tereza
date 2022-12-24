@@ -19,7 +19,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@ttoss/config": "^1.20.0",
+    "@ttoss/config": "^1.25.0",
     "change-case": "^4.1.2",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
