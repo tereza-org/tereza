@@ -18,16 +18,14 @@
   },
   "typings": "dist/index.d.ts",
   "peerDependencies": {
-    "@emotion/react": "^11.10.5",
-    "react": "^18.2.0",
-    "theme-ui": "^0.15.4"
+    "@ttoss/ui": "^1.27.3",
+    "react": "^18.2.0"
   },
   "devDependencies": {
-    "@emotion/react": "^11.10.5",
     "@ttoss/config": "^1.25.0",
+    "@ttoss/ui": "^1.27.3",
     "@types/react": "^18.0.26",
     "react": "^18.2.0",
-    "theme-ui": "^0.15.4",
     "tsup": "^6.5.0"
   },
   "keywords": [],

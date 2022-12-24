@@ -1,4 +1,10 @@
-import { Theme } from 'theme-ui';
+import { Theme } from '@ttoss/ui';
+
+export const fonts = [
+  'https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap',
+  'https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+  'https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+];
 
 /**
  * Generated on https://color.adobe.com/create/image using the hero image.

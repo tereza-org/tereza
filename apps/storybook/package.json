@@ -16,8 +16,8 @@
   "dependencies": {
     "@tereza-tech/react-zettel": "^0.3.1",
     "@tereza-tech/theme": "^1.2.1",
-    "react": "^18.2.0",
-    "theme-ui": "^0.15.4"
+    "@ttoss/ui": "^1.27.3",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
