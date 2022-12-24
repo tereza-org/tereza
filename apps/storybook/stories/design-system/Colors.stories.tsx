@@ -1,12 +1,11 @@
-import { Box, Button, Flex, Text } from 'theme-ui';
-import { useThemeUI } from 'theme-ui';
+import { Box, Button, Flex, Text, useTheme } from '@ttoss/ui';
 
 export default {
   title: 'Design System/Colors',
 };
 
 export const Colors = () => {
-  const { theme, setColorMode } = useThemeUI();
+  const { theme, setColorMode } = useTheme();
 
   return (
     <Flex sx={{ flexDirection: 'column', gap: 4 }}>

@@ -9,17 +9,17 @@
     "start": "next start"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
     "@tereza-tech/react-zettel": "^0.3.1",
+    "@tereza-tech/theme": "^1.2.1",
     "@tereza-tech/zettel": "^0.13.2",
+    "@ttoss/ui": "^1.27.3",
     "@types/node": "18.11.10",
     "@types/react": "^18.0.26",
-    "@types/react-dom": "18.0.9",
+    "@types/react-dom": "^18.0.9",
     "next": "13.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-force-graph-3d": "^1.21.15",
-    "theme-ui": "^0.15.4",
     "typescript": "^4.9.3"
   }
 }

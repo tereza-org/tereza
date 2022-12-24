@@ -1,4 +1,4 @@
-import { Flex, Heading, Text } from 'theme-ui';
+import { Flex, Heading, Text } from '@ttoss/ui';
 
 export const Hero = ({
   headline,

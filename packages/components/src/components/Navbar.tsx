@@ -1,4 +1,4 @@
-import { Flex, Image, Text } from 'theme-ui';
+import { Flex, Image, Text } from '@ttoss/ui';
 
 export const Navbar = ({
   logo,

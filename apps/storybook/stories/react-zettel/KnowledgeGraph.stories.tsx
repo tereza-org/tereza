@@ -1,4 +1,4 @@
-import { Box } from 'theme-ui';
+import { Box } from '@ttoss/ui';
 import { KnowledgeGraph, KnowledgeGraphProps } from '@tereza-tech/react-zettel';
 import { Story } from '@storybook/react';
 import { fewData, manyData } from './graphData';
