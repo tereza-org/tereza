@@ -10,6 +10,7 @@
   "main": "index.js",
   "scripts": {
     "build": "build-storybook",
+    "deploy": "carlin deploy static-app",
     "dev": "start-storybook -p 6006",
     "storybook": "start-storybook -p 6006"
   },
