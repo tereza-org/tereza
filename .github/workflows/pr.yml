@@ -16,6 +16,7 @@ concurrency:
 
 jobs:
   pr:
+    if: github.event.action != 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS Credentials
