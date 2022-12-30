@@ -10,7 +10,7 @@ export const App = () => {
 
   return (
     <Flex>
-      <h1>oi</h1>
+      <h1>hello</h1>
       <p>{JSON.stringify(user, null, 2)}</p>
       <button
         onClick={() => {
