@@ -1,21 +1,14 @@
-name: pr
+name: closed-pr
 
 'on':
   pull_request:
     branch:
       - main
     types:
-      - opened
-      - synchronize
-      - reopened
       - closed
 
-concurrency:
-  group: pr-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
-
 jobs:
-  pr:
+  closed-pr:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS Credentials
@@ -27,13 +20,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 50
 
-      - name: Fetch and merge most recent main
-        run: |
-          git fetch origin main:main
-          git merge main --ff-only --no-edit
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -51,10 +38,11 @@ jobs:
           key: yarn-cache-folder-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             yarn-cache-folder-
+
       - name: Install dependencies
         run: yarn install --frozen-lockfile --prefer-offline
 
-      - name: Run pr command
-        run: sh -e ./.cicd/commands/pr.sh
+      - name: Run closed-pr command
+        run: sh -e ./.cicd/commands/closed-pr.sh
         env:
           CARLIN_BRANCH: ${{ github.event.pull_request.head.ref }}

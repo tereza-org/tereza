@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode={$CARLIN_ENVIRONMENT || Production}",
+    "deploy": "carlin deploy static-app",
     "dev": "vite",
     "preview": "vite preview"
   },

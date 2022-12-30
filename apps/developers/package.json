@@ -5,7 +5,7 @@
   "scripts": {
     "build": "docusaurus build",
     "clear": "docusaurus clear",
-    "deploy": "docusaurus deploy",
+    "deploy": "carlin deploy static-app",
     "dev": "docusaurus start",
     "docusaurus": "docusaurus",
     "serve": "docusaurus serve",
