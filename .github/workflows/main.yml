@@ -61,5 +61,6 @@ jobs:
         timeout-minutes: 20
         run: sh -e ./.cicd/commands/main.sh
         env:
-          ACM_ARN: ${{ secrets.ACM_ARN }}
+          ACM_TEREZA_APP: ${{ secrets.ACM_TEREZA_APP }}
+          ACM_TEREZA_TECH: ${{ secrets.ACM_TEREZA_TECH }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
