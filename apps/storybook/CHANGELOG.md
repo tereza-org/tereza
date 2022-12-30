@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.2.0...@tereza-tech-apps/storybook@1.3.0) (2022-12-30)
+
+### Features
+
+- deploy tereza app ([#32](https://github.com/terezatech/tereza-tech/issues/32)) ([a4a1dbe](https://github.com/terezatech/tereza-tech/commit/a4a1dbe36177158a6ee5a0f0adb26d693c5aff1c))
+
 # [1.2.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.1.2...@tereza-tech-apps/storybook@1.2.0) (2022-12-25)
 
 ### Features
