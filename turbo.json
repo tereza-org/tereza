@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalEnv": ["ACM_TEREZA_APP"],
+  "globalEnv": ["ACM_TEREZA_APP", "ACM_TEREZA_TECH"],
   "pipeline": {
     "//#cdvc": {
       "outputs": []
