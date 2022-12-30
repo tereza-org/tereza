@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.3.0...@tereza-tech-apps/storybook@1.3.1) (2022-12-30)
+
+### Bug Fixes
+
+- configure environment for main workflow ([54918fc](https://github.com/terezatech/tereza-tech/commit/54918fcd370b1f9bda29f6742419b38edbfcf7be))
+
 # [1.3.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.2.0...@tereza-tech-apps/storybook@1.3.0) (2022-12-30)
 
 ### Features
