@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.3.0...@tereza-tech-apps/developers@0.4.0) (2023-01-01)
+
+### Features
+
+- app routes first implementation ([#33](https://github.com/terezatech/tereza-tech/issues/33)) ([e2ad176](https://github.com/terezatech/tereza-tech/commit/e2ad1768d96cf9859a552d3b1c9f62300c4373b2))
+
 # [0.3.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.2.0...@tereza-tech-apps/developers@0.3.0) (2022-12-30)
 
 ### Features
