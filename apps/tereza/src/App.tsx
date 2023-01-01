@@ -1,24 +1,65 @@
 import { Auth, useAuth } from '@ttoss/react-auth';
-import { Flex } from '@ttoss/ui';
+import { ErrorPage } from './modules/Layout/ErrorPage';
+import {
+  Navigate,
+  RouterProvider,
+  createBrowserRouter,
+  useLocation,
+} from 'react-router-dom';
+import { Root } from './modules/Layout/Root';
+import { zettelRoutes } from './modules/Zettel/zettelRoutes';
 
-export const App = () => {
-  const { isAuthenticated, user, signOut } = useAuth();
+const RequireAuth = ({ children }: { children: React.ReactNode }) => {
+  const auth = useAuth();
 
-  if (!isAuthenticated) {
-    return <Auth />;
+  const location = useLocation();
+
+  if (!auth.isAuthenticated) {
+    return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 
-  return (
-    <Flex>
-      <h1>hello</h1>
-      <p>{JSON.stringify(user, null, 2)}</p>
-      <button
-        onClick={() => {
-          signOut();
-        }}
-      >
-        Logout
-      </button>
-    </Flex>
-  );
+  return <>{children}</>;
+};
+
+const RedirectIfAuthenticated = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const auth = useAuth();
+
+  const location = useLocation();
+
+  const to = location.state.from.pathname || '/';
+
+  if (auth.isAuthenticated) {
+    return <Navigate to={to} state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+};
+
+const router = createBrowserRouter([
+  {
+    path: 'auth',
+    element: (
+      <RedirectIfAuthenticated>
+        <Auth />
+      </RedirectIfAuthenticated>
+    ),
+  },
+  {
+    path: '/',
+    element: (
+      <RequireAuth>
+        <Root />
+      </RequireAuth>
+    ),
+    errorElement: <ErrorPage />,
+    children: [...zettelRoutes],
+  },
+]);
+
+export const App = () => {
+  return <RouterProvider router={router} />;
 };
