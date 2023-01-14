@@ -7,7 +7,7 @@ export const ZettelRoot = () => {
       <Flex>
         <Text>Zettel</Text>
       </Flex>
-      <Box as="main">
+      <Box>
         <Outlet />
       </Box>
     </Flex>

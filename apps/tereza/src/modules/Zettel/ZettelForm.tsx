@@ -1,12 +1,37 @@
 import { ActionFunctionArgs, redirect, useSubmit } from 'react-router-dom';
 import { Button } from '@ttoss/ui';
 import { Form, FormFieldInput, useForm, yup, yupResolver } from '@ttoss/forms';
+import { ZettelFormMutation } from './__generated__/ZettelFormMutation.graphql';
+import { commitMutation, graphql } from 'react-relay';
+import { relayEnvironment } from '../Relay/environment';
 
 export const zettelFormAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
+
   const data = JSON.parse(formData.get('serialized') as string);
-  // eslint-disable-next-line no-console
-  console.log(data);
+
+  await new Promise((resolve, reject) => {
+    commitMutation<ZettelFormMutation>(relayEnvironment, {
+      mutation: graphql`
+        mutation ZettelFormMutation($zettel: ZettelInput!) {
+          zettel {
+            create(zettel: $zettel) {
+              id
+              title
+            }
+          }
+        }
+      `,
+      onCompleted: resolve,
+      onError: reject,
+      variables: {
+        zettel: {
+          title: data.title,
+        },
+      },
+    });
+  });
+
   return redirect('/zettel');
 };
 
