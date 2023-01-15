@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/landing-page@0.4.0...@tereza-tech-apps/landing-page@0.5.0) (2023-01-15)
+
+### Features
+
+- integrate app with api ([#34](https://github.com/terezatech/tereza-tech/issues/34)) ([3ffd63d](https://github.com/terezatech/tereza-tech/commit/3ffd63d1c530e584702860085df58d9632c67381))
+
 # [0.4.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/landing-page@0.3.0...@tereza-tech-apps/landing-page@0.4.0) (2023-01-01)
 
 ### Features
