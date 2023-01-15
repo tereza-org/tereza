@@ -34,3 +34,5 @@ yarn-error.log*
 
 dist/
 .carlin
+__generated__/
+vite.config.ts.timestamp*

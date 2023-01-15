@@ -16,12 +16,16 @@
     "test": "echo jest"
   },
   "typings": "dist/index.d.ts",
+  "dependencies": {
+    "@lexical/react": "^0.7.6",
+    "lexical": "^0.7.6"
+  },
   "peerDependencies": {
     "@ttoss/ui": "^1.27.3",
     "react": ">=16.8.0"
   },
   "devDependencies": {
-    "@ttoss/ui": "^1.28.0",
+    "@ttoss/ui": "^1.29.0",
     "@types/react": "^18.0.26",
     "react": "^18.2.0",
     "tsup": "^6.5.0"
