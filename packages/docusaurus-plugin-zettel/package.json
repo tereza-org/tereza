@@ -1,6 +1,6 @@
 {
   "name": "@tereza-tech/docusaurus-plugin-zettel",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -18,7 +18,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.13.2"
+    "@tereza-tech/zettel": "^0.14.0"
   },
   "devDependencies": {
     "@docusaurus/types": "^2.2.0"
