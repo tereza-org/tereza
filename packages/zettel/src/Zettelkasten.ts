@@ -11,17 +11,20 @@ import {
   getRecommendations,
   getTags,
   normalizeNotes,
-  readAllMarkdownFilesFromDir,
-  readMarkdownFile,
   saveNote,
 } from './notes';
 import { getFlashcardFromConfig } from './flashcard';
 import { getGraphData } from './knowledgeGraph';
 
+/**
+ * https://stackoverflow.com/a/61108377/8786986
+ */
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+
 export class Zettelkasten {
   private _config: ZettelkastenConfig;
 
-  constructor(config: ZettelkastenConfig) {
+  constructor(config: Optional<ZettelkastenConfig, 'notesClient'>) {
     this._config = { ...DEFAULT_CONFIG, ...config };
 
     /**
@@ -46,10 +49,6 @@ export class Zettelkasten {
   get config() {
     return this._config;
   }
-
-  static readMarkdownFile = readMarkdownFile;
-
-  static readAllMarkdownFilesFromDir = readAllMarkdownFilesFromDir;
 
   public async getGroups() {
     return getGroups(this.config);

@@ -19,7 +19,8 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@ttoss/config": "^1.25.0",
+    "@aws-sdk/client-s3": "^3.257.0",
+    "@ttoss/config": "^1.27.0",
     "change-case": "^4.1.2",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
@@ -28,8 +29,8 @@
     "title-case": "^3.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.3",
-    "jest": "^29.3.1",
+    "@types/jest": "^29.2.6",
+    "jest": "^29.4.0",
     "ts-node": "^10.9.1",
     "tsup": "^6.5.0"
   },
