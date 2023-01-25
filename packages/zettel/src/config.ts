@@ -1,5 +1,9 @@
+import { NotesClient } from './NotesClient';
+import { fsNotesClient } from './fsNotesClient';
+
 export type ZettelkastenConfig = {
   notesDir: string;
+  notesClient: NotesClient;
   ignoreGroups?: string[];
   requiredMetadata?: string[];
   normalizeOnInit?: boolean;
@@ -11,6 +15,7 @@ export type ZettelkastenConfig = {
 };
 
 export const DEFAULT_CONFIG = {
+  notesClient: fsNotesClient,
   requiredMetadata: [],
   normalizeOnInit: false,
   recommendationsLimit: 5,

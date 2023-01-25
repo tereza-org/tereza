@@ -10,7 +10,7 @@ yarn add @tereza-tech/zettel
 
 ## Quickstart
 
-Create your Zettelkasten notes in a folder, for example `notes`, then instantiate your Zettelkasen engine:
+Create your Zettelkasten notes in a folder, for example `notes`, then instantiate your Zettelkasten engine:
 
 ```ts
 import { Zettelkasten } from '@tereza-tech/zettel';

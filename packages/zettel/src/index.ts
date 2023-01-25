@@ -8,3 +8,4 @@ export type {
   GraphLink,
   GraphGroup,
 } from './knowledgeGraph';
+export { fsNotesClient } from './fsNotesClient';

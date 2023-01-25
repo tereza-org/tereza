@@ -1,12 +1,9 @@
 import * as dateFns from 'date-fns';
-import * as fs from 'fs';
 import * as path from 'path';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import { normalizeTags } from './normalizeTags';
-import { sortObjectByKey } from './sortObjectByKey';
 import { titleCase } from 'title-case';
 import NodeCache from 'node-cache';
-import matter from 'gray-matter';
 import readingTime from 'reading-time';
 
 const cache = new NodeCache();
@@ -35,60 +32,45 @@ export type NoteMetadata = {
   [key: string]: any;
 };
 
-const metadataSortOrder = [
-  'title',
-  'id',
-  'group',
-  'slug',
-  'draft',
-  'date',
-  'description',
-  'tags',
-  'book',
-];
-
 export type SimpleNote = NoteMetadata & {
   content: string;
 };
 
-const getDirectories = async (dir: string) => {
-  const cacheKey = `getDirectories-${dir}`;
-
-  if (!cache.has(cacheKey)) {
-    const directories = (
-      await fs.promises.readdir(dir, { withFileTypes: true })
-    )
-      .filter((dirent) => {
-        return dirent.isDirectory();
-      })
-      .map((dirent) => {
-        return dirent.name;
-      });
-
-    cache.set(cacheKey, directories);
-  }
-
-  return cache.get<string[]>(cacheKey) || [];
+const getCacheKey = (config: ZettelkastenConfig, key: string) => {
+  return JSON.stringify({
+    notesDir: config.notesDir,
+    ignoreGroups: config.ignoreGroups,
+    dateFormat: config.dateFormat,
+    key,
+  });
 };
 
 /**
  * Groups are all folders in the notesDir directory.
  */
 export const getGroups = async (config: ZettelkastenConfig) => {
-  const groups = [
-    '/',
-    ...(await getDirectories(config.notesDir)).map((group) => {
-      return `/${group}`;
-    }),
-  ];
+  const cacheKey = getCacheKey(config, 'getGroups');
 
-  return groups.filter((group) => {
-    if (config.ignoreGroups) {
-      return !config.ignoreGroups.includes(group);
-    }
+  if (!cache.has(cacheKey)) {
+    const groups = [
+      '/',
+      ...(await config.notesClient.getDirectories(config.notesDir)).map(
+        (group) => {
+          return `/${group}`;
+        }
+      ),
+    ].filter((group) => {
+      if (config.ignoreGroups) {
+        return !config.ignoreGroups.includes(group);
+      }
 
-    return true;
-  });
+      return true;
+    });
+
+    cache.set(cacheKey, groups);
+  }
+
+  return cache.get(cacheKey) as string[];
 };
 
 type MarkdownFile = {
@@ -98,65 +80,14 @@ type MarkdownFile = {
   content: string;
 };
 
-export const readMarkdownFile = async (
-  filePath: string
-): Promise<MarkdownFile | undefined> => {
-  const cacheKey = `readMarkdownFile-${filePath}`;
-
-  if (!cache.has(cacheKey)) {
-    try {
-      const fileContents = await fs.promises.readFile(filePath, 'utf8');
-      const { data, content } = matter(fileContents);
-      cache.set(cacheKey, { data, content });
-    } catch (err) {
-      cache.set(cacheKey, undefined);
-    }
-  }
-
-  return cache.get<MarkdownFile>(cacheKey);
-};
-
-export const readAllMarkdownFilesFromDir = async (dir: string) => {
-  const cacheKey = `readAllMarkdownFilesFromDir-${dir}`;
-
-  if (!cache.has(cacheKey)) {
-    const files = await fs.promises.readdir(dir);
-
-    const promises = files
-      .filter((filename) => {
-        return filename.endsWith('.md');
-      })
-      .map(async (filename) => {
-        const filePath = path.join(dir, filename);
-
-        const markdown = await readMarkdownFile(filePath);
-
-        if (markdown?.data) {
-          markdown.data.slug = filename.replace('.md', '');
-        }
-
-        return markdown;
-      });
-
-    const markdowns = (await Promise.all(promises)).filter(
-      (markdown): markdown is MarkdownFile => {
-        return markdown !== undefined;
-      }
-    );
-
-    cache.set(cacheKey, markdowns);
-  }
-
-  return cache.get<MarkdownFile[]>(cacheKey) || [];
-};
-
 const readAllMarkdownFiles = async (config: ZettelkastenConfig) => {
   const groups = await getGroups(config);
 
   const promises = groups.map(async (group) => {
     const groupDir = path.join(config.notesDir, group);
 
-    const markdowns = await readAllMarkdownFilesFromDir(groupDir);
+    const markdowns =
+      await config.notesClient.readAllMarkdownFilesFromDirectory(groupDir);
 
     markdowns.forEach((markdown) => {
       return (markdown.data.group = group);
@@ -233,7 +164,7 @@ const getSimpleNoteFromMarkdownFile = (
 };
 
 const getAllSimpleNotesCacheKey = (config: ZettelkastenConfig) => {
-  return JSON.stringify(config);
+  return getCacheKey(config, 'getAllSimpleNotes');
 };
 
 /**
@@ -413,15 +344,14 @@ export const saveNote = async (
   /**
    * Save markdown file.
    */
-  const { content, ...metadata } = note;
+  const { content, ...data } = note;
 
   const filePath = path.join(config.notesDir, note.group, `${note.slug}.md`);
 
-  const sortedMetadata = sortObjectByKey(metadata, metadataSortOrder);
-
-  const md = matter.stringify(content || '', sortedMetadata);
-
-  await fs.promises.writeFile(filePath, md);
+  await config.notesClient.writeMarkdownFile(filePath, {
+    data,
+    content,
+  });
 
   /**
    * Cache has not been initialized.
@@ -446,7 +376,7 @@ export const saveNote = async (
     config,
     {
       content: note.content,
-      data: sortedMetadata,
+      data,
     }
   );
 
