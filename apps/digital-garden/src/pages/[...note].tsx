@@ -29,9 +29,17 @@ export const getStaticProps = async ({
   params: { note: string[] };
 }) => {
   /**
-   * id is the format /folder1/folder2/folder3/slug.
+   * id is the format folder1/folder2/folder3/slug or /slug.
    */
-  const noteId = params.note.join('/');
+  const noteId = (() => {
+    const { note } = params;
+
+    if (note.length === 1) {
+      return `/${note[0]}`;
+    }
+
+    return note.join('/');
+  })();
 
   const note = await zettel.getNote(noteId);
 
