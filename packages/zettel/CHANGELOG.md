@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.14.0...@tereza-tech/zettel@0.15.0) (2023-01-26)
+
+### Features
+
+- s3 notes client ([#37](https://github.com/terezatech/tereza-tech/issues/37)) ([ffe3f35](https://github.com/terezatech/tereza-tech/commit/ffe3f35aeb3f63b413fc2696473624c8922ef0d6))
+
 # [0.14.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.13.2...@tereza-tech/zettel@0.14.0) (2023-01-25)
 
 ### Features
