@@ -38,6 +38,7 @@ export const S3NotesClient = ({
     const { Contents = [] } = await s3.send(
       new ListObjectsCommand({
         Bucket: bucket,
+        Delimiter: '/',
         Prefix: dir,
       })
     );
@@ -85,16 +86,29 @@ export const S3NotesClient = ({
     const { Contents = [] } = await s3.send(
       new ListObjectsCommand({
         Bucket: bucket,
-        // Delimiter: '/',
         Prefix: dir,
       })
     );
 
     const directories = Contents.map((object) => {
-      return object.Key;
-    }).filter((key): key is string => {
-      return !!key && key.endsWith('/');
-    });
+      const key = object.Key?.replace(dir, '');
+      const parts = key?.split('/').filter((part) => {
+        return !part.endsWith('.md') && !!part;
+      });
+      return parts?.join('/');
+    })
+      .filter((key): key is string => {
+        return !!key;
+      })
+      .filter((key, index, self) => {
+        return self.indexOf(key) === index;
+      })
+      .map((key) => {
+        if (!key.endsWith('/')) {
+          return `${key}/`;
+        }
+        return key;
+      });
 
     return directories;
   };
@@ -119,23 +133,3 @@ export const S3NotesClient = ({
     writeMarkdownFile,
   };
 };
-
-// const z = new Zettelkasten({
-//   notesClient: S3NotesClient({
-//     bucket: 'terezacloudbucket-production-s3bucket-6te9v1ziehmj',
-//     region: 'us-east-1',
-//   }),
-//   notesDir: 'zettel/',
-// });
-
-// z.saveNote({
-//   content: 'Hello world',
-//   title: 'Hello world',
-//   group: 'b',
-// })
-//   .then(() => {
-//     return z.getNotes();
-//   })
-//   .then((notes) => {
-//     console.log(notes);
-//   });
