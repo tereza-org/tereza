@@ -1,13 +1,13 @@
 import * as path from 'path';
-import { Zettelkasten, ZettelkastenConfig } from '../src';
+import { Zettelkasten } from '../src';
 
 export { Zettelkasten };
 
 const notesDir = path.join(__dirname, '__mocks__', 'notes');
 
-export const config: ZettelkastenConfig = {
+export const config = {
   notesDir,
-  ignoreGroups: ['/ignored'],
+  ignoreGroups: ['ignored/'],
   requiredMetadata: ['title', 'date', 'description'],
   normalizeOnInit: false,
 };

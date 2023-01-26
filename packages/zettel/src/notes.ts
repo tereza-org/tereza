@@ -2,6 +2,7 @@ import * as dateFns from 'date-fns';
 import * as path from 'path';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import { normalizeTags } from './normalizeTags';
+import { paramCase } from 'change-case';
 import { titleCase } from 'title-case';
 import NodeCache from 'node-cache';
 import readingTime from 'reading-time';
@@ -22,7 +23,7 @@ export type NoteMetadata = {
   group: string;
   slug: string;
   id: string;
-  title?: string;
+  title: string;
   description?: string;
   draft?: boolean;
   date?: string;
@@ -56,7 +57,11 @@ export const getGroups = async (config: ZettelkastenConfig) => {
       '/',
       ...(await config.notesClient.getDirectories(config.notesDir)).map(
         (group) => {
-          return `/${group}`;
+          if (group.endsWith('/')) {
+            return group;
+          }
+
+          return `${group}/`;
         }
       ),
     ].filter((group) => {
@@ -107,6 +112,25 @@ const getSimpleNoteFromMarkdownFile = (
 ): SimpleNote => {
   const { data, content } = markdownFile;
 
+  /**
+   * If the title is missing, create it from "untitled" and timestamp.
+   */
+  if (!data.title) {
+    data.title = `Untitled ${new Date().toISOString()}`;
+  }
+
+  if (!data.slug) {
+    data.slug = paramCase(data.title);
+  }
+
+  if (!data.group) {
+    data.group = '/';
+  }
+
+  if (!data.group.endsWith('/')) {
+    data.group = `${data.group}/`;
+  }
+
   const note: SimpleNote = {
     ...data,
     group: data.group,
@@ -114,9 +138,7 @@ const getSimpleNoteFromMarkdownFile = (
     content,
   } as SimpleNote;
 
-  note.title = note.title || titleCase(note.slug);
-
-  note.id = note.id || path.join(note.group, note.slug);
+  note.id = note.id || [note.group, note.slug].join('');
 
   const date = (() => {
     if (note.date) {
@@ -244,7 +266,7 @@ const getNotesWithoutRecommendations = async (
        * Array of all note ids that `note` use as references.
        */
       const references = allNotes.reduce((acc, recommendation) => {
-        if (note.content.includes(`(${recommendation.href})`)) {
+        if (note.content.includes(recommendation.href)) {
           return [removeContent(recommendation), ...acc];
         }
 
@@ -257,7 +279,7 @@ const getNotesWithoutRecommendations = async (
        */
       const backlinks = allNotes
         .filter(({ content }) => {
-          return content.includes(`(${note.href})`);
+          return content.includes(note.href);
         })
         .map((note) => {
           return removeContent(note);
@@ -334,19 +356,35 @@ export const getNote = async (
   return note;
 };
 
+export type SaveNoteNote = Partial<SimpleNote> & {
+  title: string;
+};
+
 /**
  * Save note as markdown file.
  */
 export const saveNote = async (
   config: ZettelkastenConfig,
-  note: SimpleNote
+  note: SaveNoteNote
 ): Promise<void> => {
   /**
    * Save markdown file.
    */
-  const { content, ...data } = note;
+  const { content = '', ...data } = note;
 
-  const filePath = path.join(config.notesDir, note.group, `${note.slug}.md`);
+  if (!data.slug) {
+    data.slug = paramCase(data.title);
+  }
+
+  if (!data.group) {
+    data.group = '/';
+  }
+
+  if (!data.group.endsWith('/')) {
+    data.group = `${data.group}/`;
+  }
+
+  const filePath = path.join(config.notesDir, data.group, `${data.slug}.md`);
 
   await config.notesClient.writeMarkdownFile(filePath, {
     data,
@@ -367,17 +405,14 @@ export const saveNote = async (
 
   const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
     return (
-      markdownFile.data.group !== note.group ||
-      markdownFile.data.slug !== note.slug
+      markdownFile.data.group !== data.group ||
+      markdownFile.data.slug !== data.slug
     );
   });
 
   const { content: newContent, ...newData } = getSimpleNoteFromMarkdownFile(
     config,
-    {
-      content: note.content,
-      data,
-    }
+    { content, data }
   );
 
   newMarkdownFiles.push({

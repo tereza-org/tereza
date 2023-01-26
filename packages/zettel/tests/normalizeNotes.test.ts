@@ -31,7 +31,7 @@ test('if a slug is tag in another note, add it as tag', async () => {
     .spyOn(fs.promises, 'writeFile')
     .mockImplementation((_, note: any) => {
       const { data } = matter(note);
-      if (data.id === '/zettel/zettel-a') {
+      if (data.id === 'zettel/zettel-a') {
         zettelATags = data.tags;
       }
 

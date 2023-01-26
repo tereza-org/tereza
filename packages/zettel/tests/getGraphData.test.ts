@@ -12,7 +12,7 @@ test('not draft notes should be in the graph', async () => {
     return node.id;
   });
   expect(ids).toMatchObject(
-    expect.arrayContaining(['/blog/note-not-a-draft', '/blog/note-a'])
+    expect.arrayContaining(['blog/note-not-a-draft', 'blog/note-a'])
   );
 });
 
@@ -21,13 +21,13 @@ test('draft notes should not be in the graph', async () => {
   const ids = graphData.nodes.map((node) => {
     return node.id;
   });
-  expect(ids).not.toMatchObject(expect.arrayContaining(['/blog/note-draft']));
+  expect(ids).not.toMatchObject(expect.arrayContaining(['blog/note-draft']));
 });
 
 test('tags should be in the graph', async () => {
   const graphData = await zettelkasten.getGraphData();
   const tags =
-    (await zettelkasten.getNote('/blog/note-not-a-draft'))?.tags || [];
+    (await zettelkasten.getNote('blog/note-not-a-draft'))?.tags || [];
   const ids = graphData.nodes.map((node) => {
     return node.id;
   });
@@ -35,7 +35,7 @@ test('tags should be in the graph', async () => {
 });
 
 test('references should be the note source', async () => {
-  const id = '/blog/note-not-a-draft-and-reference-note-not-a-draft';
+  const id = 'blog/note-not-a-draft-and-reference-note-not-a-draft';
 
   const referencingNote = await zettelkasten.getNote(id);
 
@@ -52,7 +52,7 @@ test('references should be the note source', async () => {
 });
 
 test('backlinks should be the note target', async () => {
-  const id = '/blog/note-not-a-draft';
+  const id = 'blog/note-not-a-draft';
 
   const referencedNote = await zettelkasten.getNote(id);
 
