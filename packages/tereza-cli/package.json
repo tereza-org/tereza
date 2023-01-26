@@ -1,6 +1,6 @@
 {
   "name": "tereza",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -23,7 +23,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.13.2",
+    "@tereza-tech/zettel": "^0.14.0",
     "@ttoss/config": "^1.27.0",
     "yargs": "^17.6.2"
   },

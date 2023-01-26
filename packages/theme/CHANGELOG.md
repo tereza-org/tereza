@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.5.0...@tereza-tech/theme@1.6.0) (2023-01-25)
+
+### Features
+
+- add notes client engine ([#35](https://github.com/terezatech/tereza-tech/issues/35)) ([6ca6ba0](https://github.com/terezatech/tereza-tech/commit/6ca6ba0802d0a8e5bb4aac0e6ed17b48a43abcf7))
+
 # [1.5.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.4.0...@tereza-tech/theme@1.5.0) (2023-01-15)
 
 ### Features

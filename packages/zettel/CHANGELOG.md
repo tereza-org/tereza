@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.13.2...@tereza-tech/zettel@0.14.0) (2023-01-25)
+
+### Features
+
+- add notes client engine ([#35](https://github.com/terezatech/tereza-tech/issues/35)) ([6ca6ba0](https://github.com/terezatech/tereza-tech/commit/6ca6ba0802d0a8e5bb4aac0e6ed17b48a43abcf7))
+
 ## [0.13.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.13.1...@tereza-tech/zettel@0.13.2) (2022-12-24)
 
 **Note:** Version bump only for package @tereza-tech/zettel
