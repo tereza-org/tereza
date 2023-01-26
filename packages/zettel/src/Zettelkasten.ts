@@ -1,10 +1,9 @@
-import * as path from 'path';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import {
   GetNoteParams,
   GetNotesParams,
   GetRecommendationsParams,
-  SimpleNote,
+  SaveNoteNote,
   getGroups,
   getNote,
   getNotes,
@@ -27,20 +26,10 @@ export class Zettelkasten {
   constructor(config: Optional<ZettelkastenConfig, 'notesClient'>) {
     this._config = { ...DEFAULT_CONFIG, ...config };
 
-    /**
-     * Resolve the notesDir to an absolute path.
-     */
-    this._config.notesDir = path.resolve(process.cwd(), this._config.notesDir);
-
     this.init();
   }
 
   private init() {
-    /**
-     * Get all notes on init to populate the cache.
-     */
-    this.getNotes();
-
     if (this.config.normalizeOnInit) {
       this.normalizeNotes();
     }
@@ -66,7 +55,7 @@ export class Zettelkasten {
     return getTags(this.config, params);
   }
 
-  public async saveNote(note: SimpleNote) {
+  public async saveNote(note: SaveNoteNote) {
     return saveNote(this.config, note);
   }
 

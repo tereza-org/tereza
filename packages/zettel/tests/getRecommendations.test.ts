@@ -14,7 +14,7 @@ test('getRecommendations by tag and limit', async () => {
 });
 
 test('getRecommendations by group', async () => {
-  const notes = await zettelkasten.getRecommendations({ group: '/blog' });
+  const notes = await zettelkasten.getRecommendations({ group: 'blog/' });
   expect(notes.length > 1).toBeTruthy();
 });
 

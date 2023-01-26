@@ -6,35 +6,40 @@ test('get all notes including drafts', async () => {
     return note.id;
   });
   expect(ids).toMatchObject(
-    expect.arrayContaining([
-      '/blog/note-a',
-      '/books/book-a',
-      '/zettel/zettel-a',
-    ])
+    expect.arrayContaining(['blog/note-a', 'books/book-a', 'zettel/zettel-a'])
   );
 });
 
 test('get only blog notes', async () => {
   const allNotes = await zettelkasten.getNotes({
-    groups: '/blog',
+    groups: 'blog/',
   });
   const ids = allNotes.map((note) => {
     return note.id;
   });
-  expect(ids).toMatchObject(expect.arrayContaining(['/blog/note-a']));
+  expect(ids).toMatchObject(expect.arrayContaining(['blog/note-a']));
 });
 
 test('get blog and book notes', async () => {
   const allNotes = await zettelkasten.getNotes({
-    groups: ['/blog', '/books'],
+    groups: ['blog/', 'books/'],
     includeDrafts: true,
   });
   const ids = allNotes.map((note) => {
     return note.id;
   });
   expect(ids).toMatchObject(
-    expect.arrayContaining(['/blog/note-a', '/books/book-a'])
+    expect.arrayContaining(['blog/note-a', 'books/book-a'])
   );
+});
+
+test('return nothing if groups do not end with slash', async () => {
+  const notes = await zettelkasten.getNotes({
+    groups: ['blog', 'books'],
+    includeDrafts: true,
+  });
+
+  expect(notes).toEqual([]);
 });
 
 test('get notes not including drafts', async () => {
@@ -42,8 +47,8 @@ test('get notes not including drafts', async () => {
   const ids = allNotes.map((note) => {
     return note.id;
   });
-  expect(ids).toMatchObject(expect.arrayContaining(['/blog/note-not-a-draft']));
-  expect(ids).not.toMatchObject(expect.arrayContaining(['/blog/note-draft']));
+  expect(ids).toMatchObject(expect.arrayContaining(['blog/note-not-a-draft']));
+  expect(ids).not.toMatchObject(expect.arrayContaining(['blog/note-draft']));
 });
 
 test('get notes including drafts', async () => {
@@ -52,7 +57,7 @@ test('get notes including drafts', async () => {
     return note.id;
   });
   expect(ids).toMatchObject(
-    expect.arrayContaining(['/blog/note-draft', '/blog/note-not-a-draft'])
+    expect.arrayContaining(['blog/note-draft', 'blog/note-not-a-draft'])
   );
 });
 
@@ -81,7 +86,7 @@ test('not include not markdown files', async () => {
 test('should not return notes that is draft but with draft metadata equals false', async () => {
   const allNotes = await zettelkasten.getNotes({ includeDrafts: false });
   const notDraft = allNotes.filter((note) => {
-    return note.id.includes('/blog/forced-not-draft-note');
+    return note.id.includes('blog/forced-not-draft-note');
   });
   expect(notDraft.length).toEqual(0);
 });

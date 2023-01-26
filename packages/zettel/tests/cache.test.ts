@@ -13,17 +13,14 @@ test('should cache readings', async () => {
     fsNotesClient,
     'readAllMarkdownFilesFromDirectory'
   );
-  const readMarkdownFileSpy = jest.spyOn(fsNotesClient, 'readMarkdownFile');
 
   await zettelkastenMethods();
 
   getDirectoriesSpy.mockClear();
   readAllMarkdownFilesFromDirectorySpy.mockClear();
-  readMarkdownFileSpy.mockClear();
 
   await zettelkastenMethods();
 
   expect(getDirectoriesSpy).not.toHaveBeenCalled();
   expect(readAllMarkdownFilesFromDirectorySpy).not.toHaveBeenCalled();
-  expect(readMarkdownFileSpy).not.toHaveBeenCalled();
 });

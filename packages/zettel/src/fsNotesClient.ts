@@ -61,7 +61,6 @@ const writeMarkdownFile = async (filePath: string, markdown: MarkdownFile) => {
 };
 
 export const fsNotesClient: NotesClient = {
-  readMarkdownFile,
   readAllMarkdownFilesFromDirectory,
   getDirectories,
   writeMarkdownFile,

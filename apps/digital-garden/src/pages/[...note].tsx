@@ -6,7 +6,7 @@ export const getStaticPaths = async () => {
 
   const paths = notes.map((note) => {
     /**
-     * Group has the format /folder1/folder2/folder3. We need to remove the
+     * Group has the format folder1/folder2/folder3. We need to remove the
      * first slash and split the string into an array.
      */
     const splitGroup = note.group.split('/').filter((item) => {
@@ -29,9 +29,17 @@ export const getStaticProps = async ({
   params: { note: string[] };
 }) => {
   /**
-   * id is the format /folder1/folder2/folder3/slug.
-  //  */
-  const noteId = '/' + params.note.join('/');
+   * id is the format folder1/folder2/folder3/slug or /slug.
+   */
+  const noteId = (() => {
+    const { note } = params;
+
+    if (note.length === 1) {
+      return `/${note[0]}`;
+    }
+
+    return note.join('/');
+  })();
 
   const note = await zettel.getNote(noteId);
 

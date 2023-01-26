@@ -9,3 +9,4 @@ export type {
   GraphGroup,
 } from './knowledgeGraph';
 export { fsNotesClient } from './fsNotesClient';
+export { S3NotesClient } from './s3NotesClient';
