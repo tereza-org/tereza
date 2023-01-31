@@ -1,6 +1,6 @@
 import { S3NotesClient } from '../src';
 
-const s3NotesClient = S3NotesClient({
+const s3NotesClient = new S3NotesClient({
   bucket: 'zettelkasten',
   region: 'us-east-1',
 });

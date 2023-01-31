@@ -366,7 +366,7 @@ export type SaveNoteNote = Partial<SimpleNote> & {
 export const saveNote = async (
   config: ZettelkastenConfig,
   note: SaveNoteNote
-): Promise<void> => {
+): Promise<SimpleNote> => {
   /**
    * Save markdown file.
    */
@@ -391,36 +391,36 @@ export const saveNote = async (
     content,
   });
 
-  /**
-   * Cache has not been initialized.
-   */
-  if (!cache.has(getAllSimpleNotesCacheKey(config))) {
-    return;
-  }
-
-  /**
-   * Update cache.
-   */
-  const oldMarkdownFiles = await readAllMarkdownFiles(config);
-
-  const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
-    return (
-      markdownFile.data.group !== data.group ||
-      markdownFile.data.slug !== data.slug
-    );
-  });
-
   const { content: newContent, ...newData } = getSimpleNoteFromMarkdownFile(
     config,
     { content, data }
   );
 
-  newMarkdownFiles.push({
-    content: newContent,
-    data: newData,
-  });
+  /**
+   * Update cache.
+   */
+  if (cache.has(getAllSimpleNotesCacheKey(config))) {
+    const oldMarkdownFiles = await readAllMarkdownFiles(config);
 
-  cache.set(getAllSimpleNotesCacheKey(config), newMarkdownFiles);
+    const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
+      return (
+        markdownFile.data.group !== data.group ||
+        markdownFile.data.slug !== data.slug
+      );
+    });
+
+    newMarkdownFiles.push({
+      content: newContent,
+      data: newData,
+    });
+
+    cache.set(getAllSimpleNotesCacheKey(config), newMarkdownFiles);
+  }
+
+  return {
+    ...newData,
+    content: newContent,
+  };
 };
 
 export const getTags = async (
