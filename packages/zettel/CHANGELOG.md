@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.15.0...@tereza-tech/zettel@0.15.1) (2023-01-27)
+
+### Bug Fixes
+
+- s3 client notes ([#39](https://github.com/terezatech/tereza-tech/issues/39)) ([a653ea4](https://github.com/terezatech/tereza-tech/commit/a653ea414d9063ab927e1e4f37db99bd55ccf59c))
+
 # [0.15.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.14.0...@tereza-tech/zettel@0.15.0) (2023-01-26)
 
 ### Features
