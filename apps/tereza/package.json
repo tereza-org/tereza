@@ -9,7 +9,7 @@
     "dev": "vite",
     "preview": "vite preview",
     "relay": "relay-compiler",
-    "schema": "cp ../../../tereza-cloud/cloud/api/schema/schema.graphql ./schema/schema.graphql"
+    "schema": "cp ../../../tereza-cloud/cloud/graph-api/schema/schema.graphql ./schema/schema.graphql"
   },
   "dependencies": {
     "@tereza-tech/theme": "^1.6.0",
