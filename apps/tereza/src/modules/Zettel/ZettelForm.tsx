@@ -3,7 +3,7 @@ import { Button } from '@ttoss/ui';
 import { Form, FormFieldInput, useForm, yup, yupResolver } from '@ttoss/forms';
 import { ZettelFormMutation } from './__generated__/ZettelFormMutation.graphql';
 import { commitMutation, graphql } from 'react-relay';
-import { relayEnvironment } from '../Relay/environment';
+import { relayEnvironment } from '../ApiClient/relayEnvironment';
 
 export const zettelFormAction = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -15,14 +15,17 @@ export const zettelFormAction = async ({ request }: ActionFunctionArgs) => {
       mutation: graphql`
         mutation ZettelFormMutation($zettel: ZettelInput!) {
           zettel {
-            create(zettel: $zettel) {
+            createNote(zettel: $zettel) {
               id
               title
             }
           }
         }
       `,
-      onCompleted: resolve,
+      onCompleted: (zettel) => {
+        // console.log(JSON.parse(zettel.zettel!.create.id));
+        resolve(zettel);
+      },
       onError: reject,
       variables: {
         zettel: {

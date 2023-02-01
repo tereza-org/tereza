@@ -3,9 +3,13 @@ import { Outlet } from 'react-router-dom';
 
 export const ZettelRoot = () => {
   return (
-    <Flex>
+    <Flex
+      sx={{
+        flexDirection: 'column',
+      }}
+    >
       <Flex>
-        <Text>Zettel</Text>
+        <Text>Zettel Home</Text>
       </Flex>
       <Box>
         <Outlet />
