@@ -1,5 +1,5 @@
-import { fsNotesClient } from '../src';
-import { zettelkasten } from './zettelkasten';
+import { fsNotesClient } from '../../src';
+import { zettelkasten } from '../zettelkasten';
 
 const zettelkastenMethods = async () => {
   await zettelkasten.getNotes({ includeDrafts: true });

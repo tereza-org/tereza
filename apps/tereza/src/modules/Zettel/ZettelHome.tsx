@@ -1,7 +1,9 @@
+import { Flex, Text } from '@ttoss/ui';
+import { FolderNotesList } from '@tereza-tech/components';
 import { ZettelHomeQuery } from './__generated__/ZettelHomeQuery.graphql';
 import { graphql, loadQuery, usePreloadedQuery } from 'react-relay';
 import { relayEnvironment } from '../ApiClient/relayEnvironment';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const zettelHomeQuery = graphql`
   query ZettelHomeQuery {
@@ -9,6 +11,7 @@ const zettelHomeQuery = graphql`
       notes: getNotes {
         id
         title
+        group
       }
     }
   }
@@ -18,7 +21,6 @@ export const zettelHomeLoader = async () => {
   const queryRef = loadQuery<ZettelHomeQuery>(
     relayEnvironment,
     zettelHomeQuery,
-    {},
     {}
   );
 
@@ -26,17 +28,27 @@ export const zettelHomeLoader = async () => {
 };
 
 export const ZettelHome = () => {
+  const navigate = useNavigate();
+
   const { queryRef } = useLoaderData() as Awaited<
     ReturnType<typeof zettelHomeLoader>
   >;
 
   const { zettel } = usePreloadedQuery(zettelHomeQuery, queryRef);
 
+  const notes = (zettel?.notes || []).map(({ id, title, group }) => {
+    return { id, title, group };
+  });
+
   return (
-    <span>
-      {zettel?.notes.map((note) => {
-        return <div key={note?.id}>{note?.title}</div>;
-      })}
-    </span>
+    <Flex>
+      <Text>Notes</Text>
+      <FolderNotesList
+        notes={notes}
+        onNoteClick={(note) => {
+          navigate(`/zettel/editor?noteId=${note.id}`);
+        }}
+      />
+    </Flex>
   );
 };

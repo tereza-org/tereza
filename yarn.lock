@@ -6241,10 +6241,10 @@
   resolved "https://registry.yarnpkg.com/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz#98c23c950a3d9b6c8f0daed06da6c3af06981340"
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
-"@iconify/react@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-4.0.1.tgz#098c7bcddb74ead7684a2a70e1f36dfaf2fee30d"
-  integrity sha512-/DBJqh5K7W4f+d4kpvyJa/OTpVa3GfgrE9bZFAKP0vIWDr0cvVU9MVvbbkek216w9nLQhpJY/FeJtc6izB1PHw==
+"@iconify/react@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@iconify/react/-/react-4.1.0.tgz#5ea86acae6e209a2f5b1b52922ab85d0d22f9b45"
+  integrity sha512-Mf72i3TNNKpKCKxmo7kzqyrUdCgaoljpqtWmtqpqwyxoV4ukhnDsSRNLhf2yBnqGr3cVZsdj/i0FMpXIY0Qk0g==
   dependencies:
     "@iconify/types" "^2.0.0"
 
@@ -8885,13 +8885,13 @@
   resolved "https://registry.yarnpkg.com/@ttoss/relay-amplify/-/relay-amplify-0.2.1.tgz#83bc764b2afc1c73dabc28373ddf1f8badaf5e17"
   integrity sha512-gHH5V67hS+TGW4l/dK0duor2690K0DWUrf5XxKkOCXRWtpp3YNQR6/IbyF9ZvYMJ72FoKEjGQ+NSrVfR5tC6Qw==
 
-"@ttoss/ui@^1.29.0":
-  version "1.29.0"
-  resolved "https://registry.yarnpkg.com/@ttoss/ui/-/ui-1.29.0.tgz#bca4bb90e7480fcb5c2b8fd126fbb9836de64120"
-  integrity sha512-MNeQJr/aK1nr1ngQnGMhid9vhJeBz6h8KezBBHtC/gNoOMBhzzbTMrmJQtWowZxP2PlawuYjoe1LuxrXAwWaGA==
+"@ttoss/ui@^1.30.0":
+  version "1.30.0"
+  resolved "https://registry.yarnpkg.com/@ttoss/ui/-/ui-1.30.0.tgz#04bed39595c9f7eb869e6d5633f325a81161fff4"
+  integrity sha512-Sfa4/pED78vD3Bw/T4MJr9EhYQOmDaSrsiXGBoeVPOfe73sk+joFAMuXfpRmOyjQELdMEPwNOeeMXQNxrMEimw==
   dependencies:
     "@emotion/react" "^11.10.5"
-    "@iconify/react" "^4.0.1"
+    "@iconify/react" "^4.1.0"
     "@theme-ui/match-media" "^0.15.4"
     theme-ui "^0.15.4"
 

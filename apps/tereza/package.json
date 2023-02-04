@@ -12,13 +12,14 @@
     "schema": "cp ../../../tereza-cloud/cloud/graph-api/schema/schema.graphql ./schema/schema.graphql"
   },
   "dependencies": {
+    "@tereza-tech/react-zettel": "^0.5.0",
     "@tereza-tech/theme": "^1.6.0",
     "@ttoss/forms": "^0.13.0",
     "@ttoss/react-auth": "^1.2.8",
     "@ttoss/react-i18n": "^1.18.4",
     "@ttoss/react-notifications": "^1.19.5",
     "@ttoss/relay-amplify": "^0.2.1",
-    "@ttoss/ui": "^1.29.0",
+    "@ttoss/ui": "^1.30.0",
     "aws-amplify": "^5.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

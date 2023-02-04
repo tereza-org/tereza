@@ -3,8 +3,8 @@ import {
   getFlashcards,
   getPNumber,
   getRandomInt,
-} from '../src/flashcard';
-import { zettelkasten } from './zettelkasten';
+} from '../../src/flashcard';
+import { zettelkasten } from './../zettelkasten';
 
 beforeAll(() => {
   jest.setSystemTime(new Date(2021, 5, 5, 8));

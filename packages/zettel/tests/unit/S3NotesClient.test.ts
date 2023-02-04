@@ -1,4 +1,4 @@
-import { S3NotesClient } from '../src';
+import { S3NotesClient } from '../../src';
 
 const s3NotesClient = new S3NotesClient({
   bucket: 'zettelkasten',

@@ -1,4 +1,4 @@
-import { zettelkasten } from './zettelkasten';
+import { zettelkasten } from './../zettelkasten';
 
 test('getGraphData should return links and nodes', async () => {
   const graphData = await zettelkasten.getGraphData();

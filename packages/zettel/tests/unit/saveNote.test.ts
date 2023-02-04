@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { zettelkasten } from './zettelkasten';
+import { zettelkasten } from './../zettelkasten';
 
 const noteInput = {
   id: 'blog/note-to-be-saved',
@@ -83,4 +83,24 @@ test('should add slug from title', async () => {
     expect.any(String),
     expect.stringContaining('slug: note-without-slug')
   );
+});
+
+test('should update cache after saving', async () => {
+  const id = 'blog/note-a';
+  const newContent = 'This is the new content';
+
+  const note = await zettelkasten.getNote(id);
+
+  if (!note) {
+    throw new Error('Note not found');
+  }
+
+  await zettelkasten.saveNote({
+    ...note,
+    content: newContent,
+  });
+
+  const updatedNote = await zettelkasten.getNote(id);
+
+  expect(updatedNote).toEqual({ ...note, content: newContent });
 });

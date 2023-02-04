@@ -1,4 +1,4 @@
-import { sortObjectByKey } from '../src/sortObjectByKey';
+import { sortObjectByKey } from '../../src/sortObjectByKey';
 
 const unsortedObject = {
   d: 'd',

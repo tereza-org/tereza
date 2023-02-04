@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Flex } from '@ttoss/ui';
 
 export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
+  actions: { argTypesRegex: '^on.*' },
   controls: {
     matchers: {
       color: /(background|color)$/i,
