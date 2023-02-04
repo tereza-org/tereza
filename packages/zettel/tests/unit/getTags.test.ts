@@ -1,4 +1,4 @@
-import { zettelkasten } from './zettelkasten';
+import { zettelkasten } from './../zettelkasten';
 
 test('get tags from not drafts', async () => {
   const tags = await zettelkasten.getTags();

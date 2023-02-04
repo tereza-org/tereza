@@ -1,4 +1,4 @@
-import { Zettelkasten, zettelkasten } from './zettelkasten';
+import { Zettelkasten, zettelkasten } from './../zettelkasten';
 
 test('get all notes including drafts', async () => {
   const allNotes = await zettelkasten.getNotes({ includeDrafts: true });

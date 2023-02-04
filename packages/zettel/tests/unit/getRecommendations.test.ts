@@ -1,4 +1,4 @@
-import { zettelkasten } from './zettelkasten';
+import { zettelkasten } from './../zettelkasten';
 
 test('getRecommendations by tag', async () => {
   const notes = await zettelkasten.getRecommendations({ tag: 'related-tag' });

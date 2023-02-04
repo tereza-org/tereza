@@ -1,4 +1,5 @@
 import { Auth, useAuth } from '@ttoss/react-auth';
+import { ComingSoon } from './modules/Layout/ComingSoon';
 import { ErrorPage } from './modules/Layout/ErrorPage';
 import {
   Navigate,
@@ -8,6 +9,7 @@ import {
 } from 'react-router-dom';
 import { Root } from './modules/Layout/Root';
 import { zettelRoutes } from './modules/Zettel/zettelRoutes';
+import './amplify';
 
 const RequireAuth = ({ children }: { children: React.ReactNode }) => {
   const auth = useAuth();
@@ -56,7 +58,21 @@ const router = createBrowserRouter([
       </RequireAuth>
     ),
     errorElement: <ErrorPage />,
-    children: [...zettelRoutes],
+    children: [
+      ...zettelRoutes,
+      {
+        path: '/journal',
+        element: <ComingSoon />,
+      },
+      {
+        path: '/crm',
+        element: <ComingSoon />,
+      },
+      {
+        path: '/gym',
+        element: <ComingSoon />,
+      },
+    ],
   },
 ]);
 

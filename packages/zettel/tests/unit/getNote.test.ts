@@ -1,4 +1,4 @@
-import { Zettelkasten, zettelkasten } from './zettelkasten';
+import { Zettelkasten, zettelkasten } from './../zettelkasten';
 
 test('getNote by id object', async () => {
   const id = 'blog/note-a';

@@ -414,7 +414,11 @@ export const saveNote = async (
       data: newData,
     });
 
-    cache.set(getAllSimpleNotesCacheKey(config), newMarkdownFiles);
+    const newSimpleNotes = newMarkdownFiles.map((markdownFile) => {
+      return getSimpleNoteFromMarkdownFile(config, markdownFile);
+    });
+
+    cache.set(getAllSimpleNotesCacheKey(config), newSimpleNotes);
   }
 
   return {

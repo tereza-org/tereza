@@ -17,24 +17,25 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 scalar String
 
 type MutationZettel {
-  createNote(zettel: ZettelInput!): Zettel!
+  saveNote(note: ZettelNoteInput!): ZettelNote!
 }
 
 type QueryZettel {
-  getNote(id: ID!): Zettel!
-  getNotes: [Zettel!]!
+  getNote(id: ID!): ZettelNote!
+  getNotes: [ZettelNote!]!
 }
 
-type Zettel {
+type ZettelNote {
   id: ID!
   title: String!
-  group: String
+  group: String!
   description: String
   tags: [String!]!
   content: String
 }
 
-input ZettelInput {
+input ZettelNoteInput {
+  id: ID
   title: String!
   group: String
   description: String
