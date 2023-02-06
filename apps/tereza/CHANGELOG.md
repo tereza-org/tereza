@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.6.1...@tereza-tech-apps/tereza@0.7.0) (2023-02-06)
+
+### Features
+
+- delete note on zettel. mock on ui ([#43](https://github.com/terezatech/tereza-tech/issues/43)) ([6de8bc9](https://github.com/terezatech/tereza-tech/commit/6de8bc982619eb1ad1242e35288768fffc0866af))
+
 ## [0.6.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.6.0...@tereza-tech-apps/tereza@0.6.1) (2023-02-04)
 
 **Note:** Version bump only for package @tereza-tech-apps/tereza
