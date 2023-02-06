@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.7.0...@tereza-tech-apps/tereza@0.8.0) (2023-02-06)
+
+### Bug Fixes
+
+- add components to dependecy ([37e8399](https://github.com/terezatech/tereza-tech/commit/37e83997cadc5de23f3eff0ea81231e6fec37d89))
+
+### Features
+
+- delete note working ([#44](https://github.com/terezatech/tereza-tech/issues/44)) ([dd97f37](https://github.com/terezatech/tereza-tech/commit/dd97f37b7507cbb8508691feed8baeb30a5c362f))
+
 # [0.7.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.6.1...@tereza-tech-apps/tereza@0.7.0) (2023-02-06)
 
 ### Features
