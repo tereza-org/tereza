@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Button, Flex } from '@ttoss/ui';
 import { Form, FormFieldInput, useForm, yup, yupResolver } from '@ttoss/forms';
 import {
@@ -89,6 +90,10 @@ const ZettelNoteForm = ({
 
   const { isSubmitting } = formMethods.formState;
 
+  const [noteId, setNoteId] = React.useState<string | undefined>(
+    defaultValues?.id
+  );
+
   const [saveZettelNote] = useMutation<ZettelNoteEditorSaveZettelNoteMutation>(
     zettelNoteEditorSaveZettelNoteMutation
   );
@@ -108,6 +113,8 @@ const ZettelNoteForm = ({
       });
     });
 
+    setNoteId(newId);
+
     /**
      * This happens when note's title has changed and a new note is created.
      */
@@ -126,11 +133,16 @@ const ZettelNoteForm = ({
           {isSubmitting ? 'Saving' : 'Save'}
         </Button>
         <Button
+          type="button"
           onClick={() => {
-            navigate(-1);
+            if (noteId) {
+              navigate(`/zettel/note/${noteId}`);
+            } else {
+              navigate(`/zettel`);
+            }
           }}
         >
-          Back
+          Cancel
         </Button>
       </Flex>
     </Form>
