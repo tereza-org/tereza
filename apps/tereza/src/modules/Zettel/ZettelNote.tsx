@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Box, Button, Flex, Text } from '@ttoss/ui';
+import { Box, Button, Flex } from '@ttoss/ui';
+import { DeleteZettelNote } from './DeleteZettelNote';
 import {
   LoaderFunctionArgs,
   useLoaderData,
@@ -16,6 +16,7 @@ const zettelNoteLoaderQuery = graphql`
       note: getNote(id: $noteId) {
         id
         ...ZettelNoteCard_zettelNote
+        ...DeleteZettelNote_zettelNote
       }
     }
   }
@@ -51,52 +52,31 @@ export const ZettelNote = () => {
 
   const zettelNote = zettel?.note;
 
-  const [showDeleteConfirmation, setShowDeleteConfirmation] =
-    React.useState(false);
+  if (!zettelNote) {
+    return null;
+  }
 
   return (
     <Box>
-      {!showDeleteConfirmation && (
-        <Flex>
-          <Button
-            onClick={() => {
-              navigate(`/zettel/editor/${zettelNote?.id}`);
-            }}
-          >
-            Edit
-          </Button>
-          <Button
-            sx={{
-              backgroundColor: 'danger',
-            }}
-            onClick={() => {
-              setShowDeleteConfirmation(true);
-            }}
-          >
-            Delete
-          </Button>
-        </Flex>
-      )}
-      {showDeleteConfirmation && (
-        <Flex>
-          <Text>Are you sure you want to delete this note?</Text>
-          <Button
-            sx={{
-              backgroundColor: 'danger',
-            }}
-          >
-            Yes
-          </Button>
-          <Button
-            onClick={() => {
-              setShowDeleteConfirmation(false);
-            }}
-          >
-            No
-          </Button>
-        </Flex>
-      )}
-      {zettelNote && <ZettelNoteCard zettelNoteRef={zettelNote} />}
+      <Flex>
+        <Button
+          onClick={() => {
+            navigate(`/zettel/editor/${zettelNote?.id}`);
+          }}
+        >
+          Edit
+        </Button>
+      </Flex>
+
+      <Flex
+        sx={{
+          marginY: 4,
+        }}
+      >
+        <ZettelNoteCard zettelNoteRef={zettelNote} />
+      </Flex>
+
+      <DeleteZettelNote zettelNoteRef={zettelNote} />
     </Box>
   );
 };

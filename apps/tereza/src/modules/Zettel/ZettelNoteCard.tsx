@@ -21,7 +21,13 @@ export const ZettelNoteCard = ({
   );
 
   return (
-    <Box>
+    <Box
+      sx={{
+        width: '100%',
+        border: '1px solid',
+        padding: 3,
+      }}
+    >
       <Heading as="h3">{title}</Heading>
       <Text as="p">{description}</Text>
       <Text as="p">{content}</Text>
