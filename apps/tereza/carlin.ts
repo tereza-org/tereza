@@ -5,6 +5,7 @@ export default {
       aliases: ['tereza.app'],
       cloudfront: true,
       hostedZoneName: 'tereza.app',
+      spa: true,
     },
   },
 };

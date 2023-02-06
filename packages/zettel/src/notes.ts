@@ -427,6 +427,39 @@ export const saveNote = async (
   };
 };
 
+export const deleteNote = async (
+  config: ZettelkastenConfig,
+  note?: SimpleNote
+) => {
+  if (!note || !note.group || !note.slug) {
+    return;
+  }
+
+  const filePath = path.join(config.notesDir, note.group, `${note.slug}.md`);
+
+  await config.notesClient.deleteMarkdownFile(filePath);
+
+  /**
+   * Update cache.
+   */
+  if (cache.has(getAllSimpleNotesCacheKey(config))) {
+    const oldMarkdownFiles = await readAllMarkdownFiles(config);
+
+    const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
+      return (
+        markdownFile.data.group !== note.group ||
+        markdownFile.data.slug !== note.slug
+      );
+    });
+
+    const newSimpleNotes = newMarkdownFiles.map((markdownFile) => {
+      return getSimpleNoteFromMarkdownFile(config, markdownFile);
+    });
+
+    cache.set(getAllSimpleNotesCacheKey(config), newSimpleNotes);
+  }
+};
+
 export const getTags = async (
   config: ZettelkastenConfig,
   params?: GetNotesParams

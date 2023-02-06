@@ -7,6 +7,7 @@ jest.mock('fs', () => {
     promises: {
       ...jest.requireActual('fs').promises,
       writeFile: jest.fn(),
+      rm: jest.fn(),
     },
   };
 });

@@ -4,6 +4,7 @@ import {
   GetNotesParams,
   GetRecommendationsParams,
   SaveNoteNote,
+  deleteNote,
   getGroups,
   getNote,
   getNotes,
@@ -57,6 +58,11 @@ export class Zettelkasten {
 
   public async saveNote(note: SaveNoteNote) {
     return saveNote(this.config, note);
+  }
+
+  public async deleteNote(params: GetNoteParams) {
+    const note = await this.getNote(params);
+    await deleteNote(this.config, note);
   }
 
   public async normalizeNotes() {

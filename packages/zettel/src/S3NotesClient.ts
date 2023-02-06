@@ -1,4 +1,5 @@
 import {
+  DeleteObjectCommand,
   GetObjectCommand,
   ListObjectsCommand,
   PutObjectCommand,
@@ -119,6 +120,15 @@ export class S3NotesClient implements NotesClient {
         Bucket: this.bucket,
         Key: filePath,
         Body: fileContents,
+      })
+    );
+  };
+
+  deleteMarkdownFile = async (filePath: string) => {
+    await this.s3.send(
+      new DeleteObjectCommand({
+        Bucket: this.bucket,
+        Key: filePath,
       })
     );
   };

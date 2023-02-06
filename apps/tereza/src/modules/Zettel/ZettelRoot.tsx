@@ -10,7 +10,7 @@ export const ZettelRoot = () => {
     >
       <Flex sx={{ gap: 4, justifyContent: 'center' }}>
         <Link to="/zettel">Home</Link>
-        <Link to="/zettel/editor">Editor</Link>
+        <Link to="/zettel/editor">New</Link>
       </Flex>
       <Box>
         <Outlet />

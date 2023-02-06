@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/anchor-is-valid */
+import { Text } from '@ttoss/ui';
+
 type RequiredParams = {
   group: string;
   title: string;
@@ -9,6 +8,7 @@ type RequiredParams = {
 export type FolderNotesListProps<Note extends RequiredParams = any> = {
   onGroupClick?: (group: string) => void;
   onNoteClick?: (note: Note) => void;
+  onNoteDelete?: (note: Note) => void;
   notes: Note[];
 };
 
@@ -21,13 +21,20 @@ export const FolderNotesList = <Note extends RequiredParams>({
       {notes.map((note) => {
         return (
           <li key={note.group + note.title}>
-            <a
+            <Text
+              sx={{
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                ':hover': {
+                  color: 'primary',
+                },
+              }}
               onClick={() => {
                 onNoteClick?.(note);
               }}
             >
               {note.title}
-            </a>
+            </Text>
           </li>
         );
       })}

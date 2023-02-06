@@ -60,8 +60,13 @@ const writeMarkdownFile = async (filePath: string, markdown: MarkdownFile) => {
   await fs.promises.writeFile(filePath, fileContents);
 };
 
+const deleteMarkdownFile = async (filePath: string) => {
+  await fs.promises.rm(filePath);
+};
+
 export const fsNotesClient: NotesClient = {
   readAllMarkdownFilesFromDirectory,
   getDirectories,
   writeMarkdownFile,
+  deleteMarkdownFile,
 };

@@ -21,7 +21,10 @@ export const zettelHomeLoader = async () => {
   const queryRef = loadQuery<ZettelHomeQuery>(
     relayEnvironment,
     zettelHomeQuery,
-    {}
+    {},
+    {
+      fetchPolicy: 'store-and-network',
+    }
   );
 
   return { queryRef };
@@ -46,7 +49,7 @@ export const ZettelHome = () => {
       <FolderNotesList
         notes={notes}
         onNoteClick={(note) => {
-          navigate(`/zettel/editor?noteId=${note.id}`);
+          navigate(`/zettel/note/${note.id}`);
         }}
       />
     </Flex>
