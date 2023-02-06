@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.6.1...@tereza-tech-apps/storybook@1.6.2) (2023-02-06)
+
+**Note:** Version bump only for package @tereza-tech-apps/storybook
+
 ## [1.6.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.6.0...@tereza-tech-apps/storybook@1.6.1) (2023-02-04)
 
 **Note:** Version bump only for package @tereza-tech-apps/storybook

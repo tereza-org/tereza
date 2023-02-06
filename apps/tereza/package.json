@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/tereza",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "type": "module",
   "scripts": {
     "build": "yarn relay && tsc && vite build --mode={$CARLIN_ENVIRONMENT || Production}",
@@ -12,7 +12,7 @@
     "schema": "cp ../../../tereza-cloud/cloud/graph-api/schema/schema.graphql ./schema/schema.graphql"
   },
   "dependencies": {
-    "@tereza-tech/react-zettel": "^0.5.1",
+    "@tereza-tech/react-zettel": "^0.5.2",
     "@tereza-tech/theme": "^1.6.1",
     "@ttoss/forms": "^0.13.0",
     "@ttoss/react-auth": "^1.2.8",
