@@ -8,8 +8,6 @@ export type MarkdownFile = {
 export type NotesClient = {
   /**
    * It should return `slug` for each note.
-   * @param dir
-   * @returns
    */
   readAllMarkdownFilesFromDirectory: (dir: string) => Promise<MarkdownFile[]>;
   getDirectories: (dir: string) => Promise<string[]>;
@@ -17,4 +15,5 @@ export type NotesClient = {
     filePath: string,
     markdown: MarkdownFile
   ) => Promise<void>;
+  deleteMarkdownFile: (filePath: string) => Promise<void>;
 };
