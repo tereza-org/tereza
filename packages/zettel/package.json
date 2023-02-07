@@ -19,18 +19,17 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.257.0",
-    "@ttoss/config": "^1.27.0",
+    "@aws-sdk/client-s3": "^3.266.0",
+    "@ttoss/config": "^1.28.0",
     "change-case": "^4.1.2",
     "date-fns": "^2.29.3",
     "gray-matter": "^4.0.3",
-    "node-cache": "^5.1.2",
     "reading-time": "^1.5.0",
     "title-case": "^3.0.3"
   },
   "devDependencies": {
-    "@types/jest": "^29.2.6",
-    "jest": "^29.4.0",
+    "@types/jest": "^29.4.0",
+    "jest": "^29.4.1",
     "ts-node": "^10.9.1",
     "tsup": "^6.5.0"
   },

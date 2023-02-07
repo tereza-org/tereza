@@ -1,13 +1,10 @@
 import * as dateFns from 'date-fns';
 import * as path from 'path';
+import { Cache } from './Cache';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import { normalizeTags } from './normalizeTags';
 import { paramCase } from 'change-case';
-import { titleCase } from 'title-case';
-import NodeCache from 'node-cache';
 import readingTime from 'reading-time';
-
-const cache = new NodeCache();
 
 type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
 
@@ -46,36 +43,44 @@ const getCacheKey = (config: ZettelkastenConfig, key: string) => {
   });
 };
 
+const getCacheFromConfig = (config: ZettelkastenConfig) => {
+  return !(typeof config.cache === 'boolean') ? config.cache : undefined;
+};
+
 /**
  * Groups are all folders in the notesDir directory.
  */
 export const getGroups = async (config: ZettelkastenConfig) => {
   const cacheKey = getCacheKey(config, 'getGroups');
 
-  if (!cache.has(cacheKey)) {
-    const groups = [
-      '/',
-      ...(await config.notesClient.getDirectories(config.notesDir)).map(
-        (group) => {
-          if (group.endsWith('/')) {
-            return group;
-          }
+  const cache = getCacheFromConfig(config);
 
-          return `${group}/`;
-        }
-      ),
-    ].filter((group) => {
-      if (config.ignoreGroups) {
-        return !config.ignoreGroups.includes(group);
-      }
-
-      return true;
-    });
-
-    cache.set(cacheKey, groups);
+  if (await cache?.has(cacheKey)) {
+    return (await cache?.get(cacheKey)) as string[];
   }
 
-  return cache.get(cacheKey) as string[];
+  const groups = [
+    '/',
+    ...(await config.notesClient.getDirectories(config.notesDir)).map(
+      (group) => {
+        if (group.endsWith('/')) {
+          return group;
+        }
+
+        return `${group}/`;
+      }
+    ),
+  ].filter((group) => {
+    if (config.ignoreGroups) {
+      return !config.ignoreGroups.includes(group);
+    }
+
+    return true;
+  });
+
+  await cache?.set(cacheKey, groups);
+
+  return groups;
 };
 
 type MarkdownFile = {
@@ -195,17 +200,21 @@ const getAllSimpleNotesCacheKey = (config: ZettelkastenConfig) => {
 const getAllSimpleNotes = async (config: ZettelkastenConfig) => {
   const cacheKey = getAllSimpleNotesCacheKey(config);
 
-  if (!cache.has(cacheKey)) {
-    const markdowns = await readAllMarkdownFiles(config);
+  const cache = getCacheFromConfig(config);
 
-    const notes = markdowns.map((markdown) => {
-      return getSimpleNoteFromMarkdownFile(config, markdown);
-    });
-
-    cache.set(cacheKey, notes);
+  if (await cache?.has(cacheKey)) {
+    return (await cache?.get(cacheKey)) as SimpleNote[];
   }
 
-  return cache.get<SimpleNote[]>(cacheKey) || [];
+  const markdowns = await readAllMarkdownFiles(config);
+
+  const notes = markdowns.map((markdown) => {
+    return getSimpleNoteFromMarkdownFile(config, markdown);
+  });
+
+  await cache?.set(cacheKey, notes);
+
+  return notes;
 };
 
 export type GetNotesParams = {
@@ -396,10 +405,12 @@ export const saveNote = async (
     { content, data }
   );
 
+  const cache = getCacheFromConfig(config);
+
   /**
    * Update cache.
    */
-  if (cache.has(getAllSimpleNotesCacheKey(config))) {
+  if (await cache?.has(getAllSimpleNotesCacheKey(config))) {
     const oldMarkdownFiles = await readAllMarkdownFiles(config);
 
     const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
@@ -418,7 +429,7 @@ export const saveNote = async (
       return getSimpleNoteFromMarkdownFile(config, markdownFile);
     });
 
-    cache.set(getAllSimpleNotesCacheKey(config), newSimpleNotes);
+    await cache?.set(getAllSimpleNotesCacheKey(config), newSimpleNotes);
   }
 
   return {
@@ -439,10 +450,12 @@ export const deleteNote = async (
 
   await config.notesClient.deleteMarkdownFile(filePath);
 
+  const cache = getCacheFromConfig(config);
+
   /**
    * Update cache.
    */
-  if (cache.has(getAllSimpleNotesCacheKey(config))) {
+  if (await cache?.has(getAllSimpleNotesCacheKey(config))) {
     const oldMarkdownFiles = await readAllMarkdownFiles(config);
 
     const newMarkdownFiles = oldMarkdownFiles.filter((markdownFile) => {
@@ -456,7 +469,7 @@ export const deleteNote = async (
       return getSimpleNoteFromMarkdownFile(config, markdownFile);
     });
 
-    cache.set(getAllSimpleNotesCacheKey(config), newSimpleNotes);
+    await cache?.set(getAllSimpleNotesCacheKey(config), newSimpleNotes);
   }
 };
 
