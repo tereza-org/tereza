@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/storybook",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "license": "MIT",
   "author": "Tereza Tech",
   "contributors": [
@@ -15,7 +15,7 @@
     "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@tereza-tech/react-zettel": "^0.6.0",
+    "@tereza-tech/react-zettel": "^0.6.1",
     "@tereza-tech/theme": "^1.7.0",
     "@ttoss/ui": "^1.30.0",
     "react": "^18.2.0"

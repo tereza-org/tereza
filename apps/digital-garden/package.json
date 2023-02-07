@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/digital-garden",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,9 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@tereza-tech/react-zettel": "^0.6.0",
+    "@tereza-tech/react-zettel": "^0.6.1",
     "@tereza-tech/theme": "^1.7.0",
-    "@tereza-tech/zettel": "^0.18.0",
+    "@tereza-tech/zettel": "^0.19.0",
     "@ttoss/ui": "^1.30.0",
     "@types/node": "18.11.10",
     "@types/react": "^18.0.27",
