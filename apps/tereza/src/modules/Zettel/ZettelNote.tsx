@@ -13,7 +13,7 @@ import { relayEnvironment } from '../ApiClient/relayEnvironment';
 const zettelNoteLoaderQuery = graphql`
   query ZettelNoteLoaderQuery($noteId: ID!) {
     zettel {
-      note: getNote(id: $noteId) {
+      note(id: $noteId) {
         id
         ...ZettelNoteCard_zettelNote
         ...DeleteZettelNote_zettelNote
