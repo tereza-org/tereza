@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.18.0...@tereza-tech/zettel@0.19.0) (2023-02-07)
+
+### Features
+
+- finish zettel note form ([#46](https://github.com/terezatech/tereza-tech/issues/46)) ([2e08b76](https://github.com/terezatech/tereza-tech/commit/2e08b76b96d9e7640124949e931a6123200d307e))
+
 # [0.18.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.17.0...@tereza-tech/zettel@0.18.0) (2023-02-07)
 
 ### Features
