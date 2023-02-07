@@ -21,6 +21,7 @@ import {
   useMutation,
   usePreloadedQuery,
 } from 'react-relay';
+import { ZettelInsights } from './ZettelInsights';
 import { ZettelNoteEditorLoaderQuery } from './__generated__/ZettelNoteEditorLoaderQuery.graphql';
 import { ZettelNoteEditorSaveZettelNoteMutation } from './__generated__/ZettelNoteEditorSaveZettelNoteMutation.graphql';
 import { ZettelNoteEditor_zettelNote$key } from './__generated__/ZettelNoteEditor_zettelNote.graphql';
@@ -40,7 +41,7 @@ const zettelNoteFragment = graphql`
 const zettelNoteEditorLoaderQuery = graphql`
   query ZettelNoteEditorLoaderQuery($noteId: ID!) {
     zettel {
-      note: getNote(id: $noteId) {
+      note(id: $noteId) {
         ...ZettelNoteEditor_zettelNote
       }
     }
@@ -97,12 +98,15 @@ const ZettelNoteForm = ({
   const formMethods = useForm<ZettelNoteFormValues>({
     resolver: yupResolver(schema),
     defaultValues: {
-      ...defaultValues,
       group: 'zettel/',
+      ...defaultValues,
     },
   });
 
-  const { isSubmitting } = formMethods.formState;
+  const {
+    formState: { isSubmitting },
+    watch,
+  } = formMethods;
 
   const [noteId, setNoteId] = React.useState<string | undefined>(
     defaultValues?.id
@@ -137,6 +141,8 @@ const ZettelNoteForm = ({
     }
   };
 
+  const [title, content] = watch(['title', 'content']);
+
   return (
     <Form {...formMethods} onSubmit={handleSubmit}>
       <FormFieldInput name="title" label="Title" />
@@ -161,6 +167,7 @@ const ZettelNoteForm = ({
           Cancel
         </Button>
       </Flex>
+      <ZettelInsights title={title} content={content} />
     </Form>
   );
 };
@@ -173,9 +180,9 @@ const ZettelNoteFragmentHandler = ({
   const note = useFragment(zettelNoteFragment, noteRef);
 
   const defaultValues = {
-    ...note,
     id: note.id,
     title: note.title,
+    group: note.group,
     tags: note.tags?.join(', '),
     description: note.description ?? '',
     content: note.content ?? '',

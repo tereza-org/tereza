@@ -38,8 +38,13 @@ type MutationZettel {
 }
 
 type QueryZettel {
-  getNote(id: ID!): ZettelNote!
-  getNotes: [ZettelNote!]!
+  note(id: ID!): ZettelNote!
+  notes: [ZettelNote!]!
+  insights(note: ZettelNoteInput!): [ZettelInsight!]!
+}
+
+type ZettelInsight {
+  text: String
 }
 
 type ZettelNote implements Node {

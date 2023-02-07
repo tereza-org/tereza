@@ -8,7 +8,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 const zettelHomeQuery = graphql`
   query ZettelHomeQuery {
     zettel {
-      notes: getNotes {
+      notes {
         id
         title
         group
