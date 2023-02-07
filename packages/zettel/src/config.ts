@@ -1,3 +1,4 @@
+import { Cache } from './Cache';
 import { NotesClient } from './NotesClient';
 import { fsNotesClient } from './fsNotesClient';
 
@@ -12,6 +13,7 @@ export type ZettelkastenConfig = {
    * https://date-fns.org/v2.29.3/docs/format
    */
   dateFormat?: string;
+  cache?: boolean | Cache;
 };
 
 export const DEFAULT_CONFIG = {
@@ -20,4 +22,5 @@ export const DEFAULT_CONFIG = {
   normalizeOnInit: false,
   recommendationsLimit: 5,
   dateFormat: 'PPP',
+  cache: true,
 };

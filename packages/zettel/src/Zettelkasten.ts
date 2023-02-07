@@ -13,6 +13,7 @@ import {
   normalizeNotes,
   saveNote,
 } from './notes';
+import { NodeCache } from './NodeCache';
 import { getFlashcardFromConfig } from './flashcard';
 import { getGraphData } from './knowledgeGraph';
 
@@ -27,10 +28,10 @@ export class Zettelkasten {
   constructor(config: Optional<ZettelkastenConfig, 'notesClient'>) {
     this._config = { ...DEFAULT_CONFIG, ...config };
 
-    this.init();
-  }
+    if (this.config.cache === true) {
+      this._config.cache = new NodeCache();
+    }
 
-  private init() {
     if (this.config.normalizeOnInit) {
       this.normalizeNotes();
     }
