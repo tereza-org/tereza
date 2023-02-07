@@ -1,6 +1,13 @@
 import * as React from 'react';
 import { Button, Flex } from '@ttoss/ui';
-import { Form, FormFieldInput, useForm, yup, yupResolver } from '@ttoss/forms';
+import {
+  Form,
+  FormFieldInput,
+  FormFieldTextarea,
+  useForm,
+  yup,
+  yupResolver,
+} from '@ttoss/forms';
 import {
   LoaderFunctionArgs,
   useLoaderData,
@@ -23,6 +30,8 @@ const zettelNoteFragment = graphql`
   fragment ZettelNoteEditor_zettelNote on ZettelNote {
     id
     title
+    group
+    tags
     description
     content
   }
@@ -70,6 +79,8 @@ export const zettelNoteEditorLoader = async ({
 const schema = yup.object({
   id: yup.string(),
   title: yup.string().required(),
+  group: yup.string().required(),
+  tags: yup.string(),
   description: yup.string(),
   content: yup.string(),
 });
@@ -85,7 +96,10 @@ const ZettelNoteForm = ({
 
   const formMethods = useForm<ZettelNoteFormValues>({
     resolver: yupResolver(schema),
-    defaultValues,
+    defaultValues: {
+      ...defaultValues,
+      group: 'zettel/',
+    },
   });
 
   const { isSubmitting } = formMethods.formState;
@@ -104,7 +118,7 @@ const ZettelNoteForm = ({
     const newId = await new Promise<string | undefined>((resolve, reject) => {
       saveZettelNote({
         variables: {
-          note: { ...data },
+          note: { ...data, tags: data.tags?.split(', ') },
         },
         onCompleted: ({ zettel }) => {
           return resolve(zettel?.saveNote.id);
@@ -126,8 +140,10 @@ const ZettelNoteForm = ({
   return (
     <Form {...formMethods} onSubmit={handleSubmit}>
       <FormFieldInput name="title" label="Title" />
+      <FormFieldInput name="group" label="Group" disabled />
       <FormFieldInput name="description" label="Description" />
-      <FormFieldInput name="content" label="Content" />
+      <FormFieldInput name="tags" label="Tags (separated by comma)" />
+      <FormFieldTextarea name="content" label="Content" rows={15} />
       <Flex sx={{ gap: 3 }}>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Saving' : 'Save'}
@@ -157,8 +173,10 @@ const ZettelNoteFragmentHandler = ({
   const note = useFragment(zettelNoteFragment, noteRef);
 
   const defaultValues = {
+    ...note,
     id: note.id,
     title: note.title,
+    tags: note.tags?.join(', '),
     description: note.description ?? '',
     content: note.content ?? '',
   };
