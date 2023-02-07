@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.13](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/docusaurus-plugin-zettel@0.0.12...@tereza-tech/docusaurus-plugin-zettel@0.0.13) (2023-02-07)
+
+**Note:** Version bump only for package @tereza-tech/docusaurus-plugin-zettel
+
 ## [0.0.12](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/docusaurus-plugin-zettel@0.0.11...@tereza-tech/docusaurus-plugin-zettel@0.0.12) (2023-02-06)
 
 **Note:** Version bump only for package @tereza-tech/docusaurus-plugin-zettel

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.7.4...@tereza-tech-apps/digital-garden@0.8.0) (2023-02-07)
+
+### Features
+
+- add cache to config ([#45](https://github.com/terezatech/tereza-tech/issues/45)) ([bb32b84](https://github.com/terezatech/tereza-tech/commit/bb32b846a20c9a01f6ac2136aea0a50afce04b20))
+
 ## [0.7.4](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.7.3...@tereza-tech-apps/digital-garden@0.7.4) (2023-02-06)
 
 **Note:** Version bump only for package @tereza-tech-apps/digital-garden

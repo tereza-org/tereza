@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.6.1...@tereza-tech/theme@1.7.0) (2023-02-07)
+
+### Features
+
+- add cache to config ([#45](https://github.com/terezatech/tereza-tech/issues/45)) ([bb32b84](https://github.com/terezatech/tereza-tech/commit/bb32b846a20c9a01f6ac2136aea0a50afce04b20))
+
 ## [1.6.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.6.0...@tereza-tech/theme@1.6.1) (2023-02-04)
 
 **Note:** Version bump only for package @tereza-tech/theme
