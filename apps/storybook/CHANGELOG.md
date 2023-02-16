@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.7.1...@tereza-tech-apps/storybook@1.8.0) (2023-02-16)
+
+### Features
+
+- implement lexical editor ([#50](https://github.com/terezatech/tereza-tech/issues/50)) ([e836ddb](https://github.com/terezatech/tereza-tech/commit/e836ddbaf60917fb6a57668483ce6ab33397b635))
+
 ## [1.7.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/storybook@1.7.0...@tereza-tech-apps/storybook@1.7.1) (2023-02-07)
 
 **Note:** Version bump only for package @tereza-tech-apps/storybook

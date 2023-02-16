@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/landing-page",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@tereza-tech/components": "^0.6.0",
+    "@tereza-tech/components": "^0.7.0",
     "@tereza-tech/theme": "^1.7.0",
     "@ttoss/ui": "^1.30.0",
     "@types/node": "18.11.10",
