@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tereza</title>
+    <script>
+      // Amplify need this to work. See https://github.com/aws/aws-sdk-js/issues/3673
+      const isBrowser = () => typeof window !== 'undefined';
+      const isGlobal = () => typeof global !== 'undefined';
+      if (!isGlobal() && isBrowser()) {
+        var global = window;
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
