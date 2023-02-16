@@ -1,4 +1,4 @@
-import { Editor } from '@tereza-tech/components';
+import { Editor } from '@tereza-tech/components/src';
 import { Story } from '@storybook/react';
 
 export default {
