@@ -23,7 +23,8 @@
   },
   "peerDependencies": {
     "@ttoss/ui": "^1.27.3",
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@ttoss/test-utils": "^1.20.3",
