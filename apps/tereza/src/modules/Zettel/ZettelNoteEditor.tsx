@@ -134,7 +134,7 @@ const ZettelNoteForm = ({
     setNoteId(newId);
 
     /**
-     * This happens when note's title has changed and a new note is created.
+     * This happens when note's title has changed and a new note was created.
      */
     if (oldId && newId && oldId !== newId) {
       navigate(`/zettel/editor/${newId}`);

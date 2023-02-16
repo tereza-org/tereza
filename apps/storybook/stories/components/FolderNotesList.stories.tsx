@@ -1,4 +1,7 @@
-import { FolderNotesList, FolderNotesListProps } from '@tereza-tech/components';
+import {
+  FolderNotesList,
+  FolderNotesListProps,
+} from '@tereza-tech/components/src';
 import { Story } from '@storybook/react';
 
 export default {
