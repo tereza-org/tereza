@@ -1,13 +1,14 @@
 import { ModuleContainer } from '../Layout/ModuleContainer';
 import { Outlet } from 'react-router-dom';
+import { getToday } from '../Date/utils';
 
-export const ZettelRoot = () => {
+export const JournalRoot = () => {
   return (
     <ModuleContainer
-      title="Zettel"
+      title="Journal"
       links={[
-        { label: 'Home', to: '/zettel' },
-        { label: 'New', to: '/zettel/editor' },
+        { label: 'Summary', to: '/journal' },
+        { label: 'Day', to: `/journal/${getToday()}` },
       ]}
     >
       <Outlet />

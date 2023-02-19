@@ -1,4 +1,4 @@
-import { Flex, Text } from '@ttoss/ui';
+import { Flex, Heading } from '@ttoss/ui';
 import { FolderNotesList } from '@tereza-tech/components';
 import { ZettelHomeQuery } from './__generated__/ZettelHomeQuery.graphql';
 import { graphql, loadQuery, usePreloadedQuery } from 'react-relay';
@@ -45,7 +45,7 @@ export const ZettelHome = () => {
 
   return (
     <Flex>
-      <Text>Notes</Text>
+      <Heading as="h1">Journal Summary</Heading>
       <FolderNotesList
         notes={notes}
         onNoteClick={(note) => {

@@ -20,7 +20,7 @@
     "@lerna-lite/changed": "^1.13.0",
     "@lerna-lite/cli": "^1.13.0",
     "@lerna-lite/list": "^1.13.0",
-    "@ttoss/config": "^1.28.0",
+    "@ttoss/config": "^1.28.1",
     "@ttoss/eslint-config": "^1.19.2",
     "carlin": "^1.21.3",
     "check-dependency-version-consistency": "^3.0.3",

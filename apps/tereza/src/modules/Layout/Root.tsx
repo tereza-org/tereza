@@ -1,33 +1,23 @@
 import * as React from 'react';
-import { AppsNav } from './AppsNav';
-import { Box, Button, Container, Flex, Text } from '@ttoss/ui';
+import { Container, Flex } from '@ttoss/ui';
+import { Navbar } from './Navbar';
 import { Outlet } from 'react-router-dom';
-import { useAuth } from '@ttoss/react-auth';
 
 export const Root = () => {
-  const { signOut } = useAuth();
-
   return (
-    <Container
+    <Flex
       sx={{
-        maxWidth: 800,
+        flexDirection: 'column',
+        height: '100vh',
+        overflow: 'hidden',
       }}
     >
-      <Flex
-        as="nav"
-        sx={{
-          justifyContent: 'space-between',
-        }}
-      >
-        <Text>Tereza App</Text>
-        <Button onClick={signOut}>Sign out</Button>
-      </Flex>
-      <AppsNav />
-      <Box as="main">
+      <Navbar />
+      <Container sx={{ flex: 1 }}>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </React.Suspense>
-      </Box>
-    </Container>
+      </Container>
+    </Flex>
   );
 };
