@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.8.1...@tereza-tech-apps/digital-garden@0.9.0) (2023-02-19)
+
+### Features
+
+- journal first implementation ([#51](https://github.com/terezatech/tereza-tech/issues/51)) ([8057b1e](https://github.com/terezatech/tereza-tech/commit/8057b1e42c022af10d526a6fe8016cfacbb6aff9))
+
 ## [0.8.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.8.0...@tereza-tech-apps/digital-garden@0.8.1) (2023-02-07)
 
 **Note:** Version bump only for package @tereza-tech-apps/digital-garden

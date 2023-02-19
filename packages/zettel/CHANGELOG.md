@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.19.0...@tereza-tech/zettel@0.20.0) (2023-02-19)
+
+### Features
+
+- journal first implementation ([#51](https://github.com/terezatech/tereza-tech/issues/51)) ([8057b1e](https://github.com/terezatech/tereza-tech/commit/8057b1e42c022af10d526a6fe8016cfacbb6aff9))
+
 # [0.19.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.18.0...@tereza-tech/zettel@0.19.0) (2023-02-07)
 
 ### Features
