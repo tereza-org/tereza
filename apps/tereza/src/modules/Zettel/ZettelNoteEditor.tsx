@@ -150,7 +150,7 @@ const ZettelNoteForm = ({
       <FormFieldInput name="description" label="Description" />
       <FormFieldInput name="tags" label="Tags (separated by comma)" />
       <FormFieldTextarea name="content" label="Content" rows={15} />
-      <Flex sx={{ gap: 3 }}>
+      <Flex sx={{ gap: 'md' }}>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Saving' : 'Save'}
         </Button>

@@ -8,8 +8,10 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { Root } from './modules/Layout/Root';
+import { journalRoutes } from './modules/Journal/journalRoutes';
 import { zettelRoutes } from './modules/Zettel/zettelRoutes';
 import './amplify';
+import '@tereza-tech/components/dist/index.css';
 
 const RequireAuth = ({ children }: { children: React.ReactNode }) => {
   const auth = useAuth();
@@ -60,10 +62,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       ...zettelRoutes,
-      {
-        path: '/journal',
-        element: <ComingSoon />,
-      },
+      ...journalRoutes,
       {
         path: '/crm',
         element: <ComingSoon />,

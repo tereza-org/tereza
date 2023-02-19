@@ -13,8 +13,10 @@ import { ListItemNode, ListNode } from '@lexical/list';
 import { ListPlugin } from '@lexical/react/LexicalListPlugin';
 import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPlugin';
 import { OnChange, OnChangeMarkdownPlugin } from './OnChangeMarkdownPlugin';
+import { Placeholder } from './Placeholder';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
+import { ToggleEditablePlugin } from './ToggleEditablePlugin';
 import { ToolbarPlugin } from './ToolbarPlugin';
 
 const editorConfig = {
@@ -56,21 +58,24 @@ const EditorContainer = ({ children }: { children: React.ReactNode }) => {
 
         '.editor-placeholder': {
           color: '#999',
-          // overflow: 'hidden',
-          // position: 'absolute',
-          // top: '15px',
-          // left: '15px',
+          overflow: 'hidden',
+          position: 'absolute',
+          top: 'md',
+          left: 'md',
           userSelect: 'none',
           pointerEvents: 'none',
         },
 
         '.editor-input': {
-          border: '1px solid red',
+          border: '1px solid black',
+          height: '100%',
+          minHeight: '100px',
+          padding: 'md',
         },
 
         '.editor-paragraph': {
-          // backgroundColor: 'red',
-          margin: 0,
+          margin: 'none',
+          marginBottom: 'md',
           position: 'relative',
         },
       }}
@@ -80,25 +85,22 @@ const EditorContainer = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const Placeholder = () => {
-  return (
-    <div className="editor-placeholder">
-      Play around with the horizontal rule plugin...
-    </div>
-  );
+export type EditorProps = {
+  editable?: boolean;
+  initialValue?: string;
+  onChange?: OnChange;
 };
 
 export const Editor = ({
+  editable = true,
   initialValue,
   onChange,
-}: {
-  initialValue?: string;
-  onChange?: OnChange;
-}) => {
+}: EditorProps) => {
   return (
     <LexicalComposer
       initialConfig={{
         ...editorConfig,
+        editable,
         editorState: () => {
           if (!initialValue) {
             return;
@@ -110,7 +112,11 @@ export const Editor = ({
     >
       <EditorContainer>
         <ToolbarPlugin />
-        <Box>
+        <Box
+          sx={{
+            position: 'relative',
+          }}
+        >
           <RichTextPlugin
             contentEditable={<ContentEditable className="editor-input" />}
             placeholder={<Placeholder />}
@@ -125,6 +131,7 @@ export const Editor = ({
           <CodeHighlightPlugin />
           {onChange && <OnChangeMarkdownPlugin onChange={onChange} />}
         </Box>
+        <ToggleEditablePlugin editable={editable} />
       </EditorContainer>
     </LexicalComposer>
   );

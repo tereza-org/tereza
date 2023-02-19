@@ -1,4 +1,4 @@
-import { Editor } from '@tereza-tech/components/src';
+import { Editor, EditorProps } from '@tereza-tech/components/src';
 import { Story } from '@storybook/react';
 
 export default {
@@ -6,8 +6,27 @@ export default {
   component: Editor,
 };
 
-const Template: Story<any> = () => {
-  return <Editor />;
+const Template: Story<EditorProps> = (props) => {
+  return <Editor {...props} />;
 };
 
-export const Example = Template.bind({});
+export const Empty = Template.bind({});
+
+const initialValue = `
+#### The quarterly results look great!
+
+ - Revenue was off the chart.
+ - Profits were higher than ever.
+
+*Everything* is going according to **plan**.
+`;
+
+export const WithInitialValue = Template.bind({});
+WithInitialValue.args = {
+  initialValue,
+};
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+  editable: false,
+};

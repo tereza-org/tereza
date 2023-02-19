@@ -32,6 +32,8 @@ import {
 import { createPortal } from 'react-dom';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import './styles.css';
+import { useIsEditable } from './useIsEditable';
 
 const LowPriority = 1;
 
@@ -436,6 +438,7 @@ export const ToolbarPlugin = () => {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
+  const { isEditable } = useIsEditable();
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -523,6 +526,10 @@ export const ToolbarPlugin = () => {
       editor.dispatchCommand(TOGGLE_LINK_COMMAND, null);
     }
   }, [editor, isLink]);
+
+  if (!isEditable) {
+    return null;
+  }
 
   return (
     <div className="toolbar" ref={toolbarRef}>
