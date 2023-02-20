@@ -56,5 +56,5 @@ export const JournalEditor = ({
     };
   }, [onChange, date]);
 
-  return <Editor editable={editable} initialValue={text} onChange={onChange} />;
+  return <Editor initialValue={text} onChange={onChange} />;
 };
