@@ -8,8 +8,9 @@ export const Root = () => {
     <Flex
       sx={{
         flexDirection: 'column',
-        height: '100vh',
-        overflow: 'hidden',
+        height: ['100%', '100vh'],
+        overflowY: ['scroll', 'hidden'],
+        overflowX: 'hidden',
       }}
     >
       <Navbar />

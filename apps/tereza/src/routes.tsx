@@ -63,6 +63,10 @@ export const routes: RouteObject[] = [
         loader: hasUserAccessToAppLoader,
         element: <HasUserAccessToApp />,
         children: [
+          {
+            path: '/',
+            element: <Navigate to="/journal" />,
+          },
           ...zettelRoutes,
           ...journalRoutes,
           {
@@ -76,5 +80,9 @@ export const routes: RouteObject[] = [
         ],
       },
     ],
+  },
+  {
+    path: '*',
+    element: <Navigate to="/" />,
   },
 ];

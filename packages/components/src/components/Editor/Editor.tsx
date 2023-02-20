@@ -16,7 +16,6 @@ import { OnChange, OnChangeMarkdownPlugin } from './OnChangeMarkdownPlugin';
 import { Placeholder } from './Placeholder';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
-import { ToggleEditablePlugin } from './ToggleEditablePlugin';
 import { ToolbarPlugin } from './ToolbarPlugin';
 
 export type { OnChange };
@@ -49,7 +48,11 @@ const EditorContainer = ({ children }: { children: React.ReactNode }) => {
     <Flex
       sx={{
         width: '100%',
+        backgroundColor: '#fbfbfb',
         flexDirection: 'column',
+        border: '1px solid',
+        borderColor: '#ccc',
+
         '.ltr': {
           textAlign: 'left',
         },
@@ -69,7 +72,8 @@ const EditorContainer = ({ children }: { children: React.ReactNode }) => {
         },
 
         '.editor-input': {
-          border: '1px solid black',
+          borderTop: '1px solid',
+          borderColor: '#ccc',
           height: '100%',
           minHeight: '100px',
           padding: 'md',
@@ -88,21 +92,15 @@ const EditorContainer = ({ children }: { children: React.ReactNode }) => {
 };
 
 export type EditorProps = {
-  editable?: boolean;
   initialValue?: string;
   onChange?: OnChange;
 };
 
-export const Editor = ({
-  editable = true,
-  initialValue,
-  onChange,
-}: EditorProps) => {
+export const Editor = ({ initialValue, onChange }: EditorProps) => {
   return (
     <LexicalComposer
       initialConfig={{
         ...editorConfig,
-        editable,
         editorState: () => {
           if (!initialValue) {
             return;
@@ -133,7 +131,6 @@ export const Editor = ({
           <CodeHighlightPlugin />
           {onChange && <OnChangeMarkdownPlugin onChange={onChange} />}
         </Box>
-        <ToggleEditablePlugin editable={editable} />
       </EditorContainer>
     </LexicalComposer>
   );

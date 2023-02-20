@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@ttoss/test-utils": "^1.20.3",
-    "@ttoss/ui": "^1.30.0",
+    "@ttoss/ui": "^1.30.2",
     "@types/react": "^18.0.28",
     "react": "^18.2.0",
     "tsup": "^6.6.3"

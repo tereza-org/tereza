@@ -34,6 +34,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import './styles.css';
 import { useIsEditable } from './useIsEditable';
+import { Icon, Select as SelectUi } from '@ttoss/ui';
 
 const LowPriority = 1;
 
@@ -238,7 +239,7 @@ const FloatingLinkEditor = ({ editor }: any) => {
 
 const Select = ({ onChange, className, options, value }: any) => {
   return (
-    <select className={className} onChange={onChange} value={value}>
+    <SelectUi className={className} onChange={onChange} value={value}>
       <option hidden={true} value="" />
       {options.map((option: any) => {
         return (
@@ -247,7 +248,7 @@ const Select = ({ onChange, className, options, value }: any) => {
           </option>
         );
       })}
-    </select>
+    </SelectUi>
   );
 };
 
@@ -386,37 +387,37 @@ const BlockOptionsDropdownList = ({
   return (
     <div className="dropdown" ref={dropDownRef}>
       <button className="item" onClick={formatParagraph}>
-        <span className="icon paragraph" />
+        {/* <span className="icon paragraph" /> */}
         <span className="text">Normal</span>
         {blockType === 'paragraph' && <span className="active" />}
       </button>
       <button className="item" onClick={formatLargeHeading}>
-        <span className="icon large-heading" />
+        {/* <span className="icon large-heading" /> */}
         <span className="text">Large Heading</span>
         {blockType === 'h1' && <span className="active" />}
       </button>
       <button className="item" onClick={formatSmallHeading}>
-        <span className="icon small-heading" />
+        {/* <span className="icon small-heading" /> */}
         <span className="text">Small Heading</span>
         {blockType === 'h2' && <span className="active" />}
       </button>
       <button className="item" onClick={formatBulletList}>
-        <span className="icon bullet-list" />
+        {/* <span className="icon bullet-list" /> */}
         <span className="text">Bullet List</span>
         {blockType === 'ul' && <span className="active" />}
       </button>
       <button className="item" onClick={formatNumberedList}>
-        <span className="icon numbered-list" />
+        {/* <span className="icon numbered-list" /> */}
         <span className="text">Numbered List</span>
         {blockType === 'ol' && <span className="active" />}
       </button>
       <button className="item" onClick={formatQuote}>
-        <span className="icon quote" />
+        {/* <span className="icon quote" /> */}
         <span className="text">Quote</span>
         {blockType === 'quote' && <span className="active" />}
       </button>
       <button className="item" onClick={formatCode}>
-        <span className="icon code" />
+        {/* <span className="icon code" /> */}
         <span className="text">Code Block</span>
         {blockType === 'code' && <span className="active" />}
       </button>
@@ -542,9 +543,9 @@ export const ToolbarPlugin = () => {
             }}
             aria-label="Formatting Options"
           >
-            <span className={'icon block-type ' + blockType} />
+            {/* <span className={'icon block-type ' + blockType} /> */}
             <span className="text">{blockTypeToBlockName[blockType]}</span>
-            <i className="chevron-down" />
+            {/* <i className="chevron-down" /> */}
           </button>
           {showBlockOptionsDropDown &&
             createPortal(
@@ -578,8 +579,7 @@ export const ToolbarPlugin = () => {
             className={'toolbar-item spaced ' + (isBold ? 'active' : '')}
             aria-label="Format Bold"
           >
-            Bold
-            <i className="format bold" />
+            <Icon icon="material-symbols:format-bold" />
           </button>
           <button
             onClick={() => {
@@ -588,8 +588,7 @@ export const ToolbarPlugin = () => {
             className={'toolbar-item spaced ' + (isItalic ? 'active' : '')}
             aria-label="Format Italics"
           >
-            Italic
-            <i className="format italic" />
+            <Icon icon="ph:text-italic" />
           </button>
           <button
             onClick={() => {
@@ -598,8 +597,7 @@ export const ToolbarPlugin = () => {
             className={'toolbar-item spaced ' + (isUnderline ? 'active' : '')}
             aria-label="Format Underline"
           >
-            Underline
-            <i className="format underline" />
+            <Icon icon="ph:text-underline" />
           </button>
           <button
             onClick={() => {
@@ -610,8 +608,7 @@ export const ToolbarPlugin = () => {
             }
             aria-label="Format Strikethrough"
           >
-            Strikethrough
-            <i className="format strikethrough" />
+            <Icon icon="ph:text-strikethrough" />
           </button>
           <button
             onClick={() => {
@@ -620,16 +617,14 @@ export const ToolbarPlugin = () => {
             className={'toolbar-item spaced ' + (isCode ? 'active' : '')}
             aria-label="Insert Code"
           >
-            Code
-            <i className="format code" />
+            <Icon icon="material-symbols:code" />
           </button>
           <button
             onClick={insertLink}
             className={'toolbar-item spaced ' + (isLink ? 'active' : '')}
             aria-label="Insert Link"
           >
-            Link
-            <i className="format link" />
+            <Icon icon="material-symbols:link-sharp" />
           </button>
           {isLink &&
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}

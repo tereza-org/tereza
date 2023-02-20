@@ -114,7 +114,14 @@ export const JournalDay = () => {
         }}
       />
       <Box>
-        <Heading as="h3">On this day</Heading>
+        <Heading
+          as="h3"
+          sx={{
+            marginBottom: 'md',
+          }}
+        >
+          On this day
+        </Heading>
         <React.Suspense fallback={<div>Loading...</div>}>
           <JournalDayEditorPreloader />
         </React.Suspense>
