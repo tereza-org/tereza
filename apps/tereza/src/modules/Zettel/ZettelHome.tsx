@@ -45,7 +45,7 @@ export const ZettelHome = () => {
 
   return (
     <Flex>
-      <Heading as="h1">Journal Summary</Heading>
+      <Heading as="h1">Notes</Heading>
       <FolderNotesList
         notes={notes}
         onNoteClick={(note) => {

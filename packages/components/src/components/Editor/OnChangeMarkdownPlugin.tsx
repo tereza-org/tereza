@@ -35,7 +35,7 @@ export const OnChangeMarkdownPlugin = ({
 }) => {
   const debouncedOnChange = useDebouncedCallback((editorState: EditorState) => {
     return transformState(editorState, onChange);
-  }, 250);
+  }, 10);
 
   return <OnChangePlugin onChange={debouncedOnChange} ignoreSelectionChange />;
 };

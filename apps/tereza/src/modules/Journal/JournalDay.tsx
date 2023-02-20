@@ -1,6 +1,8 @@
+import * as React from 'react';
 import { Box, Flex, Heading, Text } from '@ttoss/ui';
 import { DatePicker } from '../Date/DatePicker';
 import { JournalDayQuery } from './__generated__/JournalDayQuery.graphql';
+import { JournalDay_journal$key } from './__generated__/JournalDay_journal.graphql';
 import { JournalEditor } from './JournalEditor';
 import {
   LoaderFunctionArgs,
@@ -8,17 +10,29 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { getToday, isValidDate } from '../Date/utils';
-import { graphql, loadQuery, usePreloadedQuery } from 'react-relay';
+import {
+  graphql,
+  loadQuery,
+  useFragment,
+  usePreloadedQuery,
+} from 'react-relay';
 import { relayEnvironment } from '../ApiClient/relayEnvironment';
-import React from 'react';
 
-const journalDayQuery = graphql`
+export const journalDayQuery = graphql`
   query JournalDayQuery($date: String!) {
     journal {
       journalDay(date: $date) {
-        text
+        ...JournalDay_journal
       }
     }
+  }
+`;
+
+const journalFragment = graphql`
+  fragment JournalDay_journal on Journal {
+    id
+    date
+    text
   }
 `;
 
@@ -38,22 +52,44 @@ export const journalDayLoader = async ({ params }: LoaderFunctionArgs) => {
   return { date, queryRef };
 };
 
-const JournalDayEditor = () => {
-  const { date, queryRef } = useLoaderData() as Awaited<
+const JournalDayEditor = ({
+  journalRef,
+}: {
+  journalRef: JournalDay_journal$key;
+}) => {
+  const { id, date, text } = useFragment(journalFragment, journalRef);
+
+  return (
+    <>
+      {!text && <Text>No journal for this day ;(</Text>}
+      <JournalEditor
+        /**
+         * We use the id as key here to force the editor to re-render when the
+         * journal changes. This is a workaround for the fact that the editor
+         * doesn't re-render when the text prop changes. See:
+         * https://lexical.dev/docs/concepts/editor-state#understanding-the-editor-state
+         */
+        key={id}
+        date={date}
+        editable={true}
+        text={text}
+      />
+    </>
+  );
+};
+
+const JournalDayEditorPreloader = () => {
+  const { queryRef } = useLoaderData() as Awaited<
     ReturnType<typeof journalDayLoader>
   >;
 
   const { journal } = usePreloadedQuery(journalDayQuery, queryRef);
 
-  const text = journal?.journalDay?.text || '';
+  if (!journal?.journalDay) {
+    return null;
+  }
 
-  return (
-    <Box>
-      <Heading as="h3">On this day</Heading>
-      {!text && <Text>No journal for this day ;(</Text>}
-      <JournalEditor date={date} editable={false} text={text} />
-    </Box>
-  );
+  return <JournalDayEditor journalRef={journal.journalDay} />;
 };
 
 export const JournalDay = () => {
@@ -77,9 +113,12 @@ export const JournalDay = () => {
           navigate(`/journal/${date}`);
         }}
       />
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <JournalDayEditor />
-      </React.Suspense>
+      <Box>
+        <Heading as="h3">On this day</Heading>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <JournalDayEditorPreloader />
+        </React.Suspense>
+      </Box>
     </Flex>
   );
 };

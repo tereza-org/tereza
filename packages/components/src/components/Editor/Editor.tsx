@@ -19,6 +19,8 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToggleEditablePlugin } from './ToggleEditablePlugin';
 import { ToolbarPlugin } from './ToolbarPlugin';
 
+export type { OnChange };
+
 const editorConfig = {
   namespace: 'editor',
   theme: {

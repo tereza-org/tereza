@@ -9,7 +9,8 @@
     "dev": "vite",
     "preview": "vite preview",
     "relay": "relay-compiler",
-    "schema": "cp ../../../tereza-cloud/cloud/graph-api/schema/schema.graphql ./schema/schema.graphql"
+    "schema": "cp ../../../tereza-cloud/cloud/graph-api/schema/schema.graphql ./schema/schema.graphql",
+    "test": "echo vitest"
   },
   "dependencies": {
     "@tereza-tech/components": "^0.8.0",
@@ -28,9 +29,11 @@
     "react-dom": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-relay": "^14.1.0",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "use-debounce": "^9.0.3"
   },
   "devDependencies": {
+    "@ttoss/test-utils": "^1.20.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
     "@types/react-relay": "^14.1.3",
@@ -41,6 +44,7 @@
     "typescript": "^4.9.5",
     "vite": "^4.1.1",
     "vite-plugin-babel": "^1.1.3",
-    "vite-plugin-relay": "^2.0.0"
+    "vite-plugin-relay": "^2.0.0",
+    "vitest": "^0.28.5"
   }
 }
