@@ -10,8 +10,6 @@ const Template: Story<EditorProps> = (props) => {
   return <Editor {...props} />;
 };
 
-export const Empty = Template.bind({});
-
 const initialValue = `
 #### The quarterly results look great!
 
@@ -21,6 +19,8 @@ const initialValue = `
 *Everything* is going according to **plan**.
 `;
 
+export const Empty = Template.bind({});
+
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
   initialValue,
@@ -28,5 +28,11 @@ WithInitialValue.args = {
 
 export const ReadOnly = Template.bind({});
 ReadOnly.args = {
+  editable: false,
+};
+
+export const ReadOnlyWithInitialValue = Template.bind({});
+ReadOnlyWithInitialValue.args = {
+  initialValue,
   editable: false,
 };

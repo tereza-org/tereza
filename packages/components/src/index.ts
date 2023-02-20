@@ -1,4 +1,4 @@
-export { Editor } from './components/Editor/Editor';
+export { Editor, EditorProps } from './components/Editor/Editor';
 export {
   FolderNotesList,
   FolderNotesListProps,

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Editor } from '@tereza-tech/components';
 import { JournalEditorMutation } from './__generated__/JournalEditorMutation.graphql';
 import { graphql, useMutation } from 'react-relay';
-import { useAutosave } from 'react-autosave';
+import { useDebouncedCallback } from 'use-debounce';
 
 export const JournalEditor = ({
   editable = false,
@@ -18,23 +18,17 @@ export const JournalEditor = ({
       mutation JournalEditorMutation($journal: JournalInput!) {
         journal {
           saveJournal(journal: $journal) {
-            id
+            # We need to refetch the query to update the Editor.
+            ...JournalDay_journal
           }
         }
       }
     `
   );
 
-  const [currentValue, setCurrentValue] = React.useState(text);
-
-  useAutosave({
-    data: isInFlight ? '' : currentValue,
-    onSave: (data) => {
-      if (!data) {
-        return;
-      }
-
-      if (data === text) {
+  const onChange = useDebouncedCallback(
+    (newText: string) => {
+      if (newText === text) {
         return;
       }
 
@@ -42,21 +36,25 @@ export const JournalEditor = ({
         variables: {
           journal: {
             date,
-            text: data,
+            text: newText,
           },
         },
       });
     },
-    saveOnUnmount: true,
-    interval: 2000,
-  });
-
-  return (
-    <Editor
-      key={date}
-      editable={editable}
-      initialValue={text}
-      onChange={setCurrentValue}
-    />
+    2000,
+    {
+      maxWait: 5000,
+    }
   );
+
+  /**
+   * When the component goes to be unmounted, we will save if the input has changed.
+   */
+  React.useEffect(() => {
+    return () => {
+      onChange.flush();
+    };
+  }, [onChange, date]);
+
+  return <Editor editable={editable} initialValue={text} onChange={onChange} />;
 };

@@ -4,6 +4,7 @@ type Query {
     """The globally unique ID among all types"""
     id: ID!
   ): Node
+  me: Me!
   journal: QueryJournal
   zettel: QueryZettel
 }
@@ -51,6 +52,11 @@ type JournalEdge {
 
   """A cursor for use in pagination"""
   cursor: String!
+}
+
+type Me {
+  id: ID!
+  allowed: Boolean
 }
 
 type MutationJournal {

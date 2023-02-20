@@ -1,5 +1,5 @@
 import { babelConfig } from '@ttoss/config';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import babel from 'vite-plugin-babel';
 import react from '@vitejs/plugin-react-swc';
 import relay from 'vite-plugin-relay';
@@ -17,10 +17,15 @@ export default defineConfig({
       },
     }),
     relay,
-  ],
+  ] as any,
   resolve: {
     alias: {
       './runtimeConfig': './runtimeConfig.browser',
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./vitest.setup.js', './tests/setupTests.tsx'],
   },
 });
