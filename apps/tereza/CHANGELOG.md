@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.14.0...@tereza-tech-apps/tereza@0.15.0) (2023-02-20)
+
+### Bug Fixes
+
+- editor build ([86f92da](https://github.com/terezatech/tereza-tech/commit/86f92daabaa5afd7f77865a3d9c075fca085916e))
+
+### Features
+
+- add responsiveness ([#53](https://github.com/terezatech/tereza-tech/issues/53)) ([0873ee3](https://github.com/terezatech/tereza-tech/commit/0873ee3f130c8904f76605989800bdc443d8c3a8))
+
 # [0.14.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.13.0...@tereza-tech-apps/tereza@0.14.0) (2023-02-20)
 
 ### Features
