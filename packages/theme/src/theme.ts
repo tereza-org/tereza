@@ -43,8 +43,8 @@ export const theme = createTheme({
     draft: palette.color5,
     modes: {
       dark: {
-        text: white,
-        background: black,
+        // text: white,
+        // background: black,
       },
     },
   },
@@ -59,13 +59,17 @@ export const theme = createTheme({
       lineHeight: 'body',
       fontWeight: 'body',
       a: {
-        color: 'black !important',
-        textDecoration: 'none',
+        color: 'text',
+        textDecoration: 'underline',
         ':hover': {
-          color: palette.color4,
-          textDecoration: 'underline',
+          color: 'primary',
         },
       },
+    },
+  },
+  cards: {
+    primary: {
+      backgroundColor: 'background',
     },
   },
 });

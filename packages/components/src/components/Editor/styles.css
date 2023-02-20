@@ -295,7 +295,7 @@ pre::-webkit-scrollbar-thumb {
 .toolbar {
   display: flex;
   margin-bottom: 1px;
-  background: #fff;
+  /* background: #fff; */
   padding: 4px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -310,6 +310,7 @@ pre::-webkit-scrollbar-thumb {
   padding: 8px;
   cursor: pointer;
   vertical-align: middle;
+  font-size: 20px;
 }
 
 .toolbar button.toolbar-item:disabled {
@@ -376,12 +377,11 @@ pre::-webkit-scrollbar-thumb {
 .toolbar .toolbar-item .text {
   display: flex;
   line-height: 20px;
-  width: 200px;
   vertical-align: middle;
   font-size: 14px;
   color: #777;
   text-overflow: ellipsis;
-  width: 70px;
+  width: 50px;
   overflow: hidden;
   height: 20px;
   text-align: left;

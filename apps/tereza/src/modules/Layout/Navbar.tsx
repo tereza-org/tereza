@@ -11,6 +11,8 @@ export const Navbar = () => {
         justifyContent: 'space-between',
         borderBottom: '1px solid',
         padding: 'lg',
+
+        alignItems: 'center',
       }}
     >
       <Text>Tereza App</Text>
@@ -19,10 +21,10 @@ export const Navbar = () => {
           gap: 'lg',
         }}
       >
-        <Link to="/zettel">Zettel</Link>
         <Link to="/journal">Journal</Link>
-        <Link to="/crm">Personal CRM</Link>
-        <Link to="/gym">Gym</Link>
+        <Link to="/zettel">Zettel</Link>
+        {/* <Link to="/crm">Personal CRM</Link>
+        <Link to="/gym">Gym</Link> */}
       </Flex>
       <Button onClick={signOut}>Sign out</Button>
     </Flex>

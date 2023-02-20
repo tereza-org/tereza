@@ -11,12 +11,10 @@ const Template: Story<EditorProps> = (props) => {
 };
 
 const initialValue = `
-#### The quarterly results look great!
+# The quarterly results look great!
 
- - Revenue was off the chart.
- - Profits were higher than ever.
-
-*Everything* is going according to **plan**.
+- Revenue was off the chart.
+- Profits were higher than ever.
 `;
 
 export const Empty = Template.bind({});
@@ -24,15 +22,4 @@ export const Empty = Template.bind({});
 export const WithInitialValue = Template.bind({});
 WithInitialValue.args = {
   initialValue,
-};
-
-export const ReadOnly = Template.bind({});
-ReadOnly.args = {
-  editable: false,
-};
-
-export const ReadOnlyWithInitialValue = Template.bind({});
-ReadOnlyWithInitialValue.args = {
-  initialValue,
-  editable: false,
 };

@@ -17,14 +17,16 @@ export const ModuleContainer = ({
     <Flex
       sx={{
         height: '100%',
+        flexDirection: ['column', 'row'],
       }}
     >
       <Flex
         as="nav"
         sx={{
           flexDirection: 'column',
-          width: '200px',
-          borderRight: '1px solid',
+          width: ['100%', '200px'],
+          borderRight: ['none', '1px solid'],
+          borderBottom: ['1px solid', 'none'],
           height: '100%',
         }}
       >
