@@ -14,6 +14,17 @@ type Mutation {
   zettel: MutationZettel
 }
 
+enum JournalSummaryKeyEnum {
+  TODAY
+  YESTERDAY
+  LAST_WEEK
+  LAST_MONTH
+  LAST_YEAR
+  LAST_TWO_YEARS
+  LAST_FIVE_YEARS
+  LAST_TEN_YEARS
+}
+
 enum SortConnectionJournalEnum {
   DESC
 }
@@ -72,6 +83,11 @@ type JournalStatsGroupDay {
   missing: Boolean!
 }
 
+type JournalSummaryItem {
+  key: JournalSummaryKeyEnum!
+  journal: Journal!
+}
+
 type Me {
   id: ID!
   allowed: Boolean
@@ -120,6 +136,7 @@ type QueryJournal {
     sort: SortConnectionJournalEnum = DESC
   ): JournalConnection
   stats(today: String!): JournalStats
+  summary(date: String!): [JournalSummaryItem!]!
 }
 
 type QueryZettel {

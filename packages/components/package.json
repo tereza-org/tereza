@@ -19,10 +19,11 @@
   "dependencies": {
     "@lexical/react": "^0.8.0",
     "lexical": "^0.8.0",
+    "react-markdown": "^8.0.5",
     "use-debounce": "^9.0.3"
   },
   "peerDependencies": {
-    "@ttoss/ui": "^1.27.3",
+    "@ttoss/ui": "^1.30.2",
     "react": ">=16.8.0",
     "react-dom": "^18.2.0"
   },

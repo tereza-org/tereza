@@ -15,6 +15,11 @@ const initialValue = `
 
 - Revenue was off the chart.
 - Profits were higher than ever.
+
+## Sales are soaring!
+
+1. We sold more than we ever thought possible.
+2. Revenue exceeds forecasts by 20%.
 `;
 
 export const Empty = Template.bind({});
