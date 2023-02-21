@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.7.0...@tereza-tech-apps/developers@0.7.1) (2023-02-21)
+
+**Note:** Version bump only for package @tereza-tech-apps/developers
+
 # [0.7.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/developers@0.6.4...@tereza-tech-apps/developers@0.7.0) (2023-02-20)
 
 ### Features
