@@ -9,12 +9,12 @@ export const Root = () => {
       sx={{
         flexDirection: 'column',
         height: ['100%', '100vh'],
-        overflowY: ['scroll', 'hidden'],
+        overflowY: ['hidden'],
         overflowX: 'hidden',
       }}
     >
       <Navbar />
-      <Container sx={{ flex: 1 }}>
+      <Container sx={{ flex: 1, overflowY: 'auto' }}>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Outlet />
         </React.Suspense>
