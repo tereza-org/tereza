@@ -19,6 +19,7 @@
   "dependencies": {
     "@lexical/react": "^0.8.0",
     "lexical": "^0.8.0",
+    "react-markdown": "^8.0.5",
     "use-debounce": "^9.0.3"
   },
   "peerDependencies": {
