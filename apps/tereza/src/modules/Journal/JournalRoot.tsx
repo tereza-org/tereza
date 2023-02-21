@@ -9,6 +9,7 @@ export const JournalRoot = () => {
       links={[
         { label: 'Summary', to: '/journal' },
         { label: 'Day', to: `/journal/${getToday()}` },
+        { label: 'Stats', to: '/journal/stats' },
       ]}
     >
       <Outlet />

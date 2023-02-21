@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Container, Flex, Text } from '@ttoss/ui';
+import { Box, Container, Flex, Text } from '@ttoss/ui';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorPage } from './ErrorPage';
 import { Link } from 'react-router-dom';
@@ -43,7 +43,7 @@ export const ModuleContainer = ({
         <Flex
           sx={{
             flexDirection: 'column',
-            gap: 'md',
+            gap: 'lg',
             padding: 'md',
           }}
         >
@@ -56,18 +56,26 @@ export const ModuleContainer = ({
           })}
         </Flex>
       </Flex>
-      <Container
-        as="main"
+      <Flex
         sx={{
-          maxWidth: '800px',
           width: '100%',
+          justifyContent: 'center',
+          overflowY: 'auto',
           padding: 'xl',
         }}
       >
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <ErrorBoundary fallbackRender={ErrorPage}>{children}</ErrorBoundary>
-        </React.Suspense>
-      </Container>
+        <Container
+          as="main"
+          sx={{
+            maxWidth: '800px',
+            width: '100%',
+          }}
+        >
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <ErrorBoundary fallbackRender={ErrorPage}>{children}</ErrorBoundary>
+          </React.Suspense>
+        </Container>
+      </Flex>
     </Flex>
   );
 };

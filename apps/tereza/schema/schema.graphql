@@ -54,6 +54,24 @@ type JournalEdge {
   cursor: String!
 }
 
+type JournalStats {
+  count: Int!
+  initialDate: String!
+  maxStreak: Int!
+  missingDatesCount: Int!
+  groupDates: [JournalStatsGroupDate!]!
+}
+
+type JournalStatsGroupDate {
+  month: String!
+  days: [JournalStatsGroupDay!]!
+}
+
+type JournalStatsGroupDay {
+  day: String!
+  missing: Boolean!
+}
+
 type Me {
   id: ID!
   allowed: Boolean
@@ -101,6 +119,7 @@ type QueryJournal {
     """Sort argument for data ordering"""
     sort: SortConnectionJournalEnum = DESC
   ): JournalConnection
+  stats(today: String!): JournalStats
 }
 
 type QueryZettel {
