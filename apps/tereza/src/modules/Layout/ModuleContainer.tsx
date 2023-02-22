@@ -18,6 +18,7 @@ export const ModuleContainer = ({
       sx={{
         height: '100%',
         flexDirection: ['column', 'row'],
+        position: 'relative',
       }}
     >
       <Flex
@@ -69,6 +70,7 @@ export const ModuleContainer = ({
           sx={{
             maxWidth: '800px',
             width: '100%',
+            height: '100%',
           }}
         >
           <React.Suspense fallback={<div>Loading...</div>}>

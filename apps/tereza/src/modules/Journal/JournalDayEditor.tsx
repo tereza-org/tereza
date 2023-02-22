@@ -238,10 +238,15 @@ export const JournalDayEditor = () => {
         flexDirection: 'column',
         gap: '2xl',
         alignItems: 'flex-start',
+        width: '100%',
       }}
     >
       <Heading as="h1">Journal Editor</Heading>
-      <Box>
+      <Box
+        sx={{
+          width: '100%',
+        }}
+      >
         <Heading
           as="h3"
           sx={{
