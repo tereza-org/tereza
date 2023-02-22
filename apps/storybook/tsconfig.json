@@ -1,6 +1,3 @@
 {
-  "extends": "@ttoss/config/tsconfig.json",
-  "compilerOptions": {
-    "preserveSymlinks": true
-  }
+  "extends": "@ttoss/config/tsconfig.json"
 }
