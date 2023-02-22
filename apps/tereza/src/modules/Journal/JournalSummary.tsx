@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Flex, Heading } from '@ttoss/ui';
-import { Journal } from '@tereza-tech/components';
+import { JournalMarkdown } from './JournalMarkdown';
 import { JournalSummaryQuery } from './__generated__/JournalSummaryQuery.graphql';
 import { JournalSummary_journalSummaryItem$key } from './__generated__/JournalSummary_journalSummaryItem.graphql';
 import { getToday } from '../Date/utils';
@@ -11,7 +11,7 @@ import {
   usePreloadedQuery,
 } from 'react-relay';
 import { relayEnvironment } from '../ApiClient/relayEnvironment';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 const journalSummaryQuery = graphql`
   query JournalSummaryQuery($date: String!) {
@@ -41,8 +41,6 @@ const JournalSummaryItem = ({
 }: {
   journalSummaryItemRef: JournalSummary_journalSummaryItem$key;
 }) => {
-  const navigate = useNavigate();
-
   const { key, journal } = useFragment(
     graphql`
       fragment JournalSummary_journalSummaryItem on JournalSummaryItem {
@@ -59,13 +57,7 @@ const JournalSummaryItem = ({
   const label = [key, journal?.date].join(' - ');
 
   return (
-    <Journal
-      label={label}
-      text={journal?.text}
-      onEdit={() => {
-        return navigate(`/journal/${journal?.date}`);
-      }}
-    />
+    <JournalMarkdown label={label} text={journal.text} date={journal.date} />
   );
 };
 

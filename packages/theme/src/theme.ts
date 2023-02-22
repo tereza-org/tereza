@@ -56,7 +56,7 @@ export const theme = createTheme({
   styles: {
     root: {
       fontFamily: 'body',
-      lineHeight: 'body',
+      lineHeight: '1.5',
       fontWeight: 'body',
       a: {
         color: 'text',

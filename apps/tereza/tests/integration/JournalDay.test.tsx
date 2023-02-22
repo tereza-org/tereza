@@ -9,7 +9,7 @@ import {
   createMockEnvironment,
 } from '@ttoss/test-utils/relay';
 import { RelayEnvironmentProvider } from 'react-relay';
-import { journalDayQuery } from '../../src/modules/Journal/JournalDay';
+import { journalDayQuery } from '../../src/modules/Journal/JournalDayEditor';
 import { render, screen } from '@ttoss/test-utils';
 import { routes } from '../../src/routes';
 import { vi } from 'vitest';
