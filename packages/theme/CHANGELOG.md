@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.9.0...@tereza-tech/theme@1.10.0) (2023-02-22)
+
+### Features
+
+- improve journal navigation ([#57](https://github.com/terezatech/tereza-tech/issues/57)) ([c4cb043](https://github.com/terezatech/tereza-tech/commit/c4cb04396f501fe22e52921d860d93bea75513f3))
+
 # [1.9.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.8.0...@tereza-tech/theme@1.9.0) (2023-02-20)
 
 ### Features
