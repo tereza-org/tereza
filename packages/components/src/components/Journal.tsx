@@ -8,8 +8,6 @@ export type JournalProps = {
   onLabelClick?: () => void;
 };
 
-const TempIcon = Icon as any;
-
 export const Journal = ({
   label,
   text,
@@ -57,7 +55,11 @@ export const Journal = ({
               cursor: 'pointer',
             }}
           >
-            <TempIcon icon="material-symbols:edit" />
+            <Icon
+              {...({
+                icon: 'material-symbols:edit',
+              } as any)}
+            />
           </Text>
         )}
       </Text>
