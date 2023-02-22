@@ -6,6 +6,7 @@ import { Box, Flex } from '@ttoss/ui';
 import { CodeHighlightNode, CodeNode } from '@lexical/code';
 import { CodeHighlightPlugin } from './CodeHighlightPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
+import { EditorRef, EditorRefPlugin } from './EditorRefPlugin';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
@@ -17,8 +18,9 @@ import { Placeholder } from './Placeholder';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToolbarPlugin } from './ToolbarPlugin';
+import { forwardRef } from 'react';
 
-export type { OnChange };
+export type { OnChange, EditorRef };
 
 const editorConfig = {
   namespace: 'editor',
@@ -96,42 +98,47 @@ export type EditorProps = {
   onChange?: OnChange;
 };
 
-export const Editor = ({ initialValue, onChange }: EditorProps) => {
-  return (
-    <LexicalComposer
-      initialConfig={{
-        ...editorConfig,
-        editorState: () => {
-          if (!initialValue) {
-            return;
-          }
+export const Editor = forwardRef<any, EditorProps>(
+  ({ initialValue, onChange }, ref) => {
+    return (
+      <LexicalComposer
+        initialConfig={{
+          ...editorConfig,
+          editorState: () => {
+            if (!initialValue) {
+              return;
+            }
 
-          return $convertFromMarkdownString(initialValue, TRANSFORMERS);
-        },
-      }}
-    >
-      <EditorContainer>
-        <ToolbarPlugin />
-        <Box
-          sx={{
-            position: 'relative',
-          }}
-        >
-          <RichTextPlugin
-            contentEditable={<ContentEditable className="editor-input" />}
-            placeholder={<Placeholder />}
-            ErrorBoundary={() => {
-              return <div>Error</div>;
+            return $convertFromMarkdownString(initialValue, TRANSFORMERS);
+          },
+        }}
+      >
+        <EditorContainer>
+          <ToolbarPlugin />
+          <Box
+            sx={{
+              position: 'relative',
             }}
-          />
-          <AutoFocusPlugin />
-          <ListPlugin />
-          <LinkPlugin />
-          <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
-          <CodeHighlightPlugin />
-          {onChange && <OnChangeMarkdownPlugin onChange={onChange} />}
-        </Box>
-      </EditorContainer>
-    </LexicalComposer>
-  );
-};
+          >
+            <RichTextPlugin
+              contentEditable={<ContentEditable className="editor-input" />}
+              placeholder={<Placeholder />}
+              ErrorBoundary={() => {
+                return <div>Error</div>;
+              }}
+            />
+            <AutoFocusPlugin />
+            <ListPlugin />
+            <LinkPlugin />
+            <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+            <CodeHighlightPlugin />
+            {onChange && <OnChangeMarkdownPlugin onChange={onChange} />}
+            <EditorRefPlugin ref={ref} />
+          </Box>
+        </EditorContainer>
+      </LexicalComposer>
+    );
+  }
+);
+
+Editor.displayName = 'Editor';

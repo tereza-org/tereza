@@ -65,6 +65,17 @@ type JournalEdge {
   cursor: String!
 }
 
+type JournalQuestion {
+  question: String!
+  enabled: Boolean!
+}
+
+type JournalQuestions {
+  system: [JournalQuestion!]!
+  user: [JournalQuestion!]
+  daily(date: String!): [JournalQuestion!]!
+}
+
 type JournalStats {
   count: Int!
   initialDate: String!
@@ -94,7 +105,8 @@ type Me {
 }
 
 type MutationJournal {
-  saveJournal(journal: JournalInput): Journal
+  saveJournal(journal: JournalInput!): Journal!
+  saveQuestions(questions: [JournalQuestionInput!]!): [JournalQuestion!]!
 }
 
 type MutationZettel {
@@ -137,6 +149,7 @@ type QueryJournal {
   ): JournalConnection
   stats(today: String!): JournalStats
   summary(date: String!): [JournalSummaryItem!]!
+  questions: JournalQuestions
 }
 
 type QueryZettel {
@@ -162,6 +175,11 @@ type ZettelNote implements Node {
 input JournalInput {
   date: String!
   text: String!
+}
+
+input JournalQuestionInput {
+  question: String!
+  enabled: Boolean!
 }
 
 input ZettelNoteInput {

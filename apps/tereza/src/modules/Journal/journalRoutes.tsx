@@ -1,5 +1,6 @@
 import { ErrorPage } from '../Layout/ErrorPage';
 import { JournalDay, journalDayLoader } from './JournalDay';
+import { JournalQuestions, journalQuestionsLoader } from './JournalQuestions';
 import { JournalRoot } from './JournalRoot';
 import { JournalStats, journalStatsLoader } from './JournalStats';
 import { JournalSummary, journalSummaryLoader } from './JournalSummary';
@@ -23,6 +24,11 @@ export const journalRoutes: RouteObject[] = [
             path: 'stats',
             loader: journalStatsLoader,
             element: <JournalStats />,
+          },
+          {
+            path: 'questions',
+            loader: journalQuestionsLoader,
+            element: <JournalQuestions />,
           },
           {
             path: ':date',

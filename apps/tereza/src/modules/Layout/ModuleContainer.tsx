@@ -72,7 +72,15 @@ export const ModuleContainer = ({
           }}
         >
           <React.Suspense fallback={<div>Loading...</div>}>
-            <ErrorBoundary fallbackRender={ErrorPage}>{children}</ErrorBoundary>
+            <ErrorBoundary fallbackRender={ErrorPage}>
+              <Box
+                sx={{
+                  paddingBottom: '3xl',
+                }}
+              >
+                {children}
+              </Box>
+            </ErrorBoundary>
           </React.Suspense>
         </Container>
       </Flex>

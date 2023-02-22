@@ -1,18 +1,15 @@
 import * as React from 'react';
-import { Editor } from '@tereza-tech/components';
+import { Editor, EditorRef } from '@tereza-tech/components';
 import { JournalEditorMutation } from './__generated__/JournalEditorMutation.graphql';
 import { graphql, useMutation } from 'react-relay';
 import { useDebouncedCallback } from 'use-debounce';
 
-export const JournalEditor = ({
-  editable = false,
-  text,
-  date,
-}: {
-  editable?: boolean;
-  text?: string;
-  date: string;
-}) => {
+export type { EditorRef };
+
+export const JournalEditor = React.forwardRef<
+  EditorRef,
+  { text?: string; date: string }
+>(({ text, date }, ref) => {
   const [saveJournal, isInFlight] = useMutation<JournalEditorMutation>(
     graphql`
       mutation JournalEditorMutation($journal: JournalInput!) {
@@ -41,9 +38,13 @@ export const JournalEditor = ({
         },
       });
     },
-    2000,
+    5 * 1000,
     {
-      maxWait: 5000,
+      maxWait: 30 * 1000,
+      /**
+       * Add the leading to remove daily questions immediately.
+       */
+      leading: true,
     }
   );
 
@@ -56,5 +57,7 @@ export const JournalEditor = ({
     };
   }, [onChange, date]);
 
-  return <Editor initialValue={text} onChange={onChange} />;
-};
+  return <Editor initialValue={text} onChange={onChange} ref={ref} />;
+});
+
+JournalEditor.displayName = 'JournalEditor';
