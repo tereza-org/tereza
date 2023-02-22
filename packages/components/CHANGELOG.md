@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.13.0...@tereza-tech/components@0.14.0) (2023-02-22)
+
+### Features
+
+- editor button and some layout fixes ([#59](https://github.com/terezatech/tereza-tech/issues/59)) ([6232ffe](https://github.com/terezatech/tereza-tech/commit/6232ffe468b749ff17c29739095a8770cf334997))
+
 # [0.13.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.12.0...@tereza-tech/components@0.13.0) (2023-02-22)
 
 ### Features
