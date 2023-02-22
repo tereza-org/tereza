@@ -5,29 +5,30 @@ export type JournalProps = {
   label: string;
   text: string;
   onEdit?: () => void;
+  onLabelClick?: () => void;
 };
 
 const TempIcon = Icon as any;
 
-export const Journal = ({ label, text, onEdit }: JournalProps) => {
+export const Journal = ({
+  label,
+  text,
+  onEdit,
+  onLabelClick,
+}: JournalProps) => {
   const missing = !text;
 
   const finalText = missing ? '_No journal entry for this day_ 😢' : text;
 
   return (
     <Flex
-      onClick={onEdit}
       sx={{
         flexDirection: 'column',
-        backgroundColor: '#f2f2f2',
-        padding: 'md',
+        backgroundColor: '#f7f7f7',
+        padding: 'xl',
         border: '1px solid',
         borderColor: missing ? 'red' : 'transparent',
         borderRadius: '4px',
-        cursor: onEdit ? 'pointer' : 'default',
-        ':hover': {
-          backgroundColor: '#f7f7f7',
-        },
       }}
     >
       <Text
@@ -37,11 +38,23 @@ export const Journal = ({ label, text, onEdit }: JournalProps) => {
           fontSize: 'lg',
         }}
       >
-        {label}
+        <Text
+          onClick={onLabelClick}
+          sx={{
+            cursor: onLabelClick ? 'pointer' : 'default',
+            ':hover': {
+              textDecoration: onLabelClick ? 'underline' : 'none',
+            },
+          }}
+        >
+          {label}
+        </Text>
         {onEdit && (
           <Text
+            onClick={onEdit}
             sx={{
               marginLeft: 'md',
+              cursor: 'pointer',
             }}
           >
             <TempIcon icon="material-symbols:edit" />
