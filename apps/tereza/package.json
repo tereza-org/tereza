@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/tereza",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "type": "module",
   "scripts": {
     "build": "yarn relay && tsc && vite build --mode={$CARLIN_ENVIRONMENT || Production}",
@@ -13,7 +13,7 @@
     "test": "echo vitest"
   },
   "dependencies": {
-    "@tereza-tech/components": "^0.11.0",
+    "@tereza-tech/components": "^0.12.0",
     "@tereza-tech/react-zettel": "^0.7.0",
     "@tereza-tech/theme": "^1.9.0",
     "@ttoss/forms": "^0.14.2",
