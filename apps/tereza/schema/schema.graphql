@@ -26,7 +26,11 @@ enum JournalSummaryKeyEnum {
 }
 
 enum SortConnectionJournalEnum {
-  DESC
+  DATE_DESC
+}
+
+enum SortConnectionZettelNoteEnum {
+  BY_TITLE
 }
 
 """
@@ -145,7 +149,7 @@ type QueryJournal {
     before: String
 
     """Sort argument for data ordering"""
-    sort: SortConnectionJournalEnum = DESC
+    sort: SortConnectionJournalEnum = DATE_DESC
   ): JournalConnection
   stats(today: String!): JournalStats
   summary(date: String!): [JournalSummaryItem!]!
@@ -154,8 +158,25 @@ type QueryJournal {
 
 type QueryZettel {
   note(id: ID!): ZettelNote!
-  notes: [ZettelNote!]!
+  notes(
+    """Forward pagination argument for returning at most first edges"""
+    first: Int
+
+    """Forward pagination argument for returning at most first edges"""
+    after: String
+
+    """Backward pagination argument for returning at most last edges"""
+    last: Int
+
+    """Backward pagination argument for returning at most last edges"""
+    before: String
+    filter: ZettelNotesFilterInput
+
+    """Sort argument for data ordering"""
+    sort: SortConnectionZettelNoteEnum = BY_TITLE
+  ): ZettelNoteConnection
   insights(note: ZettelNoteInput!): [ZettelInsight!]!
+  tags: [String!]!
 }
 
 type ZettelInsight {
@@ -170,6 +191,27 @@ type ZettelNote implements Node {
   description: String
   tags: [String!]!
   content: String
+}
+
+"""A connection to a list of items."""
+type ZettelNoteConnection {
+  """Total object count."""
+  count: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ZettelNoteEdge!]!
+}
+
+"""An edge in a connection."""
+type ZettelNoteEdge {
+  """The item at the end of the edge"""
+  node: ZettelNote!
+
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 input JournalInput {
@@ -189,4 +231,10 @@ input ZettelNoteInput {
   description: String
   tags: [String!]
   content: String
+}
+
+input ZettelNotesFilterInput {
+  groups: [String!]
+  includeDrafts: Boolean
+  tags: [String!]
 }
