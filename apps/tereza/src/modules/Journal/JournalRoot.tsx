@@ -14,6 +14,7 @@ export const JournalRoot = () => {
         { label: 'Summary', to: '/journal' },
         { label: 'Stats', to: '/journal/stats' },
         { label: 'Questions', to: '/journal/questions' },
+        { label: 'All', to: '/journal/all' },
       ]}
     >
       <Outlet />

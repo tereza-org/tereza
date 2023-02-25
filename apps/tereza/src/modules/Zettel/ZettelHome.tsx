@@ -9,9 +9,13 @@ const zettelHomeQuery = graphql`
   query ZettelHomeQuery {
     zettel {
       notes {
-        id
-        title
-        group
+        edges {
+          node {
+            id
+            title
+            group
+          }
+        }
       }
     }
   }
@@ -39,9 +43,13 @@ export const ZettelHome = () => {
 
   const { zettel } = usePreloadedQuery(zettelHomeQuery, queryRef);
 
-  const notes = (zettel?.notes || []).map(({ id, title, group }) => {
-    return { id, title, group };
-  });
+  const notes = (zettel?.notes?.edges || [])
+    .map(({ node }) => {
+      return node;
+    })
+    .map(({ id, title, group }) => {
+      return { id, title, group };
+    });
 
   return (
     <Flex>

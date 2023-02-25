@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Button, Flex } from '@ttoss/ui';
+import { Editor } from '@tereza-tech/components';
 import {
   Form,
+  FormField,
   FormFieldInput,
-  FormFieldTextarea,
   useForm,
   yup,
   yupResolver,
@@ -144,12 +145,28 @@ const ZettelNoteForm = ({
   const [title, content] = watch(['title', 'content']);
 
   return (
-    <Form {...formMethods} onSubmit={handleSubmit}>
+    <Form
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 'lg',
+      }}
+      {...formMethods}
+      onSubmit={handleSubmit}
+    >
       <FormFieldInput name="title" label="Title" />
       <FormFieldInput name="group" label="Group" disabled />
       <FormFieldInput name="description" label="Description" />
       <FormFieldInput name="tags" label="Tags (separated by comma)" />
-      <FormFieldTextarea name="content" label="Content" rows={15} />
+      <FormField
+        name="content"
+        label="Content"
+        render={({ field: { onChange, value } }) => {
+          return (
+            <Editor key={noteId} initialValue={value} onChange={onChange} />
+          );
+        }}
+      />
       <Flex sx={{ gap: 'md' }}>
         <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Saving' : 'Save'}

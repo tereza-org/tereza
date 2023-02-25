@@ -8,6 +8,7 @@ export const ZettelRoot = () => {
       links={[
         { label: 'Home', to: '/zettel' },
         { label: 'New', to: '/zettel/editor' },
+        { label: 'Tags', to: '/zettel/tags' },
       ]}
     >
       <Outlet />
