@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.20.0...@tereza-tech-apps/tereza@0.21.0) (2023-02-25)
+
+### Features
+
+- add journal all ([#60](https://github.com/terezatech/tereza-tech/issues/60)) ([0c8163f](https://github.com/terezatech/tereza-tech/commit/0c8163f8a042bd2bb355466704cd07e3cfed85d1))
+
 # [0.20.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.19.0...@tereza-tech-apps/tereza@0.20.0) (2023-02-22)
 
 ### Features
