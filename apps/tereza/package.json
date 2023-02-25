@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/tereza",
-  "version": "0.21.0",
+  "version": "0.21.1",
   "type": "module",
   "scripts": {
     "build": "yarn relay && tsc && vite build --mode={$CARLIN_ENVIRONMENT || Production}",

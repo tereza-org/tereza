@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.21.0...@tereza-tech-apps/tereza@0.21.1) (2023-02-25)
+
+### Bug Fixes
+
+- mobile design ([#61](https://github.com/terezatech/tereza-tech/issues/61)) ([0db18e9](https://github.com/terezatech/tereza-tech/commit/0db18e9e0d0e6d67a9174fd3faabe333fec9b6cb))
+
 # [0.21.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.20.0...@tereza-tech-apps/tereza@0.21.0) (2023-02-25)
 
 ### Features
