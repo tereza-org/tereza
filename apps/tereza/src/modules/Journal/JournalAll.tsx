@@ -121,7 +121,7 @@ export const JournalAll = () => {
         gap: '2xl',
       }}
     >
-      <Heading as="h1">Journal Day</Heading>
+      <Heading as="h1">All Journals</Heading>
       <React.Suspense fallback={<div>Loading...</div>}>
         <JournalAllPreloader />
       </React.Suspense>
