@@ -43,7 +43,9 @@ export const ModuleContainer = ({
         </Text>
         <Flex
           sx={{
-            flexDirection: 'column',
+            flexDirection: ['row', 'column'],
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
             gap: 'lg',
             padding: 'md',
           }}
@@ -62,7 +64,8 @@ export const ModuleContainer = ({
           width: '100%',
           justifyContent: 'center',
           overflowY: 'auto',
-          padding: 'xl',
+          paddingX: ['lg', 'xl'],
+          paddingY: ['xl'],
         }}
       >
         <Container
