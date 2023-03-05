@@ -4,7 +4,7 @@
   "version": "0.22.0",
   "type": "module",
   "scripts": {
-    "build": "yarn relay && tsc && vite build --mode={$CARLIN_ENVIRONMENT || Staging}",
+    "build": "yarn relay && tsc && vite build --mode=${CARLIN_ENVIRONMENT:-Staging}",
     "deploy": "carlin deploy static-app",
     "dev": "vite",
     "env": "carlin generate-env",
