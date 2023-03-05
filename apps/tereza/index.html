@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tereza</title>
     <script>
-      // Amplify need this to work. See https://github.com/aws/aws-sdk-js/issues/3673
-      const isBrowser = () => typeof window !== 'undefined';
-      const isGlobal = () => typeof global !== 'undefined';
-      if (!isGlobal() && isBrowser()) {
-        var global = window;
-      }
+      window.global = window;
+    </script>
+    <script type="module">
+      import process from 'process';
+      import EventEmitter from 'events';
+      import { Buffer } from 'buffer';
+      window.Buffer = Buffer;
+      window.process = process;
+      window.EventEmitter = EventEmitter;
     </script>
   </head>
   <body>

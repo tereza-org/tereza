@@ -11,7 +11,7 @@
   "dependencies": {
     "@tereza-tech/components": "^0.14.0",
     "@tereza-tech/theme": "^1.10.0",
-    "@ttoss/ui": "^1.30.2",
+    "@ttoss/ui": "^1.30.6",
     "@types/node": "18.11.10",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
