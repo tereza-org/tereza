@@ -22,7 +22,7 @@
     "@lerna-lite/list": "^1.13.0",
     "@ttoss/config": "^1.28.1",
     "@ttoss/eslint-config": "^1.19.2",
-    "carlin": "^1.21.3",
+    "carlin": "^1.24.0",
     "check-dependency-version-consistency": "^3.0.3",
     "eslint": "^8.30.0",
     "husky": "^8.0.2",
