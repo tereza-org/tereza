@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.21.1...@tereza-tech-apps/tereza@0.22.0) (2023-03-05)
+
+### Features
+
+- add staging environment ([#62](https://github.com/terezatech/tereza-tech/issues/62)) ([3702e12](https://github.com/terezatech/tereza-tech/commit/3702e12745a64d87ff358b7b06614f5580981f6b))
+
 ## [0.21.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.21.0...@tereza-tech-apps/tereza@0.21.1) (2023-02-25)
 
 ### Bug Fixes

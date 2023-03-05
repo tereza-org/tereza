@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/tereza",
-  "version": "0.21.1",
+  "version": "0.22.0",
   "type": "module",
   "scripts": {
     "build": "yarn relay && tsc && vite build --mode={$CARLIN_ENVIRONMENT || Staging}",
@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-    "@tereza-tech/components": "^0.14.0",
+    "@tereza-tech/components": "^0.15.0",
     "@tereza-tech/react-zettel": "^0.7.0",
-    "@tereza-tech/theme": "^1.10.0",
+    "@tereza-tech/theme": "^1.11.0",
     "@ttoss/forms": "^0.14.6",
     "@ttoss/react-auth": "^1.2.18",
     "@ttoss/react-i18n": "^1.18.8",
