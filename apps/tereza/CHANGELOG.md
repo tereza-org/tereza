@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.22.0...@tereza-tech-apps/tereza@0.22.1) (2023-03-05)
+
+### Bug Fixes
+
+- **tereza:** build command ([38a342b](https://github.com/terezatech/tereza-tech/commit/38a342b7d1af24abd4eb554ef681348ca43e1d30))
+
 # [0.22.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.21.1...@tereza-tech-apps/tereza@0.22.0) (2023-03-05)
 
 ### Features
