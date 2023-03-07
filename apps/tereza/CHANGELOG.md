@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.22.1...@tereza-tech-apps/tereza@0.23.0) (2023-03-07)
+
+### Features
+
+- reestructure to support lazy loading ([#63](https://github.com/terezatech/tereza-tech/issues/63)) ([8702a5e](https://github.com/terezatech/tereza-tech/commit/8702a5eaa7085b325c922be07ab867d14678ff5a))
+
 ## [0.22.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.22.0...@tereza-tech-apps/tereza@0.22.1) (2023-03-05)
 
 ### Bug Fixes

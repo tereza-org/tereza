@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.8.0 (2023-03-07)
+
+### Features
+
+- reestructure to support lazy loading ([#63](https://github.com/terezatech/tereza-tech/issues/63)) ([8702a5e](https://github.com/terezatech/tereza-tech/commit/8702a5eaa7085b325c922be07ab867d14678ff5a))
+
 # [0.7.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/react-zettel@0.6.1...@tereza-tech/react-zettel@0.7.0) (2023-02-19)
 
 ### Features
