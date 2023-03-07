@@ -177,6 +177,23 @@ type QueryZettel {
   ): ZettelNoteConnection
   insights(note: ZettelNoteInput!): [ZettelInsight!]!
   tags: [String!]!
+  graphData: ZettelGraph!
+}
+
+type ZettelGraph {
+  nodes: [ZettelGraphNode!]!
+  links: [ZettelGraphLink!]!
+}
+
+type ZettelGraphLink {
+  source: String!
+  target: String!
+}
+
+type ZettelGraphNode {
+  id: ID!
+  group: String!
+  label: String
 }
 
 type ZettelInsight {

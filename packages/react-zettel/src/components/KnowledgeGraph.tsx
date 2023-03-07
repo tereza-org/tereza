@@ -9,9 +9,12 @@ import ForceGraph3D, {
   ForceGraphProps as ForceGraphProps3D,
 } from 'react-force-graph-3d';
 import SpriteText from 'three-spritetext';
-import type { GraphData } from '@tereza-tech/zettel/src/knowledgeGraph';
+import type {
+  GraphData,
+  GraphGroup,
+} from '@tereza-tech/zettel/src/knowledgeGraph';
 
-export type { GraphData };
+export type { GraphData, GraphGroup };
 
 export type KnowledgeGraphProps = {
   height?: number;

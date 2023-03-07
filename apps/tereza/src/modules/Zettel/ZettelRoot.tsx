@@ -9,6 +9,7 @@ export const ZettelRoot = () => {
         { label: 'Home', to: '/zettel' },
         { label: 'New', to: '/zettel/editor' },
         { label: 'Tags', to: '/zettel/tags' },
+        { label: 'Graph', to: '/zettel/graph' },
       ]}
     >
       <Outlet />

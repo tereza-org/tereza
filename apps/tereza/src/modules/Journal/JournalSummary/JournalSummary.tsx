@@ -1,40 +1,14 @@
-import * as React from 'react';
 import { Flex, Heading } from '@ttoss/ui';
-import { JournalMarkdown } from './JournalMarkdown';
-import { JournalSummaryQuery } from './__generated__/JournalSummaryQuery.graphql';
+import { JournalMarkdown } from '../JournalMarkdown';
+import { JournalSummaryList_queryJournal$key } from './__generated__/JournalSummaryList_queryJournal.graphql';
 import { JournalSummary_journalSummaryItem$key } from './__generated__/JournalSummary_journalSummaryItem.graphql';
-import { getToday } from '../Date/utils';
+import { Suspense } from '../../Layout';
+import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import {
-  graphql,
-  loadQuery,
-  useFragment,
-  usePreloadedQuery,
-} from 'react-relay';
-import { relayEnvironment } from '../ApiClient/relayEnvironment';
+  journalSummaryLoader,
+  journalSummaryRootQuery,
+} from './journalSummaryLoader';
 import { useLoaderData } from 'react-router-dom';
-
-const journalSummaryQuery = graphql`
-  query JournalSummaryQuery($date: String!) {
-    journal {
-      summary(date: $date) {
-        key
-        ...JournalSummary_journalSummaryItem
-      }
-    }
-  }
-`;
-
-export const journalSummaryLoader = async () => {
-  const queryRef = loadQuery<JournalSummaryQuery>(
-    relayEnvironment,
-    journalSummaryQuery,
-    {
-      date: getToday(),
-    }
-  );
-
-  return { queryRef };
-};
 
 const JournalSummaryItem = ({
   journalSummaryItemRef,
@@ -61,14 +35,22 @@ const JournalSummaryItem = ({
   );
 };
 
-const JournalSummaryPreloader = () => {
-  const { queryRef } = useLoaderData() as Awaited<
-    ReturnType<typeof journalSummaryLoader>
-  >;
-
-  const { journal } = usePreloadedQuery(journalSummaryQuery, queryRef);
-
-  const summary = journal?.summary || [];
+const JournalSummaryList = ({
+  queryJournalRef,
+}: {
+  queryJournalRef: JournalSummaryList_queryJournal$key;
+}) => {
+  const { summary } = useFragment(
+    graphql`
+      fragment JournalSummaryList_queryJournal on QueryJournal {
+        summary(date: $date) {
+          key
+          ...JournalSummary_journalSummaryItem
+        }
+      }
+    `,
+    queryJournalRef
+  );
 
   return (
     <Flex
@@ -86,7 +68,24 @@ const JournalSummaryPreloader = () => {
   );
 };
 
-export const JournalSummary = () => {
+const JournalSummaryPreloader = () => {
+  const { journalSummaryRootQueryRef } = useLoaderData() as Awaited<
+    ReturnType<typeof journalSummaryLoader>
+  >;
+
+  const { journal } = usePreloadedQuery(
+    journalSummaryRootQuery,
+    journalSummaryRootQueryRef
+  );
+
+  if (!journal) {
+    return null;
+  }
+
+  return <JournalSummaryList queryJournalRef={journal} />;
+};
+
+const JournalSummary = () => {
   return (
     <Flex
       sx={{
@@ -95,9 +94,11 @@ export const JournalSummary = () => {
       }}
     >
       <Heading as="h1">Journal Summary</Heading>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <Suspense>
         <JournalSummaryPreloader />
-      </React.Suspense>
+      </Suspense>
     </Flex>
   );
 };
+
+export default JournalSummary;
