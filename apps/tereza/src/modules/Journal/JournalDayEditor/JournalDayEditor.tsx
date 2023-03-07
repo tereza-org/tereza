@@ -1,56 +1,17 @@
 import * as React from 'react';
 import { Box, Button, Flex, Heading, Text } from '@ttoss/ui';
-import { EditorRef, JournalEditor } from './JournalEditor';
+import { EditorRef, JournalEditor } from '../JournalEditor';
 import { ErrorBoundary } from 'react-error-boundary';
 import { JournalDayEditorNoEntryMessage_queryJournal$key } from './__generated__/JournalDayEditorNoEntryMessage_queryJournal.graphql';
-import {
-  JournalDayEditorQuery,
-  JournalDayEditorQuery$data,
-} from './__generated__/JournalDayEditorQuery.graphql';
+import { JournalDayEditorQuery$data } from './__generated__/JournalDayEditorQuery.graphql';
 import { JournalDayEditor_journal$key } from './__generated__/JournalDayEditor_journal.graphql';
+import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import {
-  LoaderFunctionArgs,
-  useLoaderData,
-  useNavigate,
-} from 'react-router-dom';
-import { getToday, isValidDate } from '../Date/utils';
-import {
-  graphql,
-  loadQuery,
-  useFragment,
-  usePreloadedQuery,
-} from 'react-relay';
-import { relayEnvironment } from '../ApiClient/relayEnvironment';
+  journalDayEditorLoader,
+  journalDayEditorRootQuery,
+} from './journalDayEditorLoader';
 import { useDebounce } from 'use-debounce';
-
-export const journalDayQuery = graphql`
-  query JournalDayEditorQuery($date: String!) {
-    journal {
-      ...JournalDayEditorNoEntryMessage_queryJournal
-      journalDay(date: $date) {
-        ...JournalDayEditor_journal
-      }
-    }
-  }
-`;
-
-export const journalDayEditorLoader = async ({
-  params,
-}: LoaderFunctionArgs) => {
-  const { date = getToday() } = params;
-
-  if (!isValidDate(date)) {
-    throw new Error('Invalid date');
-  }
-
-  const queryRef = loadQuery<JournalDayEditorQuery>(
-    relayEnvironment,
-    journalDayQuery,
-    { date }
-  );
-
-  return { date, queryRef };
-};
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 const JournalDayNoEntryMessage = ({
   onApplyQuestions,
@@ -212,11 +173,14 @@ const JournalDayEditorWithNoEntryMessage = ({
 };
 
 const JournalDayEditorPreloader = () => {
-  const { queryRef } = useLoaderData() as Awaited<
+  const { journalDayEditorRootQueryRef } = useLoaderData() as Awaited<
     ReturnType<typeof journalDayEditorLoader>
   >;
 
-  const { journal } = usePreloadedQuery(journalDayQuery, queryRef);
+  const { journal } = usePreloadedQuery(
+    journalDayEditorRootQuery,
+    journalDayEditorRootQueryRef
+  );
 
   if (!journal) {
     return null;
@@ -225,7 +189,7 @@ const JournalDayEditorPreloader = () => {
   return <JournalDayEditorWithNoEntryMessage journal={journal} />;
 };
 
-export const JournalDayEditor = () => {
+const JournalDayEditor = () => {
   const navigate = useNavigate();
 
   const { date } = useLoaderData() as Awaited<
@@ -269,3 +233,5 @@ export const JournalDayEditor = () => {
     </Flex>
   );
 };
+
+export default JournalDayEditor;

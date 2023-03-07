@@ -10,23 +10,21 @@ import {
   yupResolver,
 } from '@ttoss/forms';
 import {
-  LoaderFunctionArgs,
-  useLoaderData,
-  useNavigate,
-} from 'react-router-dom';
-import {
   PreloadedQuery,
   graphql,
-  loadQuery,
   useFragment,
   useMutation,
   usePreloadedQuery,
 } from 'react-relay';
-import { ZettelInsights } from './ZettelInsights';
-import { ZettelNoteEditorLoaderQuery } from './__generated__/ZettelNoteEditorLoaderQuery.graphql';
+import { ZettelInsights } from '../ZettelInsights';
 import { ZettelNoteEditorSaveZettelNoteMutation } from './__generated__/ZettelNoteEditorSaveZettelNoteMutation.graphql';
 import { ZettelNoteEditor_zettelNote$key } from './__generated__/ZettelNoteEditor_zettelNote.graphql';
-import { relayEnvironment } from '../ApiClient/relayEnvironment';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import {
+  zettelNoteEditorLoader,
+  zettelNoteEditorRootQuery,
+} from './zettelNoteEditorLoader';
+import { zettelNoteEditorLoaderRootQuery } from './__generated__/zettelNoteEditorLoaderRootQuery.graphql';
 
 const zettelNoteFragment = graphql`
   fragment ZettelNoteEditor_zettelNote on ZettelNote {
@@ -36,16 +34,6 @@ const zettelNoteFragment = graphql`
     tags
     description
     content
-  }
-`;
-
-const zettelNoteEditorLoaderQuery = graphql`
-  query ZettelNoteEditorLoaderQuery($noteId: ID!) {
-    zettel {
-      note(id: $noteId) {
-        ...ZettelNoteEditor_zettelNote
-      }
-    }
   }
 `;
 
@@ -59,24 +47,6 @@ const zettelNoteEditorSaveZettelNoteMutation = graphql`
     }
   }
 `;
-
-export const zettelNoteEditorLoader = async ({
-  params,
-}: LoaderFunctionArgs) => {
-  const { noteId } = params;
-
-  if (!noteId) {
-    return {};
-  }
-
-  const zettelNoteEditorLoaderQueryRef = loadQuery<ZettelNoteEditorLoaderQuery>(
-    relayEnvironment,
-    zettelNoteEditorLoaderQuery,
-    { noteId }
-  );
-
-  return { zettelNoteEditorLoaderQueryRef };
-};
 
 const schema = yup.object({
   id: yup.string(),
@@ -190,11 +160,11 @@ const ZettelNoteForm = ({
 };
 
 const ZettelNoteFragmentHandler = ({
-  noteRef,
+  zettelNoteRef,
 }: {
-  noteRef: ZettelNoteEditor_zettelNote$key;
+  zettelNoteRef: ZettelNoteEditor_zettelNote$key;
 }) => {
-  const note = useFragment(zettelNoteFragment, noteRef);
+  const note = useFragment(zettelNoteFragment, zettelNoteRef);
 
   const defaultValues = {
     id: note.id,
@@ -209,36 +179,42 @@ const ZettelNoteFragmentHandler = ({
 };
 
 const PreloadedQueryHandler = ({
-  zettelNoteEditorLoaderQueryRef,
+  zettelNoteEditorRootQueryRef,
 }: {
-  zettelNoteEditorLoaderQueryRef: PreloadedQuery<ZettelNoteEditorLoaderQuery>;
+  zettelNoteEditorRootQueryRef: PreloadedQuery<zettelNoteEditorLoaderRootQuery>;
 }) => {
-  const { zettel } = usePreloadedQuery<ZettelNoteEditorLoaderQuery>(
-    zettelNoteEditorLoaderQuery,
-    zettelNoteEditorLoaderQueryRef
+  const { zettel } = usePreloadedQuery<zettelNoteEditorLoaderRootQuery>(
+    zettelNoteEditorRootQuery,
+    zettelNoteEditorRootQueryRef
   );
 
-  const noteRef = zettel?.note;
+  const zettelNote = zettel?.note;
 
-  if (!noteRef) {
+  if (!zettelNote) {
     return null;
   }
 
-  return <ZettelNoteFragmentHandler noteRef={noteRef} />;
+  return <ZettelNoteFragmentHandler zettelNoteRef={zettelNote} />;
 };
 
-export const ZettelNoteEditor = () => {
-  const { zettelNoteEditorLoaderQueryRef } = useLoaderData() as Awaited<
+/**
+ * Check if note exists and load it if it does.
+ * Otherwise, render a form to create a new note.
+ */
+const ZettelNoteEditor = () => {
+  const { zettelNoteEditorRootQueryRef } = useLoaderData() as Awaited<
     ReturnType<typeof zettelNoteEditorLoader>
   >;
 
-  if (!zettelNoteEditorLoaderQueryRef) {
+  if (!zettelNoteEditorRootQueryRef) {
     return <ZettelNoteForm />;
   }
 
   return (
     <PreloadedQueryHandler
-      zettelNoteEditorLoaderQueryRef={zettelNoteEditorLoaderQueryRef}
+      zettelNoteEditorRootQueryRef={zettelNoteEditorRootQueryRef}
     />
   );
 };
+
+export default ZettelNoteEditor;

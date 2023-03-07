@@ -1,34 +1,16 @@
 import * as React from 'react';
 import { Button, Flex, Heading } from '@ttoss/ui';
 import { JournalAllJournalListFragment_query$key } from './__generated__/JournalAllJournalListFragment_query.graphql';
-import { JournalAllQuery } from './__generated__/JournalAllQuery.graphql';
 import { JournalAll_journal$key } from './__generated__/JournalAll_journal.graphql';
-import { JournalMarkdown } from './JournalMarkdown';
+import { JournalMarkdown } from '../JournalMarkdown';
 import {
   graphql,
-  loadQuery,
   useFragment,
   usePaginationFragment,
   usePreloadedQuery,
 } from 'react-relay';
-import { relayEnvironment } from '../ApiClient/relayEnvironment';
+import { journalAllLoader, journalAllRootQuery } from './journalAllLoader';
 import { useLoaderData } from 'react-router-dom';
-
-const journalAllQuery = graphql`
-  query JournalAllQuery {
-    ...JournalAllJournalListFragment_query
-  }
-`;
-
-export const journalAllLoader = async () => {
-  const queryRef = loadQuery<JournalAllQuery>(
-    relayEnvironment,
-    journalAllQuery,
-    {}
-  );
-
-  return { queryRef };
-};
 
 const Journal = ({ journalRef }: { journalRef: JournalAll_journal$key }) => {
   const { date, text } = useFragment(
@@ -104,16 +86,16 @@ const JournalList = ({
 };
 
 const JournalAllPreloader = () => {
-  const { queryRef } = useLoaderData() as Awaited<
+  const { journalAllRootQueryRef } = useLoaderData() as Awaited<
     ReturnType<typeof journalAllLoader>
   >;
 
-  const query = usePreloadedQuery(journalAllQuery, queryRef);
+  const query = usePreloadedQuery(journalAllRootQuery, journalAllRootQueryRef);
 
   return <JournalList queryRef={query} />;
 };
 
-export const JournalAll = () => {
+const JournalAll = () => {
   return (
     <Flex
       sx={{
@@ -128,3 +110,5 @@ export const JournalAll = () => {
     </Flex>
   );
 };
+
+export default JournalAll;

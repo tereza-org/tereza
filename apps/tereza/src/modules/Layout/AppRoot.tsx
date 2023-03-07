@@ -3,7 +3,7 @@ import { Container, Flex } from '@ttoss/ui';
 import { Navbar } from './Navbar';
 import { Outlet } from 'react-router-dom';
 
-export const Root = () => {
+export const AppRoot = () => {
   return (
     <Flex
       sx={{

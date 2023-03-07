@@ -1,41 +1,14 @@
-import * as React from 'react';
 import { Box, Flex, Heading, Text } from '@ttoss/ui';
 import { JournalStatsGroupDate_journalStatsGroupDate$key } from './__generated__/JournalStatsGroupDate_journalStatsGroupDate.graphql';
 import { JournalStatsGroupDates_journalStats$key } from './__generated__/JournalStatsGroupDates_journalStats.graphql';
-import { JournalStatsQuery } from './__generated__/JournalStatsQuery.graphql';
 import { JournalStatsTexts_journalStats$key } from './__generated__/JournalStatsTexts_journalStats.graphql';
-import { getToday } from '../Date/utils';
+import { Suspense } from '../../Layout';
+import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import {
-  graphql,
-  loadQuery,
-  useFragment,
-  usePreloadedQuery,
-} from 'react-relay';
-import { relayEnvironment } from '../ApiClient/relayEnvironment';
+  journalStatsLoader,
+  journalStatsRootQuery,
+} from './journalStatsLoader';
 import { useLoaderData, useNavigate } from 'react-router-dom';
-
-const journalStatsQuery = graphql`
-  query JournalStatsQuery($today: String!) {
-    journal {
-      stats(today: $today) {
-        ...JournalStatsTexts_journalStats
-        ...JournalStatsGroupDates_journalStats
-      }
-    }
-  }
-`;
-
-export const journalStatsLoader = async () => {
-  const queryRef = loadQuery<JournalStatsQuery>(
-    relayEnvironment,
-    journalStatsQuery,
-    {
-      today: getToday(),
-    }
-  );
-
-  return { queryRef };
-};
 
 const StatsTexts = ({
   statsRef,
@@ -175,11 +148,14 @@ const GroupDates = ({
 };
 
 const JournalStatusPreloader = () => {
-  const { queryRef } = useLoaderData() as Awaited<
+  const { journalStatsRootQueryRef } = useLoaderData() as Awaited<
     ReturnType<typeof journalStatsLoader>
   >;
 
-  const { journal } = usePreloadedQuery(journalStatsQuery, queryRef);
+  const { journal } = usePreloadedQuery(
+    journalStatsRootQuery,
+    journalStatsRootQueryRef
+  );
 
   if (!journal?.stats) {
     return null;
@@ -193,7 +169,7 @@ const JournalStatusPreloader = () => {
   );
 };
 
-export const JournalStats = () => {
+const JournalStats = () => {
   return (
     <Flex
       sx={{
@@ -202,9 +178,11 @@ export const JournalStats = () => {
       }}
     >
       <Heading as="h1">Journal Stats</Heading>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <Suspense>
         <JournalStatusPreloader />
-      </React.Suspense>
+      </Suspense>
     </Flex>
   );
 };
+
+export default JournalStats;
