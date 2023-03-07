@@ -3,13 +3,13 @@ import { Box, Button, Flex, Heading, Text } from '@ttoss/ui';
 import { EditorRef, JournalEditor } from '../JournalEditor';
 import { ErrorBoundary } from 'react-error-boundary';
 import { JournalDayEditorNoEntryMessage_queryJournal$key } from './__generated__/JournalDayEditorNoEntryMessage_queryJournal.graphql';
-import { JournalDayEditorQuery$data } from './__generated__/JournalDayEditorQuery.graphql';
 import { JournalDayEditor_journal$key } from './__generated__/JournalDayEditor_journal.graphql';
 import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import {
   journalDayEditorLoader,
   journalDayEditorRootQuery,
 } from './journalDayEditorLoader';
+import { journalDayEditorLoaderRootQuery$data } from './__generated__/journalDayEditorLoaderRootQuery.graphql';
 import { useDebounce } from 'use-debounce';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
@@ -143,7 +143,7 @@ JournalDayEditorWithErrorBoundary.displayName =
 
 const JournalDayEditorWithNoEntryMessage = ({
   journal,
-}: JournalDayEditorQuery$data) => {
+}: journalDayEditorLoaderRootQuery$data) => {
   const editorRef = React.useRef<EditorRef>(null);
 
   const onApplyQuestions = (value: string) => {
