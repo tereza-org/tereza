@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Box, Button, Flex, Heading, Text } from '@ttoss/ui';
 import { EditorRef, JournalEditor } from '../JournalEditor';
 import { ErrorBoundary } from 'react-error-boundary';
-import { JournalDayEditorNoEntryMessage_queryJournal$key } from './__generated__/JournalDayEditorNoEntryMessage_queryJournal.graphql';
+import { JournalDayEditorQuestions_queryJournal$key } from './__generated__/JournalDayEditorQuestions_queryJournal.graphql';
 import { JournalDayEditor_journal$key } from './__generated__/JournalDayEditor_journal.graphql';
+import { ModuleMain } from '../../Layout';
 import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import {
   journalDayEditorLoader,
@@ -13,16 +14,16 @@ import { journalDayEditorLoaderRootQuery$data } from './__generated__/journalDay
 import { useDebounce } from 'use-debounce';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-const JournalDayNoEntryMessage = ({
+const JournalDayQuestions = ({
   onApplyQuestions,
   queryJournalRef,
 }: {
   onApplyQuestions: (value: string) => void;
-  queryJournalRef: JournalDayEditorNoEntryMessage_queryJournal$key;
+  queryJournalRef: JournalDayEditorQuestions_queryJournal$key;
 }) => {
   const { journalDay, questions } = useFragment(
     graphql`
-      fragment JournalDayEditorNoEntryMessage_queryJournal on QueryJournal {
+      fragment JournalDayEditorQuestions_queryJournal on QueryJournal {
         journalDay(date: $date) {
           text
         }
@@ -36,15 +37,15 @@ const JournalDayNoEntryMessage = ({
     queryJournalRef
   );
 
-  if (journalDay?.text) {
-    return null;
-  }
+  const disabled = !!journalDay?.text;
 
   const questionsTemplate = questions?.daily
     .map(({ question }) => {
       return `# ${question}`;
     })
     .join('\n\n');
+
+  const headline = `Your daily questions.`;
 
   return (
     <Flex
@@ -60,7 +61,7 @@ const JournalDayNoEntryMessage = ({
           fontStyle: 'italic',
         }}
       >
-        No journal for this day. Would you like to apply the daily questions?
+        {headline}
       </Text>
       {questions && questionsTemplate && (
         <>
@@ -74,6 +75,7 @@ const JournalDayNoEntryMessage = ({
             })}
           </ul>
           <Button
+            disabled={disabled}
             onClick={() => {
               return onApplyQuestions(questionsTemplate);
             }}
@@ -141,7 +143,7 @@ const JournalDayEditorWithErrorBoundary = React.forwardRef<
 JournalDayEditorWithErrorBoundary.displayName =
   'JournalDayEditorWithErrorBoundary';
 
-const JournalDayEditorWithNoEntryMessage = ({
+const JournalDayEditorWithQuestions = ({
   journal,
 }: journalDayEditorLoaderRootQuery$data) => {
   const editorRef = React.useRef<EditorRef>(null);
@@ -155,12 +157,10 @@ const JournalDayEditorWithNoEntryMessage = ({
   return (
     <>
       {journal && (
-        <React.Suspense>
-          <JournalDayNoEntryMessage
-            onApplyQuestions={onApplyQuestions}
-            queryJournalRef={journal}
-          />
-        </React.Suspense>
+        <JournalDayQuestions
+          onApplyQuestions={onApplyQuestions}
+          queryJournalRef={journal}
+        />
       )}
       {journal?.journalDay && (
         <JournalDayEditorWithErrorBoundary
@@ -186,7 +186,7 @@ const JournalDayEditorPreloader = () => {
     return null;
   }
 
-  return <JournalDayEditorWithNoEntryMessage journal={journal} />;
+  return <JournalDayEditorWithQuestions journal={journal} />;
 };
 
 const JournalDayEditor = () => {
@@ -197,15 +197,7 @@ const JournalDayEditor = () => {
   >;
 
   return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        gap: '2xl',
-        alignItems: 'flex-start',
-        width: '100%',
-      }}
-    >
-      <Heading as="h1">Journal Editor</Heading>
+    <ModuleMain title="Journal Editor">
       <Box
         sx={{
           width: '100%',
@@ -230,7 +222,7 @@ const JournalDayEditor = () => {
       >
         Finish
       </Button>
-    </Flex>
+    </ModuleMain>
   );
 };
 
