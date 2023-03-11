@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Box, Flex, Text } from '@ttoss/ui';
 import { Editor, EditorRef } from '@tereza-tech/components';
 import { JournalEditorMutation } from './__generated__/JournalEditorMutation.graphql';
 import { graphql, useMutation } from 'react-relay';
@@ -23,7 +24,17 @@ export const JournalEditor = React.forwardRef<
     `
   );
 
-  const onChange = useDebouncedCallback(
+  const [savingStatus, setSavingStatus] = React.useState('Not saved');
+
+  const [errorOnSave, setErrorOnSave] = React.useState<Error | null>(null);
+
+  React.useEffect(() => {
+    if (isInFlight) {
+      setSavingStatus('Saving...');
+    }
+  }, [isInFlight]);
+
+  const save = useDebouncedCallback(
     (newText: string) => {
       if (newText === text) {
         return;
@@ -35,6 +46,12 @@ export const JournalEditor = React.forwardRef<
             date,
             text: newText,
           },
+        },
+        onCompleted: () => {
+          setSavingStatus('Saved');
+        },
+        onError: (error) => {
+          setErrorOnSave(error);
         },
       });
     },
@@ -48,16 +65,58 @@ export const JournalEditor = React.forwardRef<
     }
   );
 
+  const onChange = React.useCallback(
+    (newText: string) => {
+      setSavingStatus('Not saved');
+      save(newText);
+    },
+    [save]
+  );
+
   /**
    * When the component goes to be unmounted, we will save if the input has changed.
    */
   React.useEffect(() => {
     return () => {
-      onChange.flush();
+      save.flush();
     };
-  }, [onChange, date]);
+  }, [save, date]);
 
-  return <Editor initialValue={text} onChange={onChange} ref={ref} />;
+  return (
+    <Flex
+      sx={{
+        flexDirection: 'column',
+      }}
+    >
+      <Text
+        sx={{
+          fontSize: 'sm',
+          color: '#999',
+          fontStyle: 'italic',
+          alignSelf: 'flex-end',
+        }}
+      >
+        {savingStatus}
+      </Text>
+
+      <Editor initialValue={text} onChange={onChange} ref={ref} />
+      <Box
+        sx={{
+          marginY: 'xl',
+        }}
+      >
+        {errorOnSave && (
+          <Text
+            sx={{
+              color: 'red',
+            }}
+          >
+            Error on save: {errorOnSave.message}
+          </Text>
+        )}
+      </Box>
+    </Flex>
+  );
 });
 
 JournalEditor.displayName = 'JournalEditor';

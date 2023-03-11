@@ -7,7 +7,7 @@ import { relayEnvironment } from '../../ApiClient/relayEnvironment';
 export const journalDayEditorRootQuery = graphql`
   query journalDayEditorLoaderRootQuery($date: String!) {
     journal {
-      ...JournalDayEditorNoEntryMessage_queryJournal
+      ...JournalDayEditorQuestions_queryJournal
       journalDay(date: $date) {
         ...JournalDayEditor_journal
       }
