@@ -1,6 +1,5 @@
 import * as dateFns from 'date-fns';
 import * as path from 'path';
-import { Cache } from './Cache';
 import { DEFAULT_CONFIG, ZettelkastenConfig } from './config';
 import { normalizeTags } from './normalizeTags';
 import { paramCase } from 'change-case';

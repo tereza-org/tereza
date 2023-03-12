@@ -26,19 +26,20 @@ export const Hero = ({
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          paddingX: 3,
-          gap: 4,
+          paddingX: 'md',
+          gap: 'md',
         }}
       >
         <Heading
           as="h1"
           sx={{
-            fontSize: [8, 8, 9],
+            fontSize: ['2xl', '3xl', '5xl'],
             color: 'primary',
-            padding: 0,
+            padding: 'md',
             margin: 0,
             textShadow: 'shadow',
             textAlign: 'center',
+            backgroundColor: 'black',
           }}
         >
           {headline}
@@ -46,11 +47,13 @@ export const Hero = ({
         <Text
           sx={{
             maxWidth: 1000,
-            fontSize: [5, 5, 6],
+            fontSize: ['md', 'md', 'xl'],
             color: 'white',
             textShadow: 'shadow',
             fontWeight: 'bold',
             textAlign: 'center',
+            backgroundColor: 'black',
+            padding: 'sm',
           }}
         >
           {subhead}

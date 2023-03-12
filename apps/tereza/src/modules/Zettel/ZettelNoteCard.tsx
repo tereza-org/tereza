@@ -6,7 +6,6 @@ const zettelNoteFragment = graphql`
   fragment ZettelNoteCard_zettelNote on ZettelNote {
     title
     description
-    content
   }
 `;
 
@@ -15,22 +14,18 @@ export const ZettelNoteCard = ({
 }: {
   zettelNoteRef: ZettelNoteCard_zettelNote$key;
 }) => {
-  const { title, description, content } = useFragment(
-    zettelNoteFragment,
-    zettelNoteRef
-  );
+  const { title, description } = useFragment(zettelNoteFragment, zettelNoteRef);
 
   return (
     <Box
       sx={{
         width: '100%',
         border: '1px solid',
-        padding: 3,
+        padding: 'md',
       }}
     >
-      <Heading as="h3">{title}</Heading>
+      <Heading as="h1">{title}</Heading>
       <Text as="p">{description}</Text>
-      <Text as="p">{content}</Text>
     </Box>
   );
 };
