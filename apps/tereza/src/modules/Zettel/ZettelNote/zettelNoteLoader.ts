@@ -10,6 +10,7 @@ export const zettelNoteRootQuery = graphql`
         ...ZettelNoteEditButton_zettelNote
         ...ZettelNoteCard_zettelNote
         ...DeleteZettelNote_zettelNote
+        ...ZettelNoteContent_zettelNote
       }
     }
   }

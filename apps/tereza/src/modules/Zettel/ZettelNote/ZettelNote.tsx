@@ -1,10 +1,31 @@
 import { Box, Button, Flex } from '@ttoss/ui';
 import { DeleteZettelNote } from '../DeleteZettelNote';
+import { Markdown } from '@tereza-tech/components';
 import { ZettelNoteCard } from '../ZettelNoteCard';
+import { ZettelNoteContent_zettelNote$key } from './__generated__/ZettelNoteContent_zettelNote.graphql';
 import { ZettelNoteEditButton_zettelNote$key } from './__generated__/ZettelNoteEditButton_zettelNote.graphql';
 import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { zettelNoteLoader, zettelNoteRootQuery } from './zettelNoteLoader';
+
+const ZettelContent = ({
+  zettelNoteRef,
+}: {
+  zettelNoteRef: ZettelNoteContent_zettelNote$key;
+}) => {
+  const zettelNote = useFragment(
+    graphql`
+      fragment ZettelNoteContent_zettelNote on ZettelNote {
+        content
+      }
+    `,
+    zettelNoteRef
+  );
+
+  const content = zettelNote?.content || '';
+
+  return <Markdown>{content}</Markdown>;
+};
 
 const ZettelNoteEditButton = ({
   zettelNoteRef,
@@ -57,10 +78,12 @@ const ZettelNote = () => {
 
       <Flex
         sx={{
-          marginY: 4,
+          flexDirection: 'column',
+          marginY: 'lg',
         }}
       >
         <ZettelNoteCard zettelNoteRef={zettelNote} />
+        <ZettelContent zettelNoteRef={zettelNote} />
       </Flex>
 
       <DeleteZettelNote zettelNoteRef={zettelNote} />

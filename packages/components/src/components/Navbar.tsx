@@ -15,19 +15,21 @@ export const Navbar = ({
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 72,
-        paddingY: 2,
-        paddingX: [3, 3, 4],
+        paddingY: 'md',
+        paddingX: ['md', 'md', 'lg'],
         backgroundColor: 'background',
       }}
     >
-      <Flex sx={{ gap: 3 }}>
+      <Flex sx={{ gap: 'md' }}>
         <Image src={logo} width={32} height={32} />
-        <Text sx={{ fontWeight: 'bold', fontSize: [3, 3, 4] }}>{title}</Text>
+        <Text sx={{ fontWeight: 'bold', fontSize: ['base', 'base', 'lg'] }}>
+          {title}
+        </Text>
       </Flex>
       <Flex
         sx={{
-          gap: 4,
-          fontSize: [2, 3, 3],
+          gap: 'lg',
+          fontSize: ['md', 'md', 'md'],
         }}
       >
         {links}
