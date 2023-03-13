@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.21.0 (2023-03-13)
+
+### Features
+
+- add zettel markdown ([#66](https://github.com/terezatech/tereza-tech/issues/66)) ([82a3488](https://github.com/terezatech/tereza-tech/commit/82a3488cac5eefb0c4bc9fd2a278cd68be8240b6))
+
 # [0.20.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.19.0...@tereza-tech/zettel@0.20.0) (2023-02-19)
 
 ### Features
