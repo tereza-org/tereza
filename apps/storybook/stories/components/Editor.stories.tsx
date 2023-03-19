@@ -2,11 +2,24 @@ import * as React from 'react';
 import { Button, Flex, Input } from '@ttoss/ui';
 import { Editor, EditorProps, EditorRef } from '@tereza-tech/components/src';
 import { Meta, Story } from '@storybook/react';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'components/Editor',
   component: Editor,
 } as Meta;
+
+const promiseAction = (msg: string) => {
+  return (...args: any) => {
+    action(msg)(...args);
+
+    return new Promise<void>((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 5 * 1000);
+    });
+  };
+};
 
 const Template: Story<EditorProps> = (props) => {
   return <Editor {...props} />;
@@ -31,6 +44,16 @@ WithInitialValue.args = {
   initialValue,
 };
 
+export const WithAutoSave = Template.bind({});
+WithAutoSave.args = {
+  onSave: promiseAction('onSave'),
+  autoSaveConfig: {
+    enabled: true,
+    delay: 5 * 1000,
+    maxWait: 10 * 1000,
+  },
+};
+
 export const UpdateEditor = () => {
   const editorRef = React.useRef<EditorRef>(null);
 
@@ -52,7 +75,7 @@ export const UpdateEditor = () => {
       />
       <Button
         onClick={() => {
-          editorRef.current.updateValue(value);
+          editorRef.current?.updateValue(value);
         }}
       >
         Update Editor

@@ -1,6 +1,8 @@
 import { $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
+import { AUTOSAVE_COMMAND } from './SavePlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { useDebouncedCallback } from 'use-debounce';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import type { Dispatch, SetStateAction } from 'react';
 import type { EditorState } from 'lexical';
 
@@ -8,8 +10,8 @@ export type OnChange =
   | Dispatch<SetStateAction<string>>
   | ((value: string) => void);
 
-const transformState = (editorState: EditorState, onChange: OnChange) => {
-  editorState.read(() => {
+const transformState = (editorState: EditorState) => {
+  return editorState.read(() => {
     const markdown = $convertToMarkdownString(TRANSFORMERS);
 
     const escaped = markdown
@@ -24,18 +26,24 @@ const transformState = (editorState: EditorState, onChange: OnChange) => {
        */
       .replace(/^(&gt;)(?=\s)(?!.*&lt;)/gm, '>');
 
-    onChange(escaped);
+    return escaped;
   });
 };
 
 export const OnChangeMarkdownPlugin = ({
   onChange,
 }: {
-  onChange: OnChange;
+  onChange?: OnChange;
 }) => {
+  const [editor] = useLexicalComposerContext();
+
   const debouncedOnChange = useDebouncedCallback((editorState: EditorState) => {
-    return transformState(editorState, onChange);
-  }, 10);
+    const escaped = transformState(editorState);
+
+    onChange?.(escaped);
+
+    editor.dispatchCommand(AUTOSAVE_COMMAND, escaped);
+  }, 1);
 
   return <OnChangePlugin onChange={debouncedOnChange} ignoreSelectionChange />;
 };

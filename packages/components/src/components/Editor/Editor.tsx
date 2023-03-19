@@ -16,6 +16,7 @@ import { MarkdownShortcutPlugin } from '@lexical/react/LexicalMarkdownShortcutPl
 import { OnChange, OnChangeMarkdownPlugin } from './OnChangeMarkdownPlugin';
 import { Placeholder } from './Placeholder';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
+import { SavePlugin, SaveProvider, SaveProviderProps } from './SavePlugin';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToolbarPlugin } from './ToolbarPlugin';
 import { forwardRef } from 'react';
@@ -96,10 +97,14 @@ const EditorContainer = ({ children }: { children: React.ReactNode }) => {
 export type EditorProps = {
   initialValue?: string;
   onChange?: OnChange;
-};
+} & SaveProviderProps;
 
-export const Editor = forwardRef<any, EditorProps>(
-  ({ initialValue, onChange }, ref) => {
+export const Editor = forwardRef<EditorRef, EditorProps>(
+  ({ initialValue, onChange, onSave, autoSaveConfig }, ref) => {
+    const shouldRenderOnChangeMarkdownPlugin = Boolean(
+      onChange || autoSaveConfig?.enabled
+    );
+
     return (
       <LexicalComposer
         initialConfig={{
@@ -113,29 +118,39 @@ export const Editor = forwardRef<any, EditorProps>(
           },
         }}
       >
-        <EditorContainer>
-          <ToolbarPlugin />
-          <Box
-            sx={{
-              position: 'relative',
-            }}
-          >
-            <RichTextPlugin
-              contentEditable={<ContentEditable className="editor-input" />}
-              placeholder={<Placeholder />}
-              ErrorBoundary={() => {
-                return <div>Error</div>;
+        <SaveProvider onSave={onSave} autoSaveConfig={autoSaveConfig}>
+          <EditorContainer>
+            <ToolbarPlugin />
+            <Box
+              sx={{
+                position: 'relative',
               }}
-            />
-            <AutoFocusPlugin />
-            <ListPlugin />
-            <LinkPlugin />
-            <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
-            <CodeHighlightPlugin />
-            {onChange && <OnChangeMarkdownPlugin onChange={onChange} />}
-            <EditorRefPlugin ref={ref} />
-          </Box>
-        </EditorContainer>
+            >
+              <RichTextPlugin
+                contentEditable={
+                  <ContentEditable
+                    data-testid="editor-input"
+                    className="editor-input"
+                  />
+                }
+                placeholder={<Placeholder />}
+                ErrorBoundary={() => {
+                  return <div>Error</div>;
+                }}
+              />
+              <AutoFocusPlugin />
+              <ListPlugin />
+              <LinkPlugin />
+              <MarkdownShortcutPlugin transformers={TRANSFORMERS} />
+              <CodeHighlightPlugin />
+              {shouldRenderOnChangeMarkdownPlugin && (
+                <OnChangeMarkdownPlugin onChange={onChange} />
+              )}
+              <EditorRefPlugin ref={ref} />
+              <SavePlugin />
+            </Box>
+          </EditorContainer>
+        </SaveProvider>
       </LexicalComposer>
     );
   }
