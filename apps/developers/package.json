@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/developers",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "scripts": {
     "build": "docusaurus build",
     "clear": "docusaurus clear",
@@ -18,7 +18,7 @@
     "@docusaurus/core": "2.2.0",
     "@docusaurus/preset-classic": "2.2.0",
     "@mdx-js/react": "^1.6.22",
-    "@tereza-tech/components": "^0.16.0",
+    "@tereza-tech/components": "^0.17.0",
     "@tereza-tech/docusaurus-plugin-zettel": "^0.0.16",
     "@tereza-tech/react-zettel": "^0.8.1",
     "@tereza-tech/theme": "^1.11.0",

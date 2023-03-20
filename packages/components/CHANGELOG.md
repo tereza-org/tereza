@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.16.0...@tereza-tech/components@0.17.0) (2023-03-20)
+
+### Features
+
+- autosave on editor component ([#68](https://github.com/terezatech/tereza-tech/issues/68)) ([6a30932](https://github.com/terezatech/tereza-tech/commit/6a30932d3b42cb61973c477983d26dd14cf05553))
+
 # [0.16.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.15.0...@tereza-tech/components@0.16.0) (2023-03-13)
 
 ### Features
