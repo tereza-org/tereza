@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Flex } from '@ttoss/ui';
 import { Editor, EditorRef } from '../../src';
-import { act, render, screen, userEvent } from '@ttoss/test-utils';
+import { act, render, screen, userEvent, waitFor } from '@ttoss/test-utils';
 
 const initialMarkdown = `
 # Heading 1
@@ -77,3 +77,56 @@ test('should update editor value', async () => {
   expect(screen.getByText(valueToSet)).toBeInTheDocument();
   expect(onChange).not.toHaveBeenCalled();
 });
+
+test('should show saving message and then saved message', async () => {
+  const onSave = jest.fn().mockResolvedValue(true);
+
+  render(<Editor initialValue={initialMarkdown} onSave={onSave} />);
+
+  const user = userEvent.setup({ delay: null });
+
+  const saveButton = screen.getByLabelText('Save');
+
+  await user.click(saveButton);
+
+  expect(screen.getByText('Saving...')).toBeInTheDocument();
+
+  expect(onSave).toHaveBeenCalledWith(initialMarkdown.trim());
+
+  act(() => {
+    jest.runAllTimers();
+  });
+
+  expect(screen.getByText('Saved')).toBeInTheDocument();
+});
+
+// test.only('should not autosave if autoSaveConfig.enabled is false', async () => {
+//   const onSave = jest.fn().mockResolvedValue(true);
+
+//   const delay = 1000;
+
+//   render(
+//     <Editor
+//       initialValue=""
+//       onSave={onSave}
+//       autoSaveConfig={{ enabled: true, delay }}
+//     />
+//   );
+
+//   const user = userEvent.setup({ delay: null });
+
+//   await act(async () => {
+//     await user.type(screen.getByTestId('editor-input'), 'New Text');
+//     return jest.runAllTimers();
+//   });
+
+//   await waitFor(() => {
+//     return expect(screen.getByText('New Text')).toBeInTheDocument();
+//   });
+
+//   // // await waitFor(() => {
+//   // jest.advanceTimersByTime(2 * delay);
+//   // // });
+
+//   // expect(onSave).not.toHaveBeenCalled();
+// });

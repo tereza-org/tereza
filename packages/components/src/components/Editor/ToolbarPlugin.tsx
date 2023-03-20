@@ -33,8 +33,8 @@ import { createPortal } from 'react-dom';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import './styles.css';
-import { useIsEditable } from './useIsEditable';
-import { Icon, Select as SelectUi } from '@ttoss/ui';
+import { Icon, Flex, Select as SelectUi, Text } from '@ttoss/ui';
+import { useSaveContext, SAVE_COMMAND } from './SavePlugin';
 
 const LowPriority = 1;
 
@@ -439,7 +439,8 @@ export const ToolbarPlugin = () => {
   const [isUnderline, setIsUnderline] = useState(false);
   const [isStrikethrough, setIsStrikethrough] = useState(false);
   const [isCode, setIsCode] = useState(false);
-  const { isEditable } = useIsEditable();
+
+  const { saveMessage } = useSaveContext();
 
   const updateToolbar = useCallback(() => {
     const selection = $getSelection();
@@ -528,10 +529,6 @@ export const ToolbarPlugin = () => {
     }
   }, [editor, isLink]);
 
-  if (!isEditable) {
-    return null;
-  }
-
   return (
     <div className="toolbar" ref={toolbarRef}>
       {supportedBlockTypes.has(blockType) && (
@@ -571,7 +568,11 @@ export const ToolbarPlugin = () => {
           <i className="chevron-down inside" />
         </>
       ) : (
-        <>
+        <Flex
+          sx={{
+            alignItems: 'center',
+          }}
+        >
           <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');
@@ -628,7 +629,17 @@ export const ToolbarPlugin = () => {
           </button>
           {isLink &&
             createPortal(<FloatingLinkEditor editor={editor} />, document.body)}
-        </>
+          <button
+            onClick={() => {
+              editor.dispatchCommand(SAVE_COMMAND);
+            }}
+            aria-label="Save"
+            className={'toolbar-item spaced'}
+          >
+            <Icon icon="material-symbols:save-as-outline" />
+          </button>
+          <Text>{saveMessage}</Text>
+        </Flex>
       )}
     </div>
   );
