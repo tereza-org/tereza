@@ -1,4 +1,5 @@
 import { Flex, Heading } from '@ttoss/ui';
+import { FormattedMessage } from '@ttoss/react-i18n';
 import { JournalMarkdown } from '../JournalMarkdown';
 import { JournalSummaryList_queryJournal$key } from './__generated__/JournalSummaryList_queryJournal.graphql';
 import { JournalSummary_journalSummaryItem$key } from './__generated__/JournalSummary_journalSummaryItem.graphql';
@@ -93,7 +94,12 @@ const JournalSummary = () => {
         gap: '2xl',
       }}
     >
-      <Heading as="h1">Journal Summary</Heading>
+      <Heading as="h1">
+        <FormattedMessage
+          defaultMessage="Journal Summary"
+          description="Journal summary page title"
+        />
+      </Heading>
       <Suspense>
         <JournalSummaryPreloader />
       </Suspense>

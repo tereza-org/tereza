@@ -1,0 +1,116 @@
+{
+  "8HywKr": {
+    "defaultMessage": "Home",
+    "description": "Home page"
+  },
+  "CpF44e": {
+    "defaultMessage": "Journal Summary",
+    "description": "Journal summary page title"
+  },
+  "PqTJvc": {
+    "defaultMessage": "Questions",
+    "description": "Journal questions"
+  },
+  "mCg1P5": {
+    "defaultMessage": "Stats",
+    "description": "Statistics abbreviation"
+  },
+  "p07znv": {
+    "defaultMessage": "Day",
+    "description": "Represents the current day"
+  },
+  "rGQohl": {
+    "defaultMessage": "All",
+    "description": "All journal entries"
+  },
+  "0XOzcH": {
+    "defaultMessage": "Required field",
+    "description": "Required field.",
+    "module": "@ttoss/react-auth"
+  },
+  "0cVgsc": {
+    "defaultMessage": "Login",
+    "description": "Button label.",
+    "module": "@ttoss/react-auth"
+  },
+  "5E12mO": {
+    "defaultMessage": "Email",
+    "description": "Email label.",
+    "module": "@ttoss/react-auth"
+  },
+  "EXZxA0": {
+    "defaultMessage": "Register",
+    "description": "Title on sign up.",
+    "module": "@ttoss/react-auth"
+  },
+  "KY2T6J": {
+    "defaultMessage": "Code",
+    "description": "Sign up confirmation code",
+    "module": "@ttoss/react-auth"
+  },
+  "LU2ddR": {
+    "defaultMessage": "Do you already have an account? Sign in",
+    "description": "Link to sign in on sign up.",
+    "module": "@ttoss/react-auth"
+  },
+  "OhDL0i": {
+    "defaultMessage": "Invalid email",
+    "description": "Invalid email.",
+    "module": "@ttoss/react-auth"
+  },
+  "Pdio77": {
+    "defaultMessage": "Create account",
+    "description": "Create account.",
+    "module": "@ttoss/react-auth"
+  },
+  "PylVqx": {
+    "defaultMessage": "Password",
+    "description": "Password label.",
+    "module": "@ttoss/react-auth"
+  },
+  "R1rFNQ": {
+    "defaultMessage": "Login",
+    "description": "Sign in title.",
+    "module": "@ttoss/react-auth"
+  },
+  "S3pjKw": {
+    "defaultMessage": "Minimum {value} characters",
+    "description": "Minimum {value} characters.",
+    "module": "@ttoss/react-auth"
+  },
+  "TZ4WUk": {
+    "defaultMessage": "Password requires {value} characters",
+    "description": "Password must be at least {value} characters long.",
+    "module": "@ttoss/react-auth"
+  },
+  "UNttd+": {
+    "defaultMessage": "Confirm",
+    "description": "Confirm",
+    "module": "@ttoss/react-auth"
+  },
+  "XC1w2U": {
+    "defaultMessage": "Don't have an account? Sign up",
+    "description": "Link to sign up.",
+    "module": "@ttoss/react-auth"
+  },
+  "cGR2eI": {
+    "defaultMessage": "Confirmation",
+    "description": "Confirmation",
+    "module": "@ttoss/react-auth"
+  },
+  "kdFYba": {
+    "defaultMessage": "Password field is required",
+    "description": "Password is required.",
+    "module": "@ttoss/react-auth"
+  },
+  "r+QgO+": {
+    "defaultMessage": "Email field is required",
+    "description": "Email is a required field.",
+    "module": "@ttoss/react-auth"
+  },
+  "z5s0vm": {
+    "defaultMessage": "Do you forgot your password?",
+    "description": "Link to retrieve password.",
+    "module": "@ttoss/react-auth"
+  }
+}

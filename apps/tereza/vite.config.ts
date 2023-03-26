@@ -1,10 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+// @ts-nocheck
 import { babelConfig } from '@ttoss/config';
 import { defineConfig } from 'vitest/config';
-import babel from 'vite-plugin-babel';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import relay from 'vite-plugin-relay';
 
 // https://vitejs.dev/config/
@@ -14,25 +12,16 @@ export default defineConfig({
       define: {
         global: 'globalThis',
       },
-      plugins: [
-        NodeGlobalsPolyfillPlugin({
-          buffer: true,
-          process: true,
-        }),
-      ],
     },
   },
   plugins: [
-    react(),
-    babel({
-      babelConfig: {
-        babelrc: false,
-        configFile: false,
+    react({
+      babel: {
         plugins: babelConfig().plugins,
       },
     }),
     relay,
-  ] as any,
+  ],
   resolve: {
     alias: {
       './runtimeConfig': './runtimeConfig.browser',

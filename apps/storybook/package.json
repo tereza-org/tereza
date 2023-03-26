@@ -17,7 +17,7 @@
   "dependencies": {
     "@tereza-tech/react-zettel": "^0.8.1",
     "@tereza-tech/theme": "^1.11.0",
-    "@ttoss/ui": "^1.30.6",
+    "@ttoss/ui": "^1.31.2",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -30,7 +30,7 @@
     "@storybook/manager-webpack5": "^6.5.14",
     "@storybook/react": "^6.5.14",
     "@storybook/testing-library": "^0.0.13",
-    "@ttoss/config": "^1.28.1",
+    "@ttoss/config": "^1.29.2",
     "babel-loader": "^8.3.0"
   }
 }
