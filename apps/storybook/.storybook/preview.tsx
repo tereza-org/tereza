@@ -1,4 +1,4 @@
-import { DecoratorFn } from '@storybook/react';
+import { Decorator } from '@storybook/react';
 import { ThemeProvider } from '@tereza-tech/theme';
 import * as React from 'react';
 import { Flex } from '@ttoss/ui';
@@ -13,7 +13,7 @@ export const parameters = {
   },
 };
 
-export const decorators: DecoratorFn[] = [
+export const decorators: Decorator[] = [
   (Story) => (
     <ThemeProvider>
       <Flex sx={{ flex: 1 }}>
