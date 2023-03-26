@@ -65,3 +65,5 @@ jobs:
           ACM_TEREZA_APP: ${{ secrets.ACM_TEREZA_APP }}
           ACM_TEREZA_TECH: ${{ secrets.ACM_TEREZA_TECH }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}

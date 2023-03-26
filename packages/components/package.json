@@ -17,13 +17,13 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@lexical/react": "^0.9.0",
-    "lexical": "^0.9.0",
+    "@lexical/react": "^0.9.1",
+    "lexical": "^0.9.1",
     "react-markdown": "^8.0.6",
     "use-debounce": "^9.0.3"
   },
   "peerDependencies": {
-    "@ttoss/ui": "^1.31.1",
+    "@ttoss/ui": "^1.31.3",
     "react": ">=16.8.0",
     "react-dom": "^18.2.0"
   },

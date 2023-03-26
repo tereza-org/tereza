@@ -6087,7 +6087,7 @@
   resolved "https://registry.yarnpkg.com/@lexical/plain-text/-/plain-text-0.9.1.tgz#285f4ab9992111393d9a76018df8384ca434a10c"
   integrity sha512-mFDfTtz6KkbQahpGj3U6tsF+oLUMYojrKl7AhO87gLKB3lJM5rIO9avkYRt5qAtagKh84FpRLEHpqs7KFQFPxw==
 
-"@lexical/react@^0.9.0":
+"@lexical/react@^0.9.1":
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/@lexical/react/-/react-0.9.1.tgz#5ce1e2b3d5756dd26b2d558db272b3f3e90679db"
   integrity sha512-xpRqyPEbEHcXFeianPdnAYhD4NYt7zCsLza2uVLnNG2Uul+TzHgkBfT8rJhY3B1FcdNY/5+TpkYG43JxJEiNTg==
@@ -8580,10 +8580,19 @@
     jest-environment-jsdom "^29.3.1"
     relay-test-utils "^14.1.0"
 
-"@ttoss/theme@^1.2.4", "@ttoss/theme@^1.4.2":
+"@ttoss/theme@^1.4.2":
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/@ttoss/theme/-/theme-1.4.2.tgz#62b97aeeadb3686f86c3f1cf09ebc7c93eea3b53"
   integrity sha512-A0mdQ1glAFLKq77+OmBuhQs0g19wvpY1VgwJL7PDsgvO+eNjBgog4P/N3itryIbzhwOVz8r5CpKi1qW+mHiVpA==
+  dependencies:
+    "@iconify-icon/react" "^1.0.7"
+    "@iconify/icons-carbon" "^1.2.16"
+    deepmerge "^4.3.1"
+
+"@ttoss/theme@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@ttoss/theme/-/theme-1.4.3.tgz#900fb8d80406c49390b6a501885071e47c0f3b4c"
+  integrity sha512-HIo+ucsQQZBqfO42rvAJBam4Mg4bAS4m1Po1NwEt+7rLYCkTZdNpnEmOw4gIYFCgvGfkKxBNCIlCtvj3h1k6Uw==
   dependencies:
     "@iconify-icon/react" "^1.0.7"
     "@iconify/icons-carbon" "^1.2.16"
@@ -17449,7 +17458,7 @@ levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-lexical@^0.9.0:
+lexical@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/lexical/-/lexical-0.9.1.tgz#0e8a3df9e3d4cb8399b39a52693cc0251620ed82"
   integrity sha512-I7m8u717rqjdGZaRCZ3/EW+IwJWA78nX2kaTYQyua6mLlFDvcnHtX1bFXDZA+flNpPcnAuaI8HMA4xgajdFgHw==
