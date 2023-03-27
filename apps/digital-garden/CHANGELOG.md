@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.11.2...@tereza-tech-apps/digital-garden@0.12.0) (2023-03-27)
+
+### Features
+
+- implement i18n ([#69](https://github.com/terezatech/tereza-tech/issues/69)) ([3ffe083](https://github.com/terezatech/tereza-tech/commit/3ffe083d5e21d456bcdb5c55cdce6d3ca8acc45d))
+
 ## [0.11.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.11.1...@tereza-tech-apps/digital-garden@0.11.2) (2023-03-13)
 
 **Note:** Version bump only for package @tereza-tech-apps/digital-garden
