@@ -16,19 +16,19 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "^17.3.0",
-    "@lerna-lite/changed": "^1.13.0",
-    "@lerna-lite/cli": "^1.13.0",
-    "@lerna-lite/list": "^1.13.0",
-    "@ttoss/config": "^1.28.1",
-    "@ttoss/eslint-config": "^1.19.2",
-    "carlin": "^1.24.0",
+    "@commitlint/cli": "^17.5.0",
+    "@lerna-lite/changed": "^1.17.0",
+    "@lerna-lite/cli": "^1.17.0",
+    "@lerna-lite/list": "^1.17.0",
+    "@ttoss/config": "^1.29.2",
+    "@ttoss/eslint-config": "^1.19.3",
+    "carlin": "^1.26.3",
     "check-dependency-version-consistency": "^3.0.3",
-    "eslint": "^8.30.0",
-    "husky": "^8.0.2",
-    "lint-staged": "^13.1.0",
-    "prettier": "^2.8.1",
-    "turbo": "latest"
+    "eslint": "^8.36.0",
+    "husky": "^8.0.3",
+    "lint-staged": "13.1.0",
+    "prettier": "^2.8.7",
+    "turbo": "^1.8.5"
   },
   "engines": {
     "node": ">=18.0.0"

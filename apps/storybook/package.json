@@ -9,28 +9,33 @@
   ],
   "main": "index.js",
   "scripts": {
-    "build": "build-storybook",
+    "build": "storybook build",
     "deploy": "carlin deploy static-app",
-    "dev": "start-storybook -p 6006",
-    "storybook": "start-storybook -p 6006"
+    "dev": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
     "@tereza-tech/react-zettel": "^0.8.1",
     "@tereza-tech/theme": "^1.11.0",
-    "@ttoss/ui": "^1.30.6",
+    "@ttoss/ui": "^1.31.2",
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.5",
-    "@storybook/addon-actions": "^6.5.14",
-    "@storybook/addon-essentials": "^6.5.14",
-    "@storybook/addon-interactions": "^6.5.14",
-    "@storybook/addon-links": "^6.5.14",
-    "@storybook/builder-webpack5": "^6.5.14",
-    "@storybook/manager-webpack5": "^6.5.14",
-    "@storybook/react": "^6.5.14",
-    "@storybook/testing-library": "^0.0.13",
-    "@ttoss/config": "^1.28.1",
-    "babel-loader": "^8.3.0"
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.21.0",
+    "@storybook/addon-actions": "^7.0.0-rc.8",
+    "@storybook/addon-essentials": "^7.0.0-rc.8",
+    "@storybook/addon-interactions": "^7.0.0-rc.8",
+    "@storybook/addon-links": "^7.0.0-rc.8",
+    "@storybook/addon-mdx-gfm": "^7.0.0-rc.8",
+    "@storybook/react": "^7.0.0-rc.8",
+    "@storybook/react-webpack5": "^7.0.0-rc.8",
+    "@storybook/testing-library": "^0.0.14-next.1",
+    "@ttoss/config": "^1.29.2",
+    "babel-loader": "^9.1.2",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.0-rc.8"
   }
 }

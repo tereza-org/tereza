@@ -8,6 +8,7 @@ import { CodeHighlightPlugin } from './CodeHighlightPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { EditorRef, EditorRefPlugin } from './EditorRefPlugin';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListItemNode, ListNode } from '@lexical/list';
@@ -19,7 +20,7 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { SavePlugin, SaveProvider, SaveProviderProps } from './SavePlugin';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToolbarPlugin } from './ToolbarPlugin';
-import { forwardRef } from 'react';
+import HorizontalRulePlugin from './HorizontalRulePlugin';
 
 export type { OnChange, EditorRef };
 
@@ -32,6 +33,7 @@ const editorConfig = {
     throw error;
   },
   nodes: [
+    HorizontalRuleNode,
     HeadingNode,
     ListNode,
     ListItemNode,
@@ -99,7 +101,7 @@ export type EditorProps = {
   onChange?: OnChange;
 } & SaveProviderProps;
 
-export const Editor = forwardRef<EditorRef, EditorProps>(
+export const Editor = React.forwardRef<EditorRef, EditorProps>(
   ({ initialValue, onChange, onSave, autoSaveConfig }, ref) => {
     const shouldRenderOnChangeMarkdownPlugin = Boolean(
       onChange || autoSaveConfig?.enabled
@@ -148,6 +150,7 @@ export const Editor = forwardRef<EditorRef, EditorProps>(
               )}
               <EditorRefPlugin ref={ref} />
               <SavePlugin />
+              <HorizontalRulePlugin />
             </Box>
           </EditorContainer>
         </SaveProvider>

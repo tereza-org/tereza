@@ -59,3 +59,5 @@ jobs:
         run: sh -e ./.cicd/commands/pr.sh
         env:
           CARLIN_BRANCH: ${{ github.event.pull_request.head.ref }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}

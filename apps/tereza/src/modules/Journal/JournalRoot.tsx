@@ -2,19 +2,52 @@ import { Flex, Icon } from '@ttoss/ui';
 import { ModuleContainer } from '../Layout/ModuleContainer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getToday } from '../Date/utils';
+import { useIntl } from 'react-intl';
 
 export const JournalRoot = () => {
   const navigate = useNavigate();
+
+  const intl = useIntl();
 
   return (
     <ModuleContainer
       title="Journal"
       links={[
-        { label: 'Day', to: `/journal/${getToday()}` },
-        { label: 'Summary', to: '/journal' },
-        { label: 'Stats', to: '/journal/stats' },
-        { label: 'Questions', to: '/journal/questions' },
-        { label: 'All', to: '/journal/all' },
+        {
+          label: intl.formatMessage({
+            defaultMessage: 'Home',
+            description: 'Home page',
+          }),
+          to: '/journal',
+        },
+        {
+          label: intl.formatMessage({
+            defaultMessage: 'Day',
+            description: 'Represents the current day',
+          }),
+          to: `/journal/${getToday()}`,
+        },
+        {
+          label: intl.formatMessage({
+            defaultMessage: 'Stats',
+            description: 'Statistics abbreviation',
+          }),
+          to: '/journal/stats',
+        },
+        {
+          label: intl.formatMessage({
+            defaultMessage: 'Questions',
+            description: 'Journal questions',
+          }),
+          to: '/journal/questions',
+        },
+        {
+          label: intl.formatMessage({
+            defaultMessage: 'All',
+            description: 'All journal entries',
+          }),
+          to: '/journal/all',
+        },
       ]}
     >
       <Outlet />
@@ -38,11 +71,7 @@ export const JournalRoot = () => {
           alignItems: 'center',
         }}
       >
-        <Icon
-          {...({
-            icon: 'material-symbols:edit',
-          } as any)}
-        />
+        <Icon icon="material-symbols:edit" />
       </Flex>
     </ModuleContainer>
   );
