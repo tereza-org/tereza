@@ -17,14 +17,14 @@
   "dependencies": {
     "@tereza-tech/react-zettel": "^0.9.0",
     "@tereza-tech/theme": "^1.12.0",
-    "@ttoss/ui": "^1.31.2",
+    "@ttoss/ui": "^1.31.7",
     "react": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.0",
+    "@babel/preset-typescript": "^7.21.4",
     "@storybook/addon-actions": "^7.0.0-rc.8",
     "@storybook/addon-essentials": "^7.0.0-rc.8",
     "@storybook/addon-interactions": "^7.0.0-rc.8",
