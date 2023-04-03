@@ -17,7 +17,7 @@
   "dependencies": {
     "@tereza-tech/react-zettel": "^0.9.0",
     "@tereza-tech/theme": "^1.12.0",
-    "@ttoss/ui": "^1.31.7",
+    "@ttoss/ui": "^1.31.8",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -25,17 +25,17 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
-    "@storybook/addon-actions": "^7.0.0-rc.8",
-    "@storybook/addon-essentials": "^7.0.0-rc.8",
-    "@storybook/addon-interactions": "^7.0.0-rc.8",
-    "@storybook/addon-links": "^7.0.0-rc.8",
-    "@storybook/addon-mdx-gfm": "^7.0.0-rc.8",
-    "@storybook/react": "^7.0.0-rc.8",
-    "@storybook/react-webpack5": "^7.0.0-rc.8",
-    "@storybook/testing-library": "^0.0.14-next.1",
+    "@storybook/addon-actions": "^7.0.0",
+    "@storybook/addon-essentials": "^7.0.0",
+    "@storybook/addon-interactions": "^7.0.0",
+    "@storybook/addon-links": "^7.0.0",
+    "@storybook/addon-mdx-gfm": "^7.0.0",
+    "@storybook/react": "^7.0.0",
+    "@storybook/react-webpack5": "^7.0.0",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@ttoss/config": "^1.29.2",
     "babel-loader": "^9.1.2",
     "react-dom": "^18.2.0",
-    "storybook": "^7.0.0-rc.8"
+    "storybook": "^7.0.0"
   }
 }

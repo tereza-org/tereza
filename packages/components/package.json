@@ -23,13 +23,13 @@
     "use-debounce": "^9.0.3"
   },
   "peerDependencies": {
-    "@ttoss/ui": "^1.31.3",
+    "@ttoss/ui": "^1.31.8",
     "react": ">=16.8.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@ttoss/test-utils": "^1.20.9",
-    "@ttoss/ui": "^1.31.7",
+    "@ttoss/test-utils": "^1.21.0",
+    "@ttoss/ui": "^1.31.8",
     "@types/react": "^18.0.32",
     "react": "^18.2.0",
     "tsup": "^6.7.0"

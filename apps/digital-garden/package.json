@@ -12,7 +12,7 @@
     "@tereza-tech/react-zettel": "^0.9.0",
     "@tereza-tech/theme": "^1.12.0",
     "@tereza-tech/zettel": "^0.22.0",
-    "@ttoss/ui": "^1.31.7",
+    "@ttoss/ui": "^1.31.8",
     "@types/node": "18.11.10",
     "@types/react": "^18.0.32",
     "@types/react-dom": "^18.0.11",

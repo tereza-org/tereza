@@ -18,15 +18,15 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@ttoss/theme": "^1.4.7"
+    "@ttoss/theme": "^1.4.8"
   },
   "peerDependencies": {
-    "@ttoss/ui": "^1.31.7",
+    "@ttoss/ui": "^1.31.8",
     "react": "^18.2.0"
   },
   "devDependencies": {
     "@ttoss/config": "^1.29.2",
-    "@ttoss/ui": "^1.31.7",
+    "@ttoss/ui": "^1.31.8",
     "@types/react": "^18.0.32",
     "react": "^18.2.0",
     "tsup": "^6.7.0"

@@ -10,10 +10,12 @@
     "playbook": "yarn workspace @tereza-tech-apps/developers run start",
     "prepare": "husky install"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ]
+  },
   "dependencies": {},
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
