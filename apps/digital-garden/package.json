@@ -12,14 +12,14 @@
     "@tereza-tech/react-zettel": "^0.9.0",
     "@tereza-tech/theme": "^1.12.0",
     "@tereza-tech/zettel": "^0.22.0",
-    "@ttoss/ui": "^1.31.2",
+    "@ttoss/ui": "^1.31.8",
     "@types/node": "18.11.10",
-    "@types/react": "^18.0.29",
+    "@types/react": "^18.0.32",
     "@types/react-dom": "^18.0.11",
     "next": "13.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-force-graph-3d": "^1.21.15",
-    "typescript": "^5.0.2"
+    "react-force-graph-3d": "^1.22.0",
+    "typescript": "^5.0.3"
   }
 }

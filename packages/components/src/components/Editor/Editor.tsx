@@ -9,6 +9,7 @@ import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { EditorRef, EditorRefPlugin } from './EditorRefPlugin';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
+import { HorizontalRulePlugin } from './HorizontalRulePlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
 import { LinkPlugin } from '@lexical/react/LexicalLinkPlugin';
 import { ListItemNode, ListNode } from '@lexical/list';
@@ -20,7 +21,7 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { SavePlugin, SaveProvider, SaveProviderProps } from './SavePlugin';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToolbarPlugin } from './ToolbarPlugin';
-import HorizontalRulePlugin from './HorizontalRulePlugin';
+import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 
 export type { OnChange, EditorRef };
 
@@ -136,9 +137,7 @@ export const Editor = React.forwardRef<EditorRef, EditorProps>(
                   />
                 }
                 placeholder={<Placeholder />}
-                ErrorBoundary={() => {
-                  return <div>Error</div>;
-                }}
+                ErrorBoundary={LexicalErrorBoundary}
               />
               <AutoFocusPlugin />
               <ListPlugin />

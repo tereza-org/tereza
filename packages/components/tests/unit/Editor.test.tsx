@@ -79,7 +79,15 @@ test('should update editor value', async () => {
 });
 
 test('should show saving message and then saved message', async () => {
-  const onSave = jest.fn().mockResolvedValue(true);
+  const onSaveDelay = 1000;
+
+  const onSave = jest.fn().mockImplementation(() => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, onSaveDelay);
+    });
+  });
 
   render(<Editor initialValue={initialMarkdown} onSave={onSave} />);
 
@@ -93,8 +101,8 @@ test('should show saving message and then saved message', async () => {
 
   expect(onSave).toHaveBeenCalledWith(initialMarkdown.trim());
 
-  act(() => {
-    jest.runAllTimers();
+  await act(() => {
+    return jest.advanceTimersByTimeAsync(onSaveDelay * 2);
   });
 
   expect(screen.getByText('Saved')).toBeInTheDocument();

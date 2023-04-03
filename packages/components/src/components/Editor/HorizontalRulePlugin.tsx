@@ -10,7 +10,7 @@ import {
 } from 'lexical';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
-export default (): null => {
+export const HorizontalRulePlugin = () => {
   const [editor] = useLexicalComposerContext();
 
   React.useEffect(() => {

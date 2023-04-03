@@ -10,13 +10,15 @@
     "playbook": "yarn workspace @tereza-tech-apps/developers run start",
     "prepare": "husky install"
   },
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ]
+  },
   "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "^17.5.0",
+    "@commitlint/cli": "^17.5.1",
     "@lerna-lite/changed": "^1.17.0",
     "@lerna-lite/cli": "^1.17.0",
     "@lerna-lite/list": "^1.17.0",
@@ -24,11 +26,11 @@
     "@ttoss/eslint-config": "^1.19.3",
     "carlin": "^1.26.3",
     "check-dependency-version-consistency": "^3.0.3",
-    "eslint": "^8.36.0",
+    "eslint": "^8.37.0",
     "husky": "^8.0.3",
     "lint-staged": "13.1.0",
     "prettier": "^2.8.7",
-    "turbo": "^1.8.5"
+    "turbo": "^1.8.8"
   },
   "engines": {
     "node": ">=18.0.0"
