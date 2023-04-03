@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.12.0...@tereza-tech/theme@1.12.1) (2023-04-03)
+
+### Bug Fixes
+
+- horizontal rule and update packages ([#70](https://github.com/terezatech/tereza-tech/issues/70)) ([6dc74e8](https://github.com/terezatech/tereza-tech/commit/6dc74e8cff164d5d9f882b6301f4d8572585f3c6))
+
 # [1.12.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.11.0...@tereza-tech/theme@1.12.0) (2023-03-27)
 
 ### Features

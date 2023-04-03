@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/terezatech/tereza-tech/compare/tereza@0.8.0...tereza@0.8.1) (2023-04-03)
+
+### Bug Fixes
+
+- horizontal rule and update packages ([#70](https://github.com/terezatech/tereza-tech/issues/70)) ([6dc74e8](https://github.com/terezatech/tereza-tech/commit/6dc74e8cff164d5d9f882b6301f4d8572585f3c6))
+
 # [0.8.0](https://github.com/terezatech/tereza-tech/compare/tereza@0.7.1...tereza@0.8.0) (2023-03-27)
 
 ### Features
