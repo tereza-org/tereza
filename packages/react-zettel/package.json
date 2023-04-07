@@ -1,6 +1,6 @@
 {
   "name": "@tereza-tech/react-zettel",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "description": "",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -19,7 +19,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.22.1",
+    "@tereza-tech/zettel": "^0.23.0",
     "react-force-graph-2d": "^1.24.0",
     "react-force-graph-3d": "^1.22.0",
     "three-spritetext": "^1.8.0"
