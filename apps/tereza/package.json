@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@tereza-tech-apps/tereza",
-  "version": "0.28.0",
+  "version": "0.28.1",
   "type": "module",
   "scripts": {
     "prebuild": "yarn relay && yarn i18n",
@@ -16,7 +16,7 @@
     "test": "echo vitest"
   },
   "dependencies": {
-    "@tereza-tech/components": "^0.19.0",
+    "@tereza-tech/components": "^0.19.1",
     "@tereza-tech/react-zettel": "^0.10.0",
     "@tereza-tech/theme": "^1.13.0",
     "@ttoss/forms": "^0.14.28",

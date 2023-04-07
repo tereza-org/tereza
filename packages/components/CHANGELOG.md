@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.19.0...@tereza-tech/components@0.19.1) (2023-04-07)
+
+### Bug Fixes
+
+- horizontal rule transformers ([#72](https://github.com/terezatech/tereza-tech/issues/72)) ([c51dd32](https://github.com/terezatech/tereza-tech/commit/c51dd32b139d7ffb2c1203cfa8a0fc690b0dfab2))
+
 # [0.19.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.18.1...@tereza-tech/components@0.19.0) (2023-04-07)
 
 ### Features
