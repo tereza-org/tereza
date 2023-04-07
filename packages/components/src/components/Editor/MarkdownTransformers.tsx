@@ -18,8 +18,8 @@ export const HORIZONTAL_RULE: ElementTransformer = {
   },
   regExp: /---/,
   replace: (parentNode) => {
-    const node = $createHorizontalRuleNode();
-    parentNode.replace(node);
+    const horizontalRuleNode = $createHorizontalRuleNode();
+    parentNode.replace(horizontalRuleNode);
   },
   type: 'element',
 };

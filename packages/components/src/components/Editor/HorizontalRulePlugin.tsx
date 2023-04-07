@@ -39,9 +39,8 @@ export const HorizontalRulePlugin = () => {
 
         if (focusNode.getTextContent() === '---') {
           const horizontalRuleNode = $createHorizontalRuleNode();
-
           selection.insertParagraph();
-          focusNode.replace(horizontalRuleNode);
+          focusNode.getTopLevelElementOrThrow().replace(horizontalRuleNode);
         }
 
         return true;
