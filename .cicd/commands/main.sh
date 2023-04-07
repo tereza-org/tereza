@@ -18,9 +18,12 @@ echo //registry.npmjs.org/:\_authToken=$NPM_TOKEN > .npmrc
 # Version before publish to rebuild all packages that Lerna will publish
 yarn lerna version --yes --no-push
 
-# Lint, test, and build all packages since $LATEST_TAG and their dependent packages.
+# Lint
+yarn turbo run lint
+
+# Test, and build all packages since $LATEST_TAG and their dependent packages.
 # https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependents-of-matched-workspaces
-yarn turbo run lint build test --filter=...[$LATEST_TAG]
+yarn turbo run build test --filter=...[$LATEST_TAG]
 
 # Undo all files that were changed by the build command—this happens because
 # the build can change files with different linting rules, or modify some
