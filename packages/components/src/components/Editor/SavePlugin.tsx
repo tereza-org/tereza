@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
+import { $convertToMarkdownString } from '@lexical/markdown';
 import {
   COMMAND_PRIORITY_LOW,
   COMMAND_PRIORITY_NORMAL,
   LexicalCommand,
   createCommand,
 } from 'lexical';
+import { TRANSFORMERS } from './MarkdownTransformers';
 import { useDebouncedCallback } from 'use-debounce';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import type { EditorState } from 'lexical';

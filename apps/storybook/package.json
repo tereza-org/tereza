@@ -12,12 +12,13 @@
     "build": "storybook build",
     "deploy": "carlin deploy static-app",
     "dev": "storybook dev -p 6006",
-    "storybook": "storybook dev -p 6006"
+    "storybook": "storybook dev -p 6006",
+    "upgrade": "storybook upgrade"
   },
   "dependencies": {
     "@tereza-tech/react-zettel": "^0.9.1",
     "@tereza-tech/theme": "^1.12.1",
-    "@ttoss/ui": "^1.31.8",
+    "@ttoss/ui": "^1.31.15",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -25,17 +26,17 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
-    "@storybook/addon-actions": "^7.0.0",
-    "@storybook/addon-essentials": "^7.0.0",
-    "@storybook/addon-interactions": "^7.0.0",
-    "@storybook/addon-links": "^7.0.0",
-    "@storybook/addon-mdx-gfm": "^7.0.0",
-    "@storybook/react": "^7.0.0",
-    "@storybook/react-webpack5": "^7.0.0",
-    "@storybook/testing-library": "^0.0.14-next.2",
-    "@ttoss/config": "^1.29.2",
+    "@storybook/addon-actions": "^7.0.2",
+    "@storybook/addon-essentials": "^7.0.2",
+    "@storybook/addon-interactions": "^7.0.2",
+    "@storybook/addon-links": "^7.0.2",
+    "@storybook/addon-mdx-gfm": "^7.0.2",
+    "@storybook/react": "^7.0.2",
+    "@storybook/react-webpack5": "^7.0.2",
+    "@storybook/testing-library": "^0.1.0",
+    "@ttoss/config": "^1.29.3",
     "babel-loader": "^9.1.2",
     "react-dom": "^18.2.0",
-    "storybook": "^7.0.0"
+    "storybook": "^7.0.2"
   }
 }

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { $convertFromMarkdownString, TRANSFORMERS } from '@lexical/markdown';
+import { $convertFromMarkdownString } from '@lexical/markdown';
+import { TRANSFORMERS } from './MarkdownTransformers';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 
 export type EditorRef = {

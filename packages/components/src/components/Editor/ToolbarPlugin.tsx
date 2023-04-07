@@ -17,6 +17,10 @@ import {
   $getSelection,
   $isRangeSelection,
   FORMAT_TEXT_COMMAND,
+  UNDO_COMMAND,
+  REDO_COMMAND,
+  CAN_REDO_COMMAND,
+  CAN_UNDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
 } from 'lexical';
 import { $getNearestNodeOfType, mergeRegister } from '@lexical/utils';
@@ -493,6 +497,7 @@ export const ToolbarPlugin = () => {
           updateToolbar();
         });
       }),
+
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,
         (_payload, newEditor) => {
@@ -573,6 +578,18 @@ export const ToolbarPlugin = () => {
             alignItems: 'center',
           }}
         >
+          <button
+            className={'toolbar-item spaced'}
+            onClick={() => editor.dispatchCommand(UNDO_COMMAND)}
+          >
+            <Icon icon="material-symbols:undo" />
+          </button>
+          <button
+            className={'toolbar-item spaced'}
+            onClick={() => editor.dispatchCommand(REDO_COMMAND)}
+          >
+            <Icon icon="material-symbols:redo" />
+          </button>
           <button
             onClick={() => {
               editor.dispatchCommand(FORMAT_TEXT_COMMAND, 'bold');

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { $convertFromMarkdownString, TRANSFORMERS } from '@lexical/markdown';
+import { $convertFromMarkdownString } from '@lexical/markdown';
 import { AutoFocusPlugin } from '@lexical/react/LexicalAutoFocusPlugin';
 import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { Box, Flex } from '@ttoss/ui';
@@ -8,6 +8,7 @@ import { CodeHighlightPlugin } from './CodeHighlightPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { EditorRef, EditorRefPlugin } from './EditorRefPlugin';
 import { HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { HorizontalRuleNode } from '@lexical/react/LexicalHorizontalRuleNode';
 import { HorizontalRulePlugin } from './HorizontalRulePlugin';
 import { LexicalComposer } from '@lexical/react/LexicalComposer';
@@ -19,6 +20,7 @@ import { OnChange, OnChangeMarkdownPlugin } from './OnChangeMarkdownPlugin';
 import { Placeholder } from './Placeholder';
 import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { SavePlugin, SaveProvider, SaveProviderProps } from './SavePlugin';
+import { TRANSFORMERS } from './MarkdownTransformers';
 import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToolbarPlugin } from './ToolbarPlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
@@ -150,6 +152,7 @@ export const Editor = React.forwardRef<EditorRef, EditorProps>(
               <EditorRefPlugin ref={ref} />
               <SavePlugin />
               <HorizontalRulePlugin />
+              <HistoryPlugin />
             </Box>
           </EditorContainer>
         </SaveProvider>
