@@ -1,6 +1,7 @@
-import { $convertToMarkdownString, TRANSFORMERS } from '@lexical/markdown';
+import { $convertToMarkdownString } from '@lexical/markdown';
 import { AUTOSAVE_COMMAND } from './SavePlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
+import { TRANSFORMERS } from './MarkdownTransformers';
 import { useDebouncedCallback } from 'use-debounce';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import type { Dispatch, SetStateAction } from 'react';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button, Flex, Input } from '@ttoss/ui';
 import { Editor, EditorProps, EditorRef } from '@tereza-tech/components/src';
-import { Meta, Story } from '@storybook/react';
+import { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -21,7 +21,7 @@ const promiseAction = (msg: string) => {
   };
 };
 
-const Template: Story<EditorProps> = (props) => {
+const Template: StoryFn<EditorProps> = (props) => {
   return <Editor {...props} />;
 };
 
@@ -30,6 +30,8 @@ const initialValue = `
 
 - Revenue was off the chart.
 - Profits were higher than ever.
+
+---
 
 ## Sales are soaring!
 
