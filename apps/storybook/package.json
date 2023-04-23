@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@apps/storybook",
+  "name": "@tereza-tech-apps/storybook",
   "version": "1.18.0",
   "license": "MIT",
   "author": "Tereza Tech",

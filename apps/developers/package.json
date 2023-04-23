@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@apps/developers",
+  "name": "@tereza-tech-apps/developers",
   "version": "0.11.0",
   "scripts": {
     "build": "docusaurus build",
