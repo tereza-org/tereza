@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.13.0...@tereza-tech-apps/digital-garden@0.14.1) (2023-04-23)
+
+### Bug Fixes
+
+- return apps names because cloudformation stacks ([176bee5](https://github.com/terezatech/tereza-tech/commit/176bee535da1788949b1c34980750abf1026f679))
+
 # 0.14.0 (2023-04-23)
 
 ### Bug Fixes

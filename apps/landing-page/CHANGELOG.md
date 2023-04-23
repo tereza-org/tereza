@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/landing-page@0.11.1...@tereza-tech-apps/landing-page@0.12.1) (2023-04-23)
+
+### Bug Fixes
+
+- return apps names because cloudformation stacks ([176bee5](https://github.com/terezatech/tereza-tech/commit/176bee535da1788949b1c34980750abf1026f679))
+
 # 0.12.0 (2023-04-23)
 
 ### Bug Fixes
