@@ -19,7 +19,8 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.23.0",
+    "@tereza-tech/zettel": "workspace:^",
+    "@ttoss/ui": "^1.32.7",
     "react-force-graph-2d": "^1.24.0",
     "react-force-graph-3d": "^1.22.0",
     "three-spritetext": "^1.8.0"
@@ -29,10 +30,11 @@
     "theme-ui": "^0.15.7"
   },
   "devDependencies": {
-    "@ttoss/config": "^1.29.3",
-    "@types/react": "^18.0.33",
+    "@ttoss/config": "^1.29.5",
+    "@types/react": "^18.0.38",
     "react": "^18.2.0",
-    "theme-ui": "^0.15.7"
+    "theme-ui": "^0.15.7",
+    "tsup": "^6.7.0"
   },
   "keywords": [],
   "publishConfig": {

@@ -1,6 +1,6 @@
 {
   "version": "independent",
-  "npmClient": "yarn",
+  "npmClient": "pnpm",
   "useWorkspaces": true,
   "stream": true,
   "all": true,
@@ -11,5 +11,7 @@
       "message": "chore(release): publish packages",
       "noPrivate": true
     }
-  }
+  },
+
+  "packages": ["apps/*", "packages/*"]
 }

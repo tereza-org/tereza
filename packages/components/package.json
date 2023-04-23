@@ -17,20 +17,28 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@lexical/react": "^0.9.1",
-    "lexical": "^0.9.1",
-    "react-markdown": "^8.0.6",
+    "@lexical/code": "^0.10.0",
+    "@lexical/link": "^0.10.0",
+    "@lexical/list": "^0.10.0",
+    "@lexical/markdown": "^0.10.0",
+    "@lexical/react": "^0.10.0",
+    "@lexical/rich-text": "^0.10.0",
+    "@lexical/selection": "^0.10.0",
+    "@lexical/table": "^0.10.0",
+    "@lexical/utils": "^0.10.0",
+    "lexical": "^0.10.0",
+    "react-markdown": "^8.0.7",
     "use-debounce": "^9.0.4"
   },
   "peerDependencies": {
     "@ttoss/ui": "^1.31.15",
     "react": ">=16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
-    "@ttoss/test-utils": "^1.21.2",
-    "@ttoss/ui": "^1.31.15",
-    "@types/react": "^18.0.33",
+    "@ttoss/test-utils": "^1.21.5",
+    "@ttoss/ui": "^1.32.7",
+    "@types/react": "^18.0.38",
     "react": "^18.2.0",
     "tsup": "^6.7.0"
   },

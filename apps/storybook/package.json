@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@tereza-tech-apps/storybook",
+  "name": "@apps/storybook",
   "version": "1.17.0",
   "license": "MIT",
   "author": "Tereza Tech",
@@ -9,16 +9,17 @@
   ],
   "main": "index.js",
   "scripts": {
-    "build": "storybook build",
+    "build": "storybook build --quiet",
     "deploy": "carlin deploy static-app",
     "dev": "storybook dev -p 6006",
     "storybook": "storybook dev -p 6006",
     "upgrade": "storybook upgrade"
   },
   "dependencies": {
-    "@tereza-tech/react-zettel": "^0.10.0",
-    "@tereza-tech/theme": "^1.13.0",
-    "@ttoss/ui": "^1.31.15",
+    "@tereza-tech/components": "workspace:^",
+    "@tereza-tech/react-zettel": "workspace:^",
+    "@tereza-tech/theme": "workspace:^",
+    "@ttoss/ui": "^1.32.7",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -26,17 +27,17 @@
     "@babel/preset-env": "^7.21.4",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.21.4",
-    "@storybook/addon-actions": "^7.0.2",
-    "@storybook/addon-essentials": "^7.0.2",
-    "@storybook/addon-interactions": "^7.0.2",
-    "@storybook/addon-links": "^7.0.2",
-    "@storybook/addon-mdx-gfm": "^7.0.2",
-    "@storybook/react": "^7.0.2",
-    "@storybook/react-webpack5": "^7.0.2",
+    "@storybook/addon-actions": "^7.0.6",
+    "@storybook/addon-essentials": "^7.0.6",
+    "@storybook/addon-interactions": "^7.0.6",
+    "@storybook/addon-links": "^7.0.6",
+    "@storybook/addon-mdx-gfm": "^7.0.6",
+    "@storybook/react": "^7.0.6",
+    "@storybook/react-webpack5": "^7.0.6",
     "@storybook/testing-library": "^0.1.0",
-    "@ttoss/config": "^1.29.3",
+    "@ttoss/config": "^1.29.5",
     "babel-loader": "^9.1.2",
     "react-dom": "^18.2.0",
-    "storybook": "^7.0.2"
+    "storybook": "^7.0.6"
   }
 }

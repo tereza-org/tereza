@@ -1,3 +1,3 @@
 export CARLIN_DESTROY=true
 
-yarn turbo run deploy --only
+pnpm turbo run deploy --only
