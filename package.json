@@ -4,36 +4,31 @@
   "version": "1.0.0",
   "scripts": {
     "build-graph": "turbo run build --graph=turbo-build-graph.png",
-    "cdvc": "check-dependency-version-consistency .",
+    "preinstall": "npx only-allow pnpm",
     "lint": "lint-staged --diff main --quiet",
     "ls": "lerna ls",
-    "playbook": "yarn workspace @tereza-tech-apps/developers run start",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "syncpack:fix": "syncpack fix-mismatches",
+    "syncpack:list": "syncpack list-mismatches"
   },
-  "workspaces": {
-    "packages": [
-      "apps/*",
-      "packages/*"
-    ]
-  },
-  "dependencies": {},
   "devDependencies": {
-    "@commitlint/cli": "^17.5.1",
-    "@lerna-lite/changed": "^1.17.0",
-    "@lerna-lite/cli": "^1.17.0",
-    "@lerna-lite/list": "^1.17.0",
-    "@ttoss/config": "^1.29.3",
-    "@ttoss/eslint-config": "^1.19.3",
-    "carlin": "^1.26.3",
-    "check-dependency-version-consistency": "^3.0.3",
-    "eslint": "^8.37.0",
+    "@commitlint/cli": "^17.6.1",
+    "@lerna-lite/changed": "^2.1.0",
+    "@lerna-lite/cli": "^2.1.0",
+    "@lerna-lite/list": "^2.1.0",
+    "@lerna-lite/publish": "^2.1.0",
+    "@lerna-lite/version": "^2.1.0",
+    "@ttoss/config": "^1.29.5",
+    "@ttoss/eslint-config": "^1.19.4",
+    "carlin": "^1.26.9",
+    "eslint": "^8.39.0",
     "husky": "^8.0.3",
     "lint-staged": "13.1.0",
-    "prettier": "^2.8.7",
-    "turbo": "^1.8.8"
+    "prettier": "^2.8.8",
+    "syncpack": "^9.8.6",
+    "turbo": "^1.9.3"
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "packageManager": "yarn@1.22.0"
+  }
 }

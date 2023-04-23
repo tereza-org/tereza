@@ -23,8 +23,8 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.23.0",
-    "@ttoss/config": "^1.29.3",
+    "@tereza-tech/zettel": "workspace:^",
+    "@ttoss/config": "^1.29.5",
     "yargs": "^17.6.2"
   },
   "devDependencies": {

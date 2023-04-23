@@ -18,10 +18,11 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@tereza-tech/zettel": "^0.23.0"
+    "@tereza-tech/zettel": "workspace:^"
   },
   "devDependencies": {
-    "@docusaurus/types": "^2.2.0"
+    "@docusaurus/types": "^2.2.0",
+    "tsup": "^6.7.0"
   },
   "keywords": [],
   "publishConfig": {

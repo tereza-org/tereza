@@ -2,12 +2,12 @@ import { Flex, Icon } from '@ttoss/ui';
 import { ModuleContainer } from '../Layout/ModuleContainer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getToday } from '../Date/utils';
-import { useIntl } from 'react-intl';
+import { useI18n } from '@ttoss/react-i18n';
 
 export const JournalRoot = () => {
   const navigate = useNavigate();
 
-  const intl = useIntl();
+  const { intl } = useI18n();
 
   return (
     <ModuleContainer

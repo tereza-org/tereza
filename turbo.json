@@ -2,20 +2,31 @@
   "$schema": "https://turborepo.org/schema.json",
   "globalEnv": ["ACM_TEREZA_APP", "ACM_TEREZA_TECH"],
   "pipeline": {
-    "//#cdvc": {
+    "//#lint": {
+      "dependsOn": [],
       "outputs": []
     },
-    "//#lint": {},
+    "//#syncpack:list": {
+      "dependsOn": [],
+      "outputs": []
+    },
     "build": {
-      "dependsOn": ["//#cdvc", "^build"],
+      "dependsOn": ["//#lint", "//#syncpack:list", "^build"],
       "outputs": ["build/**", "dist/**", ".next/**", "storybook-static/**"]
     },
     "test": {
-      "dependsOn": ["//#cdvc", "build"],
-      "inputs": ["src/**/*.tsx", "src/**/*.ts", "test/**/*.ts", "test/**/*.tsx"]
+      "dependsOn": ["^build"],
+      "outputs": [],
+      "inputs": [
+        "src/**/*.tsx",
+        "src/**/*.ts",
+        "tests/**/*.ts",
+        "tests/**/*.tsx"
+      ]
     },
     "deploy": {
-      "dependsOn": ["//#lint", "build", "test", "^deploy"]
+      "dependsOn": ["build", "test"],
+      "outputs": [".carlin/**"]
     }
   }
 }

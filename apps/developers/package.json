@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@tereza-tech-apps/developers",
+  "name": "@apps/developers",
   "version": "0.10.1",
   "scripts": {
     "build": "docusaurus build",
@@ -18,13 +18,13 @@
     "@docusaurus/core": "2.2.0",
     "@docusaurus/preset-classic": "2.2.0",
     "@mdx-js/react": "^1.6.22",
-    "@tereza-tech/components": "^0.19.1",
-    "@tereza-tech/docusaurus-plugin-zettel": "^0.0.19",
-    "@tereza-tech/react-zettel": "^0.10.0",
-    "@tereza-tech/theme": "^1.13.0",
-    "@tereza-tech/zettel": "^0.23.0",
+    "@tereza-tech/components": "workspace:^",
+    "@tereza-tech/docusaurus-plugin-zettel": "workspace:^",
+    "@tereza-tech/react-zettel": "workspace:^",
+    "@tereza-tech/theme": "workspace:^",
+    "@tereza-tech/zettel": "workspace:^",
     "@theme-ui/mdx": "^0.15.4",
-    "@ttoss/ui": "^1.31.15",
+    "@ttoss/ui": "^1.32.7",
     "prism-react-renderer": "^1.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
