@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.29.0 (2023-04-23)
+
+### Bug Fixes
+
+- horizontal rule and update packages ([#70](https://github.com/terezatech/tereza-tech/issues/70)) ([6dc74e8](https://github.com/terezatech/tereza-tech/commit/6dc74e8cff164d5d9f882b6301f4d8572585f3c6))
+- **tereza:** build command ([38a342b](https://github.com/terezatech/tereza-tech/commit/38a342b7d1af24abd4eb554ef681348ca43e1d30))
+
+### Features
+
+- add journal saving status ([#65](https://github.com/terezatech/tereza-tech/issues/65)) ([9027481](https://github.com/terezatech/tereza-tech/commit/9027481d785c4e3df78d766a91dd059b2a25e02d))
+- add undo redo ([#71](https://github.com/terezatech/tereza-tech/issues/71)) ([5b7bdb4](https://github.com/terezatech/tereza-tech/commit/5b7bdb43f39179cc6fd8229286fea63b846056b1))
+- add zettel markdown ([#66](https://github.com/terezatech/tereza-tech/issues/66)) ([82a3488](https://github.com/terezatech/tereza-tech/commit/82a3488cac5eefb0c4bc9fd2a278cd68be8240b6))
+- autosave on editor component ([#68](https://github.com/terezatech/tereza-tech/issues/68)) ([6a30932](https://github.com/terezatech/tereza-tech/commit/6a30932d3b42cb61973c477983d26dd14cf05553))
+- implement i18n ([#69](https://github.com/terezatech/tereza-tech/issues/69)) ([3ffe083](https://github.com/terezatech/tereza-tech/commit/3ffe083d5e21d456bcdb5c55cdce6d3ca8acc45d))
+- reestructure to support lazy loading ([#63](https://github.com/terezatech/tereza-tech/issues/63)) ([8702a5e](https://github.com/terezatech/tereza-tech/commit/8702a5eaa7085b325c922be07ab867d14678ff5a))
+
 ## [0.28.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.28.0...@tereza-tech-apps/tereza@0.28.1) (2023-04-07)
 
 **Note:** Version bump only for package @tereza-tech-apps/tereza

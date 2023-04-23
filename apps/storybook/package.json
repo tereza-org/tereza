@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "@apps/storybook",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "license": "MIT",
   "author": "Tereza Tech",
   "contributors": [

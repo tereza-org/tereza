@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.14.0 (2023-04-23)
+
+### Bug Fixes
+
+- horizontal rule and update packages ([#70](https://github.com/terezatech/tereza-tech/issues/70)) ([6dc74e8](https://github.com/terezatech/tereza-tech/commit/6dc74e8cff164d5d9f882b6301f4d8572585f3c6))
+- **tereza:** build command ([38a342b](https://github.com/terezatech/tereza-tech/commit/38a342b7d1af24abd4eb554ef681348ca43e1d30))
+
+### Features
+
+- add undo redo ([#71](https://github.com/terezatech/tereza-tech/issues/71)) ([5b7bdb4](https://github.com/terezatech/tereza-tech/commit/5b7bdb43f39179cc6fd8229286fea63b846056b1))
+- implement i18n ([#69](https://github.com/terezatech/tereza-tech/issues/69)) ([3ffe083](https://github.com/terezatech/tereza-tech/commit/3ffe083d5e21d456bcdb5c55cdce6d3ca8acc45d))
+
 # [0.13.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/digital-garden@0.12.1...@tereza-tech-apps/digital-garden@0.13.0) (2023-04-07)
 
 ### Features
