@@ -36,6 +36,6 @@ dist/
 .carlin
 __generated__/
 vite.config.ts.timestamp*
-
+tsup.config.bundled*
 **/i18n/compiled/
 **/i18n/missing/
