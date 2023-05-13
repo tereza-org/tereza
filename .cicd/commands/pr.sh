@@ -11,7 +11,7 @@ pnpm turbo run build test --filter=...[main]
 # We don't want these changes becaues it will cause
 # turbo cache missing. https://turbo.build/repo/docs/core-concepts/caching#missing-the-cache
 pnpm turbo run lint
-git status --porcelain || { echo "Error: There are changed files."; git status; exit 1; }
+git diff --exit-code --quiet || { echo "Error: There are changed files."; git status; exit 1; }
 
 # Run deploy separately from command above because we don't want to deploy
 # packages with bug. As `test` isn't a dependsOn of `deploy` on turbo.json,

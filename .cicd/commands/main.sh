@@ -46,7 +46,7 @@ if pnpm lerna changed; then
 
   # See description on pr.sh.
   pnpm turbo run lint
-  git status --porcelain || { echo "Error: There are changed files."; git status; exit 1; }
+  git diff --exit-code --quiet || { echo "Error: There are changed files."; git status; exit 1; }
 
   # Use Git to check for changes in the origin repository. If there are any
   # changes, "git push --follow-tags" will fail. The error message will be:
