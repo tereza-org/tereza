@@ -10,7 +10,7 @@ git fetch --tags --quiet
 # return a non-zero exit code, which indicates failure. If there are tags, grep
 # will find at least one character in the output and return a zero exit code,
 # which indicates success.
-git tag --points-at HEAD | grep -q . && { echo "There are tags in the current commit, exiting main workflow" && exit 0; }
+git tag --points-at HEAD | grep -q . && { echo "There are tags in the current commit, exiting main workflow"; exit 0; }
 
 # Retrieve the latest tag
 export LATEST_TAG=$(git describe --tags --abbrev=0)
@@ -45,7 +45,8 @@ if pnpm lerna changed; then
   pnpm turbo run build test --filter=...[$LATEST_TAG]
 
   # See description on pr.sh.
-  git checkout -- .
+  pnpm turbo run lint
+  git status --porcelain || { echo "Error: There are changed files."; git status; exit 1; }
 
   # Use Git to check for changes in the origin repository. If there are any
   # changes, "git push --follow-tags" will fail. The error message will be:
@@ -65,7 +66,7 @@ if pnpm lerna changed; then
   git fetch
 
   # HEAD^1 because lerna version created a commit
-  git diff HEAD^1 origin/main --quiet || { echo "Changes found before publishing. Workflow stopped." && exit 1; }
+  git diff HEAD^1 origin/main --quiet || { echo "Changes found before publishing. Workflow stopped."; exit 1; }
 
   # Push changes
   git push --follow-tags
