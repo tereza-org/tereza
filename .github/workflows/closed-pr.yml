@@ -2,7 +2,7 @@ name: closed-pr
 
 'on':
   pull_request:
-    branch:
+    branches:
       - main
     types:
       - closed

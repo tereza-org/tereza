@@ -31,9 +31,6 @@ export const DatePicker = ({
         onClick={() => {
           handleDateChange(addToDate(value, { days: -1 }));
         }}
-        sx={{
-          width: '100px',
-        }}
       >
         Prev
       </Button>
@@ -49,9 +46,6 @@ export const DatePicker = ({
         disabled={value === getToday()}
         onClick={() => {
           handleDateChange(addToDate(value, { days: 1 }));
-        }}
-        sx={{
-          width: '100px',
         }}
       >
         Next
