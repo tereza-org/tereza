@@ -53,11 +53,6 @@ export const theme = createTheme({
     body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     monospace: 'Menlo, monospace',
   },
-  cards: {
-    primary: {
-      backgroundColor: 'background',
-    },
-  },
 });
 
 // export const theme: Theme = {

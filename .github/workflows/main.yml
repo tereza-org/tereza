@@ -32,6 +32,7 @@ jobs:
         run: |
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -68,5 +69,5 @@ jobs:
           ACM_TEREZA_APP: ${{ secrets.ACM_TEREZA_APP }}
           ACM_TEREZA_TECH: ${{ secrets.ACM_TEREZA_TECH }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          TURBO_TEAM: TURBO_TEAM
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}

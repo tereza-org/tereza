@@ -12,21 +12,20 @@
     "syncpack:list": "syncpack list-mismatches"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.1",
-    "@lerna-lite/changed": "^2.1.0",
-    "@lerna-lite/cli": "^2.1.0",
-    "@lerna-lite/list": "^2.1.0",
-    "@lerna-lite/publish": "^2.1.0",
-    "@lerna-lite/version": "^2.1.0",
-    "@ttoss/config": "^1.29.5",
-    "@ttoss/eslint-config": "^1.19.4",
-    "carlin": "^1.26.9",
-    "eslint": "^8.39.0",
+    "@commitlint/cli": "^17.6.3",
+    "@lerna-lite/changed": "^2.3.0",
+    "@lerna-lite/cli": "^2.3.0",
+    "@lerna-lite/list": "^2.3.0",
+    "@lerna-lite/version": "^2.3.0",
+    "@ttoss/config": "^1.30.0",
+    "@ttoss/eslint-config": "^1.20.0",
+    "carlin": "^1.29.0",
+    "eslint": "^8.40.0",
     "husky": "^8.0.3",
     "lint-staged": "13.1.0",
     "prettier": "^2.8.8",
     "syncpack": "^9.8.6",
-    "turbo": "^1.9.3"
+    "turbo": "^1.9.4"
   },
   "engines": {
     "node": ">=18.0.0"

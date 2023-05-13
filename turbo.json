@@ -10,8 +10,12 @@
       "dependsOn": [],
       "outputs": []
     },
+    "i18n": {
+      "dependsOn": [],
+      "outputs": ["i18n/lang/**"]
+    },
     "build": {
-      "dependsOn": ["//#lint", "//#syncpack:list", "^build"],
+      "dependsOn": ["//#lint", "//#syncpack:list", "i18n", "^build"],
       "outputs": ["build/**", "dist/**", ".next/**", "storybook-static/**"]
     },
     "test": {
@@ -25,7 +29,7 @@
       ]
     },
     "deploy": {
-      "dependsOn": ["build", "test"],
+      "dependsOn": ["build", "test", "^deploy"],
       "outputs": [".carlin/**"]
     }
   }

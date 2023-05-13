@@ -23,14 +23,14 @@
     "defaultMessage": "All",
     "description": "All journal entries"
   },
+  "/J+02x": {
+    "defaultMessage": "Log in",
+    "description": "Button label.",
+    "module": "@ttoss/react-auth"
+  },
   "0XOzcH": {
     "defaultMessage": "Required field",
     "description": "Required field.",
-    "module": "@ttoss/react-auth"
-  },
-  "0cVgsc": {
-    "defaultMessage": "Login",
-    "description": "Button label.",
     "module": "@ttoss/react-auth"
   },
   "5E12mO": {
@@ -38,9 +38,24 @@
     "description": "Email label.",
     "module": "@ttoss/react-auth"
   },
+  "BtK6KR": {
+    "defaultMessage": "Forgot password?",
+    "description": "Forgot password?",
+    "module": "@ttoss/react-auth"
+  },
   "EXZxA0": {
     "defaultMessage": "Register",
     "description": "Title on sign up.",
+    "module": "@ttoss/react-auth"
+  },
+  "EZ3YF2": {
+    "defaultMessage": "Sign up",
+    "description": "Sign up",
+    "module": "@ttoss/react-auth"
+  },
+  "F2iS37": {
+    "defaultMessage": "Log in",
+    "description": "Sign in title.",
     "module": "@ttoss/react-auth"
   },
   "KY2T6J": {
@@ -68,11 +83,6 @@
     "description": "Password label.",
     "module": "@ttoss/react-auth"
   },
-  "R1rFNQ": {
-    "defaultMessage": "Login",
-    "description": "Sign in title.",
-    "module": "@ttoss/react-auth"
-  },
   "S3pjKw": {
     "defaultMessage": "Minimum {value} characters",
     "description": "Minimum {value} characters.",
@@ -88,11 +98,6 @@
     "description": "Confirm",
     "module": "@ttoss/react-auth"
   },
-  "XC1w2U": {
-    "defaultMessage": "Don't have an account? Sign up",
-    "description": "Link to sign up.",
-    "module": "@ttoss/react-auth"
-  },
   "cGR2eI": {
     "defaultMessage": "Confirmation",
     "description": "Confirmation",
@@ -106,11 +111,6 @@
   "r+QgO+": {
     "defaultMessage": "Email field is required",
     "description": "Email is a required field.",
-    "module": "@ttoss/react-auth"
-  },
-  "z5s0vm": {
-    "defaultMessage": "Do you forgot your password?",
-    "description": "Link to retrieve password.",
     "module": "@ttoss/react-auth"
   }
 }

@@ -24,7 +24,7 @@
   "typings": "dist/index.d.ts",
   "dependencies": {
     "@tereza-tech/zettel": "workspace:^",
-    "@ttoss/config": "^1.29.5",
+    "@ttoss/config": "^1.30.0",
     "yargs": "^17.6.2"
   },
   "devDependencies": {

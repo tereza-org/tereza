@@ -35,4 +35,5 @@ const GraphPage = ({
   );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default GraphPage;

@@ -10,4 +10,5 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
+// eslint-disable-next-line import/no-default-export
 export default Recommendations;
