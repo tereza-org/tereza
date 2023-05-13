@@ -52,4 +52,5 @@ export const getStaticProps = async ({
   };
 };
 
+// eslint-disable-next-line import/no-default-export
 export default NotePage;
