@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.3](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.19.2...@tereza-tech/components@0.19.3) (2023-05-15)
+
+**Note:** Version bump only for package @tereza-tech/components
+
 ## [0.19.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.19.1...@tereza-tech/components@0.19.2) (2023-04-23)
 
 **Note:** Version bump only for package @tereza-tech/components

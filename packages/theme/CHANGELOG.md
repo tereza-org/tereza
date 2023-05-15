@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.13.1...@tereza-tech/theme@1.13.2) (2023-05-15)
+
+**Note:** Version bump only for package @tereza-tech/theme
+
 ## [1.13.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.13.0...@tereza-tech/theme@1.13.1) (2023-04-23)
 
 **Note:** Version bump only for package @tereza-tech/theme
