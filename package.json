@@ -3,7 +3,7 @@
   "name": "tereza-tech",
   "version": "1.0.0",
   "scripts": {
-    "build-graph": "turbo run build --graph=turbo-build-graph.png",
+    "build-graph": "turbo run build --only --graph=turbo-build-graph.png",
     "preinstall": "npx only-allow pnpm",
     "lint": "lint-staged --diff main --quiet",
     "ls": "lerna ls",

@@ -6,10 +6,7 @@ export LATEST_TAG=$(git describe --tags --abbrev=0)
 # https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependents-of-matched-workspaces
 pnpm turbo run build test --filter=...[main]
 
-# Undo all files that were changed by the build command—this happens because
-# the build can change files with different linting rules.
-# We don't want these changes becaues it will cause
-# turbo cache missing. https://turbo.build/repo/docs/core-concepts/caching#missing-the-cache
+# See description on the main.sh file.
 pnpm turbo run lint
 git diff --exit-code --quiet || { echo "Error: There are changed files."; git status; exit 1; }
 

@@ -23,12 +23,6 @@ echo //registry.npmjs.org/:\_authToken=$NPM_TOKEN > ~/.npmrc
 # Print "NPM whoami" to check if the token is valid
 echo NPM whoami: $(npm whoami)
 
-# Build @ttoss/config package to lerna version command works properly
-# when commiting changes. If we don't build this package, commit will fail
-# because pre-commit hook will run syncpack:list with default config, that
-# not works because of package version and "workspace:^" mismatch.
-pnpm turbo run build:config
-
 # Publish packages only if `pnpm lerna changed` is success. This happens when
 # exists an updade on root and no packages changes. This way, `version` won't
 # create tags and `git diff HEAD^1 origin/main --quiet` will fail because
@@ -44,8 +38,12 @@ if pnpm lerna changed; then
   # https://turbo.build/repo/docs/core-concepts/monorepos/filtering#include-dependents-of-matched-workspaces
   pnpm turbo run build test --filter=...[$LATEST_TAG]
 
-  # See description on pr.sh.
-  pnpm turbo run lint
+  # Undo all files that were changed by the build command—this happens because
+  # the build can change files with different linting rules and `pnpm run lint`
+  # fix them.
+  # We don't want these changes becaues it will cause
+  # turbo cache missing. https://turbo.build/repo/docs/core-concepts/caching#missing-the-cache
+  pnpm turbo run lint -- --allow-empty
   git diff --exit-code --quiet || { echo "Error: There are changed files."; git status; exit 1; }
 
   # Use Git to check for changes in the origin repository. If there are any
