@@ -5,10 +5,6 @@ import {
   RequireAuthentication,
 } from './modules/Auth';
 import {
-  HasUserAccessToApp,
-  hasUserAccessToAppLoader,
-} from './modules/Account/HasUserAccessToApp';
-import {
   JournalAll,
   JournalDay,
   JournalDayEditor,
@@ -65,72 +61,58 @@ const routes = (
       }
       errorElement={<ErrorPage />}
     >
-      <Route
-        loader={hasUserAccessToAppLoader}
-        element={<HasUserAccessToApp />}
-        errorElement={<ErrorPage />}
-      >
-        <Route path="/" element={<Navigate to="/zettel" />} />
-        <Route path="/journal" element={<JournalRoot />}>
-          <Route
-            path=""
-            loader={journalSummaryLoader}
-            element={<JournalSummary />}
-          />
-          <Route
-            path="stats"
-            loader={journalStatsLoader}
-            element={<JournalStats />}
-          />
-          <Route
-            path="questions"
-            loader={journalQuestionsLoader}
-            element={<JournalQuestions />}
-          />
-          <Route
-            path=":date"
-            loader={journalDayLoader}
-            element={<JournalDay />}
-          />
-          <Route
-            path=":date/edit"
-            loader={journalDayEditorLoader}
-            element={<JournalDayEditor />}
-          />
-          <Route
-            path="all"
-            loader={journalAllLoader}
-            element={<JournalAll />}
-          />
-        </Route>
-        <Route path="/zettel" element={<ZettelRoot />}>
-          <Route path="" loader={zettelHomeLoader} element={<ZettelHome />} />
-          <Route
-            path="note/:noteId"
-            loader={zettelNoteLoader}
-            element={<ZettelNote />}
-          />
-          <Route
-            path="editor"
-            loader={zettelNoteEditorLoader}
-            element={<ZettelNoteEditor />}
-          />
-          <Route
-            path="editor/:noteId"
-            loader={zettelNoteEditorLoader}
-            element={<ZettelNoteEditor />}
-          />
-          <Route
-            path="tags"
-            loader={zettelTagsLoader}
-            element={<ZettelTags />}
-          />
-          <Route
-            path="graph"
-            loader={zettelGraphLoader}
-            element={<ZettelGraph />}
-          />
-        </Route>
+      <Route path="/" element={<Navigate to="/zettel" />} />
+      <Route path="/journal" element={<JournalRoot />}>
+        <Route
+          path=""
+          loader={journalSummaryLoader}
+          element={<JournalSummary />}
+        />
+        <Route
+          path="stats"
+          loader={journalStatsLoader}
+          element={<JournalStats />}
+        />
+        <Route
+          path="questions"
+          loader={journalQuestionsLoader}
+          element={<JournalQuestions />}
+        />
+        <Route
+          path=":date"
+          loader={journalDayLoader}
+          element={<JournalDay />}
+        />
+        <Route
+          path=":date/edit"
+          loader={journalDayEditorLoader}
+          element={<JournalDayEditor />}
+        />
+        <Route path="all" loader={journalAllLoader} element={<JournalAll />} />
+      </Route>
+      <Route path="/zettel" element={<ZettelRoot />}>
+        <Route path="" loader={zettelHomeLoader} element={<ZettelHome />} />
+        <Route
+          path="note/:noteId"
+          loader={zettelNoteLoader}
+          element={<ZettelNote />}
+        />
+        <Route
+          path="editor"
+          loader={zettelNoteEditorLoader}
+          element={<ZettelNoteEditor />}
+        />
+        <Route
+          path="editor/:noteId"
+          loader={zettelNoteEditorLoader}
+          element={<ZettelNoteEditor />}
+        />
+        <Route path="tags" loader={zettelTagsLoader} element={<ZettelTags />} />
+        <Route
+          path="graph"
+          loader={zettelGraphLoader}
+          element={<ZettelGraph />}
+        />
       </Route>
     </Route>
   </>

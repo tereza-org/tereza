@@ -26,33 +26,15 @@ const palette = {
 //   },
 // },
 
-const white = '#FDFDFD';
-
-const black = '#0D0D0D';
-
 export const theme = createTheme({
-  colors: {
-    black,
-    white,
-    text: black,
-    background: white,
-    primary: palette.color3,
-    secondary: palette.color1,
-    note: palette.color3,
-    tag: '#D35844',
-    draft: palette.color5,
-    modes: {
-      dark: {
-        // text: white,
-        // background: black,
-      },
-    },
-  },
-  fonts: {
-    heading: 'Lato',
-    body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    monospace: 'Menlo, monospace',
-  },
+  // colors: {
+  //   primary: palette.color3,
+  // },
+  // fonts: {
+  //   heading: 'Lato',
+  //   body: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+  //   monospace: 'Menlo, monospace',
+  // },
 });
 
 // export const theme: Theme = {

@@ -11,13 +11,13 @@
   "dependencies": {
     "@tereza-tech/components": "workspace:^",
     "@tereza-tech/theme": "workspace:^",
-    "@ttoss/ui": "^1.36.3",
+    "@ttoss/ui": "^2.0.1",
     "@types/node": "18.11.10",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
+    "@types/react": "^18.2.13",
+    "@types/react-dom": "^18.2.6",
     "next": "13.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
