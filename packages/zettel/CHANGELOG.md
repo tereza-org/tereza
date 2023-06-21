@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.23.2...@tereza-tech/zettel@0.24.0) (2023-06-21)
+
+### Features
+
+- remove allowed access ([#75](https://github.com/terezatech/tereza-tech/issues/75)) ([6739afe](https://github.com/terezatech/tereza-tech/commit/6739afe0ab077d8e60eb5d1848dd7a23abce05c6))
+
 ## [0.23.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.23.1...@tereza-tech/zettel@0.23.2) (2023-05-15)
 
 **Note:** Version bump only for package @tereza-tech/zettel

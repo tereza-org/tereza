@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.19.3...@tereza-tech/components@0.20.0) (2023-06-21)
+
+### Features
+
+- remove allowed access ([#75](https://github.com/terezatech/tereza-tech/issues/75)) ([6739afe](https://github.com/terezatech/tereza-tech/commit/6739afe0ab077d8e60eb5d1848dd7a23abce05c6))
+
 ## [0.19.3](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.19.2...@tereza-tech/components@0.19.3) (2023-05-15)
 
 **Note:** Version bump only for package @tereza-tech/components
