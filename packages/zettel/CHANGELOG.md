@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.23.1...@tereza-tech/zettel@0.23.2) (2023-05-15)
+
+**Note:** Version bump only for package @tereza-tech/zettel
+
 ## [0.23.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.23.0...@tereza-tech/zettel@0.23.1) (2023-04-23)
 
 **Note:** Version bump only for package @tereza-tech/zettel
