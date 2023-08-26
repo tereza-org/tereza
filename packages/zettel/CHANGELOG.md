@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.24.0...@tereza-tech/zettel@0.25.0) (2023-08-26)
+
+### Features
+
+- forgot password working ([#76](https://github.com/terezatech/tereza-tech/issues/76)) ([d851f37](https://github.com/terezatech/tereza-tech/commit/d851f37d935eb9bdb9772cd7823c22c4090fe07a))
+
 # [0.24.0](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.23.2...@tereza-tech/zettel@0.24.0) (2023-06-21)
 
 ### Features
