@@ -1,4 +1,5 @@
-import { Box, Flex, Icon, Text } from '@ttoss/ui';
+import { Box, Flex, Text } from '@ttoss/ui';
+import { Icon } from '@ttoss/react-icons';
 import { Markdown } from './Markdown';
 
 export type JournalProps = {
@@ -55,11 +56,7 @@ export const Journal = ({
               cursor: 'pointer',
             }}
           >
-            <Icon
-              {...({
-                icon: 'material-symbols:edit',
-              } as any)}
-            />
+            <Icon icon="material-symbols:edit" />
           </Text>
         )}
       </Text>

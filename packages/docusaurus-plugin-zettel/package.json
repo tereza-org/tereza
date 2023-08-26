@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@docusaurus/types": "^2.2.0",
-    "tsup": "^7.0.0"
+    "tsup": "^7.2.0"
   },
   "keywords": [],
   "publishConfig": {
