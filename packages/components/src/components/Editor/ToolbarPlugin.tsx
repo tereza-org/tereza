@@ -37,8 +37,9 @@ import { createPortal } from 'react-dom';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import './styles.css';
-import { Icon, Flex, Select as SelectUi, Text } from '@ttoss/ui';
+import { Flex, Select as SelectUi, Text } from '@ttoss/ui';
 import { useSaveContext, SAVE_COMMAND } from './SavePlugin';
+import { Icon } from '@ttoss/react-icons';
 
 const LowPriority = 1;
 

@@ -1,4 +1,5 @@
-import { Flex, Icon } from '@ttoss/ui';
+import { Flex } from '@ttoss/ui';
+import { Icon } from '@ttoss/react-icons';
 import { ModuleContainer } from '../Layout/ModuleContainer';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { getToday } from '../Date/utils';
