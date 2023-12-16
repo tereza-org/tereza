@@ -1,3 +1,3 @@
 module.exports = {
-  reject: ['lint-staged'],
+  reject: ['aws-amplify'],
 };

@@ -1,0 +1,3 @@
+{
+  "extends": ["@ttoss/eslint-config/next"]
+}

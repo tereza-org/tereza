@@ -1,0 +1,285 @@
+type Query {
+  """Fetches an object that has globally unique ID among all types"""
+  node(
+    """The globally unique ID among all types"""
+    id: ID!
+  ): Node
+  me: Me!
+  journal: QueryJournal
+  zettel: QueryZettel
+}
+
+type Mutation {
+  journal: MutationJournal
+  zettel: MutationZettel
+}
+
+"""The `Boolean` scalar type represents `true` or `false`."""
+scalar Boolean
+
+"""The `Boolean` scalar type represents `true` or `false`."""
+scalar Boolean
+
+"""
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+"""
+scalar ID
+
+"""
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+"""
+scalar Int
+
+"""
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+"""
+scalar String
+
+"""
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+"""
+scalar String
+
+enum JournalSummaryKeyEnum {
+  TODAY
+  YESTERDAY
+  LAST_WEEK
+  LAST_MONTH
+  LAST_YEAR
+  LAST_TWO_YEARS
+  LAST_FIVE_YEARS
+  LAST_TEN_YEARS
+}
+
+enum SortConnectionJournalEnum {
+  DATE_DESC
+}
+
+enum SortConnectionZettelNoteEnum {
+  BY_TITLE
+}
+
+"""
+An object, that can be fetched by the globally unique ID among all types.
+"""
+interface Node {
+  """The globally unique ID among all types."""
+  id: ID!
+}
+
+type Journal implements Node {
+  """The globally unique ID among all types"""
+  id: ID!
+  date: String!
+  text: String!
+}
+
+"""A connection to a list of items."""
+type JournalConnection {
+  """Total object count."""
+  count: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [JournalEdge!]!
+}
+
+"""An edge in a connection."""
+type JournalEdge {
+  """The item at the end of the edge"""
+  node: Journal!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type JournalQuestion {
+  question: String!
+  enabled: Boolean!
+}
+
+type JournalQuestions {
+  system: [JournalQuestion!]!
+  user: [JournalQuestion!]
+  daily(date: String!): [JournalQuestion!]!
+}
+
+type JournalStats {
+  count: Int!
+  initialDate: String!
+  maxStreak: Int!
+  missingDatesCount: Int!
+  groupDates: [JournalStatsGroupDate!]!
+}
+
+type JournalStatsGroupDate {
+  month: String!
+  days: [JournalStatsGroupDay!]!
+}
+
+type JournalStatsGroupDay {
+  day: String!
+  missing: Boolean!
+}
+
+type JournalSummaryItem {
+  key: JournalSummaryKeyEnum!
+  journal: Journal!
+}
+
+type Me {
+  id: ID!
+  allowed: Boolean
+}
+
+type MutationJournal {
+  saveJournal(journal: JournalInput!): Journal!
+  saveQuestions(questions: [JournalQuestionInput!]!): [JournalQuestion!]!
+}
+
+type MutationZettel {
+  saveNote(note: ZettelNoteInput!): ZettelNote!
+  deleteNote(id: ID!): Boolean!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type QueryJournal {
+  journalDay(date: String!): Journal
+  journals(
+    """Forward pagination argument for returning at most first edges"""
+    first: Int
+
+    """Forward pagination argument for returning at most first edges"""
+    after: String
+
+    """Backward pagination argument for returning at most last edges"""
+    last: Int
+
+    """Backward pagination argument for returning at most last edges"""
+    before: String
+
+    """Sort argument for data ordering"""
+    sort: SortConnectionJournalEnum = DATE_DESC
+  ): JournalConnection
+  stats(today: String!): JournalStats
+  summary(date: String!): [JournalSummaryItem!]!
+  questions: JournalQuestions
+}
+
+type QueryZettel {
+  note(id: ID!): ZettelNote!
+  notes(
+    """Forward pagination argument for returning at most first edges"""
+    first: Int
+
+    """Forward pagination argument for returning at most first edges"""
+    after: String
+
+    """Backward pagination argument for returning at most last edges"""
+    last: Int
+
+    """Backward pagination argument for returning at most last edges"""
+    before: String
+    filter: ZettelNotesFilterInput
+
+    """Sort argument for data ordering"""
+    sort: SortConnectionZettelNoteEnum = BY_TITLE
+  ): ZettelNoteConnection
+  insights(note: ZettelNoteInput!): [ZettelInsight!]!
+  tags: [String!]!
+  graphData: ZettelGraph!
+}
+
+type ZettelGraph {
+  nodes: [ZettelGraphNode!]!
+  links: [ZettelGraphLink!]!
+}
+
+type ZettelGraphLink {
+  source: String!
+  target: String!
+}
+
+type ZettelGraphNode {
+  id: ID!
+  group: String!
+  label: String
+}
+
+type ZettelInsight {
+  text: String
+}
+
+type ZettelNote implements Node {
+  """The globally unique ID among all types"""
+  id: ID!
+  title: String!
+  group: String!
+  description: String
+  date: String
+  tags: [String!]!
+  content: String
+}
+
+"""A connection to a list of items."""
+type ZettelNoteConnection {
+  """Total object count."""
+  count: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ZettelNoteEdge!]!
+}
+
+"""An edge in a connection."""
+type ZettelNoteEdge {
+  """The item at the end of the edge"""
+  node: ZettelNote!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input JournalInput {
+  date: String!
+  text: String!
+}
+
+input JournalQuestionInput {
+  question: String!
+  enabled: Boolean!
+}
+
+input ZettelNoteInput {
+  id: ID
+  title: String!
+  group: String
+  description: String
+  date: String
+  tags: [String!]
+  content: String
+}
+
+input ZettelNotesFilterInput {
+  groups: [String!]
+  includeDrafts: Boolean
+  tags: [String!]
+}
