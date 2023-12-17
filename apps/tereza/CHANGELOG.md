@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.31.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.31.1...@tereza-tech-apps/tereza@0.31.2) (2023-12-17)
+
+### Bug Fixes
+
+- add CARLIN_ENVIRONMENT to turbo.json ([8140e12](https://github.com/terezatech/tereza-tech/commit/8140e123388cabc9b1ed92623ff1e2b990dc226c))
+
 ## [0.31.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.31.0...@tereza-tech-apps/tereza@0.31.1) (2023-12-17)
 
 **Note:** Version bump only for package @tereza-tech-apps/tereza
