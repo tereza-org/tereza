@@ -7,7 +7,6 @@ const JournalLayout = ({
   title,
 }: {
   children: React.ReactNode;
-  journalSummary: React.ReactNode;
   title: React.ReactNode;
 }) => {
   return (

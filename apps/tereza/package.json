@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "@tereza-tech-apps/tereza",
+  "name": "@tereza-apps/tereza",
   "version": "0.31.3",
   "scripts": {
     "prebuild": "pnpm run relay",
