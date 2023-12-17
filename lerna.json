@@ -12,5 +12,5 @@
     }
   },
 
-  "packages": ["apps/*", "packages/*"]
+  "packages": ["apps/tereza", "packages/*"]
 }
