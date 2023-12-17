@@ -17,7 +17,7 @@
     "@lerna-lite/cli": "^3.1.0",
     "@lerna-lite/list": "^3.1.0",
     "@lerna-lite/version": "^3.1.0",
-    "@ttoss/config": "^1.31.3",
+    "@ttoss/config": "^1.31.4",
     "@ttoss/eslint-config": "^1.22.7",
     "carlin": "^1.31.6",
     "eslint": "^8.55.0",

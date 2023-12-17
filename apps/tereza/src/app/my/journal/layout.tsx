@@ -1,25 +1,26 @@
 'use client';
 
-import { Flex, Heading } from '@ttoss/ui';
-import { FormattedMessage } from '@ttoss/react-i18n';
+import { usePathname } from 'next/navigation';
 
-const JournalLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        gap: '2xl',
-      }}
-    >
-      <Heading as="h1">
-        <FormattedMessage
-          defaultMessage="Journal Summary"
-          description="Journal summary page title"
-        />
-      </Heading>
-      {children}
-    </Flex>
-  );
+const JournalLayout = ({
+  children,
+  journalSummary,
+}: {
+  children: React.ReactNode;
+  journalSummary: React.ReactNode;
+}) => {
+  const pathname = usePathname();
+
+  if (pathname === '/my/journal') {
+    return (
+      <>
+        {children}
+        {journalSummary}
+      </>
+    );
+  }
+
+  return <>{children}</>;
 };
 
 export default JournalLayout;

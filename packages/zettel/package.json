@@ -20,7 +20,7 @@
   "typings": "dist/index.d.ts",
   "dependencies": {
     "@aws-sdk/client-s3": "^3.304.0",
-    "@ttoss/config": "^1.31.3",
+    "@ttoss/config": "^1.31.4",
     "change-case": "^4.1.2",
     "date-fns": "^2.30.0",
     "gray-matter": "^4.0.3",

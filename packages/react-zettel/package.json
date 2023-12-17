@@ -20,7 +20,7 @@
   "typings": "dist/index.d.ts",
   "dependencies": {
     "@tereza-tech/zettel": "workspace:^",
-    "@ttoss/ui": "^4.0.6",
+    "@ttoss/ui": "^4.0.7",
     "react-force-graph-2d": "^1.24.0",
     "react-force-graph-3d": "^1.23.0",
     "three-spritetext": "^1.8.0"
@@ -30,8 +30,8 @@
     "theme-ui": "^0.15.7"
   },
   "devDependencies": {
-    "@ttoss/config": "^1.31.3",
-    "@types/react": "^18.2.42",
+    "@ttoss/config": "^1.31.4",
+    "@types/react": "^18.2.45",
     "react": "^18.2.0",
     "theme-ui": "^0.15.7",
     "tsup": "^7.2.0"

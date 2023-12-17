@@ -19,7 +19,7 @@
     "@tereza-tech/components": "workspace:^",
     "@tereza-tech/react-zettel": "workspace:^",
     "@tereza-tech/theme": "workspace:^",
-    "@ttoss/ui": "^4.0.6",
+    "@ttoss/ui": "^4.0.7",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -35,7 +35,7 @@
     "@storybook/react": "^7.3.2",
     "@storybook/react-webpack5": "^7.3.2",
     "@storybook/testing-library": "^0.2.0",
-    "@ttoss/config": "^1.31.3",
+    "@ttoss/config": "^1.31.4",
     "babel-loader": "^9.1.2",
     "react-dom": "^18.2.0",
     "storybook": "^7.3.2"

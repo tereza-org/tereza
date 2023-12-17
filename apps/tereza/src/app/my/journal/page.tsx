@@ -1,19 +1,19 @@
-import { JournalHome } from './JournalHome';
-import { getToday } from 'src/modules/Date/getToday';
-import { loadSerializableQuery } from 'src/relay/loadSerializableQuery';
-import JournalHomeQueryNode, {
-  JournalHomeQuery,
-} from './__generated__/JournalHomeQuery.graphql';
+'use client';
 
-const JournalPage = async () => {
-  const preloadedQuery = await loadSerializableQuery<
-    typeof JournalHomeQueryNode,
-    JournalHomeQuery
-  >(JournalHomeQueryNode.params, {
-    date: getToday(),
-  });
+import { FormattedMessage } from '@ttoss/react-i18n';
+import { Heading } from '@ttoss/ui';
 
-  return <JournalHome preloadedQuery={preloadedQuery} />;
+const JournalPage = () => {
+  return (
+    <>
+      <Heading as="h1">
+        <FormattedMessage
+          defaultMessage="Journal Summary"
+          description="Journal summary page title"
+        />
+      </Heading>
+    </>
+  );
 };
 
 export default JournalPage;

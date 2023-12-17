@@ -17,10 +17,10 @@ export const JournalMarkdown = ({
       label={label}
       text={text}
       onEdit={() => {
-        return router.push(`/journal/${date}/edit`);
+        return router.push(`/my/journal/${date}/edit`);
       }}
       onLabelClick={() => {
-        return router.push(`/journal/${date}`);
+        return router.push(`/my/journal/${date}`);
       }}
     />
   );
