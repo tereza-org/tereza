@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.2](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.21.1...@tereza-tech/components@0.21.2) (2023-12-17)
+
+### Bug Fixes
+
+- toolbar wrap on mobile ([67ad695](https://github.com/terezatech/tereza-tech/commit/67ad69595887457f7b55a6ac1a94a1f77a42db32))
+
 ## [0.21.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/components@0.21.0...@tereza-tech/components@0.21.1) (2023-12-17)
 
 **Note:** Version bump only for package @tereza-tech/components
