@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@tereza-tech/react-zettel",
   "version": "0.12.0",
   "description": "",

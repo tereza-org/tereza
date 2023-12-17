@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "@tereza-tech/theme",
   "version": "1.15.0",
   "description": "",
