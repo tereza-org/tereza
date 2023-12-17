@@ -577,6 +577,7 @@ export const ToolbarPlugin = () => {
         <Flex
           sx={{
             alignItems: 'center',
+            flexWrap: 'wrap',
           }}
         >
           <button
