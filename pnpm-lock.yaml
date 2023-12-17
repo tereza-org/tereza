@@ -151,8 +151,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-force-graph-3d:
-        specifier: ^1.23.0
-        version: 1.23.0(react@18.2.0)
+        specifier: ^1.24.1
+        version: 1.24.1(react@18.2.0)
       typescript:
         specifier: ~5.2.2
         version: 5.2.2
@@ -380,14 +380,14 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7(@emotion/react@11.11.1)(@theme-ui/core@0.16.1)(@theme-ui/css@0.16.1)(@ttoss/react-icons@0.2.7)(@types/react@18.2.45)(react-dom@18.2.0)(react@18.2.0)
       react-force-graph-2d:
-        specifier: ^1.24.0
-        version: 1.24.0(react@18.2.0)
+        specifier: ^1.25.3
+        version: 1.25.3(react@18.2.0)
       react-force-graph-3d:
-        specifier: ^1.23.0
-        version: 1.23.0(react@18.2.0)
+        specifier: ^1.24.1
+        version: 1.24.1(react@18.2.0)
       three-spritetext:
-        specifier: ^1.8.0
-        version: 1.8.0(three@0.151.3)
+        specifier: ^1.8.1
+        version: 1.8.1(three@0.151.3)
     devDependencies:
       '@ttoss/config':
         specifier: ^1.31.4
@@ -399,8 +399,8 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
       theme-ui:
-        specifier: ^0.15.7
-        version: 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
+        specifier: ^0.16.1
+        version: 0.16.1(@emotion/react@11.11.1)(react@18.2.0)
       tsup:
         specifier: ^8.0.1
         version: 8.0.1(ts-node@10.9.1)(typescript@5.2.2)
@@ -491,15 +491,15 @@ importers:
 
 packages:
 
-  /3d-force-graph@1.71.3:
-    resolution: {integrity: sha512-cPM2d8Lbf7VJ8SgRE5BDcpy5wOxrsIILwEseD3OdAITcM/3zGbuKzJdDQ98DHM6Ne3iHxl7F4v0A3IJuyqXYXQ==}
+  /3d-force-graph@1.73.0:
+    resolution: {integrity: sha512-fMuZxQRIx6pVnn/JiB/0VnM0VD6uRpku1TkXMXYbnzKiMziPYQnaKobQ/QAqSskrQGJA9RUaale0ux4lOsCnOw==}
     engines: {node: '>=12'}
     dependencies:
       accessor-fn: 1.4.1
       kapsule: 1.14.2
       three: 0.151.3
       three-forcegraph: 1.41.8(three@0.151.3)
-      three-render-objects: 1.28.3(three@0.151.3)
+      three-render-objects: 1.29.0(three@0.151.3)
     dev: false
 
   /@aashutoshrathi/word-wrap@1.2.6:
@@ -13832,19 +13832,6 @@ packages:
       '@testing-library/dom': 9.3.3
     dev: true
 
-  /@theme-ui/color-modes@0.15.7(@emotion/react@11.11.1)(react@18.2.0):
-    resolution: {integrity: sha512-iF44OeCJD7+Fq+JiVaCkG0dqJJlksF39u3trEP2PyZ2GVkZE9j9UZh5/AozFnfGXek4T0I8Pn6lyNbs0lAEOrQ==}
-    peerDependencies:
-      '@emotion/react': ^11
-      react: '>=18'
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
-      '@theme-ui/core': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/css': 0.15.7(@emotion/react@11.11.1)
-      deepmerge: 4.3.1
-      react: 18.2.0
-    dev: true
-
   /@theme-ui/color-modes@0.16.1(@emotion/react@11.11.1)(react@18.2.0):
     resolution: {integrity: sha512-G2YoNEMwZroRS0DcftUG+E/8WM5/Osf8TRrQLLK+L43HJ4BmaWuBmVeyoNOaPBDlAuqMBx2203VRgoPmUaMqOg==}
     peerDependencies:
@@ -13856,21 +13843,6 @@ packages:
       '@theme-ui/css': 0.16.1(@emotion/react@11.11.1)
       deepmerge: 4.3.1
       react: 18.2.0
-
-  /@theme-ui/components@0.15.7(@emotion/react@11.11.1)(react@18.2.0):
-    resolution: {integrity: sha512-niSZQyFJQ/rojYdUyFl53OJ3J6g3w6GBO76Wc/AHDLJXsXlRvC3+Y3m5AlDlAE0q/v+qfHNhnVo16ufXIxlfwQ==}
-    peerDependencies:
-      '@emotion/react': ^11
-      react: '>=18'
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
-      '@styled-system/color': 5.1.2
-      '@styled-system/should-forward-prop': 5.1.5
-      '@styled-system/space': 5.1.2
-      '@theme-ui/css': 0.15.7(@emotion/react@11.11.1)
-      '@types/styled-system': 5.1.16
-      react: 18.2.0
-    dev: true
 
   /@theme-ui/components@0.16.1(@emotion/react@11.11.1)(@theme-ui/theme-provider@0.16.1)(react@18.2.0):
     resolution: {integrity: sha512-3v56xR8Rn9LgLzknt4TXLSvnxmAZ//lN8lW87J5yKqp+reJUPDWqItLCOv899sMRcOMpihyMfHUpBRhSG/Aeng==}
@@ -13889,18 +13861,6 @@ packages:
       '@types/styled-system': 5.1.16
       react: 18.2.0
 
-  /@theme-ui/core@0.15.7(@emotion/react@11.11.1)(react@18.2.0):
-    resolution: {integrity: sha512-87GcBbnpOvOwx0RYvWt4apuJEQ0+O8JvZuSYxdSVMXMbW0BUV6cU61KYRVArXIilNQgj49vYqiE6MGDBecoPmA==}
-    peerDependencies:
-      '@emotion/react': ^11
-      react: '>=18'
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
-      '@theme-ui/css': 0.15.7(@emotion/react@11.11.1)
-      deepmerge: 4.3.1
-      react: 18.2.0
-    dev: true
-
   /@theme-ui/core@0.16.1(@emotion/react@11.11.1)(react@18.2.0):
     resolution: {integrity: sha512-9Z0Fn50zdIWre0Apz3ObwfHXZ/zjw7NUhgRrSLYn/gdkJSPZZ8fcaY7Q2rnjfcrMt9DRCg5CPfQGLJqL1NY8xw==}
     peerDependencies:
@@ -13912,15 +13872,6 @@ packages:
       deepmerge: 4.3.1
       react: 18.2.0
 
-  /@theme-ui/css@0.15.7(@emotion/react@11.11.1):
-    resolution: {integrity: sha512-RBCoA3ElO3+DrMPeBKcwbP668Kjj/d5z9SSxJFnfVnawKQfYK0ZNWqMnyV89XO3rZm342rCNG0uVhc19jVQifg==}
-    peerDependencies:
-      '@emotion/react': ^11
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
-      csstype: 3.1.2
-    dev: true
-
   /@theme-ui/css@0.16.1(@emotion/react@11.11.1):
     resolution: {integrity: sha512-8TO2DbiqPrRyTlGRIElDak/p0M4ykyd8LkeavyOF/sTE9s93AwyFcle6KYYMEULrJP49SyYiEvTif7J7Z50DhA==}
     peerDependencies:
@@ -13928,18 +13879,6 @@ packages:
     dependencies:
       '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
       csstype: 3.1.2
-
-  /@theme-ui/global@0.15.7(@emotion/react@11.11.1)(react@18.2.0):
-    resolution: {integrity: sha512-kyaJPTzDzGY4UXiVCffsHfDFpl1xgeoJNvS9FEkKrO0clrY/wvhuYGH5guFlKImjvu7OjQY7ST/duSxkSWt9nw==}
-    peerDependencies:
-      '@emotion/react': ^11
-      react: '>=18'
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
-      '@theme-ui/core': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/css': 0.15.7(@emotion/react@11.11.1)
-      react: 18.2.0
-    dev: true
 
   /@theme-ui/global@0.16.1(@emotion/react@11.11.1)(react@18.2.0):
     resolution: {integrity: sha512-2GHRYAz4meF5sn3XxwdFSJMENICSJNj6ZEfQyHaioIXt3t46wXdPpZNjCStxdElQ3QVQgYxY6jR+ILUFORaR0w==}
@@ -13976,19 +13915,6 @@ packages:
       '@types/mdx': 2.0.4
       react: 18.2.0
     dev: false
-
-  /@theme-ui/theme-provider@0.15.7(@emotion/react@11.11.1)(react@18.2.0):
-    resolution: {integrity: sha512-p0HLpFGhK9KrLdgshBULGHtkVmbfwAkkTbGDSMaCTLT5lxGPVKRlgaibYwbqT/4+bFX/BGm2/aC9y2pjEWGcFw==}
-    peerDependencies:
-      '@emotion/react': ^11
-      react: '>=18'
-    dependencies:
-      '@emotion/react': 11.11.1(@types/react@18.2.45)(react@18.2.0)
-      '@theme-ui/color-modes': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/core': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/css': 0.15.7(@emotion/react@11.11.1)
-      react: 18.2.0
-    dev: true
 
   /@theme-ui/theme-provider@0.16.1(@emotion/react@11.11.1)(react@18.2.0):
     resolution: {integrity: sha512-+/3BJYLIOC2DwTS76cqNhigRQJJ+qOT845DYF7t3TaG2fXDfgh16/DGZSnVjGOGc9dYE3C/ZFAYcVDVwO94Guw==}
@@ -27249,8 +27175,8 @@ packages:
   /react-fast-compare@3.2.1:
     resolution: {integrity: sha512-xTYf9zFim2pEif/Fw16dBiXpe0hoy5PxcD8+OwBnTtNLfIm3g6WxhKNurY+6OmdH1u6Ta/W/Vl6vjbYP1MFnDg==}
 
-  /react-force-graph-2d@1.24.0(react@18.2.0):
-    resolution: {integrity: sha512-shhB5R1lgziJ53Acvf9JvkpO/ouwRFq6TZzotiat3TILxdhKse0PqZnc2PoURB8xThICYHgjmlgFmJofHcZjpw==}
+  /react-force-graph-2d@1.25.3(react@18.2.0):
+    resolution: {integrity: sha512-BFgZ8Mbq03fEO3Xss9hi1LAReu0LatEVpqJlrm9023p6rJMaUIrGWfVPQUx7ObjMfVBfuq0JXvCcCEpo+FmO1Q==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '*'
@@ -27261,13 +27187,13 @@ packages:
       react-kapsule: 2.4.0(react@18.2.0)
     dev: false
 
-  /react-force-graph-3d@1.23.0(react@18.2.0):
-    resolution: {integrity: sha512-B/o4L79liATUYvf70yC7nhmN+gLJQ87e9VYg6zJGVW7ffnJ59S9jQdUa2LaWhjX4hlk65goVb1OuoGyjOFAN9g==}
+  /react-force-graph-3d@1.24.1(react@18.2.0):
+    resolution: {integrity: sha512-Qx3z397VueK2KMjxETx7HRBqFFjEejjsFLgzCbne4Op+0+SlfGjwqxOCopAdAqcK6D+SQ0mhzTUCWw74Sr5wGA==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '*'
     dependencies:
-      3d-force-graph: 1.71.3
+      3d-force-graph: 1.73.0
       prop-types: 15.8.1
       react: 18.2.0
       react-kapsule: 2.4.0(react@18.2.0)
@@ -29743,22 +29669,6 @@ packages:
   /text-table@0.2.0:
     resolution: {integrity: sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==}
 
-  /theme-ui@0.15.7(@emotion/react@11.11.1)(react@18.2.0):
-    resolution: {integrity: sha512-STwxHsv3oMLm+00eg0KeKEzX/k7qsBWGqvOhD4bF401+JFxKV/pQvDu4CGdHRpY3X3gLVWVSIfGquZuBY7SkKA==}
-    peerDependencies:
-      react: '>=18'
-    dependencies:
-      '@theme-ui/color-modes': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/components': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/core': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/css': 0.15.7(@emotion/react@11.11.1)
-      '@theme-ui/global': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      '@theme-ui/theme-provider': 0.15.7(@emotion/react@11.11.1)(react@18.2.0)
-      react: 18.2.0
-    transitivePeerDependencies:
-      - '@emotion/react'
-    dev: true
-
   /theme-ui@0.16.1(@emotion/react@11.11.1)(react@18.2.0):
     resolution: {integrity: sha512-QozvNUorEbrFBZUwO5RaaHA+YU/aJLIpeB9vplJERW+vcauldilxhnAjr8KeTv8LY2QMU4iyWWreamJ8/5KzEQ==}
     peerDependencies:
@@ -29806,8 +29716,8 @@ packages:
       tinycolor2: 1.6.0
     dev: false
 
-  /three-render-objects@1.28.3(three@0.151.3):
-    resolution: {integrity: sha512-E4FUEirpNoHwIRn1z2pVioqAaOx8Gyyofb7ukNfuPn/M+MFMIIYszubceKBQmROCW+sF4dALta5W/+UoUCcTkg==}
+  /three-render-objects@1.29.0(three@0.151.3):
+    resolution: {integrity: sha512-HzVjL12KG2ko5VoU3aO/qFbtVu5Md5SN8dSzjGS7uNeTmYSAdQQZmg+R6zgctmvUrEjA78vO6ZGAC9y/9o/H2A==}
     engines: {node: '>=12'}
     peerDependencies:
       three: '*'
@@ -29819,8 +29729,8 @@ packages:
       three: 0.151.3
     dev: false
 
-  /three-spritetext@1.8.0(three@0.151.3):
-    resolution: {integrity: sha512-ehiATMfR1guCk+knjCxDWp2zikxRbxQaKXJyjXwuZKqjIbKtsCh7BQ00JHaESjzaXXhG5LJV7rXTJ78M/EYWyQ==}
+  /three-spritetext@1.8.1(three@0.151.3):
+    resolution: {integrity: sha512-pohv5CcdeUtAPLi9KhG0kcDLj3gmzdIFK/QlgsTJe+U07oQFSj+K0DLPQKbNDPWAK+7YzhulkRcjWdVIQ5F7nw==}
     engines: {node: '>=12'}
     peerDependencies:
       three: '>=0.86.0'

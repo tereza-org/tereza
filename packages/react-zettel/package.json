@@ -22,9 +22,9 @@
   "dependencies": {
     "@tereza-tech/zettel": "workspace:^",
     "@ttoss/ui": "^4.0.7",
-    "react-force-graph-2d": "^1.24.0",
-    "react-force-graph-3d": "^1.23.0",
-    "three-spritetext": "^1.8.0"
+    "react-force-graph-2d": "^1.25.3",
+    "react-force-graph-3d": "^1.24.1",
+    "three-spritetext": "^1.8.1"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -34,7 +34,7 @@
     "@ttoss/config": "^1.31.4",
     "@types/react": "^18.2.45",
     "react": "^18.2.0",
-    "theme-ui": "^0.15.7",
+    "theme-ui": "^0.16.1",
     "tsup": "^8.0.1"
   },
   "keywords": [],
