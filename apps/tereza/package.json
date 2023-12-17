@@ -3,6 +3,7 @@
   "name": "@tereza-tech-apps/tereza",
   "version": "0.31.0",
   "scripts": {
+    "prebuild": "pnpm run relay",
     "build": "relay-compiler --validate && next build",
     "dev": "next dev",
     "env": "carlin env",

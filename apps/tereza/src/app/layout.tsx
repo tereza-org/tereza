@@ -1,9 +1,10 @@
 import { RootProviders } from './RootProviders';
-import '@tereza-tech/components/dist/index.css';
 import type { Metadata } from 'next';
 
+import '@tereza-tech/components/src/components/Editor/styles.css';
+
 export const metadata: Metadata = {
-  title: 'Tereza Tech',
+  title: 'Tereza',
   description: 'We build tools to help you grow and reach your full potential.',
 };
 

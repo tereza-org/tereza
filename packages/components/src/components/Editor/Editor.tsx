@@ -25,6 +25,8 @@ import { TableCellNode, TableNode, TableRowNode } from '@lexical/table';
 import { ToolbarPlugin } from './ToolbarPlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 
+import './styles.css';
+
 export type { OnChange, EditorRef };
 
 const editorConfig = {
