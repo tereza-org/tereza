@@ -10,18 +10,16 @@ export const JournalEditor = React.forwardRef<
   EditorRef,
   { text?: string; date: string }
 >(({ text, date }, ref) => {
-  const [saveJournal] = useMutation<JournalEditorMutation>(
-    graphql`
-      mutation JournalEditorMutation($journal: JournalInput!) {
-        journal {
-          saveJournal(journal: $journal) {
-            # We need to refetch the query to update the Editor.
-            ...JournalDayEditor_journal
-          }
+  const [saveJournal] = useMutation<JournalEditorMutation>(graphql`
+    mutation JournalEditorMutation($journal: JournalInput!) {
+      journal {
+        saveJournal(journal: $journal) {
+          # We need to refetch the query to update the Editor.
+          ...JournalDayEditor_journal
         }
       }
-    `
-  );
+    }
+  `);
 
   const [errorOnSave, setErrorOnSave] = React.useState<Error | null>(null);
 

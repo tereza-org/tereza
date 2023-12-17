@@ -1,5 +1,5 @@
 import { Journal } from '@tereza-tech/components';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 
 export const JournalMarkdown = ({
   date,
@@ -10,17 +10,17 @@ export const JournalMarkdown = ({
   label: string;
   text: string;
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <Journal
       label={label}
       text={text}
       onEdit={() => {
-        return navigate(`/journal/${date}/edit`);
+        return router.push(`/my/journal/${date}/editor`);
       }}
       onLabelClick={() => {
-        return navigate(`/journal/${date}`);
+        return router.push(`/my/journal/${date}`);
       }}
     />
   );

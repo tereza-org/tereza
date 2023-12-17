@@ -1,27 +1,7 @@
 {
-  "8HywKr": {
-    "defaultMessage": "Home",
-    "description": "Home page"
-  },
   "CpF44e": {
     "defaultMessage": "Journal Summary",
     "description": "Journal summary page title"
-  },
-  "PqTJvc": {
-    "defaultMessage": "Questions",
-    "description": "Journal questions"
-  },
-  "mCg1P5": {
-    "defaultMessage": "Stats",
-    "description": "Statistics abbreviation"
-  },
-  "p07znv": {
-    "defaultMessage": "Day",
-    "description": "Represents the current day"
-  },
-  "rGQohl": {
-    "defaultMessage": "All",
-    "description": "All journal entries"
   },
   "/J+02x": {
     "defaultMessage": "Log in",
@@ -51,6 +31,11 @@
   "6PdOcy": {
     "defaultMessage": "Cancel",
     "description": "Cancel",
+    "module": "@ttoss/react-auth"
+  },
+  "8GMUPk": {
+    "defaultMessage": "I'm already registered",
+    "description": "Link to sign in on sign up.",
     "module": "@ttoss/react-auth"
   },
   "9cApwd": {
@@ -166,11 +151,6 @@
   "oayEC3": {
     "defaultMessage": "Sign up",
     "description": "Title on sign up.",
-    "module": "@ttoss/react-auth"
-  },
-  "rx8HF/": {
-    "defaultMessage": "I’m already registered",
-    "description": "Link to sign in on sign up.",
     "module": "@ttoss/react-auth"
   },
   "D1C6fR": {

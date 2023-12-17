@@ -1,9 +1,13 @@
-export { Editor, EditorProps, EditorRef } from './components/Editor/Editor';
+export {
+  Editor,
+  type EditorProps,
+  type EditorRef,
+} from './components/Editor/Editor';
 export {
   FolderNotesList,
-  FolderNotesListProps,
+  type FolderNotesListProps,
 } from './components/FolderNotesList';
 export { Hero } from './components/Hero';
-export { Journal, JournalProps } from './components/Journal';
-export { Markdown, MarkdownProps } from './components/Markdown';
+export { Journal, type JournalProps } from './components/Journal';
+export { Markdown, type MarkdownProps } from './components/Markdown';
 export { Navbar } from './components/Navbar';

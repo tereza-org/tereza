@@ -34,7 +34,7 @@ export const Hero = ({
           as="h1"
           sx={{
             fontSize: ['2xl', '3xl', '5xl'],
-            color: 'primary',
+            color: 'white',
             padding: 'md',
             margin: 0,
             textShadow: 'shadow',

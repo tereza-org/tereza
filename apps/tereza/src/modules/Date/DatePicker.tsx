@@ -1,5 +1,19 @@
+'use client';
+
+import * as dateFns from 'date-fns';
 import { Button, Flex, Input } from '@ttoss/ui';
-import { addToDate, getToday, isValidDate } from './utils';
+import { getToday } from './getToday';
+import { isValidDate } from './isValidDate';
+
+const addToDate = (date: string, add: dateFns.Duration) => {
+  const format = 'yyyy-MM-dd';
+
+  const parsedDate = dateFns.parse(date, format, new Date());
+
+  const addDay = dateFns.add(parsedDate, add);
+
+  return dateFns.format(addDay, format);
+};
 
 export const DatePicker = ({
   onChange,
