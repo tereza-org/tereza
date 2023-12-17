@@ -19,7 +19,7 @@
   },
   "typings": "dist/index.d.ts",
   "dependencies": {
-    "@ttoss/theme": "^1.5.4"
+    "@ttoss/theme": "^1.6.12"
   },
   "peerDependencies": {
     "@ttoss/ui": "^1.36.3",
