@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "tereza-tech",
+  "name": "tereza-monorepo",
   "version": "1.0.0",
   "scripts": {
     "build-graph": "turbo run build --only --graph=turbo-build-graph.png",

@@ -1,9 +1,7 @@
 'use client';
 
 import { Amplify } from 'aws-amplify';
-import { AuthProvider } from '@ttoss/react-auth';
 import { I18nProvider, LoadLocaleData } from '@ttoss/react-i18n';
-import { NotificationsProvider } from '@ttoss/react-notifications';
 import { ThemeProvider } from '@ttoss/ui';
 import { amplifyConfig } from 'src/amplify/amplifyConfig';
 
@@ -19,11 +17,9 @@ Amplify.configure(amplifyConfig);
 export const RootProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider>
-      <NotificationsProvider>
-        <I18nProvider locale="en" loadLocaleData={loadLocaleData}>
-          <AuthProvider>{children}</AuthProvider>
-        </I18nProvider>
-      </NotificationsProvider>
+      <I18nProvider locale="en" loadLocaleData={loadLocaleData}>
+        {children}
+      </I18nProvider>
     </ThemeProvider>
   );
 };

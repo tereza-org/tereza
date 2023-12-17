@@ -1,7 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import { AuthProvider } from '@ttoss/react-auth';
 import { Button, Container, Flex, Text } from '@ttoss/ui';
+import { NotificationsProvider } from '@ttoss/react-notifications';
 import { RelayEnvironmentProvider } from 'react-relay';
 import { Sidebar } from './Sidebar';
 import { environment } from 'src/relay/environment';
@@ -60,59 +62,63 @@ const Navbar = () => {
 
 const MyLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <RelayEnvironmentProvider environment={environment}>
-      <AuthRedirect>
-        <Flex
-          sx={{
-            flexDirection: 'column',
-            height: ['100%', '100vh'],
-            overflowY: ['hidden'],
-            overflowX: 'hidden',
-          }}
-        >
-          <Navbar />
-          <Container sx={{ flex: 1, overflowY: 'auto' }}>
+    <NotificationsProvider>
+      <AuthProvider>
+        <RelayEnvironmentProvider environment={environment}>
+          <AuthRedirect>
             <Flex
               sx={{
-                height: '100%',
-                flexDirection: ['column', 'row'],
-                position: 'relative',
+                flexDirection: 'column',
+                height: ['100%', '100vh'],
+                overflowY: ['hidden'],
+                overflowX: 'hidden',
               }}
             >
-              <Sidebar />
-              <Flex
-                sx={{
-                  width: '100%',
-                  justifyContent: 'center',
-                  overflowY: 'auto',
-                  paddingX: ['lg', 'xl'],
-                  paddingY: ['xl'],
-                }}
-              >
-                <Container
-                  as="main"
+              <Navbar />
+              <Container sx={{ flex: 1, overflowY: 'auto' }}>
+                <Flex
                   sx={{
-                    maxWidth: '800px',
-                    width: '100%',
                     height: '100%',
+                    flexDirection: ['column', 'row'],
+                    position: 'relative',
                   }}
                 >
+                  <Sidebar />
                   <Flex
                     sx={{
-                      flexDirection: 'column',
-                      gap: '2xl',
-                      paddingBottom: '3xl',
+                      width: '100%',
+                      justifyContent: 'center',
+                      overflowY: 'auto',
+                      paddingX: ['lg', 'xl'],
+                      paddingY: ['xl'],
                     }}
                   >
-                    {children}
+                    <Container
+                      as="main"
+                      sx={{
+                        maxWidth: '800px',
+                        width: '100%',
+                        height: '100%',
+                      }}
+                    >
+                      <Flex
+                        sx={{
+                          flexDirection: 'column',
+                          gap: '2xl',
+                          paddingBottom: '3xl',
+                        }}
+                      >
+                        {children}
+                      </Flex>
+                    </Container>
                   </Flex>
-                </Container>
-              </Flex>
+                </Flex>
+              </Container>
             </Flex>
-          </Container>
-        </Flex>
-      </AuthRedirect>
-    </RelayEnvironmentProvider>
+          </AuthRedirect>
+        </RelayEnvironmentProvider>
+      </AuthProvider>
+    </NotificationsProvider>
   );
 };
 

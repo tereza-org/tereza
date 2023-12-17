@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalEnv": [],
+  "globalEnv": ["CARLIN_ENVIRONMENT"],
   "pipeline": {
     "//#lint": {
       "dependsOn": [],

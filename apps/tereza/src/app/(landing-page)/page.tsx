@@ -21,7 +21,7 @@ const Home = () => {
       }}
     >
       <Navbar
-        title="Tereza Tech"
+        title="Tereza"
         logo="/tereza200x200.webp"
         links={links.map(({ href, label }) => {
           return (
@@ -32,7 +32,7 @@ const Home = () => {
         })}
       />
       <Hero
-        headline="Tereza Tech"
+        headline="Tereza"
         subhead="We build tools to help you grow and reach your full potential."
         backgroundImage="/tereza.webp"
       />
