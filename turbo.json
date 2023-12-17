@@ -15,7 +15,7 @@
     },
     "i18n": {
       "dependsOn": [],
-      "outputs": ["i18n/lang/**"]
+      "outputs": ["i18n/**"]
     },
     "build": {
       "dependsOn": ["//#lint", "//#syncpack:list", "env", "i18n", "^build"],
