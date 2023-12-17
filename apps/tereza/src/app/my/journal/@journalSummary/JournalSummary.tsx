@@ -4,7 +4,7 @@ import { Flex } from '@ttoss/ui';
 import { JournalMarkdown } from 'src/modules/Journal/JournalMarkdown';
 import { JournalSummary_journalSummaryItem$key } from './__generated__/JournalSummary_journalSummaryItem.graphql';
 import {
-  SerializablePreloadedQuery,
+  type SerializablePreloadedQuery,
   useSerializablePreloadedQuery,
 } from 'src/relay/useSerializablePreloadedQuery';
 import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
