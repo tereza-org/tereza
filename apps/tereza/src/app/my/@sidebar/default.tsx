@@ -46,7 +46,7 @@ const getLinksFromPathname = (pathname: string) => {
   return LINKS[key] || [];
 };
 
-export const Sidebar = () => {
+const Sidebar = () => {
   const pathname = usePathname();
 
   const { links, title } = React.useMemo(() => {
@@ -98,3 +98,5 @@ export const Sidebar = () => {
     </Flex>
   );
 };
+
+export default Sidebar;
