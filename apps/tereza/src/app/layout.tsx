@@ -1,4 +1,5 @@
 import { RootProviders } from './RootProviders';
+import '@tereza-tech/components/dist/index.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {

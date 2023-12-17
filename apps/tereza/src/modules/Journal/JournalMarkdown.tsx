@@ -17,7 +17,7 @@ export const JournalMarkdown = ({
       label={label}
       text={text}
       onEdit={() => {
-        return router.push(`/my/journal/${date}/edit`);
+        return router.push(`/my/journal/${date}/editor`);
       }}
       onLabelClick={() => {
         return router.push(`/my/journal/${date}`);

@@ -44,7 +44,7 @@ const Navbar = () => {
         alignItems: 'center',
       }}
     >
-      <Text>Tereza App</Text>
+      <Text>Tereza</Text>
       <Flex
         sx={{
           gap: 'lg',

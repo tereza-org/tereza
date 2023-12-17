@@ -3,17 +3,7 @@
 import * as dateFns from 'date-fns';
 import { Button, Flex, Input } from '@ttoss/ui';
 import { getToday } from './getToday';
-
-/**
- * Check if date is valid in format yyyy-MM-dd and has the format yyyy-MM-dd.
- */
-const isValidDate = (date: string) => {
-  if (date.length !== 10) {
-    return false;
-  }
-
-  return dateFns.isValid(new Date(date));
-};
+import { isValidDate } from './isValidDate';
 
 const addToDate = (date: string, add: dateFns.Duration) => {
   const format = 'yyyy-MM-dd';

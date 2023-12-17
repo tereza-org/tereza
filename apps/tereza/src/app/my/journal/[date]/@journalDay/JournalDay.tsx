@@ -1,7 +1,6 @@
 'use client';
 
-import { Box, Flex, Heading } from '@ttoss/ui';
-import { DatePicker } from 'src/modules/Date/DatePicker';
+import { Box, Heading } from '@ttoss/ui';
 import { JournalDayMarkdown_journal$key } from './__generated__/JournalDayMarkdown_journal.graphql';
 import { JournalMarkdown } from 'src/modules/Journal/JournalMarkdown';
 import {
@@ -9,7 +8,6 @@ import {
   useSerializablePreloadedQuery,
 } from 'src/relay/useSerializablePreloadedQuery';
 import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
-import { useRouter } from 'next/navigation';
 import JournalDayQueryNode, {
   JournalDayQuery,
 } from './__generated__/JournalDayQuery.graphql';
@@ -33,17 +31,13 @@ const JournalDayMarkdown = ({
 };
 
 export const JournalDay = ({
-  date,
   preloadedQuery,
 }: {
-  date: string;
   preloadedQuery: SerializablePreloadedQuery<
     typeof JournalDayQueryNode,
     JournalDayQuery
   >;
 }) => {
-  const router = useRouter();
-
   const queryRef = useSerializablePreloadedQuery(preloadedQuery);
 
   const { journal } = usePreloadedQuery(
@@ -64,30 +58,16 @@ export const JournalDay = ({
   }
 
   return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        gap: '2xl',
-      }}
-    >
-      <Heading as="h1">Journal Day</Heading>
-      <DatePicker
-        value={date}
-        onChange={(date) => {
-          router.push(`/my/journal/${date}`);
+    <Box>
+      <Heading
+        as="h3"
+        sx={{
+          marginBottom: 'md',
         }}
-      />
-      <Box>
-        <Heading
-          as="h3"
-          sx={{
-            marginBottom: 'md',
-          }}
-        >
-          On this day
-        </Heading>
-        <JournalDayMarkdown journalRef={journal.journalDay} />;
-      </Box>
-    </Flex>
+      >
+        On this day
+      </Heading>
+      <JournalDayMarkdown journalRef={journal.journalDay} />
+    </Box>
   );
 };
