@@ -5,8 +5,13 @@
   "description": "",
   "license": "MIT",
   "author": "Pedro Arantes <arantespp@gmail.com> (https://arantespp.com)",
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
   "files": [
     "dist",
     "src"
@@ -15,7 +20,6 @@
     "build": "tsup",
     "test": "jest"
   },
-  "typings": "dist/index.d.ts",
   "dependencies": {
     "@lexical/code": "^0.12.5",
     "@lexical/link": "^0.12.5",
@@ -32,7 +36,7 @@
   },
   "peerDependencies": {
     "@ttoss/react-icons": "^0.1.1",
-    "@ttoss/ui": "^1.31.15",
+    "@ttoss/ui": "^4.0.0",
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },

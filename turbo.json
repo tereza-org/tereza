@@ -1,6 +1,6 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "globalEnv": ["ACM_TEREZA_APP", "ACM_TEREZA_TECH"],
+  "globalEnv": [],
   "pipeline": {
     "//#lint": {
       "dependsOn": [],
@@ -10,12 +10,15 @@
       "dependsOn": [],
       "outputs": []
     },
+    "env": {
+      "outputs": [".env"]
+    },
     "i18n": {
       "dependsOn": [],
       "outputs": ["i18n/lang/**"]
     },
     "build": {
-      "dependsOn": ["//#lint", "//#syncpack:list", "i18n", "^build"],
+      "dependsOn": ["//#lint", "//#syncpack:list", "env", "i18n", "^build"],
       "outputs": ["build/**", "dist/**", ".next/**", "storybook-static/**"]
     },
     "test": {
