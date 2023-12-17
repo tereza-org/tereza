@@ -1,33 +1,21 @@
 'use client';
 
-import { FormattedMessage } from '@ttoss/react-i18n';
 import { Heading } from '@ttoss/ui';
-import { usePathname } from 'next/navigation';
 
 const JournalLayout = ({
   children,
-  journalSummary,
+  title,
 }: {
   children: React.ReactNode;
   journalSummary: React.ReactNode;
+  title: React.ReactNode;
 }) => {
-  const pathname = usePathname();
-
-  if (pathname === '/my/journal') {
-    return (
-      <>
-        <Heading as="h1">
-          <FormattedMessage
-            defaultMessage="Journal Summary"
-            description="Journal summary page title"
-          />
-        </Heading>
-        {journalSummary}
-      </>
-    );
-  }
-
-  return <>{children}</>;
+  return (
+    <>
+      <Heading as="h1">{title}</Heading>
+      {children}
+    </>
+  );
 };
 
 export default JournalLayout;
