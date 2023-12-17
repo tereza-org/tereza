@@ -5,7 +5,7 @@
   "scripts": {
     "build-graph": "turbo run build --only --graph=turbo-build-graph.png",
     "preinstall": "npx only-allow pnpm",
-    "lint": "lint-staged --diff main",
+    "lint": "lint-staged --diff main --quiet",
     "ls": "lerna ls",
     "prepare": "husky install",
     "syncpack:fix": "syncpack fix-mismatches",
