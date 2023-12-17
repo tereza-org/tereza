@@ -1,16 +1,23 @@
 'use client';
 
 import * as React from 'react';
-import { Button, Flex, Heading } from '@ttoss/ui';
+import { Button, Flex } from '@ttoss/ui';
 import { JournalAllJournalListFragment_query$key } from './__generated__/JournalAllJournalListFragment_query.graphql';
 import { JournalAll_journal$key } from './__generated__/JournalAll_journal.graphql';
 import { JournalMarkdown } from 'src/modules/Journal/JournalMarkdown';
+import {
+  SerializablePreloadedQuery,
+  useSerializablePreloadedQuery,
+} from 'src/relay/useSerializablePreloadedQuery';
 import {
   graphql,
   useFragment,
   usePaginationFragment,
   usePreloadedQuery,
 } from 'react-relay';
+import JournalAllQueryNode, {
+  JournalAllQuery,
+} from './__generated__/JournalAllQuery.graphql';
 
 const Journal = ({ journalRef }: { journalRef: JournalAll_journal$key }) => {
   const { date, text } = useFragment(
@@ -85,30 +92,24 @@ const JournalList = ({
   );
 };
 
-const JournalAllPreloader = () => {
-  const { journalAllRootQueryRef } = useLoaderData() as Awaited<
-    ReturnType<typeof journalAllLoader>
+export const JournalAll = ({
+  preloadedQuery,
+}: {
+  preloadedQuery: SerializablePreloadedQuery<
+    typeof JournalAllQueryNode,
+    JournalAllQuery
   >;
+}) => {
+  const queryRef = useSerializablePreloadedQuery(preloadedQuery);
 
-  const query = usePreloadedQuery(journalAllRootQuery, journalAllRootQueryRef);
+  const query = usePreloadedQuery(
+    graphql`
+      query JournalAllQuery {
+        ...JournalAllJournalListFragment_query
+      }
+    `,
+    queryRef
+  );
 
   return <JournalList queryRef={query} />;
 };
-
-const JournalAll = () => {
-  return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        gap: '2xl',
-      }}
-    >
-      <Heading as="h1">All Journals</Heading>
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <JournalAllPreloader />
-      </React.Suspense>
-    </Flex>
-  );
-};
-
-export default JournalAll;

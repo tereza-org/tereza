@@ -117,7 +117,7 @@ const transformState = (editorState: EditorState) => {
 export const SavePlugin = () => {
   const [editor] = useLexicalComposerContext();
 
-  const { setSaveState, saveState, onSave, autoSaveConfig } = useSaveContext();
+  const { setSaveState, onSave, autoSaveConfig } = useSaveContext();
 
   const handleSave = React.useCallback(
     (textToBeSaved: string) => {

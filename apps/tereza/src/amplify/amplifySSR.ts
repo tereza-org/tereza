@@ -3,6 +3,7 @@
  */
 import { Amplify, withSSRContext } from 'aws-amplify';
 import { amplifyConfig } from './amplifyConfig';
+import { encodeCredentials } from '@ttoss/relay-amplify';
 import { headers } from 'next/headers';
 
 Amplify.configure(amplifyConfig);
@@ -17,5 +18,13 @@ export const fetchSSR = async (args: any) => {
 
   const SSR = withSSRContext({ req });
 
-  return SSR.API.graphql(args);
+  const credentials = await SSR.Auth.currentCredentials();
+
+  const apiHeaders: { [key: string]: string } = {};
+
+  if (credentials) {
+    apiHeaders['x-credentials'] = encodeCredentials(credentials);
+  }
+
+  return SSR.API.graphql(args, apiHeaders);
 };

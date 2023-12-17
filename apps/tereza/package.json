@@ -1,10 +1,11 @@
 {
   "private": true,
-  "name": "@tereza-tech-apps/terezaa",
+  "name": "@tereza-tech-apps/tereza",
   "version": "0.31.0",
   "scripts": {
     "build": "relay-compiler --validate && next build",
     "dev": "next dev",
+    "env": "carlin env",
     "i18n": "ttoss-i18n",
     "relay": "relay-compiler",
     "start": "next start"

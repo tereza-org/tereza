@@ -95,13 +95,13 @@ const MyLayout = ({ children }: { children: React.ReactNode }) => {
                     maxWidth: '800px',
                     width: '100%',
                     height: '100%',
-                    paddingBottom: '3xl',
                   }}
                 >
                   <Flex
                     sx={{
                       flexDirection: 'column',
                       gap: '2xl',
+                      paddingBottom: '3xl',
                     }}
                   >
                     {children}

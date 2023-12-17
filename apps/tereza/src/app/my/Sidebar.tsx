@@ -33,6 +33,10 @@ const LINKS: {
       href: '/my/journal/stats',
       label: 'Stats',
     },
+    {
+      href: '/my/journal/all',
+      label: 'All',
+    },
   ],
 };
 

@@ -29,7 +29,7 @@
     "@ttoss/ui": "^4.0.7",
     "@types/react": "^18.2.45",
     "react": "^18.2.0",
-    "tsup": "^7.2.0"
+    "tsup": "^8.0.1"
   },
   "keywords": [],
   "publishConfig": {

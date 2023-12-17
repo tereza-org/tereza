@@ -12,7 +12,7 @@
     "@tereza-tech/react-zettel": "workspace:^",
     "@tereza-tech/theme": "workspace:^",
     "@tereza-tech/zettel": "workspace:^",
-    "@ttoss/react-icons": "^0.2.6",
+    "@ttoss/react-icons": "^0.2.7",
     "@ttoss/ui": "^4.0.7",
     "@types/node": "^20.10.4",
     "@types/react": "^18.2.45",
@@ -21,6 +21,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-force-graph-3d": "^1.23.0",
-    "typescript": "^5.3.3"
+    "typescript": "~5.2.2"
   }
 }
