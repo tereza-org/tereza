@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.32.0 (2023-12-17)
+
+### Bug Fixes
+
+- add CARLIN_ENVIRONMENT to turbo.json ([8140e12](https://github.com/tereza-org/tereza/commit/8140e123388cabc9b1ed92623ff1e2b990dc226c))
+- auth provider error ([4b4b9e1](https://github.com/tereza-org/tereza/commit/4b4b9e1fc54ea35aa4184c39dcbd9d6c2fc354aa))
+- tereza build ([e522ca4](https://github.com/tereza-org/tereza/commit/e522ca4e2c58e904905a0792ad819c5f0befb636))
+
+### Features
+
+- forgot password working ([#76](https://github.com/tereza-org/tereza/issues/76)) ([d851f37](https://github.com/tereza-org/tereza/commit/d851f37d935eb9bdb9772cd7823c22c4090fe07a))
+- remove allowed access ([#75](https://github.com/tereza-org/tereza/issues/75)) ([6739afe](https://github.com/tereza-org/tereza/commit/6739afe0ab077d8e60eb5d1848dd7a23abce05c6))
+
 ## [0.31.3](https://github.com/terezatech/tereza-tech/compare/@tereza-tech-apps/tereza@0.31.2...@tereza-tech-apps/tereza@0.31.3) (2023-12-17)
 
 **Note:** Version bump only for package @tereza-tech-apps/tereza
