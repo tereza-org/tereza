@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Button, Flex } from '@ttoss/ui';
+import { ConnectionHandler, graphql, useMutation } from 'react-relay';
 import { Editor } from '@tereza-tech/components';
 import {
   Form,
@@ -16,11 +17,10 @@ import {
   ZettelNoteFormSaveNoteMutation,
   ZettelNoteFormSaveNoteMutation$data,
 } from './__generated__/ZettelNoteFormSaveNoteMutation.graphql';
-import { graphql, useMutation } from 'react-relay';
 
 type ZettelNoteFormValues = {
-  title?: string;
-  content?: string;
+  title?: string | null;
+  content?: string | null;
 };
 
 const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
@@ -28,12 +28,19 @@ const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
   content: yup.string().required(),
 });
 
-export const ZettelNoteForm = () => {
-  const [noteId, setNoteId] = React.useState<string | null>(null);
+export const ZettelNoteForm = ({
+  note = {},
+}: {
+  note?: ZettelNoteFormValues & { id?: string };
+}) => {
+  const { id, ...defaultValues } = note;
+
+  const [noteId, setNoteId] = React.useState<string | null>(id ?? null);
 
   const { setNotifications } = useNotifications();
 
   const formMethods = useForm<ZettelNoteFormValues>({
+    defaultValues,
     resolver: yupResolver(schema),
   });
 
@@ -49,6 +56,7 @@ export const ZettelNoteForm = () => {
           id
           title
           content
+          ...ZettelNote_zettelNote
         }
       }
     }
@@ -77,6 +85,69 @@ export const ZettelNoteForm = () => {
           });
           resolve(undefined);
         },
+        updater: (store, mutationResponse) => {
+          if (!mutationResponse?.zettel?.saveNote) {
+            return;
+          }
+
+          /**
+           * https://relay.dev/docs/guided-tour/list-data/updating-connections/
+           */
+          const zettelRecords = store.getRoot().getLinkedRecord('zettel');
+
+          if (!zettelRecords) {
+            return;
+          }
+
+          const connectionRecord = ConnectionHandler.getConnection(
+            zettelRecords,
+            'ZettelAll_notes'
+          );
+
+          if (!connectionRecord) {
+            return;
+          }
+
+          const edges = connectionRecord.getLinkedRecords('edges');
+
+          /**
+           * Do not continue (append) if we are updating a note and it is
+           * already in the list.
+           */
+          if (edges) {
+            const existingEdge = edges.find((edge) => {
+              const node = edge.getLinkedRecord('node');
+
+              if (!node) {
+                return false;
+              }
+
+              return node.getDataID() === mutationResponse?.zettel?.saveNote.id;
+            });
+
+            if (existingEdge) {
+              return;
+            }
+          }
+
+          /**
+           * https://relay.dev/docs/guided-tour/list-data/updating-connections/#manually-adding-edges
+           */
+          const noteRecord = store.get(mutationResponse.zettel.saveNote.id);
+
+          if (!noteRecord) {
+            return;
+          }
+
+          const newEdge = ConnectionHandler.createEdge(
+            store,
+            connectionRecord,
+            noteRecord,
+            'ZettelNoteEdge'
+          );
+
+          ConnectionHandler.insertEdgeBefore(connectionRecord, newEdge);
+        },
       });
     });
 
@@ -85,6 +156,9 @@ export const ZettelNoteForm = () => {
         setNoteId(note.id);
       }
 
+      /**
+       * Reset because API may have changed the values.
+       */
       reset({
         title: note.title ?? '',
         content: note.content ?? '',

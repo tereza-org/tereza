@@ -16,6 +16,7 @@ import {
 import { ZettelNoteCard } from 'src/modules/Zettel/ZettelNoteCard';
 import { type ZettelNoteDeleteMutation } from './__generated__/ZettelNoteDeleteMutation.graphql';
 import { type ZettelNoteDelete_zettelNote$key } from './__generated__/ZettelNoteDelete_zettelNote.graphql';
+import { type ZettelNote_zettelNote$key } from './__generated__/ZettelNote_zettelNote.graphql';
 import { useRouter } from 'next/navigation';
 import ZettelNoteQueryNode, {
   type ZettelNoteQuery,
@@ -138,15 +139,12 @@ export const ZettelNote = ({
 }) => {
   const queryRef = useSerializablePreloadedQuery(preloadedQuery);
 
-  const data = usePreloadedQuery(
+  const query = usePreloadedQuery(
     graphql`
       query ZettelNoteQuery($id: ID!) {
         zettel {
           note(id: $id) {
-            id
-            title
-            content
-            ...ZettelNoteDelete_zettelNote
+            ...ZettelNote_zettelNote
           }
         }
       }
@@ -154,11 +152,24 @@ export const ZettelNote = ({
     queryRef
   );
 
-  if (!data.zettel?.note) {
+  /**
+   * Getting note by fragment to spread it to the update mutation.
+   */
+  const note = useFragment<ZettelNote_zettelNote$key>(
+    graphql`
+      fragment ZettelNote_zettelNote on ZettelNote {
+        id
+        title
+        content
+        ...ZettelNoteDelete_zettelNote
+      }
+    `,
+    query.zettel?.note
+  );
+
+  if (!note) {
     return 'Note not found';
   }
-
-  const note = { ...data.zettel?.note };
 
   return (
     <Stack>
@@ -168,7 +179,7 @@ export const ZettelNote = ({
           marginTop: '2xl',
         }}
       >
-        <DeleteZettelNote zettelNoteRef={data.zettel.note} />
+        <DeleteZettelNote zettelNoteRef={note} />
       </Box>
     </Stack>
   );

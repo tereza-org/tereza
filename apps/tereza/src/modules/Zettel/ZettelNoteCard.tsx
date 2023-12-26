@@ -15,7 +15,7 @@ export const ZettelNoteCard = ({
   return (
     <Stack sx={{ gap: 'lg' }}>
       <Text sx={{ fontSize: 'lg' }}>{note?.title}</Text>
-      <Link href={`/my/zettel/${note?.id}`}>Edit</Link>
+      <Link href={`/my/zettel/${note?.id}/editor`}>Edit</Link>
       <Text>{note?.content}</Text>
     </Stack>
   );
