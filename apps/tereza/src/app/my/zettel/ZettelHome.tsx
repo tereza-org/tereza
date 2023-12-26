@@ -4,7 +4,9 @@ import {
   SerializablePreloadedQuery,
   useSerializablePreloadedQuery,
 } from 'src/relay/useSerializablePreloadedQuery';
+import { Stack } from '@ttoss/ui';
 import { graphql, usePreloadedQuery } from 'react-relay';
+import Link from 'next/link';
 import ZettelHomeQueryNode, {
   ZettelHomeQuery,
 } from './__generated__/ZettelHomeQuery.graphql';
@@ -19,7 +21,7 @@ export const ZettelHome = ({
 }) => {
   const queryRef = useSerializablePreloadedQuery(preloadedQuery);
 
-  const a = usePreloadedQuery<ZettelHomeQuery>(
+  const data = usePreloadedQuery<ZettelHomeQuery>(
     graphql`
       query ZettelHomeQuery {
         zettel {
@@ -28,7 +30,6 @@ export const ZettelHome = ({
               node {
                 id
                 title
-                group
               }
             }
           }
@@ -38,5 +39,20 @@ export const ZettelHome = ({
     queryRef
   );
 
-  return <pre>{JSON.stringify(a, null, 2)}</pre>;
+  const notes = data.zettel?.notes?.edges?.map((edge) => {
+    return { ...edge?.node, title: edge?.node?.title || '(No title)' };
+  });
+
+  return (
+    <Stack>
+      {notes?.map((note) => {
+        const href = `/my/zettel/${note?.id}`;
+        return (
+          <Link key={note?.id} href={href}>
+            {note?.title}
+          </Link>
+        );
+      })}
+    </Stack>
+  );
 };

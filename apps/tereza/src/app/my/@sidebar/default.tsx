@@ -38,6 +38,20 @@ const LINKS: {
       label: 'All',
     },
   ],
+  '/my/zettel': [
+    {
+      href: '/my/zettel',
+      label: 'Home',
+    },
+    {
+      href: '/my/zettel/new',
+      label: 'New',
+    },
+    {
+      href: '/my/zettel/all',
+      label: 'All',
+    },
+  ],
 };
 
 const getLinksFromPathname = (pathname: string) => {

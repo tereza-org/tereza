@@ -4,15 +4,17 @@
   "version": "0.31.3",
   "scripts": {
     "prebuild": "pnpm run relay",
-    "build": "relay-compiler --validate && next build",
+    "build": "relay-compiler && next build",
     "dev": "next dev",
     "env": "carlin env",
     "i18n": "ttoss-i18n",
     "relay": "relay-compiler",
+    "schema": "cp ../../../backend/packages/graph-api/schema/schema.graphql ./schema/schema.graphql",
     "start": "next start"
   },
   "dependencies": {
     "@tereza-tech/components": "workspace:^",
+    "@ttoss/forms": "^0.21.9",
     "@ttoss/react-auth": "^1.7.20",
     "@ttoss/react-i18n": "^1.25.8",
     "@ttoss/react-notifications": "^1.24.22",

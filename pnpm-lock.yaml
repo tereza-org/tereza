@@ -59,6 +59,9 @@ importers:
       '@tereza-tech/components':
         specifier: workspace:^
         version: link:../../packages/components
+      '@ttoss/forms':
+        specifier: ^0.21.9
+        version: 0.21.9(@ttoss/react-i18n@1.25.8)(@ttoss/ui@4.0.7)(react-dom@18.2.0)(react@18.2.0)
       '@ttoss/react-auth':
         specifier: ^1.7.20
         version: 1.7.20(@ttoss/react-i18n@1.25.8)(@ttoss/react-notifications@1.24.22)(@ttoss/ui@4.0.7)(@types/react@18.2.45)(aws-amplify@5.3.13)(react-dom@18.2.0)(react@18.2.0)

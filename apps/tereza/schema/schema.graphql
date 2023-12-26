@@ -20,6 +20,8 @@ scalar Boolean
 """The `Boolean` scalar type represents `true` or `false`."""
 scalar Boolean
 
+scalar Date
+
 """
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 """
@@ -56,7 +58,7 @@ enum SortConnectionJournalEnum {
 }
 
 enum SortConnectionZettelNoteEnum {
-  BY_TITLE
+  NEWEST
 }
 
 """
@@ -65,6 +67,10 @@ An object, that can be fetched by the globally unique ID among all types.
 interface Node {
   """The globally unique ID among all types."""
   id: ID!
+}
+
+type DeleteNoteResponse {
+  deleted: Boolean!
 }
 
 type Journal implements Node {
@@ -131,7 +137,6 @@ type JournalSummaryItem {
 
 type Me {
   id: ID!
-  allowed: Boolean
 }
 
 type MutationJournal {
@@ -140,8 +145,8 @@ type MutationJournal {
 }
 
 type MutationZettel {
+  deleteNote(id: ID!): DeleteNoteResponse!
   saveNote(note: ZettelNoteInput!): ZettelNote!
-  deleteNote(id: ID!): Boolean!
 }
 
 """Information about pagination in a connection."""
@@ -183,7 +188,7 @@ type QueryJournal {
 }
 
 type QueryZettel {
-  note(id: ID!): ZettelNote!
+  note(id: ID!): ZettelNote
   notes(
     """Forward pagination argument for returning at most first edges"""
     first: Int
@@ -196,44 +201,19 @@ type QueryZettel {
 
     """Backward pagination argument for returning at most last edges"""
     before: String
-    filter: ZettelNotesFilterInput
 
     """Sort argument for data ordering"""
-    sort: SortConnectionZettelNoteEnum = BY_TITLE
+    sort: SortConnectionZettelNoteEnum = NEWEST
   ): ZettelNoteConnection
-  insights(note: ZettelNoteInput!): [ZettelInsight!]!
-  tags: [String!]!
-  graphData: ZettelGraph!
-}
-
-type ZettelGraph {
-  nodes: [ZettelGraphNode!]!
-  links: [ZettelGraphLink!]!
-}
-
-type ZettelGraphLink {
-  source: String!
-  target: String!
-}
-
-type ZettelGraphNode {
-  id: ID!
-  group: String!
-  label: String
-}
-
-type ZettelInsight {
-  text: String
 }
 
 type ZettelNote implements Node {
   """The globally unique ID among all types"""
   id: ID!
-  title: String!
-  group: String!
+  createdAt: Date!
+  title: String
   description: String
-  date: String
-  tags: [String!]!
+  tags: [String!]
   content: String
 }
 
@@ -270,16 +250,9 @@ input JournalQuestionInput {
 
 input ZettelNoteInput {
   id: ID
-  title: String!
-  group: String
+  createdAt: Date
+  title: String
   description: String
-  date: String
   tags: [String!]
   content: String
-}
-
-input ZettelNotesFilterInput {
-  groups: [String!]
-  includeDrafts: Boolean
-  tags: [String!]
 }
