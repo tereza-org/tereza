@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.32.0...@tereza-apps/tereza@0.33.0) (2023-12-27)
+
+### Features
+
+- zettel ([#82](https://github.com/tereza-org/tereza/issues/82)) ([3d5bc7b](https://github.com/tereza-org/tereza/commit/3d5bc7bf20d2fdf93360e7e1c696208af5262284))
+
 # 0.32.0 (2023-12-17)
 
 ### Bug Fixes

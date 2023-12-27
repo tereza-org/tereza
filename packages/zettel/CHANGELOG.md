@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/tereza-org/tereza/compare/@tereza-tech/zettel@0.25.1...@tereza-tech/zettel@0.26.0) (2023-12-27)
+
+### Features
+
+- zettel ([#82](https://github.com/tereza-org/tereza/issues/82)) ([3d5bc7b](https://github.com/tereza-org/tereza/commit/3d5bc7bf20d2fdf93360e7e1c696208af5262284))
+
 ## [0.25.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/zettel@0.25.0...@tereza-tech/zettel@0.25.1) (2023-12-17)
 
 **Note:** Version bump only for package @tereza-tech/zettel
