@@ -4,11 +4,11 @@ import { usePathname } from 'next/navigation';
 
 const JournalDateLayout = ({
   children,
-  journalDay,
+  journal,
   params,
 }: {
   children: React.ReactNode;
-  journalDay: React.ReactNode;
+  journal: React.ReactNode;
   params: {
     date: string;
   };
@@ -19,7 +19,7 @@ const JournalDateLayout = ({
     return (
       <>
         {children}
-        {journalDay}
+        {journal}
       </>
     );
   }

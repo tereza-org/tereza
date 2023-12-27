@@ -48,13 +48,16 @@ enum JournalSummaryKeyEnum {
   LAST_WEEK
   LAST_MONTH
   LAST_YEAR
-  LAST_TWO_YEARS
   LAST_FIVE_YEARS
   LAST_TEN_YEARS
 }
 
 enum SortConnectionJournalEnum {
   DATE_DESC
+}
+
+enum SortConnectionJournalHistoryEnum {
+  NEWEST
 }
 
 enum SortConnectionZettelNoteEnum {
@@ -78,6 +81,22 @@ type Journal implements Node {
   id: ID!
   date: String!
   text: String!
+  history(
+    """Forward pagination argument for returning at most first edges"""
+    first: Int
+
+    """Forward pagination argument for returning at most first edges"""
+    after: String
+
+    """Backward pagination argument for returning at most last edges"""
+    last: Int
+
+    """Backward pagination argument for returning at most last edges"""
+    before: String
+
+    """Sort argument for data ordering"""
+    sort: SortConnectionJournalHistoryEnum = NEWEST
+  ): JournalHistoryConnection
 }
 
 """A connection to a list of items."""
@@ -96,6 +115,32 @@ type JournalConnection {
 type JournalEdge {
   """The item at the end of the edge"""
   node: Journal!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type JournalHistory {
+  id: String!
+  text: String!
+}
+
+"""A connection to a list of items."""
+type JournalHistoryConnection {
+  """Total object count."""
+  count: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [JournalHistoryEdge!]!
+}
+
+"""An edge in a connection."""
+type JournalHistoryEdge {
+  """The item at the end of the edge"""
+  node: JournalHistory!
 
   """A cursor for use in pagination"""
   cursor: String!
@@ -165,6 +210,7 @@ type PageInfo {
 }
 
 type QueryJournal {
+  journal(date: String!): Journal
   journalDay(date: String!): Journal
   journals(
     """Forward pagination argument for returning at most first edges"""
@@ -238,14 +284,53 @@ type ZettelNoteEdge {
   cursor: String!
 }
 
+input JournalHistoryConnectionInput {
+  """Total object count."""
+  count: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfoInput!
+
+  """Information to aid in pagination."""
+  edges: [JournalHistoryEdgeInput!]!
+}
+
+input JournalHistoryEdgeInput {
+  """The item at the end of the edge"""
+  node: JournalHistoryInput!
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+input JournalHistoryInput {
+  id: String!
+  text: String!
+}
+
 input JournalInput {
   date: String!
   text: String!
+  history: JournalHistoryConnectionInput
 }
 
 input JournalQuestionInput {
   question: String!
   enabled: Boolean!
+}
+
+input PageInfoInput {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
 }
 
 input ZettelNoteInput {
