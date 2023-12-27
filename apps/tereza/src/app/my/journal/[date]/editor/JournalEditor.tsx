@@ -2,10 +2,13 @@
 
 import * as React from 'react';
 import { Box, Button, Flex, Heading, Text } from '@ttoss/ui';
-import { EditorRef, JournalEditor } from 'src/modules/Journal/JournalEditor';
+import {
+  EditorRef,
+  JournalEditor as JournalEditorComponent,
+} from 'src/modules/Journal/JournalEditor';
 import { ErrorBoundary } from 'react-error-boundary';
-import { JournalDayEditorQuestions_queryJournal$key } from './__generated__/JournalDayEditorQuestions_queryJournal.graphql';
-import { JournalDayEditor_journal$key } from './__generated__/JournalDayEditor_journal.graphql';
+import { JournalEditorQuestions_queryJournal$key } from './__generated__/JournalEditorQuestions_queryJournal.graphql';
+import { JournalEditor_journal$key } from './__generated__/JournalEditor_journal.graphql';
 import { Loading } from 'src/modules/Layout/Loading';
 import {
   PreloadedQuery,
@@ -19,21 +22,21 @@ import {
 } from 'src/relay/useSerializablePreloadedQuery';
 import { useDebounce } from 'use-debounce';
 import { useRouter } from 'next/navigation';
-import JournalDayEditorQueryNode, {
-  JournalDayEditorQuery,
-} from './__generated__/JournalDayEditorQuery.graphql';
+import JournalEditorQueryNode, {
+  JournalEditorQuery,
+} from './__generated__/JournalEditorQuery.graphql';
 
-const JournalDayQuestions = ({
+const JournalQuestions = ({
   onApplyQuestions,
   queryJournalRef,
 }: {
   onApplyQuestions: (value: string) => void;
-  queryJournalRef: JournalDayEditorQuestions_queryJournal$key;
+  queryJournalRef: JournalEditorQuestions_queryJournal$key;
 }) => {
-  const { journalDay, questions } = useFragment(
+  const { journal, questions } = useFragment(
     graphql`
-      fragment JournalDayEditorQuestions_queryJournal on QueryJournal {
-        journalDay(date: $date) {
+      fragment JournalEditorQuestions_queryJournal on QueryJournal {
+        journal(date: $date) {
           text
         }
         questions {
@@ -46,7 +49,7 @@ const JournalDayQuestions = ({
     queryJournalRef
   );
 
-  const disabled = !!journalDay?.text;
+  const disabled = !!journal?.text;
 
   const questionsTemplate = questions?.daily
     .map(({ question }) => {
@@ -97,13 +100,13 @@ const JournalDayQuestions = ({
   );
 };
 
-const JournalDayEditorWithErrorBoundary = React.forwardRef<
+const JournalEditorWithErrorBoundary = React.forwardRef<
   EditorRef,
-  { journalRef: JournalDayEditor_journal$key }
+  { journalRef: JournalEditor_journal$key }
 >(({ journalRef }, ref) => {
   const { id, date, text } = useFragment(
     graphql`
-      fragment JournalDayEditor_journal on Journal {
+      fragment JournalEditor_journal on Journal {
         id
         date
         text
@@ -133,7 +136,7 @@ const JournalDayEditorWithErrorBoundary = React.forwardRef<
         );
       }}
     >
-      <JournalEditor
+      <JournalEditorComponent
         ref={ref}
         /**
          * We use the id as key here to force the editor to re-render when the
@@ -149,23 +152,22 @@ const JournalDayEditorWithErrorBoundary = React.forwardRef<
   );
 });
 
-JournalDayEditorWithErrorBoundary.displayName =
-  'JournalDayEditorWithErrorBoundary';
+JournalEditorWithErrorBoundary.displayName = 'JournalEditorWithErrorBoundary';
 
-const JournalDayEditorWithQuestions = ({
+const JournalEditorWithQuestions = ({
   queryRef,
 }: {
-  queryRef: PreloadedQuery<JournalDayEditorQuery>;
+  queryRef: PreloadedQuery<JournalEditorQuery>;
 }) => {
   const editorRef = React.useRef<EditorRef>(null);
 
   const { journal } = usePreloadedQuery(
     graphql`
-      query JournalDayEditorQuery($date: String!) {
+      query JournalEditorQuery($date: String!) {
         journal {
-          ...JournalDayEditorQuestions_queryJournal
-          journalDay(date: $date) {
-            ...JournalDayEditor_journal
+          ...JournalEditorQuestions_queryJournal
+          journal(date: $date) {
+            ...JournalEditor_journal
           }
         }
       }
@@ -182,27 +184,27 @@ const JournalDayEditorWithQuestions = ({
   return (
     <>
       {journal && (
-        <JournalDayQuestions
+        <JournalQuestions
           onApplyQuestions={onApplyQuestions}
           queryJournalRef={journal}
         />
       )}
-      {journal?.journalDay && (
-        <JournalDayEditorWithErrorBoundary
+      {journal?.journal && (
+        <JournalEditorWithErrorBoundary
           ref={editorRef}
-          journalRef={journal.journalDay}
+          journalRef={journal.journal}
         />
       )}
     </>
   );
 };
 
-export const JournalDayEditor = ({
+export const JournalEditor = ({
   preloadedQuery,
 }: {
   preloadedQuery: SerializablePreloadedQuery<
-    typeof JournalDayEditorQueryNode,
-    JournalDayEditorQuery
+    typeof JournalEditorQueryNode,
+    JournalEditorQuery
   >;
 }) => {
   const router = useRouter();
@@ -227,7 +229,7 @@ export const JournalDayEditor = ({
           Editing {date}
         </Heading>
         <React.Suspense fallback={<Loading />}>
-          <JournalDayEditorWithQuestions queryRef={queryRef} />
+          <JournalEditorWithQuestions queryRef={queryRef} />
         </React.Suspense>
         <Button
           onClick={() => {

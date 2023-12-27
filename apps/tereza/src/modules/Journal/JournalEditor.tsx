@@ -15,7 +15,7 @@ export const JournalEditor = React.forwardRef<
       journal {
         saveJournal(journal: $journal) {
           # We need to refetch the query to update the Editor.
-          ...JournalDayEditor_journal
+          ...JournalEditor_journal
         }
       }
     }

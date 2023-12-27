@@ -1,11 +1,7 @@
 'use client';
 
-const JournalDayEditorLayout = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const JournalEditorLayout = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
-export default JournalDayEditorLayout;
+export default JournalEditorLayout;

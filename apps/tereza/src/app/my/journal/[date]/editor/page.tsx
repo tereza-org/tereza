@@ -1,16 +1,12 @@
-import { JournalDayEditor } from './JournalDayEditor';
+import { JournalEditor } from './JournalEditor';
 import { getToday } from 'src/modules/Date/getToday';
 import { isValidDate } from 'src/modules/Date/isValidDate';
 import { loadSerializableQuery } from 'src/relay/loadSerializableQuery';
-import JournalDayEditorQueryNode, {
-  JournalDayEditorQuery,
-} from './__generated__/JournalDayEditorQuery.graphql';
+import JournalEditorQueryNode, {
+  JournalEditorQuery,
+} from './__generated__/JournalEditorQuery.graphql';
 
-const JournalDayEditorPage = async ({
-  params,
-}: {
-  params: { date: string };
-}) => {
+const JournalEditorPage = async ({ params }: { params: { date: string } }) => {
   const date = params.date || getToday();
 
   if (!isValidDate(date)) {
@@ -18,13 +14,13 @@ const JournalDayEditorPage = async ({
   }
 
   const preloadedQuery = await loadSerializableQuery<
-    typeof JournalDayEditorQueryNode,
-    JournalDayEditorQuery
-  >(JournalDayEditorQueryNode.params, {
+    typeof JournalEditorQueryNode,
+    JournalEditorQuery
+  >(JournalEditorQueryNode.params, {
     date,
   });
 
-  return <JournalDayEditor preloadedQuery={preloadedQuery} />;
+  return <JournalEditor preloadedQuery={preloadedQuery} />;
 };
 
-export default JournalDayEditorPage;
+export default JournalEditorPage;
