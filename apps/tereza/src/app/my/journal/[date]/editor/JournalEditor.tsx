@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import * as React from 'react';
@@ -229,9 +228,9 @@ export const JournalEditor = ({
         >
           Editing {date}
         </Heading>
-        {/* <React.Suspense fallback={<Loading />}>
+        <React.Suspense fallback={<Loading />}>
           <JournalEditorWithQuestions queryRef={queryRef} />
-        </React.Suspense> */}
+        </React.Suspense>
         <Button
           onClick={() => {
             router.push(`/my/journal/${date}`);
