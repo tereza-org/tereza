@@ -73,7 +73,6 @@ export const Journal = ({
       <JournalMarkdown journalRef={journal.journal} />
       <Box sx={{ marginTop: 'lg' }}>
         <Link href={`/my/journal/${date}/history`}>History</Link>
-        <Link href={`/my/journal/${date}/editor`}>Editor</Link>
       </Box>
     </Box>
   );
