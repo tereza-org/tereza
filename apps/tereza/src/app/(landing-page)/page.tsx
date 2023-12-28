@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const links = [
   {
-    href: '/my/home',
+    href: '/my/journal',
     label: 'App',
   },
 ];
