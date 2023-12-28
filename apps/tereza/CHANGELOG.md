@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.1](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.33.0...@tereza-apps/tereza@0.33.1) (2023-12-28)
+
+### Bug Fixes
+
+- landing page redirect to journal ([b6f4a49](https://github.com/tereza-org/tereza/commit/b6f4a49b184d8aae6faf26150045b648462fcc9e))
+
 # [0.33.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.32.0...@tereza-apps/tereza@0.33.0) (2023-12-27)
 
 ### Features
