@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Button, Flex } from '@ttoss/ui';
+import { Button, Flex, Input } from '@ttoss/ui';
 import { ConnectionHandler, graphql, useMutation } from 'react-relay';
 import { Editor } from '@tereza-tech/components';
 import {
@@ -21,11 +21,15 @@ import {
 type ZettelNoteFormValues = {
   title?: string | null;
   content?: string | null;
+  description?: string | null;
+  tags?: string[];
 };
 
 const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
   title: yup.string(),
   content: yup.string().required(),
+  description: yup.string(),
+  tags: yup.array(yup.string().required()).required(),
 });
 
 export const ZettelNoteForm = ({
@@ -56,7 +60,12 @@ export const ZettelNoteForm = ({
           id
           title
           content
+          description
+          tags {
+            name
+          }
           ...ZettelNote_zettelNote
+          ...ZettelEditor_note
         }
       }
     }
@@ -162,6 +171,10 @@ export const ZettelNoteForm = ({
       reset({
         title: note.title ?? '',
         content: note.content ?? '',
+        description: note.description ?? '',
+        tags: note.tags.map((tag) => {
+          return tag.name;
+        }),
       });
     }
   };
@@ -184,6 +197,29 @@ export const ZettelNoteForm = ({
         }}
       />
       <FormFieldTextarea name="title" label="Title" />
+      <FormFieldTextarea name="description" label="Description" />
+      <FormField
+        name="tags"
+        label="Tags (separated by semicolon)"
+        render={({ field: { onChange, value } }) => {
+          const joinedTags =
+            value
+              ?.join('; ')
+              // Replace two or more spaces with one space
+              .replaceAll(/\s{2,}/g, ' ') ?? '';
+
+          return (
+            <Input
+              type="text"
+              value={joinedTags}
+              onChange={(e) => {
+                const tags = e.target.value.replaceAll(',', ';').split(';');
+                onChange(tags);
+              }}
+            />
+          );
+        }}
+      />
       <NotificationsBox />
       <Flex sx={{ gap: 'md' }}>
         <Button type="submit" disabled={isSubmitting}>
