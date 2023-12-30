@@ -13,6 +13,7 @@ import {
   yupResolver,
 } from '@ttoss/forms';
 import { NotificationsBox, useNotifications } from '@ttoss/react-notifications';
+import { ZettelNoteFormInsightsButton } from './ZettelNoteFormInsightsButton';
 import {
   ZettelNoteFormSaveNoteMutation,
   ZettelNoteFormSaveNoteMutation$data,
@@ -196,6 +197,7 @@ export const ZettelNoteForm = ({
           return <Editor initialValue={value} onChange={onChange} />;
         }}
       />
+      <ZettelNoteFormInsightsButton />
       <FormFieldTextarea name="title" label="Title" />
       <FormFieldTextarea name="description" label="Description" />
       <FormField
