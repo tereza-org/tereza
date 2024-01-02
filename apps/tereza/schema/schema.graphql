@@ -280,6 +280,8 @@ type ZettelNote implements Node {
   description: String
   content: String
   embedding: [Float!]
+  insights: [String!]
+  division: [String!]
   tags: [Tag!]!
 }
 

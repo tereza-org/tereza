@@ -24,6 +24,8 @@ type ZettelNoteFormValues = {
   content?: string | null;
   description?: string | null;
   tags?: string[];
+  division?: string[];
+  insights?: string[];
 };
 
 const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
@@ -31,6 +33,8 @@ const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
   content: yup.string().required(),
   description: yup.string(),
   tags: yup.array(yup.string().required()).required(),
+  division: yup.array(yup.string().required()),
+  insights: yup.array(yup.string().required()),
 });
 
 export const ZettelNoteForm = ({
