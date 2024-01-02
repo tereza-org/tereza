@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import { Box, Button, Stack, Text } from '@ttoss/ui';
+import { Loading } from '../Layout/Loading';
 import {
   type PreloadedQuery,
   graphql,
@@ -25,7 +26,7 @@ const zettelNoteFormInsightsButtonQuery = graphql`
   }
 `;
 
-const Insights = ({
+const HandleInsights = ({
   queryRef,
 }: {
   queryRef: PreloadedQuery<ZettelNoteFormInsightsButtonQuery>;
@@ -50,6 +51,9 @@ const Insights = ({
   };
 
   React.useEffect(() => {
+    setValue('insights', insights.insights);
+    setValue('division', insights.division);
+
     if (!title) {
       setValue('title', insights.title);
     }
@@ -58,12 +62,16 @@ const Insights = ({
       setValue('description', insights.description);
     }
 
-    if (!tags) {
-      setValue('tags', insights.tags);
+    if (!tags || tags.length === 0) {
+      if (insights.tags) {
+        setValue('tags', insights.tags);
+      }
     }
   }, [
     description,
     insights.description,
+    insights.division,
+    insights.insights,
     insights.tags,
     insights.title,
     setValue,
@@ -71,11 +79,21 @@ const Insights = ({
     title,
   ]);
 
+  return null;
+};
+
+const Insights = ({
+  insights,
+  division,
+}: {
+  insights?: string[];
+  division?: string[];
+}) => {
   return (
     <Stack>
       <Text sx={{ fontSize: 'lg' }}>Insights</Text>
       <Box as="ul">
-        {insights.insights?.map((insight) => {
+        {insights?.map((insight) => {
           return (
             <Text key={insight} as="li">
               {insight}
@@ -85,7 +103,7 @@ const Insights = ({
       </Box>
       <Text sx={{ fontSize: 'lg' }}>Division</Text>
       <Box as="ul">
-        {insights.division?.map((division) => {
+        {division?.map((division) => {
           return (
             <Text key={division} as="li">
               {division}
@@ -98,8 +116,8 @@ const Insights = ({
 };
 
 export const ZettelNoteFormInsightsButton = () => {
-  const [content] = useWatch({
-    name: ['content'],
+  const [content, insights, division] = useWatch({
+    name: ['content', 'insights', 'division'],
   });
 
   const [queryRef, loadInsights, disposeQuery] =
@@ -124,9 +142,10 @@ export const ZettelNoteFormInsightsButton = () => {
           Insights
         </Button>
       )}
-      <React.Suspense fallback={null}>
-        {queryRef && <Insights queryRef={queryRef} />}
+      <React.Suspense fallback={<Loading />}>
+        {queryRef && <HandleInsights queryRef={queryRef} />}
       </React.Suspense>
+      <Insights insights={insights} division={division} />
     </Stack>
   );
 };

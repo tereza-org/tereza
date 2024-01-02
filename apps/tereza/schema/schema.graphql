@@ -64,7 +64,7 @@ enum SortConnectionJournalHistoryEnum {
 }
 
 enum SortConnectionZettelNoteEnum {
-  NEWEST
+  CREATED_AT_DESC
 }
 
 """
@@ -253,7 +253,7 @@ type QueryZettel {
     before: String
 
     """Sort argument for data ordering"""
-    sort: SortConnectionZettelNoteEnum = NEWEST
+    sort: SortConnectionZettelNoteEnum = CREATED_AT_DESC
   ): ZettelNoteConnection
   search(text: String!, limit: Int): [ZettelNote!]!
 }
@@ -362,4 +362,6 @@ input ZettelNoteInput {
   description: String
   tags: [String!]
   content: String
+  insights: [String!]
+  division: [String!]
 }

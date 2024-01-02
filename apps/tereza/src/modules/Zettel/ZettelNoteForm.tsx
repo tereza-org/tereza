@@ -19,7 +19,7 @@ import {
   ZettelNoteFormSaveNoteMutation$data,
 } from './__generated__/ZettelNoteFormSaveNoteMutation.graphql';
 
-type ZettelNoteFormValues = {
+export type ZettelNoteFormValues = {
   title?: string | null;
   content?: string | null;
   description?: string | null;
@@ -32,7 +32,7 @@ const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
   title: yup.string(),
   content: yup.string().required(),
   description: yup.string(),
-  tags: yup.array(yup.string().required()).required(),
+  tags: yup.array(yup.string().required()),
   division: yup.array(yup.string().required()),
   insights: yup.array(yup.string().required()),
 });
@@ -70,7 +70,7 @@ export const ZettelNoteForm = ({
             name
           }
           ...ZettelNote_zettelNote
-          ...ZettelEditor_note
+          ...ZettelEditor_zettelNote
         }
       }
     }

@@ -4,7 +4,7 @@ import {
   type SerializablePreloadedQuery,
   useSerializablePreloadedQuery,
 } from 'src/relay/useSerializablePreloadedQuery';
-import { ZettelEditor_note$key } from './__generated__/ZettelEditor_note.graphql';
+import { ZettelEditor_zettelNote$key } from './__generated__/ZettelEditor_zettelNote.graphql';
 import { ZettelNoteForm } from 'src/modules/Zettel/ZettelNoteForm';
 import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
 import ZettelEditorQueryNode, {
@@ -26,7 +26,7 @@ export const ZettelEditor = ({
       query ZettelEditorQuery($id: ID!) {
         zettel {
           note(id: $id) {
-            ...ZettelEditor_note
+            ...ZettelEditor_zettelNote
           }
         }
       }
@@ -34,9 +34,9 @@ export const ZettelEditor = ({
     queryRef
   );
 
-  const data = useFragment<ZettelEditor_note$key>(
+  const data = useFragment<ZettelEditor_zettelNote$key>(
     graphql`
-      fragment ZettelEditor_note on ZettelNote {
+      fragment ZettelEditor_zettelNote on ZettelNote {
         id
         title
         content
@@ -44,6 +44,8 @@ export const ZettelEditor = ({
         tags {
           name
         }
+        insights
+        division
       }
     `,
     query.zettel?.note
@@ -57,6 +59,8 @@ export const ZettelEditor = ({
     tags: (data?.tags ?? []).map((tag) => {
       return tag.name;
     }),
+    insights: [...(data?.insights ?? [])],
+    division: [...(data?.division ?? [])],
   };
 
   return <ZettelNoteForm note={note} />;
