@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.1](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.34.0...@tereza-apps/tereza@0.34.1) (2024-01-03)
+
+**Note:** Version bump only for package @tereza-apps/tereza
+
 # [0.34.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.33.2...@tereza-apps/tereza@0.34.0) (2024-01-02)
 
 ### Features
