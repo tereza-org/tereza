@@ -1,30 +1,46 @@
-/**
- * https://docs.amplify.aws/javascript/prev/build-a-backend/server-side-rendering/#use-amplify-with-nextjs-app-router-app-directory
- */
-import { Amplify, withSSRContext } from 'aws-amplify';
 import { amplifyConfig } from './amplifyConfig';
+import { cookies } from 'next/headers';
+import { createServerRunner } from '@aws-amplify/adapter-nextjs';
 import { encodeCredentials } from '@ttoss/relay-amplify';
-import { headers } from 'next/headers';
+import { fetchAuthSession } from 'aws-amplify/auth/server';
+import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/api';
 
-Amplify.configure(amplifyConfig);
+const cookieBasedClient = generateServerClientUsingCookies({
+  config: amplifyConfig,
+  cookies,
+});
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fetchSSR = async (args: any) => {
-  const req = {
-    headers: {
-      cookie: headers().get('cookie'),
+const { runWithAmplifyServerContext } = createServerRunner({
+  config: amplifyConfig,
+});
+
+export const fetchSSR = async ({
+  query,
+  variables,
+}: {
+  query: string | null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  variables: any;
+}) => {
+  const { credentials } = await runWithAmplifyServerContext({
+    nextServerContext: { cookies },
+    operation: (contextSpec) => {
+      return fetchAuthSession(contextSpec);
     },
-  };
+  });
 
-  const SSR = withSSRContext({ req });
-
-  const credentials = await SSR.Auth.currentCredentials();
-
-  const apiHeaders: { [key: string]: string } = {};
+  const headers: { [key: string]: string } = {};
 
   if (credentials) {
-    apiHeaders['x-credentials'] = encodeCredentials(credentials);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    headers['x-credentials'] = encodeCredentials(credentials as any);
   }
 
-  return SSR.API.graphql(args, apiHeaders);
+  return cookieBasedClient.graphql(
+    {
+      query,
+      variables,
+    },
+    headers
+  );
 };

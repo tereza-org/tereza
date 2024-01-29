@@ -4,7 +4,6 @@
 import {
   CacheConfig,
   Environment,
-  GraphQLResponse,
   Network,
   QueryResponseCache,
   RecordSource,
@@ -12,9 +11,12 @@ import {
   Store,
   Variables,
 } from 'relay-runtime';
-import { fetchQuery } from '@ttoss/relay-amplify';
+// import { fetchQuery } from '@ttoss/relay-amplify';
+import { generateClient } from 'aws-amplify/api';
 
 const CACHE_TTL = 5 * 1000; // 5 seconds, to resolve preloaded results
+
+const client = generateClient();
 
 export const responseCache: QueryResponseCache = new QueryResponseCache({
   size: 100,
@@ -40,10 +42,14 @@ const createNetwork = () => {
       }
     }
 
-    return fetchQuery(params, variables, {}) as GraphQLResponse;
+    return client.graphql({
+      query: params.text as string,
+      variables,
+    });
   };
 
-  const network = Network.create(fetchResponse);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const network = Network.create(fetchResponse as any);
 
   return network;
 };

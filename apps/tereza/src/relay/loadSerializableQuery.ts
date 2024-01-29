@@ -6,7 +6,6 @@ import {
   VariablesOf,
 } from 'relay-runtime';
 import { fetchSSR } from 'src/amplify/amplifySSR';
-import { graphqlOperation } from 'aws-amplify';
 
 export interface SerializablePreloadedQuery<
   TRequest extends ConcreteRequest,
@@ -27,7 +26,7 @@ export const loadSerializableQuery = async <
   params: RequestParameters,
   variables: VariablesOf<TQuery>
 ): Promise<SerializablePreloadedQuery<TRequest, TQuery>> => {
-  const response = await fetchSSR(graphqlOperation(params.text, variables));
+  const response = await fetchSSR({ query: params.text, variables });
 
   return {
     params,

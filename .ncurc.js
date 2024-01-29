@@ -1,3 +1,3 @@
 module.exports = {
-  reject: ['aws-amplify', 'typescript'],
+  reject: ['next', 'typescript'],
 };
