@@ -11,7 +11,8 @@ import {
   Store,
   Variables,
 } from 'relay-runtime';
-// import { fetchQuery } from '@ttoss/relay-amplify';
+import { encodeCredentials } from '@ttoss/relay-amplify';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { generateClient } from 'aws-amplify/api';
 
 const CACHE_TTL = 5 * 1000; // 5 seconds, to resolve preloaded results
@@ -41,11 +42,46 @@ const createNetwork = () => {
       }
     }
 
-    return client.graphql({
-      query: params.text as string,
-      variables,
+    let credentials: string | undefined;
+
+    try {
+      const authSession = await fetchAuthSession();
+
+      if (
+        authSession.credentials &&
+        authSession.identityId &&
+        authSession.credentials?.sessionToken
+      ) {
+        credentials = encodeCredentials({
+          accessKeyId: authSession.credentials?.accessKeyId,
+          identityId: authSession.identityId,
+          sessionToken: authSession.credentials?.sessionToken,
+          secretAccessKey: authSession.credentials?.secretAccessKey,
+          expiration: authSession.credentials?.expiration,
+          authenticated: true,
+        });
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    }) as any;
+    } catch (err: any) {
+      // eslint-disable-next-line no-console
+      console.error(err?.message);
+      credentials = undefined;
+    }
+
+    const headers: { [key: string]: string } = {};
+
+    if (credentials) {
+      headers['x-credentials'] = credentials;
+    }
+
+    return client.graphql(
+      {
+        query: params.text as string,
+        variables,
+      },
+      headers
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ) as any;
   };
 
   const network = Network.create(fetchResponse);
