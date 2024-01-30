@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.34.1...@tereza-apps/tereza@0.35.0) (2024-01-30)
+
+### Features
+
+- update to amplify v6 ([#86](https://github.com/tereza-org/tereza/issues/86)) ([9a11174](https://github.com/tereza-org/tereza/commit/9a111742a976c303c82cfcd68d0691b128ce6212))
+
 ## [0.34.1](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.34.0...@tereza-apps/tereza@0.34.1) (2024-01-03)
 
 **Note:** Version bump only for package @tereza-apps/tereza

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/tereza-org/tereza/compare/@tereza-tech/zettel@0.26.0...@tereza-tech/zettel@0.27.0) (2024-01-30)
+
+### Features
+
+- update to amplify v6 ([#86](https://github.com/tereza-org/tereza/issues/86)) ([9a11174](https://github.com/tereza-org/tereza/commit/9a111742a976c303c82cfcd68d0691b128ce6212))
+
 # [0.26.0](https://github.com/tereza-org/tereza/compare/@tereza-tech/zettel@0.25.1...@tereza-tech/zettel@0.26.0) (2023-12-27)
 
 ### Features

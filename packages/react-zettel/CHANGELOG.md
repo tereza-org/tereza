@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/tereza-org/tereza/compare/@tereza-tech/react-zettel@0.12.2...@tereza-tech/react-zettel@0.13.0) (2024-01-30)
+
+### Features
+
+- update to amplify v6 ([#86](https://github.com/tereza-org/tereza/issues/86)) ([9a11174](https://github.com/tereza-org/tereza/commit/9a111742a976c303c82cfcd68d0691b128ce6212))
+
 ## [0.12.2](https://github.com/tereza-org/tereza/compare/@tereza-tech/react-zettel@0.12.1...@tereza-tech/react-zettel@0.12.2) (2023-12-27)
 
 **Note:** Version bump only for package @tereza-tech/react-zettel

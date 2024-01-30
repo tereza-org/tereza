@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.16.0 (2024-01-30)
+
+### Features
+
+- update to amplify v6 ([#86](https://github.com/tereza-org/tereza/issues/86)) ([9a11174](https://github.com/tereza-org/tereza/commit/9a111742a976c303c82cfcd68d0691b128ce6212))
+
 ## [1.15.1](https://github.com/terezatech/tereza-tech/compare/@tereza-tech/theme@1.15.0...@tereza-tech/theme@1.15.1) (2023-12-17)
 
 **Note:** Version bump only for package @tereza-tech/theme

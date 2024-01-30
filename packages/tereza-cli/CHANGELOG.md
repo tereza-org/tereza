@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.3](https://github.com/tereza-org/tereza/compare/tereza@0.11.2...tereza@0.11.3) (2024-01-30)
+
+**Note:** Version bump only for package tereza
+
 ## [0.11.2](https://github.com/tereza-org/tereza/compare/tereza@0.11.1...tereza@0.11.2) (2023-12-27)
 
 **Note:** Version bump only for package tereza
