@@ -14,7 +14,7 @@ const loadLocaleData: LoadLocaleData = async (locale) => {
   }
 };
 
-Amplify.configure(amplifyConfig);
+Amplify.configure(amplifyConfig, { ssr: true });
 
 export const RootProviders = ({ children }: { children: React.ReactNode }) => {
   return (

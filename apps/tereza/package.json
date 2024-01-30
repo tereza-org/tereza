@@ -13,30 +13,31 @@
     "start": "next start"
   },
   "dependencies": {
+    "@aws-amplify/adapter-nextjs": "^1.0.13",
     "@tereza-tech/components": "workspace:^",
     "@ttoss/forms": "^0.21.9",
-    "@ttoss/react-auth": "^1.7.21",
+    "@ttoss/react-auth": "^1.7.25",
     "@ttoss/react-i18n": "^1.25.8",
-    "@ttoss/react-notifications": "^1.24.22",
-    "@ttoss/relay-amplify": "^0.5.4",
+    "@ttoss/react-notifications": "^1.24.24",
+    "@ttoss/relay-amplify": "^0.5.5",
     "@ttoss/ui": "^4.0.7",
-    "aws-amplify": "^5.3.10",
-    "date-fns": "^3.0.6",
+    "aws-amplify": "^6.0.13",
+    "date-fns": "^3.3.1",
     "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "^4.0.12",
-    "react-relay": "^16.1.0",
+    "react-relay": "^16.2.0",
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@ttoss/config": "^1.31.4",
     "@ttoss/i18n-cli": "^0.7.5",
-    "@types/node": "^20.10.5",
-    "@types/react": "^18.2.45",
+    "@types/node": "^20.11.10",
+    "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
-    "babel-plugin-relay": "^16.1.0",
+    "babel-plugin-relay": "^16.2.0",
     "graphql": "^16.8.1",
-    "relay-compiler": "^16.1.0"
+    "relay-compiler": "^16.2.0"
   }
 }

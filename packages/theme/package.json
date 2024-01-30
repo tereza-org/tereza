@@ -28,7 +28,7 @@
   "devDependencies": {
     "@ttoss/config": "^1.31.4",
     "@ttoss/ui": "^4.0.7",
-    "@types/react": "^18.2.45",
+    "@types/react": "^18.2.48",
     "react": "^18.2.0",
     "tsup": "^8.0.1"
   },
