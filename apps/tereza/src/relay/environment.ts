@@ -28,7 +28,6 @@ const createNetwork = () => {
     params: RequestParameters,
     variables: Variables,
     cacheConfig: CacheConfig
-    // eslint-disable-next-line max-params
   ) => {
     const isQuery = params.operationKind === 'query';
     const cacheKey = params.id ?? params.cacheID;
@@ -45,11 +44,11 @@ const createNetwork = () => {
     return client.graphql({
       query: params.text as string,
       variables,
-    });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }) as any;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const network = Network.create(fetchResponse as any);
+  const network = Network.create(fetchResponse);
 
   return network;
 };

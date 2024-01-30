@@ -36,11 +36,16 @@ export const fetchSSR = async ({
     headers['x-credentials'] = encodeCredentials(credentials as any);
   }
 
+  if (!query) {
+    throw new Error('Missing query');
+  }
+
   return cookieBasedClient.graphql(
     {
       query,
       variables,
     },
     headers
-  );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ) as any;
 };
