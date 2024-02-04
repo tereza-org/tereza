@@ -1,3 +1,5 @@
+const withMDX = require('@next/mdx')();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   /**
@@ -10,6 +12,7 @@ const nextConfig = {
   //     language: 'typescript',
   //   },
   // },
+  pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
 };
 
-module.exports = nextConfig;
+module.exports = withMDX(nextConfig);
