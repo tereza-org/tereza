@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/tereza-org/tereza/compare/@tereza-tech/components@0.22.0...@tereza-tech/components@0.23.0) (2024-02-04)
+
+### Features
+
+- zettel references ([#87](https://github.com/tereza-org/tereza/issues/87)) ([972feee](https://github.com/tereza-org/tereza/commit/972feeeb13ffcdc52ea5fae014fc9b03e6537bc4))
+
 # [0.22.0](https://github.com/tereza-org/tereza/compare/@tereza-tech/components@0.21.2...@tereza-tech/components@0.22.0) (2024-01-30)
 
 ### Features
