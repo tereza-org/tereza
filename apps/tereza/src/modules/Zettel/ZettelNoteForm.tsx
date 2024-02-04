@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Button, Flex, Input } from '@ttoss/ui';
+import { Button, Flex, Input, Text } from '@ttoss/ui';
 import { ConnectionHandler, graphql, useMutation } from 'react-relay';
 import { Editor } from '@tereza-tech/components';
 import {
@@ -18,6 +18,7 @@ import {
   ZettelNoteFormSaveNoteMutation,
   ZettelNoteFormSaveNoteMutation$data,
 } from './__generated__/ZettelNoteFormSaveNoteMutation.graphql';
+import { useRouter } from 'next/navigation';
 
 export type ZettelNoteFormValues = {
   title?: string | null;
@@ -26,6 +27,7 @@ export type ZettelNoteFormValues = {
   tags?: string[];
   division?: string[];
   insights?: string[];
+  references?: string[];
 };
 
 const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
@@ -35,6 +37,7 @@ const schema: yup.ObjectSchema<ZettelNoteFormValues> = yup.object({
   tags: yup.array(yup.string().required()),
   division: yup.array(yup.string().required()),
   insights: yup.array(yup.string().required()),
+  references: yup.array(yup.string().required()),
 });
 
 export const ZettelNoteForm = ({
@@ -43,6 +46,8 @@ export const ZettelNoteForm = ({
   note?: ZettelNoteFormValues & { id?: string };
 }) => {
   const { id, ...defaultValues } = note;
+
+  const router = useRouter();
 
   const [noteId, setNoteId] = React.useState<string | null>(id ?? null);
 
@@ -54,9 +59,37 @@ export const ZettelNoteForm = ({
   });
 
   const {
-    formState: { isSubmitting },
+    formState: { isSubmitting, isSubmitted, isSubmitSuccessful, isDirty },
     reset,
   } = formMethods;
+
+  const [saveStatus, setSaveStatus] = React.useState('');
+
+  React.useEffect(() => {
+    if (isSubmitted && isSubmitSuccessful) {
+      setSaveStatus('Saved');
+    }
+
+    if (isSubmitted && !isSubmitSuccessful) {
+      setSaveStatus('Error saving');
+    }
+
+    if (isDirty) {
+      setSaveStatus('Unsaved changes');
+    }
+
+    if (!isDirty && isSubmitSuccessful) {
+      setSaveStatus('Saved');
+    }
+
+    if (!isDirty && !isSubmitSuccessful) {
+      setSaveStatus('');
+    }
+
+    if (isSubmitting) {
+      setSaveStatus('Saving');
+    }
+  }, [isSubmitted, isSubmitSuccessful, isDirty, isSubmitting]);
 
   const [saveNote] = useMutation<ZettelNoteFormSaveNoteMutation>(graphql`
     mutation ZettelNoteFormSaveNoteMutation($note: ZettelNoteInput!) {
@@ -68,6 +101,9 @@ export const ZettelNoteForm = ({
           description
           tags {
             name
+          }
+          references {
+            reference
           }
           ...ZettelNote_zettelNote
           ...ZettelEditor_zettelNote
@@ -180,6 +216,9 @@ export const ZettelNoteForm = ({
         tags: note.tags.map((tag) => {
           return tag.name;
         }),
+        references: note.references.map((reference) => {
+          return reference.reference;
+        }),
       });
     }
   };
@@ -199,6 +238,30 @@ export const ZettelNoteForm = ({
         label="Content"
         render={({ field: { onChange, value } }) => {
           return <Editor initialValue={value} onChange={onChange} />;
+        }}
+      />
+      <FormField
+        name="references"
+        label="References (separated by semicolon)"
+        render={({ field: { onChange, value } }) => {
+          const joinedReferences =
+            value
+              ?.join('; ')
+              // Replace two or more spaces with one space
+              .replaceAll(/\s{2,}/g, ' ') ?? '';
+
+          return (
+            <Input
+              type="text"
+              value={joinedReferences}
+              onChange={(e) => {
+                const references = e.target.value
+                  .replaceAll(',', ';')
+                  .split(';');
+                onChange(references);
+              }}
+            />
+          );
         }}
       />
       <ZettelNoteFormInsightsButton />
@@ -228,11 +291,27 @@ export const ZettelNoteForm = ({
       />
       <NotificationsBox />
       <Flex sx={{ gap: 'md' }}>
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting || !isDirty}>
           {isSubmitting ? 'Saving' : 'Save'}
         </Button>
-        <Button type="button">Cancel</Button>
+        <Button
+          type="button"
+          onClick={() => {
+            const href = id ? `../${id}` : '../';
+            router.push(href);
+          }}
+        >
+          Close
+        </Button>
       </Flex>
+      <Text
+        sx={{
+          color: 'gray',
+          fontSize: 'sm',
+        }}
+      >
+        {saveStatus}
+      </Text>
     </Form>
   );
 };

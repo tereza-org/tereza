@@ -1,5 +1,6 @@
 'use client';
 
+import { Markdown } from '@tereza-tech/components';
 import { Stack, Text } from '@ttoss/ui';
 import Link from 'next/link';
 
@@ -16,7 +17,7 @@ export const ZettelNoteCard = ({
     <Stack sx={{ gap: 'lg' }}>
       <Text sx={{ fontSize: 'lg' }}>{note?.title}</Text>
       <Link href={`/my/zettel/${note?.id}/editor`}>Edit</Link>
-      <Text>{note?.content}</Text>
+      <Markdown>{note?.content || ''}</Markdown>
     </Stack>
   );
 };
