@@ -3,7 +3,7 @@
 import { Button, Flex, Image, Stack, Text } from '@ttoss/ui';
 import Link from 'next/link';
 
-export const Header = ({
+const Header = ({
   logo,
   title,
   links,
