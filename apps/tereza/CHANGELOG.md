@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.36.0...@tereza-apps/tereza@0.37.0) (2024-02-04)
+
+### Features
+
+- add privacy policy ([#92](https://github.com/tereza-org/tereza/issues/92)) ([274ed79](https://github.com/tereza-org/tereza/commit/274ed798c03576b734ba89142c9f0e6738260273))
+
 # [0.36.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.35.0...@tereza-apps/tereza@0.36.0) (2024-02-04)
 
 ### Features
