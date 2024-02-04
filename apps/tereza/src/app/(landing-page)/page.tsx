@@ -1,42 +1,14 @@
 'use client';
 
-import { Button, Flex } from '@ttoss/ui';
-import { Hero, Navbar } from '@tereza-tech/components';
-import Link from 'next/link';
-
-const links = [
-  {
-    href: '/my/journal',
-    label: 'App',
-  },
-];
+import { Hero } from '@tereza-tech/components';
 
 const Home = () => {
   return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        backgroundColor: 'secondary',
-        minHeight: '100vh',
-      }}
-    >
-      <Navbar
-        title="Tereza"
-        logo="/tereza200x200.webp"
-        links={links.map(({ href, label }) => {
-          return (
-            <Link href={href} key={href}>
-              <Button>{label}</Button>
-            </Link>
-          );
-        })}
-      />
-      <Hero
-        headline="Tereza"
-        subhead="We build tools to help you grow and reach your full potential."
-        backgroundImage="/tereza.webp"
-      />
-    </Flex>
+    <Hero
+      headline="Tereza"
+      subhead="We build tools to help you grow and reach your full potential."
+      backgroundImage="/tereza.webp"
+    />
   );
 };
 
