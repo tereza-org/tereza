@@ -1,22 +1,28 @@
 'use client';
 
 import * as React from 'react';
-import { Input, Stack } from '@ttoss/ui';
 import {
   type PreloadedQuery,
   graphql,
   usePreloadedQuery,
   useQueryLoader,
 } from 'react-relay';
+import { Search } from '@ttoss/components';
 import {
   SerializablePreloadedQuery,
   useSerializablePreloadedQuery,
 } from 'src/relay/useSerializablePreloadedQuery';
+import { Stack } from '@ttoss/ui';
 import { ZettelHomeSearchQuery } from './__generated__/ZettelHomeSearchQuery.graphql';
 import Link from 'next/link';
 import ZettelHomeQueryNode, {
   ZettelHomeQuery,
 } from './__generated__/ZettelHomeQuery.graphql';
+
+type SearchResult = {
+  id: string;
+  title?: string | null;
+};
 
 const zettelHomeSearchQuery = graphql`
   query ZettelHomeSearchQuery($searchText: String!) {
@@ -29,7 +35,22 @@ const zettelHomeSearchQuery = graphql`
   }
 `;
 
-const SearchResults = ({
+const SearchResults = ({ results = [] }: { results?: SearchResult[] }) => {
+  return (
+    <>
+      {results?.map((result) => {
+        const href = `/my/zettel/${result?.id}`;
+        return (
+          <Link key={result?.id} href={href}>
+            {result?.title || '(No title)'}
+          </Link>
+        );
+      })}
+    </>
+  );
+};
+
+const HandleSearch = ({
   searchQueryRef,
 }: {
   searchQueryRef: PreloadedQuery<ZettelHomeSearchQuery>;
@@ -39,7 +60,9 @@ const SearchResults = ({
     searchQueryRef
   );
 
-  return <pre>{JSON.stringify(data.zettel?.search, null, 2)}</pre>;
+  const results = [...(data.zettel?.search || [])];
+
+  return <SearchResults results={results} />;
 };
 
 export const ZettelHome = ({
@@ -73,18 +96,23 @@ export const ZettelHome = ({
     queryRef
   );
 
-  const notes = data.zettel?.notes?.edges?.map((edge) => {
-    return { ...edge?.node, title: edge?.node?.title || '(No title)' };
-  });
+  const defaultResults =
+    data.zettel?.notes?.edges.map((edge) => {
+      return edge?.node;
+    }) || [];
 
-  const [searchText, setSearchText] = React.useState<string>('');
+  const [searchText, setSearchText] = React.useState<string | undefined>('');
 
   const [searchQueryRef, search, disposeSearchQuery] =
     useQueryLoader<ZettelHomeSearchQuery>(zettelHomeSearchQuery);
 
+  const [isPending, startTransition] = React.useTransition();
+
   React.useEffect(() => {
     if (searchText) {
-      search({ searchText });
+      startTransition(() => {
+        search({ searchText });
+      });
     }
 
     return disposeSearchQuery;
@@ -92,21 +120,21 @@ export const ZettelHome = ({
 
   return (
     <Stack>
-      <Input
-        value={searchText}
-        onChange={(e) => {
-          setSearchText(e.target.value);
+      <Search
+        sx={{
+          marginBottom: 'lg',
         }}
+        value={searchText}
+        onChange={(newSearchText) => {
+          setSearchText(newSearchText as string);
+        }}
+        loading={isPending}
       />
-      {searchQueryRef && <SearchResults searchQueryRef={searchQueryRef} />}
-      {notes?.map((note) => {
-        const href = `/my/zettel/${note?.id}`;
-        return (
-          <Link key={note?.id} href={href}>
-            {note?.title}
-          </Link>
-        );
-      })}
+      {searchQueryRef ? (
+        <HandleSearch searchQueryRef={searchQueryRef} />
+      ) : (
+        <SearchResults results={defaultResults} />
+      )}
     </Stack>
   );
 };

@@ -46,6 +46,9 @@ export const ZettelEditor = ({
         }
         insights
         division
+        references {
+          reference
+        }
       }
     `,
     query.zettel?.note
@@ -61,6 +64,9 @@ export const ZettelEditor = ({
     }),
     insights: [...(data?.insights ?? [])],
     division: [...(data?.division ?? [])],
+    references: (data?.references ?? []).map((reference) => {
+      return reference.reference;
+    }),
   };
 
   return <ZettelNoteForm note={note} />;

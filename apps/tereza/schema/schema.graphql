@@ -63,6 +63,10 @@ enum SortConnectionJournalHistoryEnum {
   NEWEST
 }
 
+enum SortConnectionReferenceEnum {
+  CREATED_AT_DESC
+}
+
 enum SortConnectionZettelNoteEnum {
   CREATED_AT_DESC
 }
@@ -237,6 +241,22 @@ type QueryJournal {
 }
 
 type QueryZettel {
+  references(
+    """Forward pagination argument for returning at most first edges"""
+    first: Int
+
+    """Forward pagination argument for returning at most first edges"""
+    after: String
+
+    """Backward pagination argument for returning at most last edges"""
+    last: Int
+
+    """Backward pagination argument for returning at most last edges"""
+    before: String
+
+    """Sort argument for data ordering"""
+    sort: SortConnectionReferenceEnum = CREATED_AT_DESC
+  ): ReferenceConnection
   insights(content: String!): ZettelInsight!
   note(id: ID!): ZettelNote
   notes(
@@ -256,6 +276,33 @@ type QueryZettel {
     sort: SortConnectionZettelNoteEnum = CREATED_AT_DESC
   ): ZettelNoteConnection
   search(text: String!, limit: Int): [ZettelNote!]!
+}
+
+type Reference {
+  id: ID!
+  reference: String!
+  notes: [ZettelNote!]!
+}
+
+"""A connection to a list of items."""
+type ReferenceConnection {
+  """Total object count."""
+  count: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [ReferenceEdge!]!
+}
+
+"""An edge in a connection."""
+type ReferenceEdge {
+  """The item at the end of the edge"""
+  node: Reference!
+
+  """A cursor for use in pagination"""
+  cursor: String!
 }
 
 type Tag {
@@ -282,6 +329,7 @@ type ZettelNote implements Node {
   embedding: [Float!]
   insights: [String!]
   division: [String!]
+  references: [Reference!]!
   tags: [Tag!]!
 }
 
@@ -364,4 +412,5 @@ input ZettelNoteInput {
   content: String
   insights: [String!]
   division: [String!]
+  references: [String!]
 }
