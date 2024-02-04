@@ -48,6 +48,10 @@ const LINKS: {
       label: 'New',
     },
     {
+      href: '/my/zettel/references',
+      label: 'References',
+    },
+    {
       href: '/my/zettel/all',
       label: 'All',
     },
