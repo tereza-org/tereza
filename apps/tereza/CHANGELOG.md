@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.37.1](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.37.0...@tereza-apps/tereza@0.37.1) (2024-02-10)
+
+### Bug Fixes
+
+- new zettel form issues ([#93](https://github.com/tereza-org/tereza/issues/93)) ([6ebf214](https://github.com/tereza-org/tereza/commit/6ebf21418754f01b6be804ae958032b646212c65))
+
 # [0.37.0](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.36.0...@tereza-apps/tereza@0.37.0) (2024-02-04)
 
 ### Features
