@@ -45,11 +45,9 @@ export const ZettelNoteForm = ({
 }: {
   note?: ZettelNoteFormValues & { id?: string };
 }) => {
-  const { id, ...defaultValues } = note;
+  const { id: noteId, ...defaultValues } = note;
 
   const router = useRouter();
-
-  const [noteId, setNoteId] = React.useState<string | null>(id ?? null);
 
   const { setNotifications } = useNotifications();
 
@@ -61,6 +59,7 @@ export const ZettelNoteForm = ({
   const {
     formState: { isSubmitting, isSubmitted, isSubmitSuccessful, isDirty },
     reset,
+    getValues,
   } = formMethods;
 
   const [saveStatus, setSaveStatus] = React.useState('');
@@ -202,14 +201,11 @@ export const ZettelNoteForm = ({
     });
 
     if (note) {
-      if (!noteId) {
-        setNoteId(note.id);
-      }
-
       /**
        * Reset because API may have changed the values.
        */
       reset({
+        ...getValues(),
         title: note.title ?? '',
         content: note.content ?? '',
         description: note.description ?? '',
@@ -220,6 +216,15 @@ export const ZettelNoteForm = ({
           return reference.reference;
         }),
       });
+
+      /**
+       * We've kept reset even if we're changing route because we want to
+       * get the form state updated. Else, it'd be as "dirty" as before, and
+       * thus, "unsaved changes" would be displayed.
+       */
+      if (!noteId) {
+        router.push(`/my/zettel/${note.id}/editor`);
+      }
     }
   };
 
@@ -297,7 +302,7 @@ export const ZettelNoteForm = ({
         <Button
           type="button"
           onClick={() => {
-            const href = id ? `../${id}` : '../';
+            const href = noteId ? `/my/zettel/${noteId}` : '/my/zettel';
             router.push(href);
           }}
         >
