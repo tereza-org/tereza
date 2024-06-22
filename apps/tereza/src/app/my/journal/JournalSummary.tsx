@@ -4,13 +4,12 @@ import { Flex } from '@ttoss/ui';
 import { JournalMarkdown } from 'src/modules/Journal/JournalMarkdown';
 import { JournalSummary_journalSummaryItem$key } from './__generated__/JournalSummary_journalSummaryItem.graphql';
 import {
-  type SerializablePreloadedQuery,
-  useSerializablePreloadedQuery,
-} from 'src/relay/useSerializablePreloadedQuery';
-import { graphql, useFragment, usePreloadedQuery } from 'react-relay';
-import JournalSummaryQueryNode, {
-  JournalSummaryQuery,
-} from './__generated__/JournalSummaryQuery.graphql';
+  type PreloadedQuery,
+  graphql,
+  useFragment,
+  usePreloadedQuery,
+} from 'react-relay';
+import type { JournalSummaryQuery } from './__generated__/JournalSummaryQuery.graphql';
 
 const JournalSummaryItem = ({
   journalSummaryItemRef,
@@ -40,13 +39,8 @@ const JournalSummaryItem = ({
 export const JournalSummary = ({
   preloadedQuery,
 }: {
-  preloadedQuery: SerializablePreloadedQuery<
-    typeof JournalSummaryQueryNode,
-    JournalSummaryQuery
-  >;
+  preloadedQuery: PreloadedQuery<JournalSummaryQuery>;
 }) => {
-  const queryRef = useSerializablePreloadedQuery(preloadedQuery);
-
   const { journal } = usePreloadedQuery(
     graphql`
       query JournalSummaryQuery($date: String!) {
@@ -58,7 +52,7 @@ export const JournalSummary = ({
         }
       }
     `,
-    queryRef
+    preloadedQuery
   );
 
   if (!journal) {
