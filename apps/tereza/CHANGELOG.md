@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.37.2](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.37.1...@tereza-apps/tereza@0.37.2) (2024-06-22)
+
+### Bug Fixes
+
+- issue 80 ([#95](https://github.com/tereza-org/tereza/issues/95)) ([448acfc](https://github.com/tereza-org/tereza/commit/448acfc787d66ea715ee88852871caeacf9bde4b))
+
 ## [0.37.1](https://github.com/tereza-org/tereza/compare/@tereza-apps/tereza@0.37.0...@tereza-apps/tereza@0.37.1) (2024-02-10)
 
 ### Bug Fixes
